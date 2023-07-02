@@ -1,0 +1,110 @@
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+source "$HOME/.cargo/env"
+git clone https://github.com/iden3/circom.git
+cd circom
+cargo build --release
+cargo install --path circom
+npm install -g snarkjs
+npm install -g circomlib
+
+***recompile the circuit***
+circom gameboard-traverse.circom --r1cs --wasm --sym --c
+cd gameboard-traverse_js
+node generate_witness.js gameboard-traverse.wasm ../gameboard-traverse_input.json gameboard-traverse.wtns
+cd ../
+
+snarkjs powersoftau new bn128 18 pot18_0000.ptau -v
+snarkjs powersoftau contribute pot18_0000.ptau pot18_0001.ptau --name="First contribution" -v
+snarkjs powersoftau prepare phase2 pot18_0001.ptau pot18_final.ptau -v
+
+***regenerate zkey***
+snarkjs groth16 setup gameboard-traverse.r1cs pot18_final.ptau gameboard-traverse_0000.zkey
+snarkjs zkey contribute gameboard-traverse_0000.zkey gameboard-traverse_0001.zkey --name="1st Contributor Name" -v
+snarkjs zkey export verificationkey gameboard-traverse_0001.zkey gameboard-traverse_verification_key.json
+
+***regenerate proof***
+snarkjs groth16 prove gameboard-traverse_0001.zkey gameboard-traverse_js/gameboard-traverse.wtns gameboard-traverse_proof.json gameboard-traverse_public.json
+
+snarkjs groth16 verify gameboard-traverse_verification_key.json gameboard-traverse_public.json gameboard-traverse_proof.json
+snarkjs zkey export solidityverifier gameboard-traverse_0001.zkey verifier.sol
+snarkjs generatecall
+
+Deploy order:
+	SkylabTestFlight ("https://gateway.pinata.cloud/ipfs/QmdAVTVehGVNRwTxKj9Tz4utEqh4CKf2YTaA9godJAGAFu/")
+	SkylabTournament ("ipfs://QmbdnfyfNwbCT7zTmfwxVDUDAVS7wG4Q82B1ThKXaGEwfw/")
+	SkylabResources
+	(register in SkylabTestFlight)
+	SkylabMetadata
+	(register in SkylabTestFlight)
+	MapHashes
+	ComputeHashPathDataVerifier
+	GameboardTraverseVerifier
+	SkylabGameFlightRace (0xe959546968D86d05C4c76c72E160cbD2cc0b281c, 0xED44F9025dF9DFFd9804D8efC1daE061A98FC151, 0x2d13Ea892A9B38FB755Fabe4Ce801F6CeF20E5D5, 0xc2d125BE8cF61f86A8C411ea3eE470A61B71BFEf)
+	(register in SkylabTestFlight)
+
+Mumbai Deployments:
+	SkylabTestFlight: 0xe959546968D86d05C4c76c72E160cbD2cc0b281c
+	SkylabResources: 0xF0f7a8409cb11bb82e4F3383757447f62C9e970A
+	SkylabMetadata: 0x5d8EF63f57cA48F41aAb432915E760b9699ca763
+	MapHashes: 0xc2d125BE8cF61f86A8C411ea3eE470A61B71BFEf
+	ComputeHashPathDataVerifier: 0x2d13Ea892A9B38FB755Fabe4Ce801F6CeF20E5D5
+	GameboardTraverseVerifier: 0xED44F9025dF9DFFd9804D8efC1daE061A98FC151
+	SkylabGameFlightRace: 0x33e8F645FEC8CcF1a488267768b0445B5292C39A
+	// SkylabBase: 0xEd805b1d92822416664b78b2f0d1727Aa89c36c6
+
+Poseidon Injection:
+	"Custom": {
+			"linkReferences": {
+				"contracts/poseidon.sol": {
+					"PoseidonT3": "0x306135e91082b6b6357F849Ff37fE7ea339EeFc5",
+					"PoseidonT4": "0xe75D6132095BDCE642b402518378535eA4501414"
+				}
+			},
+			"autoDeployLib": false
+		}
+
+Addresses (0xf893c57bC190bc97990F1f278009CeC0Cb28a492, 0xED44F9025dF9DFFd9804D8efC1daE061A98FC151, 0x2d13Ea892A9B38FB755Fabe4Ce801F6CeF20E5D5, 0xc2d125BE8cF61f86A8C411ea3eE470A61B71BFEf)
+Addresses (0x124c2177272546eA01871F6DD593DEae7f00ebDE, 0xED44F9025dF9DFFd9804D8efC1daE061A98FC151, 0x2d13Ea892A9B38FB755Fabe4Ce801F6CeF20E5D5, 0xc2d125BE8cF61f86A8C411ea3eE470A61B71BFEf)
+
+Mumbai Deployments with 1155
+	SkylabTestFlight: 0xf893c57bC190bc97990F1f278009CeC0Cb28a492
+	SkylabTournament: 0x7b392056d56902453fB5c08d1eEe85110358815e
+	SkylabResources(TestFlight): 0xD7f0794CD14C10d5cfB9dB7544A423F98d111172
+	SkylabResources(SkylabTournament): 0x7C94AaCbbE516a34eD49Edd938CEf1a85805aA5E
+	SkylabGameFlightRace(TestFlight): 0x6Fa257B58436a60f8F0909EdC2de0a5dF753028a
+	SkylabGameFlightRace(SkylabTournament): 0xc706c5FEAab3160F8214D4F4820155726B6d9b60
+	SkylabMetadata: 0x921072F071C0B378F7dA3F5fE5974E40B441abCD
+	MapHashes: 0xc2d125BE8cF61f86A8C411ea3eE470A61B71BFEf
+	ComputeHashPathDataVerifier: 0x2d13Ea892A9B38FB755Fabe4Ce801F6CeF20E5D5
+	GameboardTraverseVerifier: 0xED44F9025dF9DFFd9804D8efC1daE061A98FC151
+
+
+
+Polygon Deployments
+	SkylabTournament: 0xc439f052a92736F6d0a474654ab88F737b7bD308
+	SkylabResources(SkylabTournament): 0x8C3F11a17FE2f342ed121C81eBE64da3E81D5eef
+	SkylabGameFlightRace(SkylabTournament): 0x7a3f43EeF872C4eb45f831E66356F78A179c7EeD
+	SkylabMetadata: 0xF72c5945AB1eb6Fd26988622Ffe2e1c044E54Eb9
+	MapHashes: 0x41de9969517588946A0Cf164C5D8ECe211e07EFd
+	ComputeHashPathDataVerifier: 0x7F3af4c9285A015e50FB28560D82862358c82066
+	GameboardTraverseVerifier: 0x0908D5F82Ba927aAcA690f007a35DBc67398a5F7
+	("ipfs://QmbdnfyfNwbCT7zTmfwxVDUDAVS7wG4Q82B1ThKXaGEwfw/")
+	(0x887816abe127626aC1712DBdc83ba61Ae22037D5, 0x0908D5F82Ba927aAcA690f007a35DBc67398a5F7, 0x7F3af4c9285A015e50FB28560D82862358c82066, 0x41de9969517588946A0Cf164C5D8ECe211e07EFd)
+
+
+Polygon Test Deployments
+	SkylabTournament: 0x887816abe127626aC1712DBdc83ba61Ae22037D5
+	SkylabResources(SkylabTournament): 0x5BF6B0083d2F1109C4e34da5f93aFeB786571f82
+	SkylabGameFlightRace(SkylabTournament): 0xf091c6A187FFCC18f170c6d0E7f1633D4a8B3632
+
+
+Poseidon Injection:
+	"Custom": {
+			"linkReferences": {
+				"contracts/poseidon.sol": {
+					"PoseidonT3": "0x2eCa05b128bF5cbd5A73CC4BB625B51131FF119B",
+					"PoseidonT4": "0x353Ce4721F0fA55eb8951BdDFAf97cA7A3d4F9b9"
+				}
+			},
+			"autoDeployLib": false
+		}

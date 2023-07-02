@@ -1,0 +1,96 @@
+
+Front-end Interaction Components:
+	Contracts:
+		SkylabBase
+		SkylabGameFlightRace
+		SkylabResources
+
+	Circuits:
+		gameboard-traverse
+		calculate_time_per_grid
+		compute_hash_path_data
+
+Player CUJ
+	Preparation
+		Get all planes owned by player: https://docs.opensea.io/v1.0/reference/getting-assets
+		Display resources owned by player: SkylabResources._balances(address)
+		Display planes: SkylabBase.tokenURI(id)
+
+	Queueing
+
+
+
+Test flows
+	1Win1Lose flow and incorrect surrender/retreat:
+		searchOpponent A
+		searchOpponent B
+		getMap A
+		getMap B
+		(The map id should be the same)
+		commitPath A
+		commitPath B (use more resources)
+		retreat A fails
+		revealPath A
+		revealPath B
+		(At this point, B state should be 5, A should be 6)
+		surrender A fails
+		postGameCleanUp A
+		postGameCleanUp B
+		(Confirm nothing is left)
+		(Confirm A is burnt, confirm B level is 1.5)
+
+	1Win1Surrender flow:
+		searchOpponent B
+		searchOpponent C
+		getMap B
+		getMap C
+		(The map id should be the same)
+		commitPath B
+		commitPath C
+		surrender B
+		(At this point, B state should be 6, C should be 5)
+		postGameCleanUp B
+		postGameCleanUp C
+		(Confirm nothing is left)
+		(Confirm B is burnt, confirm C level is 1.5)
+
+	1Win1Retreat flow:
+		searchOpponent C
+		searchOpponent D
+		getMap C
+		getMap D
+		(The map id should be the same)
+		retreat D
+		(At this point, D state should be 7, C should be 5)
+		postGameCleanUp D
+		postGameCleanUp C
+		(Confirm nothing is left for C, confirm the tank is intact for D)
+		(Confirm D is burnt, although the tank is still here, confirm C level is 2)
+
+	"Draw" flow and withdraw:
+		searchOpponent E
+		searchOpponent C
+		withdrawFromQueue E
+		searchOpponent E
+		searchOpponent F
+		getMap E
+		getMap F
+		(The map id should be the same)
+		commitPath F
+		commitPath E (use same resources)
+		revealPath E
+		revealPath F
+		(At this point, F state should be 5, E should be 6)
+		postGameCleanUp E
+		postGameCleanUp F
+		(Confirm nothing is left)
+		(Confirm E is burnt, confirm F level is 1.5)
+
+	Timeout flow and incorrect states:
+		getMap E fails
+		withdrawFromQueue E fails
+		commitPath E fails
+		revealPath E fails
+		postGameCleanup E fails
+		(after 300 seconds)
+
