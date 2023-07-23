@@ -7,13 +7,18 @@ import json
 from requests_oauthlib import OAuth2Session
 
 # DM
-DM_text = """✨Congratulations!✨
-✈️A tournament paper plane 
-has been airdropped to you.
-🗓️Valid from June 20 to June 30
+DM_text ="""  Congratulations :) 
+  ✈️A tournament paper plane 
+  has been airdropped to your wallet 
+  
+  Valid from July 22 to 24 (EST 9:00PM) 
+  Best of luck.
+ 
+  Entrance: https://skylab.wtf/#/trailblazer
 """
 client_id = "NG1BVUZsMGhvNEhWMnd6eXNHazk6MTpjaQ"
 redirect_uri = "https://twitter.com/skylabHQ"
+batch_size = 49
 
 def handle_rate_limit_or_failure(response, expected):
     if response.status_code == 429:
@@ -32,8 +37,8 @@ def post(url, headers, body):
     return response.json()
 
 def dm(user_ids, access):
-    for i in range(0, len(user_ids), 100):
-        dm_ids = user_ids[i:i+100]
+    for i in range(0, len(user_ids), batch_size):
+        dm_ids = user_ids[i:i+batch_size]
         print(f"Sending to {dm_ids}")
         url = "https://api.twitter.com/2/dm_conversations"
         request_body = {}

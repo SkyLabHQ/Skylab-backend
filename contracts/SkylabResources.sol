@@ -4,18 +4,23 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
 // Design decision: no player interaction with this contract
 contract SkylabResources is ERC1155, Ownable {
+    using Strings for uint;
+    
     address private  _sky;
+    string private _metadataBaseURI;
 
     modifier onlySky() {
         require(msg.sender == _sky, "SkylabResources: msg.sender is not Sky");
         _;
     }
 
-    constructor(address skylabBaseAddress) ERC1155("") {
+    constructor(address skylabBaseAddress, string memory metadataBaseURI) ERC1155("") {
         _sky = skylabBaseAddress;
+        _metadataBaseURI = metadataBaseURI;
     }
 
     function setSky(address sky) external onlyOwner {
@@ -53,5 +58,19 @@ contract SkylabResources is ERC1155, Ownable {
  
     function burn(address from, uint256[] memory ids, uint256[] memory amounts) external onlySky {
         ERC1155._burnBatch(from, ids, amounts);
+    }
+
+    function uri(uint256 id) override public view virtual returns (string memory) {
+        return string(
+                    abi.encodePacked(
+                        _metadataBaseURI,
+                        id.toString(),
+                        ".json"
+                    )  
+                );
+    }
+
+    function registerMetadataURI(string memory metadataURI) external onlyOwner {
+        _metadataBaseURI = metadataURI;
     }
 }
