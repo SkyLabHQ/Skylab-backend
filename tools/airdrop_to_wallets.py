@@ -9,7 +9,7 @@ battery = 25000
 # Mint batch size
 batch_size = 20
 # Mint gas scaler
-max_gas_scaler = 1.3
+max_gas_scaler = 1.4
 
 # Skylab Tournament contract address
 network_url = 'https://polygon-rpc.com/'

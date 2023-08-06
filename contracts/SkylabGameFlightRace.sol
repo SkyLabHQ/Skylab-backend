@@ -257,7 +257,7 @@ contract SkylabGameFlightRace is SkylabGameBase {
         win(matchedAviationIDs[tokenId]);
     }
 
-    function reset(uint tokenId, bool clearTank) public {
+    function reset(uint tokenId, bool clearTank) internal {
         _skylabBase.aviationUnlock(tokenId);
         matchedAviationIDs[tokenId] = 0;
         timeout[tokenId] = 0;
