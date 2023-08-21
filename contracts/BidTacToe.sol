@@ -89,7 +89,7 @@ contract BidTacToe {
         emit ReadyPlayerTwo(player1, player2);
     }
 
-    // https://ethereum.stackexchange.com/questions/82595/how-to-keccak-256-hash-in-front-end-javascript-before-passing-it-to-my-smart-con
+    // ethers.solidityPackedKeccak256(["uint256", "uint256"], [bid, salt]);
     function commitBid(uint256 hash) external onlyPlayers {
         require(player2 != address(0), "BidTacToe: bid cannot start unless there are 2 players");
         require(gameStates[msg.sender] == 1, "BidTacToe: player gameState is not 1");

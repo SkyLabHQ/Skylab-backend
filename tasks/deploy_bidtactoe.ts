@@ -8,10 +8,24 @@ task('deploy_bidtactoe')
     const { ethers } = hre;
     await hre.run('compile');
 
-    const hash = hre.ethers.solidityPackedKeccak256(["uint256", "uint256"], [9, 123]);
-    console.log(hash);
+    const paramVerifier = await ethers.deployContract("SkylabBidTacToeParamVerifier");
+    await paramVerifier.waitForDeployment();
+    console.log(
+      `SkylabBidTacToeParamVerifier deployed to ${paramVerifier.target}`)
 
-    // const hash = hre.ethers.solidityPackedKeccak256(["address", "address", "uint256", "uint256", "uint256"], ["0x4B20993BC481177EC7E8F571CECAE8A9E22C02DB", "0x78731D3CA6B7E34AC0F824C42A7CC18A495CABAB", 100, 100, 100000000]);
-    // console.log(hash);
+    const skylabbidtactoe = await ethers.deployContract("SkylabBidTacToe", [skylabaddress, paramVerifier.target]);
+    await skylabbidtactoe.waitForDeployment();
+    console.log(
+      `SkylabBidTacToe deployed to ${skylabbidtactoe.target}`)
+
+    const tournamentFactory = await hre.ethers.getContractFactory('SkylabTestFlight');
+    const tournament = tournamentFactory.attach(skylabaddress);
+    await tournament.registerGameAddress(skylabbidtactoe.target, true);
+
+    console.log(
+      `npx hardhat verify --network ${network.name} ${skylabbidtactoe.target} ${skylabaddress} ${paramVerifier.target}`
+    );
+
+    // await verify(hre, flightRace.target, [skylabaddress, traverseVerifier.target, pathDataVerifier.target, maps.target])
   }
 )
