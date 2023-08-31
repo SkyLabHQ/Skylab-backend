@@ -8,12 +8,12 @@ task('deploy_bidtactoe')
     const { ethers } = hre;
     await hre.run('compile');
 
-    const paramVerifier = await ethers.deployContract("SkylabBidTacToeParamVerifier");
-    await paramVerifier.waitForDeployment();
+    const deployer = await ethers.deployContract("SkylabBidTacToeDeployer");
+    await deployer.waitForDeployment();
     console.log(
-      `SkylabBidTacToeParamVerifier deployed to ${paramVerifier.target}`)
+      `SkylabBidTacToeDeployer deployed to ${deployer.target}`)
 
-    const skylabbidtactoe = await ethers.deployContract("SkylabBidTacToe", [skylabaddress, paramVerifier.target]);
+    const skylabbidtactoe = await ethers.deployContract("SkylabBidTacToe", [skylabaddress, deployer.target]);
     await skylabbidtactoe.waitForDeployment();
     console.log(
       `SkylabBidTacToe deployed to ${skylabbidtactoe.target}`)
@@ -23,7 +23,7 @@ task('deploy_bidtactoe')
     await tournament.registerGameAddress(skylabbidtactoe.target, true);
 
     console.log(
-      `npx hardhat verify --network ${network.name} ${skylabbidtactoe.target} ${skylabaddress} ${paramVerifier.target}`
+      `npx hardhat verify --network ${network.name} ${skylabbidtactoe.target} ${skylabaddress} ${deployer.target}`
     );
 
     // await verify(hre, flightRace.target, [skylabaddress, traverseVerifier.target, pathDataVerifier.target, maps.target])

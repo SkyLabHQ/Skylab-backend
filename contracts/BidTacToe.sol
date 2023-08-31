@@ -17,14 +17,14 @@ contract BidTacToe {
     // ====================
     // Dynamic gameplay data
     // ====================
-    address[] public grid;
+    address[] private grid;
     uint256 public currentSelectedGrid;
     mapping(address => uint256) public gameStates;
     mapping(address => uint256) public timeouts;
     mapping(address => uint256) public balances;
     mapping(address => uint256) private commitedHashes;
-    mapping(address => uint256) public revealedBids;
-    mapping(address => uint256) public occupiedGridCounts;
+    mapping(address => uint256[]) public revealedBids;
+    mapping(address => uint256) private occupiedGridCounts;
     address public nextDrawWinner;
 
     // Static values
@@ -49,7 +49,6 @@ contract BidTacToe {
     event CommitBid(address indexed player, uint256 hash);
     event RevealBid(address indexed player, uint256 amount, uint256 salt);
     event WinGrid(address indexed player, uint256 grid);
-    event DrawGrid();
 
     event WinGame(address indexed user, uint256 state);
     event LoseGame(address indexed user, uint256 state);
@@ -66,9 +65,14 @@ contract BidTacToe {
         lengthToWin = gameParams.lengthToWin;
 
         grid = new address[](gridWidth * gridHeight);
+        revealedBids[player1] = new uint256[](gridWidth * gridHeight);
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
         skylabBidTacToe = SkylabBidTacToe(callback);
+    }
+
+    function getGrid() view external returns (address[] memory) {
+        return grid;
     }
 
     // Player 2 joins the game, do checks and generate the next grid
@@ -76,6 +80,7 @@ contract BidTacToe {
         require(player2 == address(0), "BidTacToe: cannot join because player2 exists already");
         require(player1 != player, "BidTacToe: msg.sender is player1, but playing against yourself is not allowed");
         player2 = player;
+        revealedBids[player2] = new uint256[](gridWidth * gridHeight);
         gameStates[player2] = 1;
         balances[player2] = balances[player1];
 
@@ -111,7 +116,7 @@ contract BidTacToe {
         require(commitedHashes[msg.sender] == uint(keccak256(abi.encodePacked(bid, salt))), "BidTacToe: verification failed");
         require(balances[msg.sender] >= bid, "BidTacToe: not enough balance");
 
-        revealedBids[msg.sender] = bid;
+        revealedBids[msg.sender][currentSelectedGrid] = bid;
 
         balances[msg.sender] -= bid;
         gameStates[msg.sender] = 3;
@@ -121,10 +126,10 @@ contract BidTacToe {
         if (gameStates[getOtherPlayer()] == 3) {
             address bidWinner;
             address bidLoser;
-            if (revealedBids[msg.sender] > revealedBids[getOtherPlayer()]) {
+            if (revealedBids[msg.sender][currentSelectedGrid] > revealedBids[getOtherPlayer()][currentSelectedGrid]) {
                 bidWinner = msg.sender;
                 bidLoser = getOtherPlayer();
-            } else if (revealedBids[msg.sender] < revealedBids[getOtherPlayer()]) {
+            } else if (revealedBids[msg.sender][currentSelectedGrid] < revealedBids[getOtherPlayer()][currentSelectedGrid]) {
                 bidWinner = getOtherPlayer();
                 bidLoser = msg.sender;
             } else {
@@ -171,10 +176,6 @@ contract BidTacToe {
             antiCollision += 1;
             if (antiCollision >= grid.length) {
                 antiCollision = 0;
-            }
-            if (antiCollision == tempSelection) {
-                // shouldn't happen
-                require(false, "BidTacToe: grid selection looped around and that's not possible");
             }
         }
 

@@ -3,8 +3,7 @@ pragma solidity ^0.8.0;
 
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import { BidTacToe } from "./BidTacToe.sol";
-import { SkylabBidTacToeParamVerifier } from "./SkylabBidTacToeParamVerifier.sol";
+import { SkylabBidTacToeDeployer } from "./SkylabBidTacToeDeployer.sol";
 import { SkylabBase } from "./SkylabBase.sol";
 
 
@@ -17,7 +16,7 @@ contract SkylabBidTacToe is Ownable {
     }
 
     SkylabBase internal _skylabBase;
-    SkylabBidTacToeParamVerifier private verifier;
+    SkylabBidTacToeDeployer private deployer;
     // token id => address
     mapping(uint256 => address) private _gameApprovals;
 
@@ -26,19 +25,19 @@ contract SkylabBidTacToe is Ownable {
 
     // Dynamic game data
     mapping(address => bool) private gameExists;
-    mapping(address => address) private gamePerPlayer;
+    mapping(address => address) public gamePerPlayer;
     mapping(address => GameParams) public paramsPerGame;
 
     address[] public lobbyGameQueue;
     mapping(address => uint) private lobbyGameIndex;
-    address public defaultGameQueue;
+    address private defaultGameQueue;
     
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
 
-    constructor(address skylabBaseAddress, address verifierAddress) {
+    constructor(address skylabBaseAddress, address deployerAddress) {
         _skylabBase = SkylabBase(skylabBaseAddress);
-        verifier = SkylabBidTacToeParamVerifier(verifierAddress);
+        deployer = SkylabBidTacToeDeployer(deployerAddress);
     }
 
     function createLobby(uint gridWidth, uint gridHeight, uint lengthToWin, uint initialBalance) external {
@@ -51,8 +50,7 @@ contract SkylabBidTacToe is Ownable {
 
     function createGame(GameParams memory gameParams) internal returns (address) {
         require(gamePerPlayer[msg.sender] == address(0), "SkylabBidTacToe: a game has already been created by caller");
-        verifier.verify(gameParams);
-        address newGame = address(new BidTacToe(gameParams, msg.sender, address(this)));
+        address newGame = deployer.createGame(gameParams, msg.sender, address(this));
         
         paramsPerGame[newGame] = gameParams;
         gameExists[newGame] = true;
@@ -63,8 +61,7 @@ contract SkylabBidTacToe is Ownable {
     function joinLobby(address lobby) external {
         require(gameExists[lobby], "SkylabBidTacToe: lobby does not exist");
         _skylabBase.aviationLock(burnerAddressToTokenId[msg.sender]);
-        BidTacToe existingGame = BidTacToe(lobby);
-        existingGame.joinGame(msg.sender);
+        deployer.joinGame(lobby, msg.sender);
         gamePerPlayer[msg.sender] = lobby;
 
         address swappedLobby = lobbyGameQueue[lobbyGameQueue.length - 1];
@@ -78,14 +75,14 @@ contract SkylabBidTacToe is Ownable {
     function createOrJoinDefault() external returns (address) {
         _skylabBase.aviationLock(burnerAddressToTokenId[msg.sender]);
         if (defaultGameQueue == address(0)) {
-            defaultGameQueue = createGame(verifier.defaultParams());
+            defaultGameQueue = createGame(deployer.defaultParams());
+            gamePerPlayer[msg.sender] = defaultGameQueue;
             return defaultGameQueue;
         } else {
-            BidTacToe existingGame = BidTacToe(defaultGameQueue);
-            existingGame.joinGame(msg.sender);
+            deployer.joinGame(defaultGameQueue, msg.sender);
             gamePerPlayer[msg.sender] = defaultGameQueue;
             delete defaultGameQueue;
-            return address(existingGame);
+            return gamePerPlayer[msg.sender];
         }
     }
 
@@ -100,6 +97,8 @@ contract SkylabBidTacToe is Ownable {
         emit WinGame(tokenId, _skylabBase.ownerOf(tokenId));
         _skylabBase.aviationGainCounter(tokenId);
         delete gamePerPlayer[burner];
+        delete gameExists[msg.sender];
+        delete paramsPerGame[msg.sender];
     }
 
     function handleLoss(address burner) external {
@@ -110,13 +109,15 @@ contract SkylabBidTacToe is Ownable {
         emit LoseGame(tokenId, _skylabBase.ownerOf(tokenId));
         _skylabBase.aviationLevelDown(tokenId, 1);
         delete gamePerPlayer[burner];
+        delete gameExists[msg.sender];
+        delete paramsPerGame[msg.sender];
     }
 
     // =====================
     // Approval
     // =====================
-    function isApprovedForGame(uint tokenId) public virtual view returns (bool) {
-        return _skylabBase.isApprovedOrOwner(msg.sender, tokenId) || _gameApprovals[tokenId] == msg.sender;
+    function isApprovedForGame(address to, uint tokenId) public virtual view returns (bool) {
+        return _skylabBase.isApprovedOrOwner(to, tokenId) || _gameApprovals[tokenId] == to;
     }
 
     function approveForGame(address to, uint tokenId) public virtual {
@@ -138,8 +139,8 @@ contract SkylabBidTacToe is Ownable {
         _skylabBase = SkylabBase(skylabBaseAddress);
     }
 
-    function registerSkylabBidTacToeParamVerifier(address verifierAddress) external onlyOwner {
-        verifier = SkylabBidTacToeParamVerifier(verifierAddress);
+    function registerSkylabBidTacToeDeployer(address deployerAddress) external onlyOwner {
+        deployer = SkylabBidTacToeDeployer(deployerAddress);
     }
 
 }
