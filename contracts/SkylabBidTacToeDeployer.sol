@@ -18,7 +18,7 @@ contract SkylabBidTacToeDeployer {
         require(gameParams.lengthToWin >= 3 && gameParams.lengthToWin <= max(gameParams.gridWidth, gameParams.gridHeight), "SkylabBidTacToeParamVerifier: lengthToWin incorrect");
         require(gameParams.initialBalance >= 100 && gameParams.initialBalance <= 10000, "SkylabBidTacToeParamVerifier: initialBalance incorrect");
         BidTacToeProxy bidTacToeProxy = new BidTacToeProxy();
-        (bool suceed,) = address(proxy).call(abi.encodeWithSignature("(uint256,uint256,uint256,uint256),address,address", gameParams, playerAddress, skylabBidTacToeAddress));
+        (bool suceed,) = address(proxy).call(abi.encodeWithSignature("initialize((uint256,uint256,uint256,uint256),address,address)", gameParams, playerAddress, skylabBidTacToeAddress));
         require(suceed, "create game faild");
         return address(bidTacToeProxy);
     }
