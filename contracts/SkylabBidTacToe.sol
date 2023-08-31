@@ -121,13 +121,13 @@ contract SkylabBidTacToe is Ownable {
     }
 
     function approveForGame(address to, uint tokenId) public virtual {
-        require(isApprovedForGame(tokenId), "SkylabGameBase: caller is not token owner or approved");
+        require(isApprovedForGame(to, tokenId), "SkylabGameBase: caller is not token owner or approved");
         _gameApprovals[tokenId] = to;
         burnerAddressToTokenId[to] = tokenId;
     }
 
     function unapproveForGame(uint tokenId) public virtual {
-        require(isApprovedForGame(tokenId), "SkylabGameBase: caller is not token owner or approved");
+        require(isApprovedForGame(msg.sender, tokenId), "SkylabGameBase: caller is not token owner or approved");
         delete _gameApprovals[tokenId];
         delete burnerAddressToTokenId[msg.sender];
     }

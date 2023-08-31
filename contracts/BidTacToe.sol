@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import { SkylabBidTacToe } from "./SkylabBidTacToe.sol";
+import {SkylabBidTacToe} from "./SkylabBidTacToe.sol";
+import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
-contract BidTacToe {
+contract BidTacToe is Initializable {
     // ====================
     // Static gameplay data
     // ====================
@@ -28,7 +29,7 @@ contract BidTacToe {
     address public nextDrawWinner;
 
     // Static values
-    uint constant universalTimeout = 300;
+    uint256 constant universalTimeout = 300;
 
     /*
     *   State 1: next grid has been selected, both players are ready to bid for it
@@ -42,8 +43,7 @@ contract BidTacToe {
     *   State 9: lose by surrender
     *   State 10: win by grid count
     *   State 11: lose by grid count
-    */ 
-
+    */
 
     event ReadyPlayerTwo(address indexed player1, address indexed player2);
     event CommitBid(address indexed player, uint256 hash);
@@ -58,7 +58,10 @@ contract BidTacToe {
         _;
     }
 
-    constructor(SkylabBidTacToe.GameParams memory gameParams, address player, address callback) {
+    function initialize(SkylabBidTacToe.GameParams memory gameParams, address player, address callback)
+        public
+        initializer
+    {
         player1 = player;
         gridWidth = gameParams.gridWidth;
         gridHeight = gameParams.gridHeight;
@@ -71,7 +74,7 @@ contract BidTacToe {
         skylabBidTacToe = SkylabBidTacToe(callback);
     }
 
-    function getGrid() view external returns (address[] memory) {
+    function getGrid() external view returns (address[] memory) {
         return grid;
     }
 
@@ -86,7 +89,7 @@ contract BidTacToe {
 
         generateNextGrid();
         setTimeoutForBothPlayers();
-        if (uint(keccak256(abi.encodePacked(block.timestamp, player1, player2))) % 2 == 0) {
+        if (uint256(keccak256(abi.encodePacked(block.timestamp, player1, player2))) % 2 == 0) {
             nextDrawWinner = player1;
         } else {
             nextDrawWinner = player2;
@@ -113,7 +116,10 @@ contract BidTacToe {
     function revealBid(uint256 bid, uint256 salt) external onlyPlayers {
         require(gameStates[msg.sender] == 2, "BidTacToe: player gameState is not 2");
         require(gameStates[getOtherPlayer()] >= 2, "BidTacToe: opponent gameState is less than 2");
-        require(commitedHashes[msg.sender] == uint(keccak256(abi.encodePacked(bid, salt))), "BidTacToe: verification failed");
+        require(
+            commitedHashes[msg.sender] == uint256(keccak256(abi.encodePacked(bid, salt))),
+            "BidTacToe: verification failed"
+        );
         require(balances[msg.sender] >= bid, "BidTacToe: not enough balance");
 
         revealedBids[msg.sender][currentSelectedGrid] = bid;
@@ -129,7 +135,9 @@ contract BidTacToe {
             if (revealedBids[msg.sender][currentSelectedGrid] > revealedBids[getOtherPlayer()][currentSelectedGrid]) {
                 bidWinner = msg.sender;
                 bidLoser = getOtherPlayer();
-            } else if (revealedBids[msg.sender][currentSelectedGrid] < revealedBids[getOtherPlayer()][currentSelectedGrid]) {
+            } else if (
+                revealedBids[msg.sender][currentSelectedGrid] < revealedBids[getOtherPlayer()][currentSelectedGrid]
+            ) {
                 bidWinner = getOtherPlayer();
                 bidLoser = msg.sender;
             } else {
@@ -165,10 +173,11 @@ contract BidTacToe {
     function surrender() external onlyPlayers {
         win(getOtherPlayer(), 8);
     }
-    
 
     function generateNextGrid() internal {
-        uint256 tempHash = uint(keccak256(abi.encodePacked(player1, player2, balances[player1], balances[player2], block.timestamp)));
+        uint256 tempHash = uint256(
+            keccak256(abi.encodePacked(player1, player2, balances[player1], balances[player2], block.timestamp))
+        );
         uint256 tempSelection = tempHash % (gridWidth * gridHeight);
 
         uint256 antiCollision = tempSelection;
@@ -196,16 +205,19 @@ contract BidTacToe {
     }
 
     function existsOverallWinner() private view returns (bool) {
-        return inARowHelper(0, -1) + inARowHelper(0, 1) - 1 >= lengthToWin || inARowHelper(-1, 0) + inARowHelper(1, 0) - 1 >= lengthToWin || inARowHelper(-1, -1) + inARowHelper(1, 1) - 1 >= lengthToWin || inARowHelper(1, -1) + inARowHelper(-1, 1) - 1 >= lengthToWin;
+        return inARowHelper(0, -1) + inARowHelper(0, 1) - 1 >= lengthToWin
+            || inARowHelper(-1, 0) + inARowHelper(1, 0) - 1 >= lengthToWin
+            || inARowHelper(-1, -1) + inARowHelper(1, 1) - 1 >= lengthToWin
+            || inARowHelper(1, -1) + inARowHelper(-1, 1) - 1 >= lengthToWin;
     }
 
-    function inARowHelper(int stepX, int stepY) private view returns (uint256) {
-        int currentX = int(currentSelectedGrid) % int(gridWidth);
-        int currentY = int(currentSelectedGrid) / int(gridWidth);
-        uint currentLength = 0;
-        
-        while (currentX >= 0 && currentX < int(gridWidth) && currentY >= 0 && currentY < int(gridHeight)) {
-            if (grid[uint(currentY) * gridWidth + uint(currentX)] == grid[currentSelectedGrid]) {
+    function inARowHelper(int256 stepX, int256 stepY) private view returns (uint256) {
+        int256 currentX = int256(currentSelectedGrid) % int256(gridWidth);
+        int256 currentY = int256(currentSelectedGrid) / int256(gridWidth);
+        uint256 currentLength = 0;
+
+        while (currentX >= 0 && currentX < int256(gridWidth) && currentY >= 0 && currentY < int256(gridHeight)) {
+            if (grid[uint256(currentY) * gridWidth + uint256(currentX)] == grid[currentSelectedGrid]) {
                 currentLength += 1;
             }
             currentX += stepX;
