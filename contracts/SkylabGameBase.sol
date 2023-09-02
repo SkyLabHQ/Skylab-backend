@@ -24,16 +24,16 @@ contract SkylabGameBase is Ownable, ERC1155Holder {
     // =====================
     // Approval
     // =====================
-    function isApprovedForGame(uint tokenId) public view returns (bool) {
+    function isApprovedForGame(uint tokenId) public virtual view returns (bool) {
     	return _skylabBase.isApprovedOrOwner(msg.sender, tokenId) || _gameApprovals[tokenId] == msg.sender;
     }
 
-    function approveForGame(address to, uint tokenId) external {
+    function approveForGame(address to, uint tokenId) public virtual {
     	require(isApprovedForGame(tokenId), "SkylabGameBase: caller is not token owner or approved");
     	_gameApprovals[tokenId] = to;
     }
 
-    function unapproveForGame(uint tokenId) external {
+    function unapproveForGame(uint tokenId) public virtual {
     	require(isApprovedForGame(tokenId), "SkylabGameBase: caller is not token owner or approved");
     	delete _gameApprovals[tokenId];
     }
