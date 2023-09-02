@@ -12,9 +12,11 @@ import { SkylabResources } from "./SkylabResources.sol";
 contract SkylabBase is ERC721Enumerable, Ownable {
     using Strings for uint;
 
+    uint constant _maxLevel = 16;
+
     // per token data
     mapping(uint => uint) public _aviationLevels;
-    mapping(uint => bool) public _aviationHasWinCounter;
+    mapping(uint => uint) public _aviationPoints;
     mapping(uint => bool) public _aviationTradeLock;
     mapping(uint => uint) public _aviationPilotIds;
     mapping(uint => address) public _aviationPilotAddresses;
@@ -64,26 +66,34 @@ contract SkylabBase is ERC721Enumerable, Ownable {
     // ====================
     // Aviation level 
     // ====================
+    function aviationMovePoints(uint winnerTokenId, uint loserTokenId) external onlyGameAddresses {
+        require(_exists(winnerTokenId), "SkylabBase: nonexistent token");
+        require(_exists(loserTokenId), "SkylabBase: nonexistent token");
 
-    function aviationGainCounter(uint tokenId) external onlyGameAddresses {
-        require(_exists(tokenId), "SkylabBase: nonexistent token");
-        if (!_aviationHasWinCounter[tokenId]) {
-            _aviationHasWinCounter[tokenId] = true;
-        } 
-        else {
-            _aviationHasWinCounter[tokenId] = false;
-            _aviationLevels[tokenId] += 1;
+        uint pointsToMove = _aviationPoints[winnerTokenId] >= (uint(_aviationPoints[loserTokenId] + 1) / uint(2)) ? (uint(_aviationPoints[loserTokenId] + 1) / uint(2)) : _aviationPoints[winnerTokenId];
+        _aviationPoints[winnerTokenId] += pointsToMove;
+        if (pointsToMove >= _aviationPoints[loserTokenId]) {
+            _aviationPoints[loserTokenId] = 0;
+        } else {
+            _aviationPoints[loserTokenId] -= pointsToMove;
+        }
+
+        updateLevel(winnerTokenId);
+        updateLevel(loserTokenId);
+
+        if (_aviationPoints[loserTokenId] == 0) {
+           burnAviation(loserTokenId);
         }
     }
 
-    function aviationLevelDown(uint tokenId, uint levelDelta) external onlyGameAddresses {
-        require(_exists(tokenId), "SkylabBase: nonexistent token");
-        if (_aviationLevels[tokenId] > levelDelta) {
-            _aviationLevels[tokenId] -= levelDelta;
-        } else {
-            _aviationLevels[tokenId] = 0;
-            burnAviation(tokenId);
+    function updateLevel(uint tokenId) private {
+        for (uint i = 0; i <= _maxLevel; i++) {
+            if (2**i > _aviationPoints[tokenId]) {
+                _aviationLevels[tokenId] = i;
+                return;
+            }
         }
+        _aviationLevels[tokenId] = _maxLevel;
     }
 
     function burnAviation(uint tokenId) private {
@@ -212,10 +222,6 @@ contract SkylabBase is ERC721Enumerable, Ownable {
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721: URI query for nonexistent token");
         
-        string memory tokenLevelString = _aviationLevels[tokenId].toString();
-        if (_aviationHasWinCounter[tokenId]) {
-            tokenLevelString = string(abi.encodePacked(tokenLevelString, ".5"));
-        }
         string memory pilotString = "None";
         string memory baseUrl = _metadataBaseURI;
         address pilotAddress = _aviationPilotAddresses[tokenId];
@@ -225,10 +231,11 @@ contract SkylabBase is ERC721Enumerable, Ownable {
             baseUrl = string(abi.encodePacked(_pilotAddressesToUrls[pilotAddress], _aviationPilotIds[tokenId].toString(), "/"));
         }
 
-        return _skylabMetadata.generateTokenMetadataa(
+        return _skylabMetadata.generateTokenMetadata(
             tokenId.toString(), 
-            string(abi.encodePacked(baseUrl, tokenLevelString, ".png")),
-            tokenLevelString,
+            string(abi.encodePacked(baseUrl, _aviationLevels[tokenId].toString(), ".png")),
+            _aviationLevels[tokenId].toString(),
+            _aviationPoints[tokenId].toString(),
             pilotString
         );
     }

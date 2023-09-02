@@ -275,6 +275,7 @@ contract SkylabGameFlightRace is SkylabGameBase {
         }
         delete gameTank[tokenId];
 
+        /*
         if (gameState[tokenId] == 5) {
             if (_skylabBase._aviationLevels(tokenId) == 1) {
                 _skylabBase.aviationGainCounter(tokenId);
@@ -283,6 +284,7 @@ contract SkylabGameFlightRace is SkylabGameBase {
         } else if (gameState[tokenId] == 6 || gameState[tokenId] == 7) {
             _skylabBase.aviationLevelDown(tokenId, 1);
         }
+        */
         gameState[tokenId] = 0;
     }
 
