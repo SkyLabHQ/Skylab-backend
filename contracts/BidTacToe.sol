@@ -20,6 +20,7 @@ contract BidTacToe is Initializable {
     // ====================
     address[] private grid;
     uint256 public currentSelectedGrid;
+    uint256[] public allSelectedGrids;
     mapping(address => uint256) public gameStates;
     mapping(address => uint256) public timeouts;
     mapping(address => uint256) public balances;
@@ -189,6 +190,7 @@ contract BidTacToe is Initializable {
         }
 
         currentSelectedGrid = antiCollision;
+        allSelectedGrids.push(currentSelectedGrid);
     }
 
     function setTimeoutForBothPlayers() internal {

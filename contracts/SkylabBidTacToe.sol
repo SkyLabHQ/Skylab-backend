@@ -9,10 +9,10 @@ import { SkylabBase } from "./SkylabBase.sol";
 
 contract SkylabBidTacToe is Ownable {
     struct GameParams {
-        uint gridWidth;
-        uint gridHeight; 
-        uint lengthToWin; 
-        uint initialBalance;
+        uint64 gridWidth;
+        uint64 gridHeight; 
+        uint64 lengthToWin; 
+        uint64 initialBalance;
     }
 
     SkylabBase internal _skylabBase;
@@ -30,7 +30,7 @@ contract SkylabBidTacToe is Ownable {
 
     address[] public lobbyGameQueue;
     mapping(address => uint) private lobbyGameIndex;
-    address private defaultGameQueue;
+    address public defaultGameQueue;
     
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
@@ -40,7 +40,7 @@ contract SkylabBidTacToe is Ownable {
         deployer = SkylabBidTacToeDeployer(deployerAddress);
     }
 
-    function createLobby(uint gridWidth, uint gridHeight, uint lengthToWin, uint initialBalance) external {
+    function createLobby(uint64 gridWidth, uint64 gridHeight, uint64 lengthToWin, uint64 initialBalance) external {
         _skylabBase.aviationLock(burnerAddressToTokenId[msg.sender]);
         GameParams memory gameParams = GameParams(gridWidth, gridHeight, lengthToWin, initialBalance);
         address newGame = createGame(gameParams);
@@ -72,18 +72,22 @@ contract SkylabBidTacToe is Ownable {
         delete lobbyGameIndex[lobby];
     }
 
-    function createOrJoinDefault() external returns (address) {
+    function createOrJoinDefault() external {
         _skylabBase.aviationLock(burnerAddressToTokenId[msg.sender]);
         if (defaultGameQueue == address(0)) {
-            defaultGameQueue = createGame(deployer.defaultParams());
-            gamePerPlayer[msg.sender] = defaultGameQueue;
-            return defaultGameQueue;
+            defaultGameQueue = msg.sender;
         } else {
-            deployer.joinGame(defaultGameQueue, msg.sender);
-            gamePerPlayer[msg.sender] = defaultGameQueue;
+            address gameAddress = createGame(deployer.defaultParams());
+            deployer.joinGame(gameAddress, defaultGameQueue);
+            gamePerPlayer[defaultGameQueue] = gameAddress;
             delete defaultGameQueue;
-            return gamePerPlayer[msg.sender];
         }
+    }
+
+    function withdrawFromQueue() external {
+        require(msg.sender == defaultGameQueue, "SkylabBidTacToe: msg.sender is not in default queue");
+        delete defaultGameQueue;
+        _skylabBase.aviationUnlock(burnerAddressToTokenId[msg.sender]);
     }
 
     function handleWin(address burner) external {
@@ -121,7 +125,7 @@ contract SkylabBidTacToe is Ownable {
     }
 
     function approveForGame(address to, uint tokenId) public virtual {
-        require(isApprovedForGame(to, tokenId), "SkylabGameBase: caller is not token owner or approved");
+        require(isApprovedForGame(msg.sender, tokenId), "SkylabGameBase: caller is not token owner or approved");
         _gameApprovals[tokenId] = to;
         burnerAddressToTokenId[to] = tokenId;
     }
