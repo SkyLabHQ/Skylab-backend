@@ -90,22 +90,13 @@ contract TrailblazerTournament is SkylabBase {
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721: URI query for nonexistent token");
-        
-        string memory pilotString = "None";
-        string memory baseUrl = _metadataBaseURI;
-        address pilotAddress = _aviationPilotAddresses[tokenId];
-        if (pilotAddress != address(0)) {
-            pilotString = 
-                string(abi.encodePacked(_pilotAddressesToNames[pilotAddress], " #", _aviationPilotIds[tokenId].toString()));
-            baseUrl = string(abi.encodePacked(_pilotAddressesToUrls[pilotAddress], _aviationPilotIds[tokenId].toString(), "/"));
-        }
 
         return _skylabMetadata.generateTokenMetadata(
             tokenId.toString(), 
-            string(abi.encodePacked(baseUrl, "Round", _aviationRounds[tokenId].toString(), "/", _aviationLevels[tokenId].toString(), ".png")),
+            string(abi.encodePacked(_metadataBaseURI, "Round", _aviationRounds[tokenId].toString(), "/", _aviationLevels[tokenId].toString(), ".png")),
             _aviationLevels[tokenId].toString(),
             _aviationPoints[tokenId].toString(),
-            pilotString
+            "None"
         );
     }
 }

@@ -25,7 +25,7 @@ contract BidTacToe is Initializable {
     mapping(address => uint256) public timeouts;
     mapping(address => uint256) public balances;
     mapping(address => uint256) private commitedHashes;
-    mapping(address => uint256[]) public revealedBids;
+    mapping(address => uint256[]) private revealedBids;
     mapping(address => uint256) private occupiedGridCounts;
     address public nextDrawWinner;
 
@@ -77,6 +77,10 @@ contract BidTacToe is Initializable {
 
     function getGrid() external view returns (address[] memory) {
         return grid;
+    }
+
+    function getRevealedBids(address player) external view returns (uint[] memory) {
+        return revealedBids[player];
     }
 
     // Player 2 joins the game, do checks and generate the next grid
