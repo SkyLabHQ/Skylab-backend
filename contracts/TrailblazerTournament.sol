@@ -31,6 +31,7 @@ contract TrailblazerTournament is SkylabBase {
         for (uint i = 0; i < to.length; i++) {
             _safeMint(to[i], _nextTokenID);
             _aviationLevels[_nextTokenID] = 1;
+            _aviationPoints[_nextTokenID] = 1;
             _aviationRounds[_nextTokenID] =  _currentRound;
             _nextTokenID++;
             _skylabResources.playTestNuke(to[i], ids);
@@ -90,10 +91,6 @@ contract TrailblazerTournament is SkylabBase {
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "ERC721: URI query for nonexistent token");
         
-        string memory tokenLevelString = _aviationLevels[tokenId].toString();
-        if (_aviationHasWinCounter[tokenId]) {
-            tokenLevelString = string(abi.encodePacked(tokenLevelString, ".5"));
-        }
         string memory pilotString = "None";
         string memory baseUrl = _metadataBaseURI;
         address pilotAddress = _aviationPilotAddresses[tokenId];
@@ -103,10 +100,11 @@ contract TrailblazerTournament is SkylabBase {
             baseUrl = string(abi.encodePacked(_pilotAddressesToUrls[pilotAddress], _aviationPilotIds[tokenId].toString(), "/"));
         }
 
-        return _skylabMetadata.generateTokenMetadataa(
+        return _skylabMetadata.generateTokenMetadata(
             tokenId.toString(), 
-            string(abi.encodePacked(baseUrl, "Round", _aviationRounds[tokenId].toString(), "/", tokenLevelString, ".png")),
-            tokenLevelString,
+            string(abi.encodePacked(baseUrl, "Round", _aviationRounds[tokenId].toString(), "/", _aviationLevels[tokenId].toString(), ".png")),
+            _aviationLevels[tokenId].toString(),
+            _aviationPoints[tokenId].toString(),
             pilotString
         );
     }

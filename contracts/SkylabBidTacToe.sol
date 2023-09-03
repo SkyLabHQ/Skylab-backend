@@ -90,31 +90,23 @@ contract SkylabBidTacToe is Ownable {
         _skylabBase.aviationUnlock(burnerAddressToTokenId[msg.sender]);
     }
 
-    function handleWin(address burner) external {
+    function handleWinLoss(address winnerBurner, address loserBurner) external {
         require(gameExists[msg.sender], "SkylabBidTacToe: msg.sender is not a game");
-        require(gamePerPlayer[burner] == msg.sender, "SkylabBidTacToe: address does not belong to this game");
-        uint tokenId = burnerAddressToTokenId[burner];
-        if (_skylabBase._aviationLevels(tokenId) == 1) {
-            _skylabBase.aviationGainCounter(tokenId);
-        }
-        _skylabBase.aviationUnlock(tokenId);
-        emit WinGame(tokenId, _skylabBase.ownerOf(tokenId));
-        _skylabBase.aviationGainCounter(tokenId);
-        delete gamePerPlayer[burner];
+        require(gamePerPlayer[winnerBurner] == msg.sender && gamePerPlayer[loserBurner] == msg.sender , "SkylabBidTacToe: burner addresses does not belong to this game");
+        uint winnerTokenId = cleanUp(winnerBurner);
+        uint loserTokenId = cleanUp(loserBurner);
+        emit WinGame(winnerTokenId, _skylabBase.ownerOf(winnerTokenId));
+        emit LoseGame(loserTokenId, _skylabBase.ownerOf(loserTokenId));
+        _skylabBase.aviationMovePoints(winnerTokenId, loserTokenId);
         delete gameExists[msg.sender];
         delete paramsPerGame[msg.sender];
     }
 
-    function handleLoss(address burner) external {
-        require(gameExists[msg.sender], "SkylabBidTacToe: msg.sender is not a game");
-        require(gamePerPlayer[burner] == msg.sender, "SkylabBidTacToe: address does not belong to this game");
+    function cleanUp(address burner) private returns (uint) {
         uint tokenId = burnerAddressToTokenId[burner];
         _skylabBase.aviationUnlock(tokenId);
-        emit LoseGame(tokenId, _skylabBase.ownerOf(tokenId));
-        _skylabBase.aviationLevelDown(tokenId, 1);
         delete gamePerPlayer[burner];
-        delete gameExists[msg.sender];
-        delete paramsPerGame[msg.sender];
+        return tokenId;
     }
 
     // =====================

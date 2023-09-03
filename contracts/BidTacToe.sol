@@ -235,7 +235,6 @@ contract BidTacToe is Initializable {
         gameStates[otherPlayer] = state + 1;
         emit LoseGame(otherPlayer, state + 1);
 
-        skylabBidTacToe.handleWin(player);
-        skylabBidTacToe.handleLoss(otherPlayer);
+        skylabBidTacToe.handleWinLoss(player, otherPlayer);
     }
 }
