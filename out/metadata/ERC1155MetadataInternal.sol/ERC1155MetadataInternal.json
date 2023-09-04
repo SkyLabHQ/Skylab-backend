@@ -1,0 +1,701 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "URI",
+      "type": "event"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"ERC1155Metadata internal functions\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataInternal.sol\":\"ERC1155MetadataInternal\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataInternal.sol\":{\"keccak256\":\"0x602da6e8790cf1516729cc6cc5c914a122b0103c82bbe76f6d0352f2c2c71d21\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cdfcabaefd8ccbc1baff99d63bee7f414eebdde9884e6e1b10012b3dfd700bb4\",\"dweb:/ipfs/QmXaHPjuR8KknAULPoxK714W2Zr3n8t25Fo5wUkxUAcVTA\"]},\"contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataStorage.sol\":{\"keccak256\":\"0xd90329704ba78b0b9b41353668446b0e0891d8e21e045d6a6a07379675964384\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://244cf56b50f50741ab02609bfc59ca67e3b46919c6a24a5185e12ea2f8d9f4e8\",\"dweb:/ipfs/QmdR6KnsLB2AFDifT4FUyjY9fZJvVC9EM3b6eWuwpCSrZ9\"]},\"contracts/.cache/solidstate/local/token/ERC1155/metadata/IERC1155MetadataInternal.sol\":{\"keccak256\":\"0x394093a86fbfebdcda356fe9407480d81434aa162afc6a3e8efbf72a4c05b98d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://afd12f43c0ba7b94ebd701da54b200074f464c16861bb14adcf5593f0f854c17\",\"dweb:/ipfs/QmWCmvKp1dRce5uaGrNog1pmt5pQCzsjcFuALJqn6kLxLD\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "value",
+              "type": "string",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "URI",
+          "anonymous": false
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataInternal.sol": "ERC1155MetadataInternal"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataInternal.sol": {
+        "keccak256": "0x602da6e8790cf1516729cc6cc5c914a122b0103c82bbe76f6d0352f2c2c71d21",
+        "urls": [
+          "bzz-raw://cdfcabaefd8ccbc1baff99d63bee7f414eebdde9884e6e1b10012b3dfd700bb4",
+          "dweb:/ipfs/QmXaHPjuR8KknAULPoxK714W2Zr3n8t25Fo5wUkxUAcVTA"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataStorage.sol": {
+        "keccak256": "0xd90329704ba78b0b9b41353668446b0e0891d8e21e045d6a6a07379675964384",
+        "urls": [
+          "bzz-raw://244cf56b50f50741ab02609bfc59ca67e3b46919c6a24a5185e12ea2f8d9f4e8",
+          "dweb:/ipfs/QmdR6KnsLB2AFDifT4FUyjY9fZJvVC9EM3b6eWuwpCSrZ9"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/metadata/IERC1155MetadataInternal.sol": {
+        "keccak256": "0x394093a86fbfebdcda356fe9407480d81434aa162afc6a3e8efbf72a4c05b98d",
+        "urls": [
+          "bzz-raw://afd12f43c0ba7b94ebd701da54b200074f464c16861bb14adcf5593f0f854c17",
+          "dweb:/ipfs/QmWCmvKp1dRce5uaGrNog1pmt5pQCzsjcFuALJqn6kLxLD"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataInternal.sol",
+    "id": 52331,
+    "exportedSymbols": {
+      "ERC1155MetadataInternal": [
+        52330
+      ],
+      "ERC1155MetadataStorage": [
+        52384
+      ],
+      "IERC1155MetadataInternal": [
+        52410
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:930:379",
+    "nodes": [
+      {
+        "id": 52283,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:379",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 52285,
+        "nodeType": "ImportDirective",
+        "src": "58:72:379",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/metadata/IERC1155MetadataInternal.sol",
+        "file": "./IERC1155MetadataInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52331,
+        "sourceUnit": 52411,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52284,
+              "name": "IERC1155MetadataInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 52410,
+              "src": "66:24:379",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52287,
+        "nodeType": "ImportDirective",
+        "src": "131:68:379",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataStorage.sol",
+        "file": "./ERC1155MetadataStorage.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52331,
+        "sourceUnit": 52385,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52286,
+              "name": "ERC1155MetadataStorage",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 52384,
+              "src": "139:22:379",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52330,
+        "nodeType": "ContractDefinition",
+        "src": "254:708:379",
+        "nodes": [
+          {
+            "id": 52305,
+            "nodeType": "FunctionDefinition",
+            "src": "499:119:379",
+            "nodes": [],
+            "body": {
+              "id": 52304,
+              "nodeType": "Block",
+              "src": "552:66:379",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 52302,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "expression": {
+                            "id": 52296,
+                            "name": "ERC1155MetadataStorage",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 52384,
+                            "src": "562:22:379",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_ERC1155MetadataStorage_$52384_$",
+                              "typeString": "type(library ERC1155MetadataStorage)"
+                            }
+                          },
+                          "id": 52298,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "585:6:379",
+                          "memberName": "layout",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 52383,
+                          "src": "562:29:379",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$__$returns$_t_struct$_Layout_$52371_storage_ptr_$",
+                            "typeString": "function () pure returns (struct ERC1155MetadataStorage.Layout storage pointer)"
+                          }
+                        },
+                        "id": 52299,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "562:31:379",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Layout_$52371_storage_ptr",
+                          "typeString": "struct ERC1155MetadataStorage.Layout storage pointer"
+                        }
+                      },
+                      "id": 52300,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "594:7:379",
+                      "memberName": "baseURI",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 52366,
+                      "src": "562:39:379",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 52301,
+                      "name": "baseURI",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 52293,
+                      "src": "604:7:379",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "562:49:379",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 52303,
+                  "nodeType": "ExpressionStatement",
+                  "src": "562:49:379"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 52291,
+              "nodeType": "StructuredDocumentation",
+              "src": "330:164:379",
+              "text": " @notice set base metadata URI\n @dev base URI is a non-standard feature adapted from the ERC721 specification\n @param baseURI base URI"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_setBaseURI",
+            "nameLocation": "508:11:379",
+            "parameters": {
+              "id": 52294,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 52293,
+                  "mutability": "mutable",
+                  "name": "baseURI",
+                  "nameLocation": "534:7:379",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 52305,
+                  "src": "520:21:379",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 52292,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "520:6:379",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "519:23:379"
+            },
+            "returnParameters": {
+              "id": 52295,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "552:0:379"
+            },
+            "scope": 52330,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 52329,
+            "nodeType": "FunctionDefinition",
+            "src": "773:187:379",
+            "nodes": [],
+            "body": {
+              "id": 52328,
+              "nodeType": "Block",
+              "src": "845:115:379",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 52321,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "baseExpression": {
+                        "expression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "id": 52313,
+                              "name": "ERC1155MetadataStorage",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 52384,
+                              "src": "855:22:379",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_ERC1155MetadataStorage_$52384_$",
+                                "typeString": "type(library ERC1155MetadataStorage)"
+                              }
+                            },
+                            "id": 52315,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "878:6:379",
+                            "memberName": "layout",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 52383,
+                            "src": "855:29:379",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_pure$__$returns$_t_struct$_Layout_$52371_storage_ptr_$",
+                              "typeString": "function () pure returns (struct ERC1155MetadataStorage.Layout storage pointer)"
+                            }
+                          },
+                          "id": 52316,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "855:31:379",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Layout_$52371_storage_ptr",
+                            "typeString": "struct ERC1155MetadataStorage.Layout storage pointer"
+                          }
+                        },
+                        "id": 52317,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "887:9:379",
+                        "memberName": "tokenURIs",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 52370,
+                        "src": "855:41:379",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_string_storage_$",
+                          "typeString": "mapping(uint256 => string storage ref)"
+                        }
+                      },
+                      "id": 52319,
+                      "indexExpression": {
+                        "id": 52318,
+                        "name": "tokenId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 52308,
+                        "src": "897:7:379",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "855:50:379",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 52320,
+                      "name": "tokenURI",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 52310,
+                      "src": "908:8:379",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "855:61:379",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 52322,
+                  "nodeType": "ExpressionStatement",
+                  "src": "855:61:379"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 52324,
+                        "name": "tokenURI",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 52310,
+                        "src": "935:8:379",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "id": 52325,
+                        "name": "tokenId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 52308,
+                        "src": "945:7:379",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 52323,
+                      "name": "URI",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 52409,
+                      "src": "931:3:379",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                        "typeString": "function (string memory,uint256)"
+                      }
+                    },
+                    "id": 52326,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "931:22:379",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 52327,
+                  "nodeType": "EmitStatement",
+                  "src": "926:27:379"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 52306,
+              "nodeType": "StructuredDocumentation",
+              "src": "624:144:379",
+              "text": " @notice set per-token metadata URI\n @param tokenId token whose metadata URI to set\n @param tokenURI per-token URI"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_setTokenURI",
+            "nameLocation": "782:12:379",
+            "parameters": {
+              "id": 52311,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 52308,
+                  "mutability": "mutable",
+                  "name": "tokenId",
+                  "nameLocation": "803:7:379",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 52329,
+                  "src": "795:15:379",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 52307,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "795:7:379",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 52310,
+                  "mutability": "mutable",
+                  "name": "tokenURI",
+                  "nameLocation": "826:8:379",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 52329,
+                  "src": "812:22:379",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 52309,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "812:6:379",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "794:41:379"
+            },
+            "returnParameters": {
+              "id": 52312,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "845:0:379"
+            },
+            "scope": 52330,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 52289,
+              "name": "IERC1155MetadataInternal",
+              "nameLocations": [
+                "299:24:379"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 52410,
+              "src": "299:24:379"
+            },
+            "id": 52290,
+            "nodeType": "InheritanceSpecifier",
+            "src": "299:24:379"
+          }
+        ],
+        "canonicalName": "ERC1155MetadataInternal",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 52288,
+          "nodeType": "StructuredDocumentation",
+          "src": "201:52:379",
+          "text": " @title ERC1155Metadata internal functions"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          52330,
+          52410
+        ],
+        "name": "ERC1155MetadataInternal",
+        "nameLocation": "272:23:379",
+        "scope": 52331,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 379
+}

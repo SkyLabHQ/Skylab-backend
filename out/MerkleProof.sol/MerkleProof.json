@@ -1,0 +1,971 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212205d38c15d08c02b5cc8ea37284a6f4fd7e3587f9db5a2b46f58a4689a59c60b8364736f6c63430008130033",
+    "sourceMap": "199:1011:234:-:0;;;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x600080fdfea26469706673582212205d38c15d08c02b5cc8ea37284a6f4fd7e3587f9db5a2b46f58a4689a59c60b8364736f6c63430008130033",
+    "sourceMap": "199:1011:234:-:0;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"derived from https://github.com/OpenZeppelin/openzeppelin-contracts (MIT license)\",\"kind\":\"dev\",\"methods\":{},\"title\":\"Merkle tree verification utility\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/cryptography/MerkleProof.sol\":\"MerkleProof\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/cryptography/MerkleProof.sol\":{\"keccak256\":\"0x7bf1dace0c4e62e8d52df7df6c9df61b15ffe8fde281ba1ea0c9ede7c626f1d6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1fecbbf3a73a798eff63936e7a6603fc010c678f4c62c27ff06476325b786de7\",\"dweb:/ipfs/QmVmiC65TTHeqxohLe65sNPfdobZf52Fh3dFnA3CJF19Et\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/cryptography/MerkleProof.sol": "MerkleProof"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/cryptography/MerkleProof.sol": {
+        "keccak256": "0x7bf1dace0c4e62e8d52df7df6c9df61b15ffe8fde281ba1ea0c9ede7c626f1d6",
+        "urls": [
+          "bzz-raw://1fecbbf3a73a798eff63936e7a6603fc010c678f4c62c27ff06476325b786de7",
+          "dweb:/ipfs/QmVmiC65TTHeqxohLe65sNPfdobZf52Fh3dFnA3CJF19Et"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/cryptography/MerkleProof.sol",
+    "id": 38500,
+    "exportedSymbols": {
+      "MerkleProof": [
+        38499
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:1178:234",
+    "nodes": [
+      {
+        "id": 38429,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:234",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 38499,
+        "nodeType": "ContractDefinition",
+        "src": "199:1011:234",
+        "nodes": [
+          {
+            "id": 38498,
+            "nodeType": "FunctionDefinition",
+            "src": "590:618:234",
+            "nodes": [],
+            "body": {
+              "id": 38497,
+              "nodeType": "Block",
+              "src": "687:521:234",
+              "nodes": [],
+              "statements": [
+                {
+                  "id": 38496,
+                  "nodeType": "UncheckedBlock",
+                  "src": "697:505:234",
+                  "statements": [
+                    {
+                      "assignments": [
+                        38444
+                      ],
+                      "declarations": [
+                        {
+                          "constant": false,
+                          "id": 38444,
+                          "mutability": "mutable",
+                          "name": "computedHash",
+                          "nameLocation": "729:12:234",
+                          "nodeType": "VariableDeclaration",
+                          "scope": 38496,
+                          "src": "721:20:234",
+                          "stateVariable": false,
+                          "storageLocation": "default",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          },
+                          "typeName": {
+                            "id": 38443,
+                            "name": "bytes32",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "721:7:234",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          },
+                          "visibility": "internal"
+                        }
+                      ],
+                      "id": 38446,
+                      "initialValue": {
+                        "id": 38445,
+                        "name": "leaf",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 38438,
+                        "src": "744:4:234",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "nodeType": "VariableDeclarationStatement",
+                      "src": "721:27:234"
+                    },
+                    {
+                      "body": {
+                        "id": 38490,
+                        "nodeType": "Block",
+                        "src": "806:344:234",
+                        "statements": [
+                          {
+                            "assignments": [
+                              38459
+                            ],
+                            "declarations": [
+                              {
+                                "constant": false,
+                                "id": 38459,
+                                "mutability": "mutable",
+                                "name": "proofElement",
+                                "nameLocation": "832:12:234",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 38490,
+                                "src": "824:20:234",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                },
+                                "typeName": {
+                                  "id": 38458,
+                                  "name": "bytes32",
+                                  "nodeType": "ElementaryTypeName",
+                                  "src": "824:7:234",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_bytes32",
+                                    "typeString": "bytes32"
+                                  }
+                                },
+                                "visibility": "internal"
+                              }
+                            ],
+                            "id": 38463,
+                            "initialValue": {
+                              "baseExpression": {
+                                "id": 38460,
+                                "name": "proof",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 38434,
+                                "src": "847:5:234",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_array$_t_bytes32_$dyn_memory_ptr",
+                                  "typeString": "bytes32[] memory"
+                                }
+                              },
+                              "id": 38462,
+                              "indexExpression": {
+                                "id": 38461,
+                                "name": "i",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 38448,
+                                "src": "853:1:234",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "847:8:234",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_bytes32",
+                                "typeString": "bytes32"
+                              }
+                            },
+                            "nodeType": "VariableDeclarationStatement",
+                            "src": "824:31:234"
+                          },
+                          {
+                            "condition": {
+                              "commonType": {
+                                "typeIdentifier": "t_bytes32",
+                                "typeString": "bytes32"
+                              },
+                              "id": 38466,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "leftExpression": {
+                                "id": 38464,
+                                "name": "computedHash",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 38444,
+                                "src": "878:12:234",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              },
+                              "nodeType": "BinaryOperation",
+                              "operator": "<=",
+                              "rightExpression": {
+                                "id": 38465,
+                                "name": "proofElement",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 38459,
+                                "src": "894:12:234",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              },
+                              "src": "878:28:234",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_bool",
+                                "typeString": "bool"
+                              }
+                            },
+                            "falseBody": {
+                              "id": 38488,
+                              "nodeType": "Block",
+                              "src": "1025:111:234",
+                              "statements": [
+                                {
+                                  "expression": {
+                                    "id": 38486,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "lValueRequested": false,
+                                    "leftHandSide": {
+                                      "id": 38478,
+                                      "name": "computedHash",
+                                      "nodeType": "Identifier",
+                                      "overloadedDeclarations": [],
+                                      "referencedDeclaration": 38444,
+                                      "src": "1047:12:234",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_bytes32",
+                                        "typeString": "bytes32"
+                                      }
+                                    },
+                                    "nodeType": "Assignment",
+                                    "operator": "=",
+                                    "rightHandSide": {
+                                      "arguments": [
+                                        {
+                                          "arguments": [
+                                            {
+                                              "id": 38482,
+                                              "name": "proofElement",
+                                              "nodeType": "Identifier",
+                                              "overloadedDeclarations": [],
+                                              "referencedDeclaration": 38459,
+                                              "src": "1089:12:234",
+                                              "typeDescriptions": {
+                                                "typeIdentifier": "t_bytes32",
+                                                "typeString": "bytes32"
+                                              }
+                                            },
+                                            {
+                                              "id": 38483,
+                                              "name": "computedHash",
+                                              "nodeType": "Identifier",
+                                              "overloadedDeclarations": [],
+                                              "referencedDeclaration": 38444,
+                                              "src": "1103:12:234",
+                                              "typeDescriptions": {
+                                                "typeIdentifier": "t_bytes32",
+                                                "typeString": "bytes32"
+                                              }
+                                            }
+                                          ],
+                                          "expression": {
+                                            "argumentTypes": [
+                                              {
+                                                "typeIdentifier": "t_bytes32",
+                                                "typeString": "bytes32"
+                                              },
+                                              {
+                                                "typeIdentifier": "t_bytes32",
+                                                "typeString": "bytes32"
+                                              }
+                                            ],
+                                            "expression": {
+                                              "id": 38480,
+                                              "name": "abi",
+                                              "nodeType": "Identifier",
+                                              "overloadedDeclarations": [],
+                                              "referencedDeclaration": -1,
+                                              "src": "1072:3:234",
+                                              "typeDescriptions": {
+                                                "typeIdentifier": "t_magic_abi",
+                                                "typeString": "abi"
+                                              }
+                                            },
+                                            "id": 38481,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": true,
+                                            "lValueRequested": false,
+                                            "memberLocation": "1076:12:234",
+                                            "memberName": "encodePacked",
+                                            "nodeType": "MemberAccess",
+                                            "src": "1072:16:234",
+                                            "typeDescriptions": {
+                                              "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
+                                              "typeString": "function () pure returns (bytes memory)"
+                                            }
+                                          },
+                                          "id": 38484,
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": false,
+                                          "kind": "functionCall",
+                                          "lValueRequested": false,
+                                          "nameLocations": [],
+                                          "names": [],
+                                          "nodeType": "FunctionCall",
+                                          "src": "1072:44:234",
+                                          "tryCall": false,
+                                          "typeDescriptions": {
+                                            "typeIdentifier": "t_bytes_memory_ptr",
+                                            "typeString": "bytes memory"
+                                          }
+                                        }
+                                      ],
+                                      "expression": {
+                                        "argumentTypes": [
+                                          {
+                                            "typeIdentifier": "t_bytes_memory_ptr",
+                                            "typeString": "bytes memory"
+                                          }
+                                        ],
+                                        "id": 38479,
+                                        "name": "keccak256",
+                                        "nodeType": "Identifier",
+                                        "overloadedDeclarations": [],
+                                        "referencedDeclaration": -8,
+                                        "src": "1062:9:234",
+                                        "typeDescriptions": {
+                                          "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                                          "typeString": "function (bytes memory) pure returns (bytes32)"
+                                        }
+                                      },
+                                      "id": 38485,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "kind": "functionCall",
+                                      "lValueRequested": false,
+                                      "nameLocations": [],
+                                      "names": [],
+                                      "nodeType": "FunctionCall",
+                                      "src": "1062:55:234",
+                                      "tryCall": false,
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_bytes32",
+                                        "typeString": "bytes32"
+                                      }
+                                    },
+                                    "src": "1047:70:234",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_bytes32",
+                                      "typeString": "bytes32"
+                                    }
+                                  },
+                                  "id": 38487,
+                                  "nodeType": "ExpressionStatement",
+                                  "src": "1047:70:234"
+                                }
+                              ]
+                            },
+                            "id": 38489,
+                            "nodeType": "IfStatement",
+                            "src": "874:262:234",
+                            "trueBody": {
+                              "id": 38477,
+                              "nodeType": "Block",
+                              "src": "908:111:234",
+                              "statements": [
+                                {
+                                  "expression": {
+                                    "id": 38475,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "lValueRequested": false,
+                                    "leftHandSide": {
+                                      "id": 38467,
+                                      "name": "computedHash",
+                                      "nodeType": "Identifier",
+                                      "overloadedDeclarations": [],
+                                      "referencedDeclaration": 38444,
+                                      "src": "930:12:234",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_bytes32",
+                                        "typeString": "bytes32"
+                                      }
+                                    },
+                                    "nodeType": "Assignment",
+                                    "operator": "=",
+                                    "rightHandSide": {
+                                      "arguments": [
+                                        {
+                                          "arguments": [
+                                            {
+                                              "id": 38471,
+                                              "name": "computedHash",
+                                              "nodeType": "Identifier",
+                                              "overloadedDeclarations": [],
+                                              "referencedDeclaration": 38444,
+                                              "src": "972:12:234",
+                                              "typeDescriptions": {
+                                                "typeIdentifier": "t_bytes32",
+                                                "typeString": "bytes32"
+                                              }
+                                            },
+                                            {
+                                              "id": 38472,
+                                              "name": "proofElement",
+                                              "nodeType": "Identifier",
+                                              "overloadedDeclarations": [],
+                                              "referencedDeclaration": 38459,
+                                              "src": "986:12:234",
+                                              "typeDescriptions": {
+                                                "typeIdentifier": "t_bytes32",
+                                                "typeString": "bytes32"
+                                              }
+                                            }
+                                          ],
+                                          "expression": {
+                                            "argumentTypes": [
+                                              {
+                                                "typeIdentifier": "t_bytes32",
+                                                "typeString": "bytes32"
+                                              },
+                                              {
+                                                "typeIdentifier": "t_bytes32",
+                                                "typeString": "bytes32"
+                                              }
+                                            ],
+                                            "expression": {
+                                              "id": 38469,
+                                              "name": "abi",
+                                              "nodeType": "Identifier",
+                                              "overloadedDeclarations": [],
+                                              "referencedDeclaration": -1,
+                                              "src": "955:3:234",
+                                              "typeDescriptions": {
+                                                "typeIdentifier": "t_magic_abi",
+                                                "typeString": "abi"
+                                              }
+                                            },
+                                            "id": 38470,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": true,
+                                            "lValueRequested": false,
+                                            "memberLocation": "959:12:234",
+                                            "memberName": "encodePacked",
+                                            "nodeType": "MemberAccess",
+                                            "src": "955:16:234",
+                                            "typeDescriptions": {
+                                              "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
+                                              "typeString": "function () pure returns (bytes memory)"
+                                            }
+                                          },
+                                          "id": 38473,
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": false,
+                                          "kind": "functionCall",
+                                          "lValueRequested": false,
+                                          "nameLocations": [],
+                                          "names": [],
+                                          "nodeType": "FunctionCall",
+                                          "src": "955:44:234",
+                                          "tryCall": false,
+                                          "typeDescriptions": {
+                                            "typeIdentifier": "t_bytes_memory_ptr",
+                                            "typeString": "bytes memory"
+                                          }
+                                        }
+                                      ],
+                                      "expression": {
+                                        "argumentTypes": [
+                                          {
+                                            "typeIdentifier": "t_bytes_memory_ptr",
+                                            "typeString": "bytes memory"
+                                          }
+                                        ],
+                                        "id": 38468,
+                                        "name": "keccak256",
+                                        "nodeType": "Identifier",
+                                        "overloadedDeclarations": [],
+                                        "referencedDeclaration": -8,
+                                        "src": "945:9:234",
+                                        "typeDescriptions": {
+                                          "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                                          "typeString": "function (bytes memory) pure returns (bytes32)"
+                                        }
+                                      },
+                                      "id": 38474,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "kind": "functionCall",
+                                      "lValueRequested": false,
+                                      "nameLocations": [],
+                                      "names": [],
+                                      "nodeType": "FunctionCall",
+                                      "src": "945:55:234",
+                                      "tryCall": false,
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_bytes32",
+                                        "typeString": "bytes32"
+                                      }
+                                    },
+                                    "src": "930:70:234",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_bytes32",
+                                      "typeString": "bytes32"
+                                    }
+                                  },
+                                  "id": 38476,
+                                  "nodeType": "ExpressionStatement",
+                                  "src": "930:70:234"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "condition": {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 38454,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 38451,
+                          "name": "i",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 38448,
+                          "src": "783:1:234",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "<",
+                        "rightExpression": {
+                          "expression": {
+                            "id": 38452,
+                            "name": "proof",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 38434,
+                            "src": "787:5:234",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_array$_t_bytes32_$dyn_memory_ptr",
+                              "typeString": "bytes32[] memory"
+                            }
+                          },
+                          "id": 38453,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "793:6:234",
+                          "memberName": "length",
+                          "nodeType": "MemberAccess",
+                          "src": "787:12:234",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "783:16:234",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "id": 38491,
+                      "initializationExpression": {
+                        "assignments": [
+                          38448
+                        ],
+                        "declarations": [
+                          {
+                            "constant": false,
+                            "id": 38448,
+                            "mutability": "mutable",
+                            "name": "i",
+                            "nameLocation": "776:1:234",
+                            "nodeType": "VariableDeclaration",
+                            "scope": 38491,
+                            "src": "768:9:234",
+                            "stateVariable": false,
+                            "storageLocation": "default",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            },
+                            "typeName": {
+                              "id": 38447,
+                              "name": "uint256",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "768:7:234",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "visibility": "internal"
+                          }
+                        ],
+                        "id": 38450,
+                        "initialValue": {
+                          "hexValue": "30",
+                          "id": 38449,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "780:1:234",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        },
+                        "nodeType": "VariableDeclarationStatement",
+                        "src": "768:13:234"
+                      },
+                      "loopExpression": {
+                        "expression": {
+                          "id": 38456,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "UnaryOperation",
+                          "operator": "++",
+                          "prefix": false,
+                          "src": "801:3:234",
+                          "subExpression": {
+                            "id": 38455,
+                            "name": "i",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 38448,
+                            "src": "801:1:234",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 38457,
+                        "nodeType": "ExpressionStatement",
+                        "src": "801:3:234"
+                      },
+                      "nodeType": "ForStatement",
+                      "src": "763:387:234"
+                    },
+                    {
+                      "expression": {
+                        "commonType": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        },
+                        "id": 38494,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 38492,
+                          "name": "computedHash",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 38444,
+                          "src": "1171:12:234",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "id": 38493,
+                          "name": "root",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 38436,
+                          "src": "1187:4:234",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        },
+                        "src": "1171:20:234",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "functionReturnParameters": 38442,
+                      "id": 38495,
+                      "nodeType": "Return",
+                      "src": "1164:27:234"
+                    }
+                  ]
+                }
+              ]
+            },
+            "documentation": {
+              "id": 38431,
+              "nodeType": "StructuredDocumentation",
+              "src": "225:360:234",
+              "text": " @notice verify whether given leaf is contained within Merkle tree defined by given root\n @param proof proof that Merkle tree contains given leaf\n @param root Merkle tree root\n @param leaf element whose presence in Merkle tree to prove\n @return whether leaf is proven to be contained within Merkle tree defined by root"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "verify",
+            "nameLocation": "599:6:234",
+            "parameters": {
+              "id": 38439,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 38434,
+                  "mutability": "mutable",
+                  "name": "proof",
+                  "nameLocation": "623:5:234",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38498,
+                  "src": "606:22:234",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bytes32_$dyn_memory_ptr",
+                    "typeString": "bytes32[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 38432,
+                      "name": "bytes32",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "606:7:234",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      }
+                    },
+                    "id": 38433,
+                    "nodeType": "ArrayTypeName",
+                    "src": "606:9:234",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bytes32_$dyn_storage_ptr",
+                      "typeString": "bytes32[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 38436,
+                  "mutability": "mutable",
+                  "name": "root",
+                  "nameLocation": "638:4:234",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38498,
+                  "src": "630:12:234",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 38435,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "630:7:234",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 38438,
+                  "mutability": "mutable",
+                  "name": "leaf",
+                  "nameLocation": "652:4:234",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38498,
+                  "src": "644:12:234",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 38437,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "644:7:234",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "605:52:234"
+            },
+            "returnParameters": {
+              "id": 38442,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 38441,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 38498,
+                  "src": "681:4:234",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 38440,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "681:4:234",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "680:6:234"
+            },
+            "scope": 38499,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "MerkleProof",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": {
+          "id": 38430,
+          "nodeType": "StructuredDocumentation",
+          "src": "58:140:234",
+          "text": " @title Merkle tree verification utility\n @dev derived from https://github.com/OpenZeppelin/openzeppelin-contracts (MIT license)"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          38499
+        ],
+        "name": "MerkleProof",
+        "nameLocation": "207:11:234",
+        "scope": 38500,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 234
+}

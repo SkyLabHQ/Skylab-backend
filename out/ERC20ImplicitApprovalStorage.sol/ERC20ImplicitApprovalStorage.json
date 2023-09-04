@@ -1,0 +1,427 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212202187e31f97d04bc450734e1183212d43161961081404c32cd260a873cbf4b5d964736f6c63430008130033",
+    "sourceMap": "58:394:410:-:0;;;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x600080fdfea26469706673582212202187e31f97d04bc450734e1183212d43161961081404c32cd260a873cbf4b5d964736f6c63430008130033",
+    "sourceMap": "58:394:410:-:0;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/token/ERC20/implicit_approval/ERC20ImplicitApprovalStorage.sol\":\"ERC20ImplicitApprovalStorage\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/token/ERC20/implicit_approval/ERC20ImplicitApprovalStorage.sol\":{\"keccak256\":\"0x42b3a612e07edbc5313aed504ef347ee35bf9a3d992a82556c1ee0062c3e5046\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e1e22053090c253d9210c35d78ee0aa4e4516829affafc3b5a7cb9412056c30d\",\"dweb:/ipfs/QmUj82Pz9QDgwQzjSWscNCnjMcM71Euk44gcZt88AyUG9x\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/token/ERC20/implicit_approval/ERC20ImplicitApprovalStorage.sol": "ERC20ImplicitApprovalStorage"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/token/ERC20/implicit_approval/ERC20ImplicitApprovalStorage.sol": {
+        "keccak256": "0x42b3a612e07edbc5313aed504ef347ee35bf9a3d992a82556c1ee0062c3e5046",
+        "urls": [
+          "bzz-raw://e1e22053090c253d9210c35d78ee0aa4e4516829affafc3b5a7cb9412056c30d",
+          "dweb:/ipfs/QmUj82Pz9QDgwQzjSWscNCnjMcM71Euk44gcZt88AyUG9x"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/implicit_approval/ERC20ImplicitApprovalStorage.sol",
+    "id": 54095,
+    "exportedSymbols": {
+      "ERC20ImplicitApprovalStorage": [
+        54094
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:420:410",
+    "nodes": [
+      {
+        "id": 54071,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:410",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 54094,
+        "nodeType": "ContractDefinition",
+        "src": "58:394:410",
+        "nodes": [
+          {
+            "id": 54076,
+            "nodeType": "StructDefinition",
+            "src": "101:73:410",
+            "nodes": [],
+            "canonicalName": "ERC20ImplicitApprovalStorage.Layout",
+            "members": [
+              {
+                "constant": false,
+                "id": 54075,
+                "mutability": "mutable",
+                "name": "implicitApprovals",
+                "nameLocation": "150:17:410",
+                "nodeType": "VariableDeclaration",
+                "scope": 54076,
+                "src": "125:42:410",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                  "typeString": "mapping(address => bool)"
+                },
+                "typeName": {
+                  "id": 54074,
+                  "keyName": "",
+                  "keyNameLocation": "-1:-1:-1",
+                  "keyType": {
+                    "id": 54072,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "133:7:410",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "125:24:410",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                    "typeString": "mapping(address => bool)"
+                  },
+                  "valueName": "",
+                  "valueNameLocation": "-1:-1:-1",
+                  "valueType": {
+                    "id": 54073,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "144:4:410",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Layout",
+            "nameLocation": "108:6:410",
+            "scope": 54094,
+            "visibility": "public"
+          },
+          {
+            "id": 54081,
+            "nodeType": "VariableDeclaration",
+            "src": "180:104:410",
+            "nodes": [],
+            "constant": true,
+            "mutability": "constant",
+            "name": "STORAGE_SLOT",
+            "nameLocation": "206:12:410",
+            "scope": 54094,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 54077,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "180:7:410",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "arguments": [
+                {
+                  "hexValue": "736f6c696473746174652e636f6e7472616374732e73746f726167652e4552433230496d706c69636974417070726f76616c",
+                  "id": 54079,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "string",
+                  "lValueRequested": false,
+                  "nodeType": "Literal",
+                  "src": "231:52:410",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_stringliteral_e076a236189d11087e6f258f7a69f2a5a83c9b57f620c90fb346111bfd9ecf7e",
+                    "typeString": "literal_string \"solidstate.contracts.storage.ERC20ImplicitApproval\""
+                  },
+                  "value": "solidstate.contracts.storage.ERC20ImplicitApproval"
+                }
+              ],
+              "expression": {
+                "argumentTypes": [
+                  {
+                    "typeIdentifier": "t_stringliteral_e076a236189d11087e6f258f7a69f2a5a83c9b57f620c90fb346111bfd9ecf7e",
+                    "typeString": "literal_string \"solidstate.contracts.storage.ERC20ImplicitApproval\""
+                  }
+                ],
+                "id": 54078,
+                "name": "keccak256",
+                "nodeType": "Identifier",
+                "overloadedDeclarations": [],
+                "referencedDeclaration": -8,
+                "src": "221:9:410",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                  "typeString": "function (bytes memory) pure returns (bytes32)"
+                }
+              },
+              "id": 54080,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "functionCall",
+              "lValueRequested": false,
+              "nameLocations": [],
+              "names": [],
+              "nodeType": "FunctionCall",
+              "src": "221:63:410",
+              "tryCall": false,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "id": 54093,
+            "nodeType": "FunctionDefinition",
+            "src": "291:159:410",
+            "nodes": [],
+            "body": {
+              "id": 54092,
+              "nodeType": "Block",
+              "src": "350:100:410",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    54088
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 54088,
+                      "mutability": "mutable",
+                      "name": "slot",
+                      "nameLocation": "368:4:410",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 54092,
+                      "src": "360:12:410",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      },
+                      "typeName": {
+                        "id": 54087,
+                        "name": "bytes32",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "360:7:410",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 54090,
+                  "initialValue": {
+                    "id": 54089,
+                    "name": "STORAGE_SLOT",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 54081,
+                    "src": "375:12:410",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "360:27:410"
+                },
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "406:38:410",
+                    "statements": [
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "420:14:410",
+                        "value": {
+                          "name": "slot",
+                          "nodeType": "YulIdentifier",
+                          "src": "430:4:410"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "l.slot",
+                            "nodeType": "YulIdentifier",
+                            "src": "420:6:410"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "paris",
+                  "externalReferences": [
+                    {
+                      "declaration": 54085,
+                      "isOffset": false,
+                      "isSlot": true,
+                      "src": "420:6:410",
+                      "suffix": "slot",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 54088,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "430:4:410",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 54091,
+                  "nodeType": "InlineAssembly",
+                  "src": "397:47:410"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "layout",
+            "nameLocation": "300:6:410",
+            "parameters": {
+              "id": 54082,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "306:2:410"
+            },
+            "returnParameters": {
+              "id": 54086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 54085,
+                  "mutability": "mutable",
+                  "name": "l",
+                  "nameLocation": "347:1:410",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 54093,
+                  "src": "332:16:410",
+                  "stateVariable": false,
+                  "storageLocation": "storage",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Layout_$54076_storage_ptr",
+                    "typeString": "struct ERC20ImplicitApprovalStorage.Layout"
+                  },
+                  "typeName": {
+                    "id": 54084,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 54083,
+                      "name": "Layout",
+                      "nameLocations": [
+                        "332:6:410"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 54076,
+                      "src": "332:6:410"
+                    },
+                    "referencedDeclaration": 54076,
+                    "src": "332:6:410",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Layout_$54076_storage_ptr",
+                      "typeString": "struct ERC20ImplicitApprovalStorage.Layout"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "331:18:410"
+            },
+            "scope": 54094,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "ERC20ImplicitApprovalStorage",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          54094
+        ],
+        "name": "ERC20ImplicitApprovalStorage",
+        "nameLocation": "66:28:410",
+        "scope": 54095,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 410
+}

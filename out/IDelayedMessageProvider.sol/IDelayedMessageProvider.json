@@ -1,0 +1,315 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "messageNum",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "InboxMessageDelivered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "messageNum",
+          "type": "uint256"
+        }
+      ],
+      "name": "InboxMessageDeliveredFromOrigin",
+      "type": "event"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"messageNum\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"InboxMessageDelivered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"messageNum\",\"type\":\"uint256\"}],\"name\":\"InboxMessageDeliveredFromOrigin\",\"type\":\"event\"}],\"devdoc\":{\"events\":{\"InboxMessageDelivered(uint256,bytes)\":{\"details\":\"event emitted when a inbox message is added to the Bridge's delayed accumulator\"},\"InboxMessageDeliveredFromOrigin(uint256)\":{\"details\":\"event emitted when a inbox message is added to the Bridge's delayed accumulator same as InboxMessageDelivered but the batch data is available in tx.input\"}},\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/openzeppelin/local/vendor/arbitrum/IDelayedMessageProvider.sol\":\"IDelayedMessageProvider\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/openzeppelin/local/vendor/arbitrum/IDelayedMessageProvider.sol\":{\"keccak256\":\"0xccec6fc7eac1151017a785c98f4d3d13d90c19b87a9ec1e8955245ba98f3e19b\",\"license\":\"BUSL-1.1\",\"urls\":[\"bzz-raw://c823dbf6495801b10bb720e10a31c191f9404478f6ac2993d6314f5067f8d0ea\",\"dweb:/ipfs/QmSyCRiPjqouJ84U2cmeo7nddsuW5LpfWR3qDQiAP63S2w\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "messageNum",
+              "type": "uint256",
+              "indexed": true
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "InboxMessageDelivered",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "messageNum",
+              "type": "uint256",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "InboxMessageDeliveredFromOrigin",
+          "anonymous": false
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/openzeppelin/local/vendor/arbitrum/IDelayedMessageProvider.sol": "IDelayedMessageProvider"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/openzeppelin/local/vendor/arbitrum/IDelayedMessageProvider.sol": {
+        "keccak256": "0xccec6fc7eac1151017a785c98f4d3d13d90c19b87a9ec1e8955245ba98f3e19b",
+        "urls": [
+          "bzz-raw://c823dbf6495801b10bb720e10a31c191f9404478f6ac2993d6314f5067f8d0ea",
+          "dweb:/ipfs/QmSyCRiPjqouJ84U2cmeo7nddsuW5LpfWR3qDQiAP63S2w"
+        ],
+        "license": "BUSL-1.1"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/openzeppelin/local/vendor/arbitrum/IDelayedMessageProvider.sol",
+    "id": 40963,
+    "exportedSymbols": {
+      "IDelayedMessageProvider": [
+        40962
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "299:484:256",
+    "nodes": [
+      {
+        "id": 40949,
+        "nodeType": "PragmaDirective",
+        "src": "299:31:256",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          ">=",
+          "0.6",
+          ".9",
+          "<",
+          "0.9",
+          ".0"
+        ]
+      },
+      {
+        "id": 40962,
+        "nodeType": "ContractDefinition",
+        "src": "332:450:256",
+        "nodes": [
+          {
+            "id": 40956,
+            "nodeType": "EventDefinition",
+            "src": "465:68:256",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 40950,
+              "nodeType": "StructuredDocumentation",
+              "src": "372:88:256",
+              "text": "@dev event emitted when a inbox message is added to the Bridge's delayed accumulator"
+            },
+            "eventSelector": "ff64905f73a67fb594e0f940a8075a860db489ad991e032f48c81123eb52d60b",
+            "name": "InboxMessageDelivered",
+            "nameLocation": "471:21:256",
+            "parameters": {
+              "id": 40955,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40952,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "messageNum",
+                  "nameLocation": "509:10:256",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40956,
+                  "src": "493:26:256",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40951,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "493:7:256",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 40954,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "527:4:256",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40956,
+                  "src": "521:10:256",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 40953,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "521:5:256",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "492:40:256"
+            }
+          },
+          {
+            "id": 40961,
+            "nodeType": "EventDefinition",
+            "src": "714:66:256",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 40957,
+              "nodeType": "StructuredDocumentation",
+              "src": "539:170:256",
+              "text": "@dev event emitted when a inbox message is added to the Bridge's delayed accumulator\n same as InboxMessageDelivered but the batch data is available in tx.input"
+            },
+            "eventSelector": "ab532385be8f1005a4b6ba8fa20a2245facb346134ac739fe9a5198dc1580b9c",
+            "name": "InboxMessageDeliveredFromOrigin",
+            "nameLocation": "720:31:256",
+            "parameters": {
+              "id": 40960,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 40959,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "messageNum",
+                  "nameLocation": "768:10:256",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 40961,
+                  "src": "752:26:256",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 40958,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "752:7:256",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "751:28:256"
+            }
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IDelayedMessageProvider",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          40962
+        ],
+        "name": "IDelayedMessageProvider",
+        "nameLocation": "342:23:256",
+        "scope": 40963,
+        "usedErrors": []
+      }
+    ],
+    "license": "BUSL-1.1"
+  },
+  "id": 256
+}

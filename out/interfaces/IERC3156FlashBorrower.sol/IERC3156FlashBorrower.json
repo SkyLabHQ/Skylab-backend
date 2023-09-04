@@ -1,0 +1,418 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "initiator",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "onFlashLoan",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "onFlashLoan(address,address,uint256,uint256,bytes)": "23e30c8b"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initiator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"onFlashLoan\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Interface of the ERC3156 FlashBorrower, as defined in https://eips.ethereum.org/EIPS/eip-3156[ERC-3156]. _Available since v4.1._\",\"kind\":\"dev\",\"methods\":{\"onFlashLoan(address,address,uint256,uint256,bytes)\":{\"details\":\"Receive a flash loan.\",\"params\":{\"amount\":\"The amount of tokens lent.\",\"data\":\"Arbitrary data structure, intended to contain user-defined parameters.\",\"fee\":\"The additional amount of tokens to repay.\",\"initiator\":\"The initiator of the loan.\",\"token\":\"The loan currency.\"},\"returns\":{\"_0\":\"The keccak256 hash of \\\"ERC3156FlashBorrower.onFlashLoan\\\"\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/openzeppelin/local/interfaces/IERC3156FlashBorrower.sol\":\"IERC3156FlashBorrower\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/openzeppelin/local/interfaces/IERC3156FlashBorrower.sol\":{\"keccak256\":\"0x3db026e5655eedb87ec8905ec9c162854af32d3f5d42dfc50b914801ec7c481a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://38bed5dd184ef95e851f572534aec88bf43e82cd99ee60195fb01f1e3a30b246\",\"dweb:/ipfs/QmP4cpYdYg3YjCstuSfrE6Jffdq2acgntsDuM5cqc1MDRz\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "initiator",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "fee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "onFlashLoan",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "onFlashLoan(address,address,uint256,uint256,bytes)": {
+            "details": "Receive a flash loan.",
+            "params": {
+              "amount": "The amount of tokens lent.",
+              "data": "Arbitrary data structure, intended to contain user-defined parameters.",
+              "fee": "The additional amount of tokens to repay.",
+              "initiator": "The initiator of the loan.",
+              "token": "The loan currency."
+            },
+            "returns": {
+              "_0": "The keccak256 hash of \"ERC3156FlashBorrower.onFlashLoan\""
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/openzeppelin/local/interfaces/IERC3156FlashBorrower.sol": "IERC3156FlashBorrower"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/openzeppelin/local/interfaces/IERC3156FlashBorrower.sol": {
+        "keccak256": "0x3db026e5655eedb87ec8905ec9c162854af32d3f5d42dfc50b914801ec7c481a",
+        "urls": [
+          "bzz-raw://38bed5dd184ef95e851f572534aec88bf43e82cd99ee60195fb01f1e3a30b246",
+          "dweb:/ipfs/QmP4cpYdYg3YjCstuSfrE6Jffdq2acgntsDuM5cqc1MDRz"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/openzeppelin/local/interfaces/IERC3156FlashBorrower.sol",
+    "id": 9295,
+    "exportedSymbols": {
+      "IERC3156FlashBorrower": [
+        9294
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "120:778:45",
+    "nodes": [
+      {
+        "id": 9276,
+        "nodeType": "PragmaDirective",
+        "src": "120:23:45",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 9294,
+        "nodeType": "ContractDefinition",
+        "src": "299:598:45",
+        "nodes": [
+          {
+            "id": 9293,
+            "nodeType": "FunctionDefinition",
+            "src": "747:148:45",
+            "nodes": [],
+            "documentation": {
+              "id": 9278,
+              "nodeType": "StructuredDocumentation",
+              "src": "337:405:45",
+              "text": " @dev Receive a flash loan.\n @param initiator The initiator of the loan.\n @param token The loan currency.\n @param amount The amount of tokens lent.\n @param fee The additional amount of tokens to repay.\n @param data Arbitrary data structure, intended to contain user-defined parameters.\n @return The keccak256 hash of \"ERC3156FlashBorrower.onFlashLoan\""
+            },
+            "functionSelector": "23e30c8b",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "onFlashLoan",
+            "nameLocation": "756:11:45",
+            "parameters": {
+              "id": 9289,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9280,
+                  "mutability": "mutable",
+                  "name": "initiator",
+                  "nameLocation": "776:9:45",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9293,
+                  "src": "768:17:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9279,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "768:7:45",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9282,
+                  "mutability": "mutable",
+                  "name": "token",
+                  "nameLocation": "795:5:45",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9293,
+                  "src": "787:13:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9281,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "787:7:45",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9284,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "810:6:45",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9293,
+                  "src": "802:14:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9283,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "802:7:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9286,
+                  "mutability": "mutable",
+                  "name": "fee",
+                  "nameLocation": "826:3:45",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9293,
+                  "src": "818:11:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 9285,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "818:7:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9288,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "846:4:45",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9293,
+                  "src": "831:19:45",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 9287,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "831:5:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "767:84:45"
+            },
+            "returnParameters": {
+              "id": 9292,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9291,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9293,
+                  "src": "886:7:45",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 9290,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "886:7:45",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "885:9:45"
+            },
+            "scope": 9294,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IERC3156FlashBorrower",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 9277,
+          "nodeType": "StructuredDocumentation",
+          "src": "145:153:45",
+          "text": " @dev Interface of the ERC3156 FlashBorrower, as defined in\n https://eips.ethereum.org/EIPS/eip-3156[ERC-3156].\n _Available since v4.1._"
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          9294
+        ],
+        "name": "IERC3156FlashBorrower",
+        "nameLocation": "309:21:45",
+        "scope": 9295,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 45
+}

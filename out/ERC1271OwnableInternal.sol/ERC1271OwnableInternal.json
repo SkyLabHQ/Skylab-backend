@@ -1,0 +1,788 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"Ownable__NotOwner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Ownable__NotTransitiveOwner\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"ERC1271Ownable internal functions\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableInternal.sol\":\"ERC1271OwnableInternal\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/access/ownable/IOwnableInternal.sol\":{\"keccak256\":\"0x0983a6fb097ce9707ba4ea1dbf1211603bc0f27d0f96b80e3627211c4cc3f463\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://89b36889e3f57c5560eb4d6e4da11a6cc55a1fa105cfc12890791e7dfeaf9b07\",\"dweb:/ipfs/QmcSi5vDK5qxCsN4TQCdhcTasoX3nNCTKnwww4HVTm6vGc\"]},\"contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol\":{\"keccak256\":\"0x5ea184c231770722d68e1d26f12c92a5728a922cb15ec917973c124febeb1ecd\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c0bad43f787110a77a438e6e2e4345970f601deb94e12651d444b77b766dfb14\",\"dweb:/ipfs/QmW7YjVBNPWhjEuGSRwcYL3csGR8EVr7mDSPDHwvXVgZBx\"]},\"contracts/.cache/solidstate/local/access/ownable/OwnableStorage.sol\":{\"keccak256\":\"0x7069594ee0eef486fb11dd2472f274e8627990a5af95712e0baf865300aff218\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4a09ad96ba21b8f7cbcf9d7c84455424051359f0aa5540950b082c1212301b65\",\"dweb:/ipfs/QmUDWkJAyqNiLb8vrDMphemBuBaZSRvpFvgF4b42AZMHBq\"]},\"contracts/.cache/solidstate/local/cryptography/ECDSA.sol\":{\"keccak256\":\"0xebe2da1787e7830c80fae48c6d1a6f5708bf86a25edf30be5c1ff4887fbb6306\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://19ac83051cf9bc3f2ecf631f81349ababf6e8de5e0ad6dc4d8abf06290881ada\",\"dweb:/ipfs/QmWgSMb2RrFNWtEngLhwBoqMu4LqZ2wS8vgWVa4iATYT73\"]},\"contracts/.cache/solidstate/local/interfaces/IERC1271.sol\":{\"keccak256\":\"0x4066c7ca92c186daf5c0e2ba9f410ef5fed660e5d80643e367e8c7cc4a287e57\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ae0049d02df2d933f86d4a3948a86568e3518fb56706bbcab81a633f515fd074\",\"dweb:/ipfs/QmUEGQciBrY3a1j7AAJFVXkwNbpjHjoYTS5EhkbGm7PvzN\"]},\"contracts/.cache/solidstate/local/interfaces/IERC173.sol\":{\"keccak256\":\"0xf1c1fbf0ec82110c29d549db1fbd8ec728ba0b995dc5f087e0a5464243135dce\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://16c7f3eba0547576833d0c1fddb7ec34aeba4f28b4ce9e878c3bd3ebc9c8d3d1\",\"dweb:/ipfs/Qme79eYLo7dinnhotgC4bvYnCg4doBDShHeCajrf5zpAUF\"]},\"contracts/.cache/solidstate/local/interfaces/IERC173Internal.sol\":{\"keccak256\":\"0xbd1b10afb3f0e0628f077296268a3b3d6ce92b0c481234c03bb93a82c08dbc48\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://72f2c4693435b8899495eeb9222c0fa6596b5e8a9fee001da0fbdecad202ff4b\",\"dweb:/ipfs/QmcugENqTFqiboof9DwTZAdeLn3PSvXCCAm27CJ2UVgZkW\"]},\"contracts/.cache/solidstate/local/signature/base/ERC1271BaseInternal.sol\":{\"keccak256\":\"0xcbaa337d34411d71ae9afd712a0c137f699c26c17c52b950d5a29484602108e9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a8840bf46b6b4f109a198e451dc84b3a7d0857824733f979ceee83bd72e6a091\",\"dweb:/ipfs/QmddEA77NU8xjVuMeDmoCeEFqGk2e8ssGAXVXTJuKgqshf\"]},\"contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableInternal.sol\":{\"keccak256\":\"0xbc3a6b8263cbe2f2717dc6d9251a1a55499bf96a72846e81df5933f6f343db50\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bd78611371f23c44ea72393976307901082d54c0bbc418f7f58ad6ac49840f33\",\"dweb:/ipfs/QmTHAYCkMz7QkiUxMV5bvJDoEnf2aazTB8TVCoYuqnX9Pg\"]},\"contracts/.cache/solidstate/local/utils/AddressUtils.sol\":{\"keccak256\":\"0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e\",\"dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF\"]},\"contracts/.cache/solidstate/local/utils/UintUtils.sol\":{\"keccak256\":\"0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2\",\"dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotOwner"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotTransitiveOwner"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "anonymous": false
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableInternal.sol": "ERC1271OwnableInternal"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/access/ownable/IOwnableInternal.sol": {
+        "keccak256": "0x0983a6fb097ce9707ba4ea1dbf1211603bc0f27d0f96b80e3627211c4cc3f463",
+        "urls": [
+          "bzz-raw://89b36889e3f57c5560eb4d6e4da11a6cc55a1fa105cfc12890791e7dfeaf9b07",
+          "dweb:/ipfs/QmcSi5vDK5qxCsN4TQCdhcTasoX3nNCTKnwww4HVTm6vGc"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol": {
+        "keccak256": "0x5ea184c231770722d68e1d26f12c92a5728a922cb15ec917973c124febeb1ecd",
+        "urls": [
+          "bzz-raw://c0bad43f787110a77a438e6e2e4345970f601deb94e12651d444b77b766dfb14",
+          "dweb:/ipfs/QmW7YjVBNPWhjEuGSRwcYL3csGR8EVr7mDSPDHwvXVgZBx"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/access/ownable/OwnableStorage.sol": {
+        "keccak256": "0x7069594ee0eef486fb11dd2472f274e8627990a5af95712e0baf865300aff218",
+        "urls": [
+          "bzz-raw://4a09ad96ba21b8f7cbcf9d7c84455424051359f0aa5540950b082c1212301b65",
+          "dweb:/ipfs/QmUDWkJAyqNiLb8vrDMphemBuBaZSRvpFvgF4b42AZMHBq"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/cryptography/ECDSA.sol": {
+        "keccak256": "0xebe2da1787e7830c80fae48c6d1a6f5708bf86a25edf30be5c1ff4887fbb6306",
+        "urls": [
+          "bzz-raw://19ac83051cf9bc3f2ecf631f81349ababf6e8de5e0ad6dc4d8abf06290881ada",
+          "dweb:/ipfs/QmWgSMb2RrFNWtEngLhwBoqMu4LqZ2wS8vgWVa4iATYT73"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC1271.sol": {
+        "keccak256": "0x4066c7ca92c186daf5c0e2ba9f410ef5fed660e5d80643e367e8c7cc4a287e57",
+        "urls": [
+          "bzz-raw://ae0049d02df2d933f86d4a3948a86568e3518fb56706bbcab81a633f515fd074",
+          "dweb:/ipfs/QmUEGQciBrY3a1j7AAJFVXkwNbpjHjoYTS5EhkbGm7PvzN"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC173.sol": {
+        "keccak256": "0xf1c1fbf0ec82110c29d549db1fbd8ec728ba0b995dc5f087e0a5464243135dce",
+        "urls": [
+          "bzz-raw://16c7f3eba0547576833d0c1fddb7ec34aeba4f28b4ce9e878c3bd3ebc9c8d3d1",
+          "dweb:/ipfs/Qme79eYLo7dinnhotgC4bvYnCg4doBDShHeCajrf5zpAUF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC173Internal.sol": {
+        "keccak256": "0xbd1b10afb3f0e0628f077296268a3b3d6ce92b0c481234c03bb93a82c08dbc48",
+        "urls": [
+          "bzz-raw://72f2c4693435b8899495eeb9222c0fa6596b5e8a9fee001da0fbdecad202ff4b",
+          "dweb:/ipfs/QmcugENqTFqiboof9DwTZAdeLn3PSvXCCAm27CJ2UVgZkW"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/base/ERC1271BaseInternal.sol": {
+        "keccak256": "0xcbaa337d34411d71ae9afd712a0c137f699c26c17c52b950d5a29484602108e9",
+        "urls": [
+          "bzz-raw://a8840bf46b6b4f109a198e451dc84b3a7d0857824733f979ceee83bd72e6a091",
+          "dweb:/ipfs/QmddEA77NU8xjVuMeDmoCeEFqGk2e8ssGAXVXTJuKgqshf"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableInternal.sol": {
+        "keccak256": "0xbc3a6b8263cbe2f2717dc6d9251a1a55499bf96a72846e81df5933f6f343db50",
+        "urls": [
+          "bzz-raw://bd78611371f23c44ea72393976307901082d54c0bbc418f7f58ad6ac49840f33",
+          "dweb:/ipfs/QmTHAYCkMz7QkiUxMV5bvJDoEnf2aazTB8TVCoYuqnX9Pg"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/AddressUtils.sol": {
+        "keccak256": "0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c",
+        "urls": [
+          "bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e",
+          "dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/UintUtils.sol": {
+        "keccak256": "0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c",
+        "urls": [
+          "bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2",
+          "dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableInternal.sol",
+    "id": 49726,
+    "exportedSymbols": {
+      "ECDSA": [
+        38325
+      ],
+      "ERC1271BaseInternal": [
+        49657
+      ],
+      "ERC1271OwnableInternal": [
+        49725
+      ],
+      "OwnableInternal": [
+        37887
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:784:356",
+    "nodes": [
+      {
+        "id": 49682,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:356",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 49684,
+        "nodeType": "ImportDirective",
+        "src": "58:73:356",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol",
+        "file": "../../access/ownable/OwnableInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49726,
+        "sourceUnit": 37888,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49683,
+              "name": "OwnableInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 37887,
+              "src": "66:15:356",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49686,
+        "nodeType": "ImportDirective",
+        "src": "132:51:356",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/cryptography/ECDSA.sol",
+        "file": "../../cryptography/ECDSA.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49726,
+        "sourceUnit": 38326,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49685,
+              "name": "ECDSA",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 38325,
+              "src": "140:5:356",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49688,
+        "nodeType": "ImportDirective",
+        "src": "184:68:356",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/signature/base/ERC1271BaseInternal.sol",
+        "file": "../base/ERC1271BaseInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49726,
+        "sourceUnit": 49658,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49687,
+              "name": "ERC1271BaseInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49657,
+              "src": "192:19:356",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49725,
+        "nodeType": "ContractDefinition",
+        "src": "306:510:356",
+        "nodes": [
+          {
+            "id": 49696,
+            "nodeType": "UsingForDirective",
+            "src": "393:24:356",
+            "nodes": [],
+            "global": false,
+            "libraryName": {
+              "id": 49694,
+              "name": "ECDSA",
+              "nameLocations": [
+                "399:5:356"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 38325,
+              "src": "399:5:356"
+            },
+            "typeName": {
+              "id": 49695,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "409:7:356",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            }
+          },
+          {
+            "id": 49724,
+            "nodeType": "FunctionDefinition",
+            "src": "552:262:356",
+            "nodes": [],
+            "body": {
+              "id": 49723,
+              "nodeType": "Block",
+              "src": "704:110:356",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "id": 49715,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "arguments": [
+                          {
+                            "id": 49711,
+                            "name": "signature",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 49701,
+                            "src": "759:9:356",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          ],
+                          "expression": {
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "id": 49707,
+                                "name": "hash",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 49699,
+                                "src": "721:4:356",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes32",
+                                  "typeString": "bytes32"
+                                }
+                              },
+                              "id": 49708,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberLocation": "726:22:356",
+                              "memberName": "toEthSignedMessageHash",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 38324,
+                              "src": "721:27:356",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_pure$_t_bytes32_$returns$_t_bytes32_$attached_to$_t_bytes32_$",
+                                "typeString": "function (bytes32) pure returns (bytes32)"
+                              }
+                            },
+                            "id": 49709,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "721:29:356",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes32",
+                              "typeString": "bytes32"
+                            }
+                          },
+                          "id": 49710,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "751:7:356",
+                          "memberName": "recover",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 38250,
+                          "src": "721:37:356",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_bytes32_$_t_bytes_memory_ptr_$returns$_t_address_$attached_to$_t_bytes32_$",
+                            "typeString": "function (bytes32,bytes memory) pure returns (address)"
+                          }
+                        },
+                        "id": 49712,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "721:48:356",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 49713,
+                          "name": "_owner",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 37815,
+                          "src": "773:6:356",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
+                            "typeString": "function () view returns (address)"
+                          }
+                        },
+                        "id": 49714,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "773:8:356",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "src": "721:60:356",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseExpression": {
+                      "arguments": [
+                        {
+                          "hexValue": "30",
+                          "id": 49719,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "805:1:356",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          }
+                        ],
+                        "id": 49718,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "798:6:356",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_bytes4_$",
+                          "typeString": "type(bytes4)"
+                        },
+                        "typeName": {
+                          "id": 49717,
+                          "name": "bytes4",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "798:6:356",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 49720,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "798:9:356",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "id": 49721,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "Conditional",
+                    "src": "721:86:356",
+                    "trueExpression": {
+                      "id": 49716,
+                      "name": "MAGIC_VALUE",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49646,
+                      "src": "784:11:356",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes4",
+                        "typeString": "bytes4"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "functionReturnParameters": 49706,
+                  "id": 49722,
+                  "nodeType": "Return",
+                  "src": "714:93:356"
+                }
+              ]
+            },
+            "baseFunctions": [
+              49656
+            ],
+            "documentation": {
+              "id": 49697,
+              "nodeType": "StructuredDocumentation",
+              "src": "423:124:356",
+              "text": " @inheritdoc ERC1271BaseInternal\n @notice return whether given signature is signed by contract owner"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_isValidSignature",
+            "nameLocation": "561:17:356",
+            "overrides": {
+              "id": 49703,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "655:8:356"
+            },
+            "parameters": {
+              "id": 49702,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49699,
+                  "mutability": "mutable",
+                  "name": "hash",
+                  "nameLocation": "587:4:356",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49724,
+                  "src": "579:12:356",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 49698,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "579:7:356",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 49701,
+                  "mutability": "mutable",
+                  "name": "signature",
+                  "nameLocation": "606:9:356",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49724,
+                  "src": "593:22:356",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 49700,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "593:5:356",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "578:38:356"
+            },
+            "returnParameters": {
+              "id": 49706,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49705,
+                  "mutability": "mutable",
+                  "name": "magicValue",
+                  "nameLocation": "688:10:356",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49724,
+                  "src": "681:17:356",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 49704,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "681:6:356",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "680:19:356"
+            },
+            "scope": 49725,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 49690,
+              "name": "ERC1271BaseInternal",
+              "nameLocations": [
+                "350:19:356"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49657,
+              "src": "350:19:356"
+            },
+            "id": 49691,
+            "nodeType": "InheritanceSpecifier",
+            "src": "350:19:356"
+          },
+          {
+            "baseName": {
+              "id": 49692,
+              "name": "OwnableInternal",
+              "nameLocations": [
+                "371:15:356"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 37887,
+              "src": "371:15:356"
+            },
+            "id": 49693,
+            "nodeType": "InheritanceSpecifier",
+            "src": "371:15:356"
+          }
+        ],
+        "canonicalName": "ERC1271OwnableInternal",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 49689,
+          "nodeType": "StructuredDocumentation",
+          "src": "254:51:356",
+          "text": " @title ERC1271Ownable internal functions"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          49725,
+          37887,
+          37695,
+          44903,
+          49657
+        ],
+        "name": "ERC1271OwnableInternal",
+        "nameLocation": "324:22:356",
+        "scope": 49726,
+        "usedErrors": [
+          37692,
+          37694
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 356
+}

@@ -2,8 +2,8 @@ pragma circom 2.0.3;
 
 include "/Users/neal.sun/.nvm/versions/node/v16.19.1/lib/node_modules/circomlib/circuits/poseidon.circom";
 include "/Users/neal.sun/.nvm/versions/node/v16.19.1/lib/node_modules/circomlib/circuits/comparators.circom";
-include "/Users/neal.sun/personal/skylab-backup/circuits/calculate_time_per_grid/time_per_grid.circom";
-include "/Users/neal.sun/personal/skylab-backup/circuits/hash_path_data/hash_path_data.circom";
+include "/Users/neal.sun/personal/mercury-backup/circuits/calculate_time_per_grid/time_per_grid.circom";
+include "/Users/neal.sun/personal/mercury-backup/circuits/hash_path_data/hash_path_data.circom";
 
 template Main(path_length, map_height, map_width, goal_x, goal_y) {
   // player controllered seed, only hash is on chain

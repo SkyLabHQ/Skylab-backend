@@ -1,0 +1,779 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ERC20Base__ApproveFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__ApproveToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__BurnExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__BurnFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__InsufficientAllowance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__MintToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Extended__ExcessiveAllowance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Extended__InsufficientAllowance",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "decreaseAllowance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "increaseAllowance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "decreaseAllowance(address,uint256)": "a457c2d7",
+    "increaseAllowance(address,uint256)": "39509351"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"ERC20Base__ApproveFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__ApproveToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__BurnExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__BurnFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__InsufficientAllowance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__MintToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Extended__ExcessiveAllowance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Extended__InsufficientAllowance\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"decreaseAllowance(address,uint256)\":{\"params\":{\"amount\":\"quantity by which to decrease allowance\",\"spender\":\"address whose allowance to decrease\"},\"returns\":{\"_0\":\"success status (always true; otherwise function will revert)\"}},\"increaseAllowance(address,uint256)\":{\"params\":{\"amount\":\"quantity by which to increase allowance\",\"spender\":\"address whose allowance to increase\"},\"returns\":{\"_0\":\"success status (always true; otherwise function will revert)\"}}},\"title\":\"ERC20 extended interface\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"decreaseAllowance(address,uint256)\":{\"notice\":\"decrease spend amount granted to spender\"},\"increaseAllowance(address,uint256)\":{\"notice\":\"increase spend amount granted to spender\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/token/ERC20/extended/IERC20Extended.sol\":\"IERC20Extended\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/interfaces/IERC20Internal.sol\":{\"keccak256\":\"0xca66b9db15c1c8884f5f8939fd7add412600f8edc5e97aecd092c63c9e1b38ca\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d73acdeb1648dd67ff232ba4c13154481d4b5d721c7165f17a9cf4366f3ad56f\",\"dweb:/ipfs/QmWQ8Xb2tFTv7zqtpGCHB1rnhYBZaFvdkAzQ4rNAATqcPi\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/IERC20BaseInternal.sol\":{\"keccak256\":\"0x81e5eee95fd70949ef5c02ecaa7c09609d72f5104a099d0bd3321a27bb39560e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://42648f57c064d10dd984266edd67ebd10791c665593008b5a2f0a7f9618832cd\",\"dweb:/ipfs/QmQpG97o26ZZTQce9Lixhytx9AshFTrn3QBAkiAc75NwiE\"]},\"contracts/.cache/solidstate/local/token/ERC20/extended/IERC20Extended.sol\":{\"keccak256\":\"0x56bf28297ad06334258a95cd309519a2f2c4c044067879345d8cfd7b245eb183\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://99500b6a5985ad03c82db57d9e1aebf605e06bd3b2150a8a3731cb6298febb38\",\"dweb:/ipfs/QmV3dpw39wM8neQVMdb2CfbxCuDeymSs3dzviEkuj3Qe1g\"]},\"contracts/.cache/solidstate/local/token/ERC20/extended/IERC20ExtendedInternal.sol\":{\"keccak256\":\"0x3f67f65e6b05deff9ba4720b7bdf905c3a258766e7a9fdee535546ae237934da\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://47238ea39e3b721c6f05c6fac9cf92c4fa6de84457b9ebe0bf341f2d74d5d815\",\"dweb:/ipfs/QmTMAwSFb8R2JfNd1yoVzfNNdr85k6SdwuxLB9CnZ6jzcS\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__ApproveFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__ApproveToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__BurnExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__BurnFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__InsufficientAllowance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__MintToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Extended__ExcessiveAllowance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Extended__InsufficientAllowance"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Approval",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Transfer",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "decreaseAllowance",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "increaseAllowance",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "decreaseAllowance(address,uint256)": {
+            "params": {
+              "amount": "quantity by which to decrease allowance",
+              "spender": "address whose allowance to decrease"
+            },
+            "returns": {
+              "_0": "success status (always true; otherwise function will revert)"
+            }
+          },
+          "increaseAllowance(address,uint256)": {
+            "params": {
+              "amount": "quantity by which to increase allowance",
+              "spender": "address whose allowance to increase"
+            },
+            "returns": {
+              "_0": "success status (always true; otherwise function will revert)"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "decreaseAllowance(address,uint256)": {
+            "notice": "decrease spend amount granted to spender"
+          },
+          "increaseAllowance(address,uint256)": {
+            "notice": "increase spend amount granted to spender"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/token/ERC20/extended/IERC20Extended.sol": "IERC20Extended"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/interfaces/IERC20Internal.sol": {
+        "keccak256": "0xca66b9db15c1c8884f5f8939fd7add412600f8edc5e97aecd092c63c9e1b38ca",
+        "urls": [
+          "bzz-raw://d73acdeb1648dd67ff232ba4c13154481d4b5d721c7165f17a9cf4366f3ad56f",
+          "dweb:/ipfs/QmWQ8Xb2tFTv7zqtpGCHB1rnhYBZaFvdkAzQ4rNAATqcPi"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/IERC20BaseInternal.sol": {
+        "keccak256": "0x81e5eee95fd70949ef5c02ecaa7c09609d72f5104a099d0bd3321a27bb39560e",
+        "urls": [
+          "bzz-raw://42648f57c064d10dd984266edd67ebd10791c665593008b5a2f0a7f9618832cd",
+          "dweb:/ipfs/QmQpG97o26ZZTQce9Lixhytx9AshFTrn3QBAkiAc75NwiE"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/extended/IERC20Extended.sol": {
+        "keccak256": "0x56bf28297ad06334258a95cd309519a2f2c4c044067879345d8cfd7b245eb183",
+        "urls": [
+          "bzz-raw://99500b6a5985ad03c82db57d9e1aebf605e06bd3b2150a8a3731cb6298febb38",
+          "dweb:/ipfs/QmV3dpw39wM8neQVMdb2CfbxCuDeymSs3dzviEkuj3Qe1g"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/extended/IERC20ExtendedInternal.sol": {
+        "keccak256": "0x3f67f65e6b05deff9ba4720b7bdf905c3a258766e7a9fdee535546ae237934da",
+        "urls": [
+          "bzz-raw://47238ea39e3b721c6f05c6fac9cf92c4fa6de84457b9ebe0bf341f2d74d5d815",
+          "dweb:/ipfs/QmTMAwSFb8R2JfNd1yoVzfNNdr85k6SdwuxLB9CnZ6jzcS"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/extended/IERC20Extended.sol",
+    "id": 53822,
+    "exportedSymbols": {
+      "IERC20Extended": [
+        53821
+      ],
+      "IERC20ExtendedInternal": [
+        53833
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:906:405",
+    "nodes": [
+      {
+        "id": 53795,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:405",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 53797,
+        "nodeType": "ImportDirective",
+        "src": "58:68:405",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/extended/IERC20ExtendedInternal.sol",
+        "file": "./IERC20ExtendedInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 53822,
+        "sourceUnit": 53834,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 53796,
+              "name": "IERC20ExtendedInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 53833,
+              "src": "66:22:405",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 53821,
+        "nodeType": "ContractDefinition",
+        "src": "171:767:405",
+        "nodes": [
+          {
+            "id": 53810,
+            "nodeType": "FunctionDefinition",
+            "src": "495:84:405",
+            "nodes": [],
+            "documentation": {
+              "id": 53801,
+              "nodeType": "StructuredDocumentation",
+              "src": "228:262:405",
+              "text": " @notice increase spend amount granted to spender\n @param spender address whose allowance to increase\n @param amount quantity by which to increase allowance\n @return success status (always true; otherwise function will revert)"
+            },
+            "functionSelector": "39509351",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "increaseAllowance",
+            "nameLocation": "504:17:405",
+            "parameters": {
+              "id": 53806,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 53803,
+                  "mutability": "mutable",
+                  "name": "spender",
+                  "nameLocation": "530:7:405",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 53810,
+                  "src": "522:15:405",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 53802,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "522:7:405",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 53805,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "547:6:405",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 53810,
+                  "src": "539:14:405",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 53804,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "539:7:405",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "521:33:405"
+            },
+            "returnParameters": {
+              "id": 53809,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 53808,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 53810,
+                  "src": "573:4:405",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 53807,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "573:4:405",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "572:6:405"
+            },
+            "scope": 53821,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 53820,
+            "nodeType": "FunctionDefinition",
+            "src": "852:84:405",
+            "nodes": [],
+            "documentation": {
+              "id": 53811,
+              "nodeType": "StructuredDocumentation",
+              "src": "585:262:405",
+              "text": " @notice decrease spend amount granted to spender\n @param spender address whose allowance to decrease\n @param amount quantity by which to decrease allowance\n @return success status (always true; otherwise function will revert)"
+            },
+            "functionSelector": "a457c2d7",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "decreaseAllowance",
+            "nameLocation": "861:17:405",
+            "parameters": {
+              "id": 53816,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 53813,
+                  "mutability": "mutable",
+                  "name": "spender",
+                  "nameLocation": "887:7:405",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 53820,
+                  "src": "879:15:405",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 53812,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "879:7:405",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 53815,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "904:6:405",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 53820,
+                  "src": "896:14:405",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 53814,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "896:7:405",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "878:33:405"
+            },
+            "returnParameters": {
+              "id": 53819,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 53818,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 53820,
+                  "src": "930:4:405",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 53817,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "930:4:405",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "929:6:405"
+            },
+            "scope": 53821,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 53799,
+              "name": "IERC20ExtendedInternal",
+              "nameLocations": [
+                "199:22:405"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 53833,
+              "src": "199:22:405"
+            },
+            "id": 53800,
+            "nodeType": "InheritanceSpecifier",
+            "src": "199:22:405"
+          }
+        ],
+        "canonicalName": "IERC20Extended",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 53798,
+          "nodeType": "StructuredDocumentation",
+          "src": "128:42:405",
+          "text": " @title ERC20 extended interface"
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          53821,
+          53833,
+          53640,
+          44987
+        ],
+        "name": "IERC20Extended",
+        "nameLocation": "181:14:405",
+        "scope": 53822,
+        "usedErrors": [
+          53623,
+          53625,
+          53627,
+          53629,
+          53631,
+          53633,
+          53635,
+          53637,
+          53639,
+          53830,
+          53832
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 405
+}

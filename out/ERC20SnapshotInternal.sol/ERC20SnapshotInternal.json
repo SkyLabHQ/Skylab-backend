@@ -1,0 +1,2798 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ERC20Base__ApproveFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__ApproveToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__BurnExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__BurnFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__InsufficientAllowance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__MintToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferToZeroAddress",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "Snapshot",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"ERC20Base__ApproveFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__ApproveToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__BurnExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__BurnFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__InsufficientAllowance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__MintToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferToZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"Snapshot\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"ERC20Snapshot internal functions\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/token/ERC20/snapshot/ERC20SnapshotInternal.sol\":\"ERC20SnapshotInternal\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/interfaces/IERC20.sol\":{\"keccak256\":\"0x197de4843756480d31552af560f57bcf85e4a38476da34082865b1df41717681\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://00f00a993061a7305dffa0c6cd2535a0eaa8b55054ca2986e6d9e12d9ee113ae\",\"dweb:/ipfs/QmYCsGKZHzcgJ5HWXzJg72gm2nmNS1jWgdjto3HvGqctkW\"]},\"contracts/.cache/solidstate/local/interfaces/IERC20Internal.sol\":{\"keccak256\":\"0xca66b9db15c1c8884f5f8939fd7add412600f8edc5e97aecd092c63c9e1b38ca\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d73acdeb1648dd67ff232ba4c13154481d4b5d721c7165f17a9cf4366f3ad56f\",\"dweb:/ipfs/QmWQ8Xb2tFTv7zqtpGCHB1rnhYBZaFvdkAzQ4rNAATqcPi\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/ERC20Base.sol\":{\"keccak256\":\"0xaa37e5e9a6c30f492708c0d2d7dce68219b54323ef4d3def9960bc04c9990270\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://299c4e0fd40f5f16023435908ac7d98d10adc5e136ec5c617a4db8291fbcae30\",\"dweb:/ipfs/QmbiVucTsyus2YModFP4QYj8Avc5NFBxZovXPRLQRAL9qz\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/ERC20BaseInternal.sol\":{\"keccak256\":\"0x1338104cff2a16603fe2f0cebdc465b9bff8b0381ce0b82a9c2ae20a18a11265\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://529f72519296e24796f5c0614e4118f49a0e5b378cc0cc1b38dc2671939959bf\",\"dweb:/ipfs/QmZSfd5Gp4hXJERSWGSNEejkbtCNmq9xCxdV8MuVKrvzcy\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/ERC20BaseStorage.sol\":{\"keccak256\":\"0x7abb2c7bccbf39980de5302a5275e144d88465d08d19266774ca3b776c2a7025\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8efbe58144a3d6d4893ce83f7177dc9dad8777279e2fd489dce6c46f317d6183\",\"dweb:/ipfs/QmR8ot1KGe9DrEQH9Zk95A7h5ySUn7kGNcKGAquPErDV4B\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/IERC20Base.sol\":{\"keccak256\":\"0xd633d2b3875b8c62728eb2435a0d9009e057106bea3dbbef7c89a314745beabe\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://22983bd3cd83272c348a280c55f7aac1699a8debf2456f92764b9847731d928d\",\"dweb:/ipfs/QmQxeaAqrQiPNTuPBZS9Wz3BRJC3EZXsXgUFWowkRZfrrd\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/IERC20BaseInternal.sol\":{\"keccak256\":\"0x81e5eee95fd70949ef5c02ecaa7c09609d72f5104a099d0bd3321a27bb39560e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://42648f57c064d10dd984266edd67ebd10791c665593008b5a2f0a7f9618832cd\",\"dweb:/ipfs/QmQpG97o26ZZTQce9Lixhytx9AshFTrn3QBAkiAc75NwiE\"]},\"contracts/.cache/solidstate/local/token/ERC20/snapshot/ERC20SnapshotInternal.sol\":{\"keccak256\":\"0xd3b672ff8835b01c64dae110865433d7a186b69025f9898ec3578a90c5aec6e0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://23955f1e0531130539ebc70b328d739398c57210db7eb4d8284b5df5d3dc4bd4\",\"dweb:/ipfs/QmbZgiR4jPyULuL3eBUJKq4WjyUaroeRB6wxKY1K4h4oFL\"]},\"contracts/.cache/solidstate/local/token/ERC20/snapshot/ERC20SnapshotStorage.sol\":{\"keccak256\":\"0x4a1828a7c837db7ef9939c988bf7f1e4179de05e9c46c9f7400cd62c815b8160\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://81650535e5d7b16f75c9003b2672cc7500e69dc45282123764ff02cbe0946c05\",\"dweb:/ipfs/QmSbPbGv3t78sKfUtJyPMBJBF73Qtd56uTF4kELSajfNqj\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__ApproveFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__ApproveToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__BurnExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__BurnFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__InsufficientAllowance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__MintToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferToZeroAddress"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Approval",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Snapshot",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Transfer",
+          "anonymous": false
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/token/ERC20/snapshot/ERC20SnapshotInternal.sol": "ERC20SnapshotInternal"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/interfaces/IERC20.sol": {
+        "keccak256": "0x197de4843756480d31552af560f57bcf85e4a38476da34082865b1df41717681",
+        "urls": [
+          "bzz-raw://00f00a993061a7305dffa0c6cd2535a0eaa8b55054ca2986e6d9e12d9ee113ae",
+          "dweb:/ipfs/QmYCsGKZHzcgJ5HWXzJg72gm2nmNS1jWgdjto3HvGqctkW"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC20Internal.sol": {
+        "keccak256": "0xca66b9db15c1c8884f5f8939fd7add412600f8edc5e97aecd092c63c9e1b38ca",
+        "urls": [
+          "bzz-raw://d73acdeb1648dd67ff232ba4c13154481d4b5d721c7165f17a9cf4366f3ad56f",
+          "dweb:/ipfs/QmWQ8Xb2tFTv7zqtpGCHB1rnhYBZaFvdkAzQ4rNAATqcPi"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/ERC20Base.sol": {
+        "keccak256": "0xaa37e5e9a6c30f492708c0d2d7dce68219b54323ef4d3def9960bc04c9990270",
+        "urls": [
+          "bzz-raw://299c4e0fd40f5f16023435908ac7d98d10adc5e136ec5c617a4db8291fbcae30",
+          "dweb:/ipfs/QmbiVucTsyus2YModFP4QYj8Avc5NFBxZovXPRLQRAL9qz"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/ERC20BaseInternal.sol": {
+        "keccak256": "0x1338104cff2a16603fe2f0cebdc465b9bff8b0381ce0b82a9c2ae20a18a11265",
+        "urls": [
+          "bzz-raw://529f72519296e24796f5c0614e4118f49a0e5b378cc0cc1b38dc2671939959bf",
+          "dweb:/ipfs/QmZSfd5Gp4hXJERSWGSNEejkbtCNmq9xCxdV8MuVKrvzcy"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/ERC20BaseStorage.sol": {
+        "keccak256": "0x7abb2c7bccbf39980de5302a5275e144d88465d08d19266774ca3b776c2a7025",
+        "urls": [
+          "bzz-raw://8efbe58144a3d6d4893ce83f7177dc9dad8777279e2fd489dce6c46f317d6183",
+          "dweb:/ipfs/QmR8ot1KGe9DrEQH9Zk95A7h5ySUn7kGNcKGAquPErDV4B"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/IERC20Base.sol": {
+        "keccak256": "0xd633d2b3875b8c62728eb2435a0d9009e057106bea3dbbef7c89a314745beabe",
+        "urls": [
+          "bzz-raw://22983bd3cd83272c348a280c55f7aac1699a8debf2456f92764b9847731d928d",
+          "dweb:/ipfs/QmQxeaAqrQiPNTuPBZS9Wz3BRJC3EZXsXgUFWowkRZfrrd"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/IERC20BaseInternal.sol": {
+        "keccak256": "0x81e5eee95fd70949ef5c02ecaa7c09609d72f5104a099d0bd3321a27bb39560e",
+        "urls": [
+          "bzz-raw://42648f57c064d10dd984266edd67ebd10791c665593008b5a2f0a7f9618832cd",
+          "dweb:/ipfs/QmQpG97o26ZZTQce9Lixhytx9AshFTrn3QBAkiAc75NwiE"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/snapshot/ERC20SnapshotInternal.sol": {
+        "keccak256": "0xd3b672ff8835b01c64dae110865433d7a186b69025f9898ec3578a90c5aec6e0",
+        "urls": [
+          "bzz-raw://23955f1e0531130539ebc70b328d739398c57210db7eb4d8284b5df5d3dc4bd4",
+          "dweb:/ipfs/QmbZgiR4jPyULuL3eBUJKq4WjyUaroeRB6wxKY1K4h4oFL"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/snapshot/ERC20SnapshotStorage.sol": {
+        "keccak256": "0x4a1828a7c837db7ef9939c988bf7f1e4179de05e9c46c9f7400cd62c815b8160",
+        "urls": [
+          "bzz-raw://81650535e5d7b16f75c9003b2672cc7500e69dc45282123764ff02cbe0946c05",
+          "dweb:/ipfs/QmSbPbGv3t78sKfUtJyPMBJBF73Qtd56uTF4kELSajfNqj"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/snapshot/ERC20SnapshotInternal.sol",
+    "id": 55196,
+    "exportedSymbols": {
+      "ERC20BaseInternal": [
+        53488
+      ],
+      "ERC20SnapshotInternal": [
+        55195
+      ],
+      "ERC20SnapshotStorage": [
+        55233
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:1992:427",
+    "nodes": [
+      {
+        "id": 55000,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:427",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 55002,
+        "nodeType": "ImportDirective",
+        "src": "58:56:427",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/base/ERC20Base.sol",
+        "file": "../base/ERC20Base.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 55196,
+        "sourceUnit": 53079,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 55001,
+              "name": "ERC20BaseInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 53488,
+              "src": "66:17:427",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 55004,
+        "nodeType": "ImportDirective",
+        "src": "115:64:427",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/snapshot/ERC20SnapshotStorage.sol",
+        "file": "./ERC20SnapshotStorage.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 55196,
+        "sourceUnit": 55234,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 55003,
+              "name": "ERC20SnapshotStorage",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 55233,
+              "src": "123:20:427",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 55195,
+        "nodeType": "ContractDefinition",
+        "src": "232:1792:427",
+        "nodes": [
+          {
+            "id": 55011,
+            "nodeType": "EventDefinition",
+            "src": "299:27:427",
+            "nodes": [],
+            "anonymous": false,
+            "eventSelector": "8030e83b04d87bef53480e26263266d6ca66863aa8506aca6f2559d18aa1cb67",
+            "name": "Snapshot",
+            "nameLocation": "305:8:427",
+            "parameters": {
+              "id": 55010,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 55009,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "id",
+                  "nameLocation": "322:2:427",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55011,
+                  "src": "314:10:427",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 55008,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "314:7:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "313:12:427"
+            }
+          },
+          {
+            "id": 55042,
+            "nodeType": "FunctionDefinition",
+            "src": "332:264:427",
+            "nodes": [],
+            "body": {
+              "id": 55041,
+              "nodeType": "Block",
+              "src": "388:208:427",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    55020
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 55020,
+                      "mutability": "mutable",
+                      "name": "l",
+                      "nameLocation": "434:1:427",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 55041,
+                      "src": "398:37:427",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Layout_$55215_storage_ptr",
+                        "typeString": "struct ERC20SnapshotStorage.Layout"
+                      },
+                      "typeName": {
+                        "id": 55019,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 55018,
+                          "name": "ERC20SnapshotStorage.Layout",
+                          "nameLocations": [
+                            "398:20:427",
+                            "419:6:427"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 55215,
+                          "src": "398:27:427"
+                        },
+                        "referencedDeclaration": 55215,
+                        "src": "398:27:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Layout_$55215_storage_ptr",
+                          "typeString": "struct ERC20SnapshotStorage.Layout"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 55024,
+                  "initialValue": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "id": 55021,
+                        "name": "ERC20SnapshotStorage",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55233,
+                        "src": "438:20:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ERC20SnapshotStorage_$55233_$",
+                          "typeString": "type(library ERC20SnapshotStorage)"
+                        }
+                      },
+                      "id": 55022,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "459:6:427",
+                      "memberName": "layout",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 55232,
+                      "src": "438:27:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$__$returns$_t_struct$_Layout_$55215_storage_ptr_$",
+                        "typeString": "function () pure returns (struct ERC20SnapshotStorage.Layout storage pointer)"
+                      }
+                    },
+                    "id": 55023,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "438:29:427",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Layout_$55215_storage_ptr",
+                      "typeString": "struct ERC20SnapshotStorage.Layout storage pointer"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "398:69:427"
+                },
+                {
+                  "expression": {
+                    "id": 55028,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "++",
+                    "prefix": false,
+                    "src": "478:14:427",
+                    "subExpression": {
+                      "expression": {
+                        "id": 55025,
+                        "name": "l",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55020,
+                        "src": "478:1:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Layout_$55215_storage_ptr",
+                          "typeString": "struct ERC20SnapshotStorage.Layout storage pointer"
+                        }
+                      },
+                      "id": 55027,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "480:10:427",
+                      "memberName": "snapshotId",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 55214,
+                      "src": "478:12:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 55029,
+                  "nodeType": "ExpressionStatement",
+                  "src": "478:14:427"
+                },
+                {
+                  "assignments": [
+                    55031
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 55031,
+                      "mutability": "mutable",
+                      "name": "current",
+                      "nameLocation": "511:7:427",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 55041,
+                      "src": "503:15:427",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 55030,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "503:7:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 55034,
+                  "initialValue": {
+                    "expression": {
+                      "id": 55032,
+                      "name": "l",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 55020,
+                      "src": "521:1:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Layout_$55215_storage_ptr",
+                        "typeString": "struct ERC20SnapshotStorage.Layout storage pointer"
+                      }
+                    },
+                    "id": 55033,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "523:10:427",
+                    "memberName": "snapshotId",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 55214,
+                    "src": "521:12:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "503:30:427"
+                },
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 55036,
+                        "name": "current",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55031,
+                        "src": "557:7:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 55035,
+                      "name": "Snapshot",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 55011,
+                      "src": "548:8:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 55037,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "548:17:427",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 55038,
+                  "nodeType": "EmitStatement",
+                  "src": "543:22:427"
+                },
+                {
+                  "expression": {
+                    "id": 55039,
+                    "name": "current",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 55031,
+                    "src": "582:7:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 55015,
+                  "id": 55040,
+                  "nodeType": "Return",
+                  "src": "575:14:427"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_snapshot",
+            "nameLocation": "341:9:427",
+            "parameters": {
+              "id": 55012,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "350:2:427"
+            },
+            "returnParameters": {
+              "id": 55015,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 55014,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55042,
+                  "src": "379:7:427",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 55013,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "379:7:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "378:9:427"
+            },
+            "scope": 55195,
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "internal"
+          },
+          {
+            "id": 55060,
+            "nodeType": "FunctionDefinition",
+            "src": "602:174:427",
+            "nodes": [],
+            "body": {
+              "id": 55059,
+              "nodeType": "Block",
+              "src": "659:117:427",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "baseExpression": {
+                          "expression": {
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "id": 55048,
+                                "name": "ERC20SnapshotStorage",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 55233,
+                                "src": "685:20:427",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_type$_t_contract$_ERC20SnapshotStorage_$55233_$",
+                                  "typeString": "type(library ERC20SnapshotStorage)"
+                                }
+                              },
+                              "id": 55049,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberLocation": "706:6:427",
+                              "memberName": "layout",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 55232,
+                              "src": "685:27:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_pure$__$returns$_t_struct$_Layout_$55215_storage_ptr_$",
+                                "typeString": "function () pure returns (struct ERC20SnapshotStorage.Layout storage pointer)"
+                              }
+                            },
+                            "id": 55050,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "685:29:427",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Layout_$55215_storage_ptr",
+                              "typeString": "struct ERC20SnapshotStorage.Layout storage pointer"
+                            }
+                          },
+                          "id": 55051,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "715:23:427",
+                          "memberName": "accountBalanceSnapshots",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 55209,
+                          "src": "685:53:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_mapping$_t_address_$_t_struct$_Snapshots_$55204_storage_$",
+                            "typeString": "mapping(address => struct ERC20SnapshotStorage.Snapshots storage ref)"
+                          }
+                        },
+                        "id": 55053,
+                        "indexExpression": {
+                          "id": 55052,
+                          "name": "account",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 55044,
+                          "src": "739:7:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "IndexAccess",
+                        "src": "685:62:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Snapshots_$55204_storage",
+                          "typeString": "struct ERC20SnapshotStorage.Snapshots storage ref"
+                        }
+                      },
+                      {
+                        "arguments": [
+                          {
+                            "id": 55055,
+                            "name": "account",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 55044,
+                            "src": "760:7:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 55054,
+                          "name": "_balanceOf",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 53115,
+                          "src": "749:10:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_uint256_$",
+                            "typeString": "function (address) view returns (uint256)"
+                          }
+                        },
+                        "id": 55056,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "749:19:427",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Snapshots_$55204_storage",
+                          "typeString": "struct ERC20SnapshotStorage.Snapshots storage ref"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 55047,
+                      "name": "_updateSnapshot",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 55113,
+                      "src": "669:15:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Snapshots_$55204_storage_ptr_$_t_uint256_$returns$__$",
+                        "typeString": "function (struct ERC20SnapshotStorage.Snapshots storage pointer,uint256)"
+                      }
+                    },
+                    "id": 55057,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "669:100:427",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 55058,
+                  "nodeType": "ExpressionStatement",
+                  "src": "669:100:427"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_updateAccountSnapshot",
+            "nameLocation": "611:22:427",
+            "parameters": {
+              "id": 55045,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 55044,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "642:7:427",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55060,
+                  "src": "634:15:427",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 55043,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "634:7:427",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "633:17:427"
+            },
+            "returnParameters": {
+              "id": 55046,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "659:0:427"
+            },
+            "scope": 55195,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "private"
+          },
+          {
+            "id": 55073,
+            "nodeType": "FunctionDefinition",
+            "src": "782:146:427",
+            "nodes": [],
+            "body": {
+              "id": 55072,
+              "nodeType": "Block",
+              "src": "828:100:427",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "expression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "id": 55064,
+                              "name": "ERC20SnapshotStorage",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 55233,
+                              "src": "854:20:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_ERC20SnapshotStorage_$55233_$",
+                                "typeString": "type(library ERC20SnapshotStorage)"
+                              }
+                            },
+                            "id": 55065,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "875:6:427",
+                            "memberName": "layout",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 55232,
+                            "src": "854:27:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_pure$__$returns$_t_struct$_Layout_$55215_storage_ptr_$",
+                              "typeString": "function () pure returns (struct ERC20SnapshotStorage.Layout storage pointer)"
+                            }
+                          },
+                          "id": 55066,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "854:29:427",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Layout_$55215_storage_ptr",
+                            "typeString": "struct ERC20SnapshotStorage.Layout storage pointer"
+                          }
+                        },
+                        "id": 55067,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "884:20:427",
+                        "memberName": "totalSupplySnapshots",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 55212,
+                        "src": "854:50:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Snapshots_$55204_storage",
+                          "typeString": "struct ERC20SnapshotStorage.Snapshots storage ref"
+                        }
+                      },
+                      {
+                        "arguments": [],
+                        "expression": {
+                          "argumentTypes": [],
+                          "id": 55068,
+                          "name": "_totalSupply",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 53099,
+                          "src": "906:12:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_view$__$returns$_t_uint256_$",
+                            "typeString": "function () view returns (uint256)"
+                          }
+                        },
+                        "id": 55069,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "906:14:427",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Snapshots_$55204_storage",
+                          "typeString": "struct ERC20SnapshotStorage.Snapshots storage ref"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 55063,
+                      "name": "_updateSnapshot",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 55113,
+                      "src": "838:15:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_struct$_Snapshots_$55204_storage_ptr_$_t_uint256_$returns$__$",
+                        "typeString": "function (struct ERC20SnapshotStorage.Snapshots storage pointer,uint256)"
+                      }
+                    },
+                    "id": 55070,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "838:83:427",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 55071,
+                  "nodeType": "ExpressionStatement",
+                  "src": "838:83:427"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_updateTotalSupplySnapshot",
+            "nameLocation": "791:26:427",
+            "parameters": {
+              "id": 55061,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "817:2:427"
+            },
+            "returnParameters": {
+              "id": 55062,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "828:0:427"
+            },
+            "scope": 55195,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "private"
+          },
+          {
+            "id": 55113,
+            "nodeType": "FunctionDefinition",
+            "src": "934:323:427",
+            "nodes": [],
+            "body": {
+              "id": 55112,
+              "nodeType": "Block",
+              "src": "1032:225:427",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    55082
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 55082,
+                      "mutability": "mutable",
+                      "name": "current",
+                      "nameLocation": "1050:7:427",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 55112,
+                      "src": "1042:15:427",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 55081,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1042:7:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 55087,
+                  "initialValue": {
+                    "expression": {
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "expression": {
+                          "id": 55083,
+                          "name": "ERC20SnapshotStorage",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 55233,
+                          "src": "1060:20:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_ERC20SnapshotStorage_$55233_$",
+                            "typeString": "type(library ERC20SnapshotStorage)"
+                          }
+                        },
+                        "id": 55084,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1081:6:427",
+                        "memberName": "layout",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 55232,
+                        "src": "1060:27:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_pure$__$returns$_t_struct$_Layout_$55215_storage_ptr_$",
+                          "typeString": "function () pure returns (struct ERC20SnapshotStorage.Layout storage pointer)"
+                        }
+                      },
+                      "id": 55085,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1060:29:427",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Layout_$55215_storage_ptr",
+                        "typeString": "struct ERC20SnapshotStorage.Layout storage pointer"
+                      }
+                    },
+                    "id": 55086,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1090:10:427",
+                    "memberName": "snapshotId",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 55214,
+                    "src": "1060:40:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1042:58:427"
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 55093,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "arguments": [
+                        {
+                          "expression": {
+                            "id": 55089,
+                            "name": "snapshots",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 55076,
+                            "src": "1131:9:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_Snapshots_$55204_storage_ptr",
+                              "typeString": "struct ERC20SnapshotStorage.Snapshots storage pointer"
+                            }
+                          },
+                          "id": 55090,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1141:3:427",
+                          "memberName": "ids",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 55200,
+                          "src": "1131:13:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_array$_t_uint256_$dyn_storage",
+                            "typeString": "uint256[] storage ref"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_array$_t_uint256_$dyn_storage",
+                            "typeString": "uint256[] storage ref"
+                          }
+                        ],
+                        "id": 55088,
+                        "name": "_lastSnapshotId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55135,
+                        "src": "1115:15:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_view$_t_array$_t_uint256_$dyn_storage_ptr_$returns$_t_uint256_$",
+                          "typeString": "function (uint256[] storage pointer) view returns (uint256)"
+                        }
+                      },
+                      "id": 55091,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1115:30:427",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "<",
+                    "rightExpression": {
+                      "id": 55092,
+                      "name": "current",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 55082,
+                      "src": "1148:7:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1115:40:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 55111,
+                  "nodeType": "IfStatement",
+                  "src": "1111:140:427",
+                  "trueBody": {
+                    "id": 55110,
+                    "nodeType": "Block",
+                    "src": "1157:94:427",
+                    "statements": [
+                      {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "id": 55099,
+                              "name": "current",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 55082,
+                              "src": "1190:7:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            ],
+                            "expression": {
+                              "expression": {
+                                "id": 55094,
+                                "name": "snapshots",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 55076,
+                                "src": "1171:9:427",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_struct$_Snapshots_$55204_storage_ptr",
+                                  "typeString": "struct ERC20SnapshotStorage.Snapshots storage pointer"
+                                }
+                              },
+                              "id": 55097,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberLocation": "1181:3:427",
+                              "memberName": "ids",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 55200,
+                              "src": "1171:13:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_array$_t_uint256_$dyn_storage",
+                                "typeString": "uint256[] storage ref"
+                              }
+                            },
+                            "id": 55098,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1185:4:427",
+                            "memberName": "push",
+                            "nodeType": "MemberAccess",
+                            "src": "1171:18:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_uint256_$dyn_storage_ptr_$_t_uint256_$returns$__$attached_to$_t_array$_t_uint256_$dyn_storage_ptr_$",
+                              "typeString": "function (uint256[] storage pointer,uint256)"
+                            }
+                          },
+                          "id": 55100,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1171:27:427",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 55101,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1171:27:427"
+                      },
+                      {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "id": 55107,
+                              "name": "value",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 55078,
+                              "src": "1234:5:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            ],
+                            "expression": {
+                              "expression": {
+                                "id": 55102,
+                                "name": "snapshots",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 55076,
+                                "src": "1212:9:427",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_struct$_Snapshots_$55204_storage_ptr",
+                                  "typeString": "struct ERC20SnapshotStorage.Snapshots storage pointer"
+                                }
+                              },
+                              "id": 55105,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberLocation": "1222:6:427",
+                              "memberName": "values",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 55203,
+                              "src": "1212:16:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_array$_t_uint256_$dyn_storage",
+                                "typeString": "uint256[] storage ref"
+                              }
+                            },
+                            "id": 55106,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1229:4:427",
+                            "memberName": "push",
+                            "nodeType": "MemberAccess",
+                            "src": "1212:21:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_arraypush_nonpayable$_t_array$_t_uint256_$dyn_storage_ptr_$_t_uint256_$returns$__$attached_to$_t_array$_t_uint256_$dyn_storage_ptr_$",
+                              "typeString": "function (uint256[] storage pointer,uint256)"
+                            }
+                          },
+                          "id": 55108,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1212:28:427",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 55109,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1212:28:427"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_updateSnapshot",
+            "nameLocation": "943:15:427",
+            "parameters": {
+              "id": 55079,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 55076,
+                  "mutability": "mutable",
+                  "name": "snapshots",
+                  "nameLocation": "998:9:427",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55113,
+                  "src": "959:48:427",
+                  "stateVariable": false,
+                  "storageLocation": "storage",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Snapshots_$55204_storage_ptr",
+                    "typeString": "struct ERC20SnapshotStorage.Snapshots"
+                  },
+                  "typeName": {
+                    "id": 55075,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 55074,
+                      "name": "ERC20SnapshotStorage.Snapshots",
+                      "nameLocations": [
+                        "959:20:427",
+                        "980:9:427"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 55204,
+                      "src": "959:30:427"
+                    },
+                    "referencedDeclaration": 55204,
+                    "src": "959:30:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Snapshots_$55204_storage_ptr",
+                      "typeString": "struct ERC20SnapshotStorage.Snapshots"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 55078,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nameLocation": "1017:5:427",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55113,
+                  "src": "1009:13:427",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 55077,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1009:7:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "958:65:427"
+            },
+            "returnParameters": {
+              "id": 55080,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1032:0:427"
+            },
+            "scope": 55195,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "private"
+          },
+          {
+            "id": 55135,
+            "nodeType": "FunctionDefinition",
+            "src": "1263:144:427",
+            "nodes": [],
+            "body": {
+              "id": 55134,
+              "nodeType": "Block",
+              "src": "1342:65:427",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 55124,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "expression": {
+                          "id": 55121,
+                          "name": "ids",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 55116,
+                          "src": "1359:3:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                            "typeString": "uint256[] storage pointer"
+                          }
+                        },
+                        "id": 55122,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1363:6:427",
+                        "memberName": "length",
+                        "nodeType": "MemberAccess",
+                        "src": "1359:10:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "hexValue": "30",
+                        "id": 55123,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1373:1:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        },
+                        "value": "0"
+                      },
+                      "src": "1359:15:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseExpression": {
+                      "baseExpression": {
+                        "id": 55126,
+                        "name": "ids",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55116,
+                        "src": "1381:3:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                          "typeString": "uint256[] storage pointer"
+                        }
+                      },
+                      "id": 55131,
+                      "indexExpression": {
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 55130,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "expression": {
+                            "id": 55127,
+                            "name": "ids",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 55116,
+                            "src": "1385:3:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                              "typeString": "uint256[] storage pointer"
+                            }
+                          },
+                          "id": 55128,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberLocation": "1389:6:427",
+                          "memberName": "length",
+                          "nodeType": "MemberAccess",
+                          "src": "1385:10:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "-",
+                        "rightExpression": {
+                          "hexValue": "31",
+                          "id": 55129,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1398:1:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_1_by_1",
+                            "typeString": "int_const 1"
+                          },
+                          "value": "1"
+                        },
+                        "src": "1385:14:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "IndexAccess",
+                      "src": "1381:19:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 55132,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "Conditional",
+                    "src": "1359:41:427",
+                    "trueExpression": {
+                      "hexValue": "30",
+                      "id": 55125,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1377:1:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 55120,
+                  "id": 55133,
+                  "nodeType": "Return",
+                  "src": "1352:48:427"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_lastSnapshotId",
+            "nameLocation": "1272:15:427",
+            "parameters": {
+              "id": 55117,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 55116,
+                  "mutability": "mutable",
+                  "name": "ids",
+                  "nameLocation": "1306:3:427",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55135,
+                  "src": "1288:21:427",
+                  "stateVariable": false,
+                  "storageLocation": "storage",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 55114,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1288:7:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 55115,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1288:9:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1287:23:427"
+            },
+            "returnParameters": {
+              "id": 55120,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 55119,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55135,
+                  "src": "1333:7:427",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 55118,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1333:7:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1332:9:427"
+            },
+            "scope": 55195,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "private"
+          },
+          {
+            "id": 55194,
+            "nodeType": "FunctionDefinition",
+            "src": "1514:508:427",
+            "nodes": [],
+            "body": {
+              "id": 55193,
+              "nodeType": "Block",
+              "src": "1612:410:427",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 55149,
+                        "name": "from",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55138,
+                        "src": "1649:4:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 55150,
+                        "name": "to",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55140,
+                        "src": "1655:2:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 55151,
+                        "name": "amount",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55142,
+                        "src": "1659:6:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "id": 55146,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -25,
+                        "src": "1622:5:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_super$_ERC20SnapshotInternal_$55195_$",
+                          "typeString": "type(contract super ERC20SnapshotInternal)"
+                        }
+                      },
+                      "id": 55148,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1628:20:427",
+                      "memberName": "_beforeTokenTransfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 53487,
+                      "src": "1622:26:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$_t_uint256_$returns$__$",
+                        "typeString": "function (address,address,uint256)"
+                      }
+                    },
+                    "id": 55152,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1622:44:427",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 55153,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1622:44:427"
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    },
+                    "id": 55159,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "id": 55154,
+                      "name": "from",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 55138,
+                      "src": "1681:4:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "arguments": [
+                        {
+                          "hexValue": "30",
+                          "id": 55157,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1697:1:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          }
+                        ],
+                        "id": 55156,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "lValueRequested": false,
+                        "nodeType": "ElementaryTypeNameExpression",
+                        "src": "1689:7:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_address_$",
+                          "typeString": "type(address)"
+                        },
+                        "typeName": {
+                          "id": 55155,
+                          "name": "address",
+                          "nodeType": "ElementaryTypeName",
+                          "src": "1689:7:427",
+                          "typeDescriptions": {}
+                        }
+                      },
+                      "id": 55158,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1689:10:427",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1681:18:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "id": 55173,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 55168,
+                        "name": "to",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 55140,
+                        "src": "1804:2:427",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "==",
+                      "rightExpression": {
+                        "arguments": [
+                          {
+                            "hexValue": "30",
+                            "id": 55171,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1818:1:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            },
+                            "value": "0"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            }
+                          ],
+                          "id": 55170,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1810:7:427",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": {
+                            "id": 55169,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1810:7:427",
+                            "typeDescriptions": {}
+                          }
+                        },
+                        "id": 55172,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1810:10:427",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "src": "1804:16:427",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseBody": {
+                      "id": 55190,
+                      "nodeType": "Block",
+                      "src": "1923:93:427",
+                      "statements": [
+                        {
+                          "expression": {
+                            "arguments": [
+                              {
+                                "id": 55183,
+                                "name": "to",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 55140,
+                                "src": "1960:2:427",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "id": 55182,
+                              "name": "_updateAccountSnapshot",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 55060,
+                              "src": "1937:22:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                                "typeString": "function (address)"
+                              }
+                            },
+                            "id": 55184,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1937:26:427",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_tuple$__$",
+                              "typeString": "tuple()"
+                            }
+                          },
+                          "id": 55185,
+                          "nodeType": "ExpressionStatement",
+                          "src": "1937:26:427"
+                        },
+                        {
+                          "expression": {
+                            "arguments": [
+                              {
+                                "id": 55187,
+                                "name": "from",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 55138,
+                                "src": "2000:4:427",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "id": 55186,
+                              "name": "_updateAccountSnapshot",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 55060,
+                              "src": "1977:22:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                                "typeString": "function (address)"
+                              }
+                            },
+                            "id": 55188,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1977:28:427",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_tuple$__$",
+                              "typeString": "tuple()"
+                            }
+                          },
+                          "id": 55189,
+                          "nodeType": "ExpressionStatement",
+                          "src": "1977:28:427"
+                        }
+                      ]
+                    },
+                    "id": 55191,
+                    "nodeType": "IfStatement",
+                    "src": "1800:216:427",
+                    "trueBody": {
+                      "id": 55181,
+                      "nodeType": "Block",
+                      "src": "1822:95:427",
+                      "statements": [
+                        {
+                          "expression": {
+                            "arguments": [
+                              {
+                                "id": 55175,
+                                "name": "from",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 55138,
+                                "src": "1859:4:427",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "id": 55174,
+                              "name": "_updateAccountSnapshot",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 55060,
+                              "src": "1836:22:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                                "typeString": "function (address)"
+                              }
+                            },
+                            "id": 55176,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1836:28:427",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_tuple$__$",
+                              "typeString": "tuple()"
+                            }
+                          },
+                          "id": 55177,
+                          "nodeType": "ExpressionStatement",
+                          "src": "1836:28:427"
+                        },
+                        {
+                          "expression": {
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "id": 55178,
+                              "name": "_updateTotalSupplySnapshot",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 55073,
+                              "src": "1878:26:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
+                                "typeString": "function ()"
+                              }
+                            },
+                            "id": 55179,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1878:28:427",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_tuple$__$",
+                              "typeString": "tuple()"
+                            }
+                          },
+                          "id": 55180,
+                          "nodeType": "ExpressionStatement",
+                          "src": "1878:28:427"
+                        }
+                      ]
+                    }
+                  },
+                  "id": 55192,
+                  "nodeType": "IfStatement",
+                  "src": "1677:339:427",
+                  "trueBody": {
+                    "id": 55167,
+                    "nodeType": "Block",
+                    "src": "1701:93:427",
+                    "statements": [
+                      {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "id": 55161,
+                              "name": "to",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 55140,
+                              "src": "1738:2:427",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              }
+                            ],
+                            "id": 55160,
+                            "name": "_updateAccountSnapshot",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 55060,
+                            "src": "1715:22:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                              "typeString": "function (address)"
+                            }
+                          },
+                          "id": 55162,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1715:26:427",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 55163,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1715:26:427"
+                      },
+                      {
+                        "expression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "id": 55164,
+                            "name": "_updateTotalSupplySnapshot",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 55073,
+                            "src": "1755:26:427",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
+                              "typeString": "function ()"
+                            }
+                          },
+                          "id": 55165,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1755:28:427",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_tuple$__$",
+                            "typeString": "tuple()"
+                          }
+                        },
+                        "id": 55166,
+                        "nodeType": "ExpressionStatement",
+                        "src": "1755:28:427"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "baseFunctions": [
+              53487
+            ],
+            "documentation": {
+              "id": 55136,
+              "nodeType": "StructuredDocumentation",
+              "src": "1413:96:427",
+              "text": " @notice ERC20 hook: update snapshot data\n @inheritdoc ERC20BaseInternal"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_beforeTokenTransfer",
+            "nameLocation": "1523:20:427",
+            "overrides": {
+              "id": 55144,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1603:8:427"
+            },
+            "parameters": {
+              "id": 55143,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 55138,
+                  "mutability": "mutable",
+                  "name": "from",
+                  "nameLocation": "1552:4:427",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55194,
+                  "src": "1544:12:427",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 55137,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1544:7:427",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 55140,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "1566:2:427",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55194,
+                  "src": "1558:10:427",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 55139,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1558:7:427",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 55142,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nameLocation": "1578:6:427",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 55194,
+                  "src": "1570:14:427",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 55141,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1570:7:427",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1543:42:427"
+            },
+            "returnParameters": {
+              "id": 55145,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1612:0:427"
+            },
+            "scope": 55195,
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 55006,
+              "name": "ERC20BaseInternal",
+              "nameLocations": [
+                "275:17:427"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 53488,
+              "src": "275:17:427"
+            },
+            "id": 55007,
+            "nodeType": "InheritanceSpecifier",
+            "src": "275:17:427"
+          }
+        ],
+        "canonicalName": "ERC20SnapshotInternal",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 55005,
+          "nodeType": "StructuredDocumentation",
+          "src": "181:50:427",
+          "text": " @title ERC20Snapshot internal functions"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          55195,
+          53488,
+          53640,
+          44987
+        ],
+        "name": "ERC20SnapshotInternal",
+        "nameLocation": "250:21:427",
+        "scope": 55196,
+        "usedErrors": [
+          53623,
+          53625,
+          53627,
+          53629,
+          53631,
+          53633,
+          53635,
+          53637,
+          53639
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 427
+}

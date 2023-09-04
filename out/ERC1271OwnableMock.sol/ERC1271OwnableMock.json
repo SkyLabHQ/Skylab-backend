@@ -1,0 +1,843 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "ECDSA__InvalidS",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ECDSA__InvalidSignature",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ECDSA__InvalidSignatureLength",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ECDSA__InvalidV",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "hash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "__isValidSignature",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "hash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "signature",
+          "type": "bytes"
+        }
+      ],
+      "name": "isValidSignature",
+      "outputs": [
+        {
+          "internalType": "bytes4",
+          "name": "",
+          "type": "bytes4"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080346100bc57601f6103b238819003918201601f19168301916001600160401b038311848410176100c1578084926020946040528339810103126100bc57516001600160a01b0390818116908190036100bc577f8a22373512790c48b83a1fe2efdd2888d4a917bcdc24d0adf63e60f671680460908154816040519482167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0600080a36001600160a01b0319161790556102da90816100d88239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6080604052600436101561001257600080fd5b60003560e01c80631626ba7e14610032576399fcfa591461003257600080fd5b610090565b634e487b7160e01b600052604160045260246000fd5b6060810190811067ffffffffffffffff82111761006957604052565b610037565b90601f8019910116810190811067ffffffffffffffff82111761006957604052565b346101225760403660031901126101225767ffffffffffffffff6024358181116101225736602382011215610122578060040135918211610069576040516100e2601f8401601f19166020018261006e565b82815236602484840101116101225760006020848195602461010f96018386013783010152600435610127565b6040516001600160e01b03199091168152f35b600080fd5b604090815160208101917f19457468657265756d205369676e6564204d6573736167653a0a3332000000008352603c820152603c81526101668161004d565b51902060418351036102875760208301519060608385015194015193600094851a927f7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0821161027657601b8414158061026b575b61025a57845192835260ff9390931660208084019190915260408301939093526060820152838052839060809060015afa156102555781516001600160a01b0390811691821561024557507f8a22373512790c48b83a1fe2efdd2888d4a917bcdc24d0adf63e60f67168046054166001600160a01b0316036102425750630b135d3f60e11b90565b90565b516347f3b32760e11b8152600490fd5b610298565b8451630acd54a960e41b8152600490fd5b50601c8414156101ba565b845163e4a61add60e01b8152600490fd5b81516309f846f760e31b8152600490fd5b6040513d6000823e3d90fdfea26469706673582212203fad7602537a128cfffcac2fd04c58c938ab17b3aba6d13ceb3e845271bdcdb164736f6c63430008130033",
+    "sourceMap": "112:275:357:-:0;;;;;;;;;;;;;-1:-1:-1;;112:275:357;;;;-1:-1:-1;;;;;112:275:357;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;112:275:357;;;;;;;;;;178:49:225;112:275:357;;;;;;;;;1342:38:223;-1:-1:-1;1342:38:223;;-1:-1:-1;;;;;;112:275:357;;;;;;;;;;;;-1:-1:-1;112:275:357;;;;;;-1:-1:-1;112:275:357;;;;;-1:-1:-1;112:275:357",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x6080604052600436101561001257600080fd5b60003560e01c80631626ba7e14610032576399fcfa591461003257600080fd5b610090565b634e487b7160e01b600052604160045260246000fd5b6060810190811067ffffffffffffffff82111761006957604052565b610037565b90601f8019910116810190811067ffffffffffffffff82111761006957604052565b346101225760403660031901126101225767ffffffffffffffff6024358181116101225736602382011215610122578060040135918211610069576040516100e2601f8401601f19166020018261006e565b82815236602484840101116101225760006020848195602461010f96018386013783010152600435610127565b6040516001600160e01b03199091168152f35b600080fd5b604090815160208101917f19457468657265756d205369676e6564204d6573736167653a0a3332000000008352603c820152603c81526101668161004d565b51902060418351036102875760208301519060608385015194015193600094851a927f7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0821161027657601b8414158061026b575b61025a57845192835260ff9390931660208084019190915260408301939093526060820152838052839060809060015afa156102555781516001600160a01b0390811691821561024557507f8a22373512790c48b83a1fe2efdd2888d4a917bcdc24d0adf63e60f67168046054166001600160a01b0316036102425750630b135d3f60e11b90565b90565b516347f3b32760e11b8152600490fd5b610298565b8451630acd54a960e41b8152600490fd5b50601c8414156101ba565b845163e4a61add60e01b8152600490fd5b81516309f846f760e31b8152600490fd5b6040513d6000823e3d90fdfea26469706673582212203fad7602537a128cfffcac2fd04c58c938ab17b3aba6d13ceb3e845271bdcdb164736f6c63430008130033",
+    "sourceMap": "112:275:357:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;-1:-1:-1;;112:275:357;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;112:275:357;;;;;:::i;:::-;;;;;;;;;;;;;-1:-1:-1;112:275:357;;;;;591:34:352;112:275:357;;;;;;;;;;;;591:34:352;:::i;:::-;112:275:357;;-1:-1:-1;;;;;;112:275:357;;;;;;;-1:-1:-1;112:275:357;;552:262:356;112:275:357;;;;3009:58:230;;;112:275:357;;;;;;;;;3009:58:230;;;;;:::i;:::-;112:275:357;2999:69:230;;710:2;112:275:357;;690:22:230;686:66;;3009:58;819:164;;;;;;;;;;;;-1:-1:-1;;819:164:230;;;2302:79;2315:66;2302:79;;2298:109;;2426:2;2421:7;;;:18;;;552:262:356;2417:48:230;;112:275:357;;;;;;;;;;3009:58:230;112:275:357;;;;;;;;;;;;;;;;;;2577:24:230;;;112:275:357;;;;2577:24:230;;;;;;;;-1:-1:-1;;;;;112:275:357;;;;2615:20:230;;2611:58;;-1:-1:-1;178:49:225;112:275:357;;-1:-1:-1;;;;;112:275:357;721:60:356;:86;;-1:-1:-1;;;;333:34:353;552:262:356:o;721:86::-;552:262;:::o;2611:58:230:-;112:275:357;-1:-1:-1;;;2644:25:230;;;;;2577:24;;:::i;2417:48::-;112:275:357;;-1:-1:-1;;;2448:17:230;;;;;2421:18;2432:7;112:275:357;2432:7:230;;;2421:18;;2298:109;112:275:357;;-1:-1:-1;;;2390:17:230;;;;;686:66;112:275:357;;-1:-1:-1;;;721:31:230;;;;;112:275:357;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "__isValidSignature(bytes32,bytes)": "99fcfa59",
+    "isValidSignature(bytes32,bytes)": "1626ba7e"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"ECDSA__InvalidS\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ECDSA__InvalidSignature\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ECDSA__InvalidSignatureLength\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ECDSA__InvalidV\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Ownable__NotOwner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Ownable__NotTransitiveOwner\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"name\":\"__isValidSignature\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"signature\",\"type\":\"bytes\"}],\"name\":\"isValidSignature\",\"outputs\":[{\"internalType\":\"bytes4\",\"name\":\"\",\"type\":\"bytes4\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"isValidSignature(bytes32,bytes)\":{\"params\":{\"hash\":\"hashed data\",\"signature\":\"signed hash\"},\"returns\":{\"_0\":\"ERC1271 magic value or null bytes\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"isValidSignature(bytes32,bytes)\":{\"notice\":\"return ERC1271 magic value if given signature is valid for contract\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableMock.sol\":\"ERC1271OwnableMock\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/access/ownable/IOwnableInternal.sol\":{\"keccak256\":\"0x0983a6fb097ce9707ba4ea1dbf1211603bc0f27d0f96b80e3627211c4cc3f463\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://89b36889e3f57c5560eb4d6e4da11a6cc55a1fa105cfc12890791e7dfeaf9b07\",\"dweb:/ipfs/QmcSi5vDK5qxCsN4TQCdhcTasoX3nNCTKnwww4HVTm6vGc\"]},\"contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol\":{\"keccak256\":\"0x5ea184c231770722d68e1d26f12c92a5728a922cb15ec917973c124febeb1ecd\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c0bad43f787110a77a438e6e2e4345970f601deb94e12651d444b77b766dfb14\",\"dweb:/ipfs/QmW7YjVBNPWhjEuGSRwcYL3csGR8EVr7mDSPDHwvXVgZBx\"]},\"contracts/.cache/solidstate/local/access/ownable/OwnableStorage.sol\":{\"keccak256\":\"0x7069594ee0eef486fb11dd2472f274e8627990a5af95712e0baf865300aff218\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4a09ad96ba21b8f7cbcf9d7c84455424051359f0aa5540950b082c1212301b65\",\"dweb:/ipfs/QmUDWkJAyqNiLb8vrDMphemBuBaZSRvpFvgF4b42AZMHBq\"]},\"contracts/.cache/solidstate/local/cryptography/ECDSA.sol\":{\"keccak256\":\"0xebe2da1787e7830c80fae48c6d1a6f5708bf86a25edf30be5c1ff4887fbb6306\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://19ac83051cf9bc3f2ecf631f81349ababf6e8de5e0ad6dc4d8abf06290881ada\",\"dweb:/ipfs/QmWgSMb2RrFNWtEngLhwBoqMu4LqZ2wS8vgWVa4iATYT73\"]},\"contracts/.cache/solidstate/local/interfaces/IERC1271.sol\":{\"keccak256\":\"0x4066c7ca92c186daf5c0e2ba9f410ef5fed660e5d80643e367e8c7cc4a287e57\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ae0049d02df2d933f86d4a3948a86568e3518fb56706bbcab81a633f515fd074\",\"dweb:/ipfs/QmUEGQciBrY3a1j7AAJFVXkwNbpjHjoYTS5EhkbGm7PvzN\"]},\"contracts/.cache/solidstate/local/interfaces/IERC173.sol\":{\"keccak256\":\"0xf1c1fbf0ec82110c29d549db1fbd8ec728ba0b995dc5f087e0a5464243135dce\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://16c7f3eba0547576833d0c1fddb7ec34aeba4f28b4ce9e878c3bd3ebc9c8d3d1\",\"dweb:/ipfs/Qme79eYLo7dinnhotgC4bvYnCg4doBDShHeCajrf5zpAUF\"]},\"contracts/.cache/solidstate/local/interfaces/IERC173Internal.sol\":{\"keccak256\":\"0xbd1b10afb3f0e0628f077296268a3b3d6ce92b0c481234c03bb93a82c08dbc48\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://72f2c4693435b8899495eeb9222c0fa6596b5e8a9fee001da0fbdecad202ff4b\",\"dweb:/ipfs/QmcugENqTFqiboof9DwTZAdeLn3PSvXCCAm27CJ2UVgZkW\"]},\"contracts/.cache/solidstate/local/signature/base/ERC1271Base.sol\":{\"keccak256\":\"0xdb484542c9c5386cabfdeeeb9a2c3bca2594f89c8bc0bd5e1485ee8ced18381d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dd46a64b5f0a82f3002bf1b612906153df09f424b1a85ca66d52cece1676ecf1\",\"dweb:/ipfs/QmbfwMdmiTtfq43x7ssj5W7NckuwWP6QJ3SBYt8FJsJmSk\"]},\"contracts/.cache/solidstate/local/signature/base/ERC1271BaseInternal.sol\":{\"keccak256\":\"0xcbaa337d34411d71ae9afd712a0c137f699c26c17c52b950d5a29484602108e9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a8840bf46b6b4f109a198e451dc84b3a7d0857824733f979ceee83bd72e6a091\",\"dweb:/ipfs/QmddEA77NU8xjVuMeDmoCeEFqGk2e8ssGAXVXTJuKgqshf\"]},\"contracts/.cache/solidstate/local/signature/base/IERC1271Base.sol\":{\"keccak256\":\"0x2911fb1722155487de37587e816b6db2f3c6eafce65294231f60846e5fed1946\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0b7188837c157c47a6ecf2d1b04f0f519a54ae675ca6ddda501eff62d50dbd49\",\"dweb:/ipfs/QmZxPoSdTMS5HHL13Dg3HBnNfVBFe5H8SQxtdyypeNaGwb\"]},\"contracts/.cache/solidstate/local/signature/ownable/ERC1271Ownable.sol\":{\"keccak256\":\"0x5be3faeed591270708897105188f1ffa0c754e6db5952aadeb7e5342ad689d41\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://eb78357452dab59d315245cda74f00822b3da49d65979eecc727f4afab27219d\",\"dweb:/ipfs/QmZdNiWam9SQZpPurT3h73SG5atKcHTfc2Gmz6SZmFsN6z\"]},\"contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableInternal.sol\":{\"keccak256\":\"0xbc3a6b8263cbe2f2717dc6d9251a1a55499bf96a72846e81df5933f6f343db50\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bd78611371f23c44ea72393976307901082d54c0bbc418f7f58ad6ac49840f33\",\"dweb:/ipfs/QmTHAYCkMz7QkiUxMV5bvJDoEnf2aazTB8TVCoYuqnX9Pg\"]},\"contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableMock.sol\":{\"keccak256\":\"0x5dd1b44f6767be7640cbcd87ed66893970f4939b7fa02f2314d9028f6bb97c0a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://908dbf9fc6e4fdbbe6c2958937dd8dacd4a964623a23e1f5cc2cf5f5a941c581\",\"dweb:/ipfs/QmbHdvet9oFEdFf6YAjvSXob9WuVf7jPcA1hPeLYiMF7zr\"]},\"contracts/.cache/solidstate/local/signature/ownable/IERC1271Ownable.sol\":{\"keccak256\":\"0x405cca30c8b3870fa91556ce9b1d67e0f7cb45504e8d17be8a76a641f1e9dc81\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b5a08107e2d1912ae39b6bb83a854b04d48d3c99eb6bf1553895690146da7657\",\"dweb:/ipfs/QmaYrSQwncNfruVFUYKVNz6iWmH9dXMib1X2f6CHJbdc2x\"]},\"contracts/.cache/solidstate/local/utils/AddressUtils.sol\":{\"keccak256\":\"0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e\",\"dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF\"]},\"contracts/.cache/solidstate/local/utils/UintUtils.sol\":{\"keccak256\":\"0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2\",\"dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ECDSA__InvalidS"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ECDSA__InvalidSignature"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ECDSA__InvalidSignatureLength"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ECDSA__InvalidV"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotOwner"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotTransitiveOwner"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "hash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "__isValidSignature",
+          "outputs": [
+            {
+              "internalType": "bytes4",
+              "name": "",
+              "type": "bytes4"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "hash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "isValidSignature",
+          "outputs": [
+            {
+              "internalType": "bytes4",
+              "name": "",
+              "type": "bytes4"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "isValidSignature(bytes32,bytes)": {
+            "params": {
+              "hash": "hashed data",
+              "signature": "signed hash"
+            },
+            "returns": {
+              "_0": "ERC1271 magic value or null bytes"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "isValidSignature(bytes32,bytes)": {
+            "notice": "return ERC1271 magic value if given signature is valid for contract"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableMock.sol": "ERC1271OwnableMock"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/access/ownable/IOwnableInternal.sol": {
+        "keccak256": "0x0983a6fb097ce9707ba4ea1dbf1211603bc0f27d0f96b80e3627211c4cc3f463",
+        "urls": [
+          "bzz-raw://89b36889e3f57c5560eb4d6e4da11a6cc55a1fa105cfc12890791e7dfeaf9b07",
+          "dweb:/ipfs/QmcSi5vDK5qxCsN4TQCdhcTasoX3nNCTKnwww4HVTm6vGc"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol": {
+        "keccak256": "0x5ea184c231770722d68e1d26f12c92a5728a922cb15ec917973c124febeb1ecd",
+        "urls": [
+          "bzz-raw://c0bad43f787110a77a438e6e2e4345970f601deb94e12651d444b77b766dfb14",
+          "dweb:/ipfs/QmW7YjVBNPWhjEuGSRwcYL3csGR8EVr7mDSPDHwvXVgZBx"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/access/ownable/OwnableStorage.sol": {
+        "keccak256": "0x7069594ee0eef486fb11dd2472f274e8627990a5af95712e0baf865300aff218",
+        "urls": [
+          "bzz-raw://4a09ad96ba21b8f7cbcf9d7c84455424051359f0aa5540950b082c1212301b65",
+          "dweb:/ipfs/QmUDWkJAyqNiLb8vrDMphemBuBaZSRvpFvgF4b42AZMHBq"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/cryptography/ECDSA.sol": {
+        "keccak256": "0xebe2da1787e7830c80fae48c6d1a6f5708bf86a25edf30be5c1ff4887fbb6306",
+        "urls": [
+          "bzz-raw://19ac83051cf9bc3f2ecf631f81349ababf6e8de5e0ad6dc4d8abf06290881ada",
+          "dweb:/ipfs/QmWgSMb2RrFNWtEngLhwBoqMu4LqZ2wS8vgWVa4iATYT73"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC1271.sol": {
+        "keccak256": "0x4066c7ca92c186daf5c0e2ba9f410ef5fed660e5d80643e367e8c7cc4a287e57",
+        "urls": [
+          "bzz-raw://ae0049d02df2d933f86d4a3948a86568e3518fb56706bbcab81a633f515fd074",
+          "dweb:/ipfs/QmUEGQciBrY3a1j7AAJFVXkwNbpjHjoYTS5EhkbGm7PvzN"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC173.sol": {
+        "keccak256": "0xf1c1fbf0ec82110c29d549db1fbd8ec728ba0b995dc5f087e0a5464243135dce",
+        "urls": [
+          "bzz-raw://16c7f3eba0547576833d0c1fddb7ec34aeba4f28b4ce9e878c3bd3ebc9c8d3d1",
+          "dweb:/ipfs/Qme79eYLo7dinnhotgC4bvYnCg4doBDShHeCajrf5zpAUF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC173Internal.sol": {
+        "keccak256": "0xbd1b10afb3f0e0628f077296268a3b3d6ce92b0c481234c03bb93a82c08dbc48",
+        "urls": [
+          "bzz-raw://72f2c4693435b8899495eeb9222c0fa6596b5e8a9fee001da0fbdecad202ff4b",
+          "dweb:/ipfs/QmcugENqTFqiboof9DwTZAdeLn3PSvXCCAm27CJ2UVgZkW"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/base/ERC1271Base.sol": {
+        "keccak256": "0xdb484542c9c5386cabfdeeeb9a2c3bca2594f89c8bc0bd5e1485ee8ced18381d",
+        "urls": [
+          "bzz-raw://dd46a64b5f0a82f3002bf1b612906153df09f424b1a85ca66d52cece1676ecf1",
+          "dweb:/ipfs/QmbfwMdmiTtfq43x7ssj5W7NckuwWP6QJ3SBYt8FJsJmSk"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/base/ERC1271BaseInternal.sol": {
+        "keccak256": "0xcbaa337d34411d71ae9afd712a0c137f699c26c17c52b950d5a29484602108e9",
+        "urls": [
+          "bzz-raw://a8840bf46b6b4f109a198e451dc84b3a7d0857824733f979ceee83bd72e6a091",
+          "dweb:/ipfs/QmddEA77NU8xjVuMeDmoCeEFqGk2e8ssGAXVXTJuKgqshf"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/base/IERC1271Base.sol": {
+        "keccak256": "0x2911fb1722155487de37587e816b6db2f3c6eafce65294231f60846e5fed1946",
+        "urls": [
+          "bzz-raw://0b7188837c157c47a6ecf2d1b04f0f519a54ae675ca6ddda501eff62d50dbd49",
+          "dweb:/ipfs/QmZxPoSdTMS5HHL13Dg3HBnNfVBFe5H8SQxtdyypeNaGwb"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/ownable/ERC1271Ownable.sol": {
+        "keccak256": "0x5be3faeed591270708897105188f1ffa0c754e6db5952aadeb7e5342ad689d41",
+        "urls": [
+          "bzz-raw://eb78357452dab59d315245cda74f00822b3da49d65979eecc727f4afab27219d",
+          "dweb:/ipfs/QmZdNiWam9SQZpPurT3h73SG5atKcHTfc2Gmz6SZmFsN6z"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableInternal.sol": {
+        "keccak256": "0xbc3a6b8263cbe2f2717dc6d9251a1a55499bf96a72846e81df5933f6f343db50",
+        "urls": [
+          "bzz-raw://bd78611371f23c44ea72393976307901082d54c0bbc418f7f58ad6ac49840f33",
+          "dweb:/ipfs/QmTHAYCkMz7QkiUxMV5bvJDoEnf2aazTB8TVCoYuqnX9Pg"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableMock.sol": {
+        "keccak256": "0x5dd1b44f6767be7640cbcd87ed66893970f4939b7fa02f2314d9028f6bb97c0a",
+        "urls": [
+          "bzz-raw://908dbf9fc6e4fdbbe6c2958937dd8dacd4a964623a23e1f5cc2cf5f5a941c581",
+          "dweb:/ipfs/QmbHdvet9oFEdFf6YAjvSXob9WuVf7jPcA1hPeLYiMF7zr"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/signature/ownable/IERC1271Ownable.sol": {
+        "keccak256": "0x405cca30c8b3870fa91556ce9b1d67e0f7cb45504e8d17be8a76a641f1e9dc81",
+        "urls": [
+          "bzz-raw://b5a08107e2d1912ae39b6bb83a854b04d48d3c99eb6bf1553895690146da7657",
+          "dweb:/ipfs/QmaYrSQwncNfruVFUYKVNz6iWmH9dXMib1X2f6CHJbdc2x"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/AddressUtils.sol": {
+        "keccak256": "0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c",
+        "urls": [
+          "bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e",
+          "dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/UintUtils.sol": {
+        "keccak256": "0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c",
+        "urls": [
+          "bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2",
+          "dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/signature/ownable/ERC1271OwnableMock.sol",
+    "id": 49758,
+    "exportedSymbols": {
+      "ERC1271Ownable": [
+        49680
+      ],
+      "ERC1271OwnableMock": [
+        49757
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:355:357",
+    "nodes": [
+      {
+        "id": 49727,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:357",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 49729,
+        "nodeType": "ImportDirective",
+        "src": "58:52:357",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/signature/ownable/ERC1271Ownable.sol",
+        "file": "./ERC1271Ownable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49758,
+        "sourceUnit": 49681,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49728,
+              "name": "ERC1271Ownable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49680,
+              "src": "66:14:357",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49757,
+        "nodeType": "ContractDefinition",
+        "src": "112:275:357",
+        "nodes": [
+          {
+            "id": 49741,
+            "nodeType": "FunctionDefinition",
+            "src": "164:60:357",
+            "nodes": [],
+            "body": {
+              "id": 49740,
+              "nodeType": "Block",
+              "src": "191:33:357",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 49737,
+                        "name": "owner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49733,
+                        "src": "211:5:357",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 49736,
+                      "name": "_setOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 37886,
+                      "src": "201:9:357",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 49738,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "201:16:357",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 49739,
+                  "nodeType": "ExpressionStatement",
+                  "src": "201:16:357"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nameLocation": "-1:-1:-1",
+            "parameters": {
+              "id": 49734,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49733,
+                  "mutability": "mutable",
+                  "name": "owner",
+                  "nameLocation": "184:5:357",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49741,
+                  "src": "176:13:357",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 49732,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "176:7:357",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "175:15:357"
+            },
+            "returnParameters": {
+              "id": 49735,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "191:0:357"
+            },
+            "scope": 49757,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 49756,
+            "nodeType": "FunctionDefinition",
+            "src": "230:155:357",
+            "nodes": [],
+            "body": {
+              "id": 49755,
+              "nodeType": "Block",
+              "src": "327:58:357",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 49751,
+                        "name": "hash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49743,
+                        "src": "362:4:357",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      {
+                        "id": 49752,
+                        "name": "signature",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49745,
+                        "src": "368:9:357",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "id": 49750,
+                      "name": "_isValidSignature",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        49724
+                      ],
+                      "referencedDeclaration": 49724,
+                      "src": "344:17:357",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_bytes32_$_t_bytes_memory_ptr_$returns$_t_bytes4_$",
+                        "typeString": "function (bytes32,bytes memory) view returns (bytes4)"
+                      }
+                    },
+                    "id": 49753,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "344:34:357",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "functionReturnParameters": 49749,
+                  "id": 49754,
+                  "nodeType": "Return",
+                  "src": "337:41:357"
+                }
+              ]
+            },
+            "functionSelector": "99fcfa59",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__isValidSignature",
+            "nameLocation": "239:18:357",
+            "parameters": {
+              "id": 49746,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49743,
+                  "mutability": "mutable",
+                  "name": "hash",
+                  "nameLocation": "266:4:357",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49756,
+                  "src": "258:12:357",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 49742,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "258:7:357",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 49745,
+                  "mutability": "mutable",
+                  "name": "signature",
+                  "nameLocation": "285:9:357",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49756,
+                  "src": "272:22:357",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 49744,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "272:5:357",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "257:38:357"
+            },
+            "returnParameters": {
+              "id": 49749,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49748,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49756,
+                  "src": "319:6:357",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 49747,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "319:6:357",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "318:8:357"
+            },
+            "scope": 49757,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 49730,
+              "name": "ERC1271Ownable",
+              "nameLocations": [
+                "143:14:357"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49680,
+              "src": "143:14:357"
+            },
+            "id": 49731,
+            "nodeType": "InheritanceSpecifier",
+            "src": "143:14:357"
+          }
+        ],
+        "canonicalName": "ERC1271OwnableMock",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          49757,
+          49680,
+          49725,
+          37887,
+          37695,
+          44903,
+          49636,
+          49657,
+          49764,
+          49664,
+          44813
+        ],
+        "name": "ERC1271OwnableMock",
+        "nameLocation": "121:18:357",
+        "scope": 49758,
+        "usedErrors": [
+          37692,
+          37694,
+          38208,
+          38210,
+          38212,
+          38214
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 357
+}

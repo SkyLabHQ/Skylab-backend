@@ -1,0 +1,2872 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint64",
+              "name": "gridWidth",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "gridHeight",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "lengthToWin",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "initialBalance",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct MercuryBidTacToe.GameParams",
+          "name": "gameParams",
+          "type": "tuple"
+        },
+        {
+          "internalType": "address",
+          "name": "playerAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "mercuryBidTacToeAddress",
+          "type": "address"
+        }
+      ],
+      "name": "createGame",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "defaultParams",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint64",
+              "name": "gridWidth",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "gridHeight",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "lengthToWin",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "initialBalance",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct MercuryBidTacToe.GameParams",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "gameAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "playerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "joinGame",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x60808060405234610016576106d8908161001c8239f35b600080fdfe608060408181526004908136101561001657600080fd5b600092833560e01c908163615dfa5c146105275750806364dcddeb146100e6576393dae5eb1461004557600080fd5b8291346100e257816003193601126100e2576001600160a01b038135818116908190036100de576024359182168092036100de57803b156100de5760248592855196879384926302389a2960e41b8452878401525af180156100d4576100a9578380f35b67ffffffffffffffff83116100c15750523880808380f35b634e487b7160e01b845260419052602483fd5b82513d86823e3d90fd5b8480fd5b5050fd5b503461052357366003190160c0811261051c576080136105235780519261010c846105b9565b82359267ffffffffffffffff948585169485810361051c57815260248035938785168503610520576020978884019586526044938435828116810361051c57888201908152606497883590848216820361051857606084019182526001600160a01b039b6084358d811694919085900361051457908d93929160a4359e8f169e8f036105105760038114908115610505575b50156104aa57868251166003811490811561049f575b501561044357869051166003811015918261041c575b5050156103bf575184168981101590816103b2575b501561035357895160b78082019082821087831117610341579082916105ec8339039086f080156103375716998951916102588d84019463bfa4e24160e01b8652888501906060908167ffffffffffffffff91828151168552826020820151166020860152826040820151166040860152015116910152565b60a483015260c482015260c48152610100810181811084821117610325578952518391829190828c5af1913d1561031e573d82811161030c57885192601f8201601f19908116603f01168401908111848210176102fa5789528252893d92013e5b156102c8575050505051908152f35b845162461bcd60e51b81529283018790526011908301527018dc99585d194819d85b594819985a5b19607a1b90820152fd5b634e487b7160e01b8352604188528583fd5b634e487b7160e01b8252604187528482fd5b50506102b9565b634e487b7160e01b8552604188528585fd5b8a513d87823e3d90fd5b634e487b7160e01b885260418b528888fd5b895162461bcd60e51b81528089018d90526036818801527f536b796c6162426964546163546f65506172616d56657269666965723a20696e81890152751a5d1a585b10985b185b98d9481a5b98dbdc9c9958dd60521b818b0152608490fd5b61271091501115386101df565b50895162461bcd60e51b81528089018d90526033818801527f536b796c6162426964546163546f65506172616d56657269666965723a206c6581890152721b99dd1a151bd5da5b881a5b98dbdc9c9958dd606a1b818b0152608490fd5b86519051919250871690871680821061043b5750905b111538806101ca565b905090610432565b508b5162461bcd60e51b8152808b018f90526032818a01527f536b796c6162426964546163546f65506172616d56657269666965723a206772818b0152711a5912195a59da1d081a5b98dbdc9c9958dd60721b818d0152608490fd5b6005915014386101b4565b508b5162461bcd60e51b8152808b018f90526031818a01527f536b796c6162426964546163546f65506172616d56657269666965723a206772818b0152701a5915da591d1a081a5b98dbdc9c9958dd607a1b818d0152608490fd5b60059150143861019e565b8880fd5b8780fd5b8580fd5b8380fd5b80fd5b8280fd5b82859134610523578260031936011261052357916060836105496080956105b9565b828152826020820152828482015201526105b7815191610568836105b9565b6003835260036020840152600381840152606460608401525180926060908167ffffffffffffffff91828151168552826020820151166020860152826040820151166040860152015116910152565bf35b6080810190811067ffffffffffffffff8211176105d557604052565b634e487b7160e01b600052604160045260246000fdfe60808060405234601457609d908161001a8239f35b600080fdfe60806040523615603a5760003681803780803681738468429a73c21efee188db99b1508b84a4289d8c5af43d82803e156036573d90f35b3d90fd5b60003681803780803681738468429a73c21efee188db99b1508b84a4289d8c5af43d82803e156036573d90f3fea2646970667358221220804761196b0e5fbb1afe9b426d266f0f636185e2e67256a106f979fc31ec1b5d64736f6c63430008130033a264697066735822122087bf456b4958f3c3d8fe7d18f906e5d461c4a65012998199160b2b6876c4f71964736f6c63430008130033",
+    "sourceMap": "215:1629:10:-:0;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060408181526004908136101561001657600080fd5b600092833560e01c908163615dfa5c146105275750806364dcddeb146100e6576393dae5eb1461004557600080fd5b8291346100e257816003193601126100e2576001600160a01b038135818116908190036100de576024359182168092036100de57803b156100de5760248592855196879384926302389a2960e41b8452878401525af180156100d4576100a9578380f35b67ffffffffffffffff83116100c15750523880808380f35b634e487b7160e01b845260419052602483fd5b82513d86823e3d90fd5b8480fd5b5050fd5b503461052357366003190160c0811261051c576080136105235780519261010c846105b9565b82359267ffffffffffffffff948585169485810361051c57815260248035938785168503610520576020978884019586526044938435828116810361051c57888201908152606497883590848216820361051857606084019182526001600160a01b039b6084358d811694919085900361051457908d93929160a4359e8f169e8f036105105760038114908115610505575b50156104aa57868251166003811490811561049f575b501561044357869051166003811015918261041c575b5050156103bf575184168981101590816103b2575b501561035357895160b78082019082821087831117610341579082916105ec8339039086f080156103375716998951916102588d84019463bfa4e24160e01b8652888501906060908167ffffffffffffffff91828151168552826020820151166020860152826040820151166040860152015116910152565b60a483015260c482015260c48152610100810181811084821117610325578952518391829190828c5af1913d1561031e573d82811161030c57885192601f8201601f19908116603f01168401908111848210176102fa5789528252893d92013e5b156102c8575050505051908152f35b845162461bcd60e51b81529283018790526011908301527018dc99585d194819d85b594819985a5b19607a1b90820152fd5b634e487b7160e01b8352604188528583fd5b634e487b7160e01b8252604187528482fd5b50506102b9565b634e487b7160e01b8552604188528585fd5b8a513d87823e3d90fd5b634e487b7160e01b885260418b528888fd5b895162461bcd60e51b81528089018d90526036818801527f536b796c6162426964546163546f65506172616d56657269666965723a20696e81890152751a5d1a585b10985b185b98d9481a5b98dbdc9c9958dd60521b818b0152608490fd5b61271091501115386101df565b50895162461bcd60e51b81528089018d90526033818801527f536b796c6162426964546163546f65506172616d56657269666965723a206c6581890152721b99dd1a151bd5da5b881a5b98dbdc9c9958dd606a1b818b0152608490fd5b86519051919250871690871680821061043b5750905b111538806101ca565b905090610432565b508b5162461bcd60e51b8152808b018f90526032818a01527f536b796c6162426964546163546f65506172616d56657269666965723a206772818b0152711a5912195a59da1d081a5b98dbdc9c9958dd60721b818d0152608490fd5b6005915014386101b4565b508b5162461bcd60e51b8152808b018f90526031818a01527f536b796c6162426964546163546f65506172616d56657269666965723a206772818b0152701a5915da591d1a081a5b98dbdc9c9958dd607a1b818d0152608490fd5b60059150143861019e565b8880fd5b8780fd5b8580fd5b8380fd5b80fd5b8280fd5b82859134610523578260031936011261052357916060836105496080956105b9565b828152826020820152828482015201526105b7815191610568836105b9565b6003835260036020840152600381840152606460608401525180926060908167ffffffffffffffff91828151168552826020820151166020860152826040820151166040860152015116910152565bf35b6080810190811067ffffffffffffffff8211176105d557604052565b634e487b7160e01b600052604160045260246000fdfe60808060405234601457609d908161001a8239f35b600080fdfe60806040523615603a5760003681803780803681738468429a73c21efee188db99b1508b84a4289d8c5af43d82803e156036573d90f35b3d90fd5b60003681803780803681738468429a73c21efee188db99b1508b84a4289d8c5af43d82803e156036573d90f3fea2646970667358221220804761196b0e5fbb1afe9b426d266f0f636185e2e67256a106f979fc31ec1b5d64736f6c63430008130033a264697066735822122087bf456b4958f3c3d8fe7d18f906e5d461c4a65012998199160b2b6876c4f71964736f6c63430008130033",
+    "sourceMap": "215:1629:10:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;215:1629:10;;;;;;;;;;;;;;;;;;;;;1687:36;;;;;215:1629;;;;;;;;;;;;;1687:36;;;;;215:1629;1687:36;;;;;;;;215:1629;;;1687:36;215:1629;;;;;;;1687:36;;;215:1629;;;;-1:-1:-1;;;215:1629:10;;;;;;;;1687:36;215:1629;;;;;;;;;1687:36;215:1629;;;;;;;;;;;;;-1:-1:-1;;215:1629:10;;;;;;;-1:-1:-1;215:1629:10;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;215:1629:10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;633:25;;:54;;;;;215:1629;;;;;;;;;;759:26;;:56;;;;;215:1629;;;;;;;;;;888:27;;;:105;;;;215:1629;;;;;;;;;1067:32;;;;;;:70;;215:1629;;;;;;;1238:20;;;;;;;;;;;;;;;;;;;;;;;;;;;;215:1629;;;;1314:135;215:1629;1314:135;;;;;;;;;;;;215:1629;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1314:135;;215:1629;;;;;;;;;;;;;;1285:165;215:1629;;;;1285:165;215:1629;1285:165;;;215:1629;;;;;;;;;;;;;;1314:135;215:1629;;-1:-1:-1;;215:1629:10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;;1238:20;215:1629;;;;;;;;;1238:20;-1:-1:-1;;;215:1629:10;;;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;;;;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;1067:70;1132:5;1103:34;;;;1067:70;;;215:1629;-1:-1:-1;215:1629:10;;-1:-1:-1;;;215:1629:10;;;;;;;;;;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;888:105;215:1629;;;;;;-1:-1:-1;215:1629:10;;;;;1820:6;;;;;:14;;;919:74;;888:105;;;;1820:14;;;;;;215:1629;-1:-1:-1;215:1629:10;;-1:-1:-1;;;215:1629:10;;;;;;;;;;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;759:56;814:1;789:26;;;759:56;;;215:1629;-1:-1:-1;215:1629:10;;-1:-1:-1;;;215:1629:10;;;;;;;;;;;;;;;;;;-1:-1:-1;;;215:1629:10;;;;;;;633:54;686:1;662:25;;;633:54;;;215:1629;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;355:40;;215:1629;;355:40;;;215:1629;391:3;215:1629;355:40;;215:1629;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "createGame((uint64,uint64,uint64,uint64),address,address)": "64dcddeb",
+    "defaultParams()": "615dfa5c",
+    "joinGame(address,address)": "93dae5eb"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"gridWidth\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"gridHeight\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lengthToWin\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"initialBalance\",\"type\":\"uint64\"}],\"internalType\":\"struct MercuryBidTacToe.GameParams\",\"name\":\"gameParams\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"playerAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"mercuryBidTacToeAddress\",\"type\":\"address\"}],\"name\":\"createGame\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"defaultParams\",\"outputs\":[{\"components\":[{\"internalType\":\"uint64\",\"name\":\"gridWidth\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"gridHeight\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"lengthToWin\",\"type\":\"uint64\"},{\"internalType\":\"uint64\",\"name\":\"initialBalance\",\"type\":\"uint64\"}],\"internalType\":\"struct MercuryBidTacToe.GameParams\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"gameAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"playerAddress\",\"type\":\"address\"}],\"name\":\"joinGame\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/games/bidtactoe/MercuryBidTacToeDeployer.sol\":\"MercuryBidTacToeDeployer\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/facets/MercuryBase.sol\":{\"keccak256\":\"0x1d6dc284d2548f598b3cff494c0f5251b6fe031730484afd69ea469455e0f1e3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a06f1ce21db23ba08da7eea8102c49484cc61a5abd5095cec62ef17c692c183e\",\"dweb:/ipfs/QmRfUkcc88bS2gEtjEA1DC2EojgvtmNgmFQr8gQBYWVDaf\"]},\"contracts/facets/MercuryMetadata.sol\":{\"keccak256\":\"0x5ead1b042265a2d9f59a8b385c344bb0ac2702d24efa952854f9b11e99d367ec\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f010bc152a0c52bd9da73720bd31850f434bc6998c3f943ab34d403415e654c2\",\"dweb:/ipfs/QmY67pkpt9QsUFyQ6touEryEtTJrViTeUnk99V1JWP1QpQ\"]},\"contracts/facets/MercuryResources.sol\":{\"keccak256\":\"0x9d104cc4c15f54bb6c4fc813f3a897339788b46a7c91d39aff0894ee4925218e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://97685b934349be57de290a60819e6be4bbc6cc33966c5d21a39ff6828686f40a\",\"dweb:/ipfs/QmWjpfEZfmd7UbnWPg1fy7k2meSyRXMXujz6itRmzdHFkU\"]},\"contracts/games/bidtactoe/BidTacToe.sol\":{\"keccak256\":\"0x15d56e58f4463238e5e7396ef895687dffcb529e1ac7b141700508154b0f799e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://74f9caf42cbe4f548ae1d551c87ef4db0c77dea507a20b7aaa4ffd7442bfeed4\",\"dweb:/ipfs/QmTYrncqULpezokJzAYA5VR4zQYwwbh26dNiz4e4cqAW9Z\"]},\"contracts/games/bidtactoe/BidTacToeProxy.sol\":{\"keccak256\":\"0x00b69a48bbf48dd8446c5c59e23e59df18957f1ff961c1c8b46e72448cf0a66f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://67bb160152a4a5cb7400be7876ed00004abfd401649ec9b08b67809fbf4ba17f\",\"dweb:/ipfs/QmS7BrPxXeR3GTXjkiind3uFXK8dwq4voiD7r6WhbAFCgh\"]},\"contracts/games/bidtactoe/MercuryBidTacToe.sol\":{\"keccak256\":\"0x5a0c7d75e7e4c70c980ac0f8bbeb485cfeef70bfd8c0b837d7560515e5747290\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://695788690f16cd581d5f03d80c7b42c5bd9675b5f65094c1f0a4384af82481cc\",\"dweb:/ipfs/QmeNZdcnJninc1MkNzybbk9CUJusZPcZHFGReom9Ruufwn\"]},\"contracts/games/bidtactoe/MercuryBidTacToeDeployer.sol\":{\"keccak256\":\"0xdca17ba3571732b5d25fab12f4828ba3c4df7bfa97044e19900a1c36c5303830\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a2289525be0ef26083f47c9d4f9f9cc6cb1f3ae2e7d4a094bc873959795f70e2\",\"dweb:/ipfs/QmSYyLxuEbFL8joqDuRpFCWVCE3f55kHrC7H9bdFyQTqdu\"]},\"contracts/interfaces/IDiamondCut.sol\":{\"keccak256\":\"0xa14aeacef67fd7ea6ee824cbe48670f03e6c77c27acd35336a6a24daccca8bec\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c9db92dc2387b7295593c7e540599498cf4081472adf94d543352e937b933d8b\",\"dweb:/ipfs/Qma3wqoZbU97TGmwMUAtLF6qd1J6YvJj4RxRRjNCXnSxSi\"]},\"contracts/libraries/Base64.sol\":{\"keccak256\":\"0x1c028c11af1c0456b73c889a98bd7a66f06ac60c9c18e31e0ae3170b138b53f4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a6ec71f205f878d72eb77409b93a627ba6b5acbce05f7b470c497a57ed675687\",\"dweb:/ipfs/QmRo4uXKiSQa1BbovJXDH6xxEL6hfjzbdWgCYyyWr21ULz\"]},\"contracts/libraries/LibDiamond.sol\":{\"keccak256\":\"0xda21b5ecf913a60dac64b9061ccd92713a459b6890e050b110c82bd37003d3a5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ad3755b66c6436429a64969e578e8ad587feac21c6285de5b8dcbb3a55a336e6\",\"dweb:/ipfs/QmcY6JTmnktxYrz2QSzFkoJcm1hqQntJaA1e3QR8RveYc3\"]},\"lib/openzeppelin-contracts/contracts/access/Ownable.sol\":{\"keccak256\":\"0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fc980984badf3984b6303b377711220e067722bbd6a135b24669ff5069ef9f32\",\"dweb:/ipfs/QmPHXMSXj99XjSVM21YsY6aNtLLjLVXDbyN76J5HQYvvrz\"]},\"lib/openzeppelin-contracts/contracts/proxy/utils/Initializable.sol\":{\"keccak256\":\"0x3d6069be9b4c01fb81840fb9c2c4dc58dd6a6a4aafaa2c6837de8699574d84c6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://720d6bb56ea0c4ef781c0bd65c5bd0541f5a46100163b2587170f97658d2deed\",\"dweb:/ipfs/QmTS2biLVPrv8CeeXCaKmkFxonMiRvc1LxiYBRYDAJHQUS\"]},\"lib/openzeppelin-contracts/contracts/token/ERC1155/ERC1155.sol\":{\"keccak256\":\"0x81149353c99ccf8ff18af7701bc3f38665c7a97e344cdc0d27f927f03d22af0e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b488da93995672b613897afa8ed85bb10442351ed54124001832bf2944108601\",\"dweb:/ipfs/QmP2fX6BzbgZyskxXqckeMzC1C3g7wKEbdtZfMegHoGW3j\"]},\"lib/openzeppelin-contracts/contracts/token/ERC1155/IERC1155.sol\":{\"keccak256\":\"0xcab667ddad478ff0d39c2053ca77fac778af8483c18ab07d810277b4216fd582\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://919c7ea27c77275c3c341da0c4a26a66a20ed27605fbe8becf11f58ec3bc65bf\",\"dweb:/ipfs/QmRLKyVE2n7e2Jo4bLNn8eLgqqhNGYnVQyjJPWdr8poskf\"]},\"lib/openzeppelin-contracts/contracts/token/ERC1155/IERC1155Receiver.sol\":{\"keccak256\":\"0xeb373f1fdc7b755c6a750123a9b9e3a8a02c1470042fd6505d875000a80bde0b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0e28648f994abf1d6bc345644a361cc0b7efa544f8bc0c8ec26011fed85a91ec\",\"dweb:/ipfs/QmVVE7AiRjKaQYYji7TkjmTeVzGpNmms5eoxqTCfvvpj6D\"]},\"lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol\":{\"keccak256\":\"0xa66d18b9a85458d28fc3304717964502ae36f7f8a2ff35bc83f6f85d74b03574\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e46c80ea068989111d6103e5521223f9ef337e93de76deed8b03f75c6f7b2797\",\"dweb:/ipfs/QmNoSE6knNfFncdDDLTb3fGR6oSQty1srG96Vsx3E9wQdw\"]},\"lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol\":{\"keccak256\":\"0x2c309e7df9e05e6ce15bedfe74f3c61b467fc37e0fae9eab496acf5ea0bbd7ff\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7063b5c98711a98018ba4635ac74cee1c1cfa2ea01099498e062699ed9530005\",\"dweb:/ipfs/QmeJ8rGXkcv7RrqLdAW8PCXPAykxVsddfYY6g5NaTwmRFE\"]},\"lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol\":{\"keccak256\":\"0x5bce51e11f7d194b79ea59fe00c9e8de9fa2c5530124960f29a24d4c740a3266\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7e66dfde185df46104c11bc89d08fa0760737aa59a2b8546a656473d810a8ea4\",\"dweb:/ipfs/QmXvyqtXPaPss2PD7eqPoSao5Szm2n6UMoiG8TZZDjmChR\"]},\"lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol\":{\"keccak256\":\"0xa82b58eca1ee256be466e536706850163d2ec7821945abd6b4778cfb3bee37da\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6e75cf83beb757b8855791088546b8337e9d4684e169400c20d44a515353b708\",\"dweb:/ipfs/QmYvPafLfoquiDMEj7CKHtvbgHu7TJNPSVPSCjrtjV8HjV\"]},\"lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Enumerable.sol\":{\"keccak256\":\"0xa8796bd16014cefb8c26449413981a49c510f92a98d6828494f5fd046223ced3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://63a5e0bb5a7d182e0d0eef87033f78115eab791de3626a929bc98c157087880a\",\"dweb:/ipfs/QmetkXAu2CJKS4qrZtEQPU8okAPwUwa6HL4XYwk8vrYMk8\"]},\"lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol\":{\"keccak256\":\"0xd1556954440b31c97a142c6ba07d5cade45f96fafd52091d33a14ebe365aecbf\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://26fef835622b46a5ba08b3ef6b46a22e94b5f285d0f0fb66b703bd30217d2c34\",\"dweb:/ipfs/QmZ548qdwfL1qF7aXz3xh1GCdTiST81kGGuKRqVUfYmPZR\"]},\"lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol\":{\"keccak256\":\"0x75b829ff2f26c14355d1cba20e16fe7b29ca58eb5fef665ede48bc0f9c6c74b9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a0a107160525724f9e1bbbab031defc2f298296dd9e331f16a6f7130cec32146\",\"dweb:/ipfs/QmemujxSd7gX8A9M8UwmNbz4Ms3U9FG9QfudUgxwvTmPWf\"]},\"lib/openzeppelin-contracts/contracts/utils/Address.sol\":{\"keccak256\":\"0x006dd67219697fe68d7fbfdea512e7c4cb64a43565ed86171d67e844982da6fa\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2455248c8ddd9cc6a7af76a13973cddf222072427e7b0e2a7d1aff345145e931\",\"dweb:/ipfs/QmfYjnjRbWqYpuxurqveE6HtzsY1Xx323J428AKQgtBJZm\"]},\"lib/openzeppelin-contracts/contracts/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"lib/openzeppelin-contracts/contracts/utils/Strings.sol\":{\"keccak256\":\"0x3088eb2868e8d13d89d16670b5f8612c4ab9ff8956272837d8e90106c59c14a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b81d9ff6559ea5c47fc573e17ece6d9ba5d6839e213e6ebc3b4c5c8fe4199d7f\",\"dweb:/ipfs/QmPCW1bFisUzJkyjroY3yipwfism9RRCigCcK1hbXtVM8n\"]},\"lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol\":{\"keccak256\":\"0xd10975de010d89fd1c78dc5e8a9a7e7f496198085c151648f20cba166b32582b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fb0048dee081f6fffa5f74afc3fb328483c2a30504e94a0ddd2a5114d731ec4d\",\"dweb:/ipfs/QmZptt1nmYoA5SgjwnSgWqgUSDgm4q52Yos3xhnMv3MV43\"]},\"lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol\":{\"keccak256\":\"0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f\",\"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy\"]},\"lib/openzeppelin-contracts/contracts/utils/math/Math.sol\":{\"keccak256\":\"0xe4455ac1eb7fc497bb7402579e7b4d64d928b846fce7d2b6fde06d366f21c2b3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cc8841b3cd48ad125e2f46323c8bad3aa0e88e399ec62acb9e57efa7e7c8058c\",\"dweb:/ipfs/QmSqE4mXHA2BXW58deDbXE8MTcsL5JSKNDbm23sVQxRLPS\"]},\"lib/openzeppelin-contracts/contracts/utils/math/SignedMath.sol\":{\"keccak256\":\"0xf92515413956f529d95977adc9b0567d583c6203fc31ab1c23824c35187e3ddc\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c50fcc459e49a9858b6d8ad5f911295cb7c9ab57567845a250bf0153f84a95c7\",\"dweb:/ipfs/QmcEW85JRzvDkQggxiBBLVAasXWdkhEysqypj9EaB6H2g6\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "struct MercuryBidTacToe.GameParams",
+              "name": "gameParams",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "uint64",
+                  "name": "gridWidth",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "gridHeight",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "lengthToWin",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "initialBalance",
+                  "type": "uint64"
+                }
+              ]
+            },
+            {
+              "internalType": "address",
+              "name": "playerAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "mercuryBidTacToeAddress",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "createGame",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "pure",
+          "type": "function",
+          "name": "defaultParams",
+          "outputs": [
+            {
+              "internalType": "struct MercuryBidTacToe.GameParams",
+              "name": "",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "uint64",
+                  "name": "gridWidth",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "gridHeight",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "lengthToWin",
+                  "type": "uint64"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "initialBalance",
+                  "type": "uint64"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "gameAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "playerAddress",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "joinGame"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/games/bidtactoe/MercuryBidTacToeDeployer.sol": "MercuryBidTacToeDeployer"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/facets/MercuryBase.sol": {
+        "keccak256": "0x1d6dc284d2548f598b3cff494c0f5251b6fe031730484afd69ea469455e0f1e3",
+        "urls": [
+          "bzz-raw://a06f1ce21db23ba08da7eea8102c49484cc61a5abd5095cec62ef17c692c183e",
+          "dweb:/ipfs/QmRfUkcc88bS2gEtjEA1DC2EojgvtmNgmFQr8gQBYWVDaf"
+        ],
+        "license": "MIT"
+      },
+      "contracts/facets/MercuryMetadata.sol": {
+        "keccak256": "0x5ead1b042265a2d9f59a8b385c344bb0ac2702d24efa952854f9b11e99d367ec",
+        "urls": [
+          "bzz-raw://f010bc152a0c52bd9da73720bd31850f434bc6998c3f943ab34d403415e654c2",
+          "dweb:/ipfs/QmY67pkpt9QsUFyQ6touEryEtTJrViTeUnk99V1JWP1QpQ"
+        ],
+        "license": "MIT"
+      },
+      "contracts/facets/MercuryResources.sol": {
+        "keccak256": "0x9d104cc4c15f54bb6c4fc813f3a897339788b46a7c91d39aff0894ee4925218e",
+        "urls": [
+          "bzz-raw://97685b934349be57de290a60819e6be4bbc6cc33966c5d21a39ff6828686f40a",
+          "dweb:/ipfs/QmWjpfEZfmd7UbnWPg1fy7k2meSyRXMXujz6itRmzdHFkU"
+        ],
+        "license": "MIT"
+      },
+      "contracts/games/bidtactoe/BidTacToe.sol": {
+        "keccak256": "0x15d56e58f4463238e5e7396ef895687dffcb529e1ac7b141700508154b0f799e",
+        "urls": [
+          "bzz-raw://74f9caf42cbe4f548ae1d551c87ef4db0c77dea507a20b7aaa4ffd7442bfeed4",
+          "dweb:/ipfs/QmTYrncqULpezokJzAYA5VR4zQYwwbh26dNiz4e4cqAW9Z"
+        ],
+        "license": "MIT"
+      },
+      "contracts/games/bidtactoe/BidTacToeProxy.sol": {
+        "keccak256": "0x00b69a48bbf48dd8446c5c59e23e59df18957f1ff961c1c8b46e72448cf0a66f",
+        "urls": [
+          "bzz-raw://67bb160152a4a5cb7400be7876ed00004abfd401649ec9b08b67809fbf4ba17f",
+          "dweb:/ipfs/QmS7BrPxXeR3GTXjkiind3uFXK8dwq4voiD7r6WhbAFCgh"
+        ],
+        "license": "MIT"
+      },
+      "contracts/games/bidtactoe/MercuryBidTacToe.sol": {
+        "keccak256": "0x5a0c7d75e7e4c70c980ac0f8bbeb485cfeef70bfd8c0b837d7560515e5747290",
+        "urls": [
+          "bzz-raw://695788690f16cd581d5f03d80c7b42c5bd9675b5f65094c1f0a4384af82481cc",
+          "dweb:/ipfs/QmeNZdcnJninc1MkNzybbk9CUJusZPcZHFGReom9Ruufwn"
+        ],
+        "license": "MIT"
+      },
+      "contracts/games/bidtactoe/MercuryBidTacToeDeployer.sol": {
+        "keccak256": "0xdca17ba3571732b5d25fab12f4828ba3c4df7bfa97044e19900a1c36c5303830",
+        "urls": [
+          "bzz-raw://a2289525be0ef26083f47c9d4f9f9cc6cb1f3ae2e7d4a094bc873959795f70e2",
+          "dweb:/ipfs/QmSYyLxuEbFL8joqDuRpFCWVCE3f55kHrC7H9bdFyQTqdu"
+        ],
+        "license": "MIT"
+      },
+      "contracts/interfaces/IDiamondCut.sol": {
+        "keccak256": "0xa14aeacef67fd7ea6ee824cbe48670f03e6c77c27acd35336a6a24daccca8bec",
+        "urls": [
+          "bzz-raw://c9db92dc2387b7295593c7e540599498cf4081472adf94d543352e937b933d8b",
+          "dweb:/ipfs/Qma3wqoZbU97TGmwMUAtLF6qd1J6YvJj4RxRRjNCXnSxSi"
+        ],
+        "license": "MIT"
+      },
+      "contracts/libraries/Base64.sol": {
+        "keccak256": "0x1c028c11af1c0456b73c889a98bd7a66f06ac60c9c18e31e0ae3170b138b53f4",
+        "urls": [
+          "bzz-raw://a6ec71f205f878d72eb77409b93a627ba6b5acbce05f7b470c497a57ed675687",
+          "dweb:/ipfs/QmRo4uXKiSQa1BbovJXDH6xxEL6hfjzbdWgCYyyWr21ULz"
+        ],
+        "license": "MIT"
+      },
+      "contracts/libraries/LibDiamond.sol": {
+        "keccak256": "0xda21b5ecf913a60dac64b9061ccd92713a459b6890e050b110c82bd37003d3a5",
+        "urls": [
+          "bzz-raw://ad3755b66c6436429a64969e578e8ad587feac21c6285de5b8dcbb3a55a336e6",
+          "dweb:/ipfs/QmcY6JTmnktxYrz2QSzFkoJcm1hqQntJaA1e3QR8RveYc3"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/access/Ownable.sol": {
+        "keccak256": "0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218",
+        "urls": [
+          "bzz-raw://fc980984badf3984b6303b377711220e067722bbd6a135b24669ff5069ef9f32",
+          "dweb:/ipfs/QmPHXMSXj99XjSVM21YsY6aNtLLjLVXDbyN76J5HQYvvrz"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/proxy/utils/Initializable.sol": {
+        "keccak256": "0x3d6069be9b4c01fb81840fb9c2c4dc58dd6a6a4aafaa2c6837de8699574d84c6",
+        "urls": [
+          "bzz-raw://720d6bb56ea0c4ef781c0bd65c5bd0541f5a46100163b2587170f97658d2deed",
+          "dweb:/ipfs/QmTS2biLVPrv8CeeXCaKmkFxonMiRvc1LxiYBRYDAJHQUS"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC1155/ERC1155.sol": {
+        "keccak256": "0x81149353c99ccf8ff18af7701bc3f38665c7a97e344cdc0d27f927f03d22af0e",
+        "urls": [
+          "bzz-raw://b488da93995672b613897afa8ed85bb10442351ed54124001832bf2944108601",
+          "dweb:/ipfs/QmP2fX6BzbgZyskxXqckeMzC1C3g7wKEbdtZfMegHoGW3j"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC1155/IERC1155.sol": {
+        "keccak256": "0xcab667ddad478ff0d39c2053ca77fac778af8483c18ab07d810277b4216fd582",
+        "urls": [
+          "bzz-raw://919c7ea27c77275c3c341da0c4a26a66a20ed27605fbe8becf11f58ec3bc65bf",
+          "dweb:/ipfs/QmRLKyVE2n7e2Jo4bLNn8eLgqqhNGYnVQyjJPWdr8poskf"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC1155/IERC1155Receiver.sol": {
+        "keccak256": "0xeb373f1fdc7b755c6a750123a9b9e3a8a02c1470042fd6505d875000a80bde0b",
+        "urls": [
+          "bzz-raw://0e28648f994abf1d6bc345644a361cc0b7efa544f8bc0c8ec26011fed85a91ec",
+          "dweb:/ipfs/QmVVE7AiRjKaQYYji7TkjmTeVzGpNmms5eoxqTCfvvpj6D"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol": {
+        "keccak256": "0xa66d18b9a85458d28fc3304717964502ae36f7f8a2ff35bc83f6f85d74b03574",
+        "urls": [
+          "bzz-raw://e46c80ea068989111d6103e5521223f9ef337e93de76deed8b03f75c6f7b2797",
+          "dweb:/ipfs/QmNoSE6knNfFncdDDLTb3fGR6oSQty1srG96Vsx3E9wQdw"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC721/ERC721.sol": {
+        "keccak256": "0x2c309e7df9e05e6ce15bedfe74f3c61b467fc37e0fae9eab496acf5ea0bbd7ff",
+        "urls": [
+          "bzz-raw://7063b5c98711a98018ba4635ac74cee1c1cfa2ea01099498e062699ed9530005",
+          "dweb:/ipfs/QmeJ8rGXkcv7RrqLdAW8PCXPAykxVsddfYY6g5NaTwmRFE"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol": {
+        "keccak256": "0x5bce51e11f7d194b79ea59fe00c9e8de9fa2c5530124960f29a24d4c740a3266",
+        "urls": [
+          "bzz-raw://7e66dfde185df46104c11bc89d08fa0760737aa59a2b8546a656473d810a8ea4",
+          "dweb:/ipfs/QmXvyqtXPaPss2PD7eqPoSao5Szm2n6UMoiG8TZZDjmChR"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721Receiver.sol": {
+        "keccak256": "0xa82b58eca1ee256be466e536706850163d2ec7821945abd6b4778cfb3bee37da",
+        "urls": [
+          "bzz-raw://6e75cf83beb757b8855791088546b8337e9d4684e169400c20d44a515353b708",
+          "dweb:/ipfs/QmYvPafLfoquiDMEj7CKHtvbgHu7TJNPSVPSCjrtjV8HjV"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
+        "keccak256": "0xa8796bd16014cefb8c26449413981a49c510f92a98d6828494f5fd046223ced3",
+        "urls": [
+          "bzz-raw://63a5e0bb5a7d182e0d0eef87033f78115eab791de3626a929bc98c157087880a",
+          "dweb:/ipfs/QmetkXAu2CJKS4qrZtEQPU8okAPwUwa6HL4XYwk8vrYMk8"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
+        "keccak256": "0xd1556954440b31c97a142c6ba07d5cade45f96fafd52091d33a14ebe365aecbf",
+        "urls": [
+          "bzz-raw://26fef835622b46a5ba08b3ef6b46a22e94b5f285d0f0fb66b703bd30217d2c34",
+          "dweb:/ipfs/QmZ548qdwfL1qF7aXz3xh1GCdTiST81kGGuKRqVUfYmPZR"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+        "keccak256": "0x75b829ff2f26c14355d1cba20e16fe7b29ca58eb5fef665ede48bc0f9c6c74b9",
+        "urls": [
+          "bzz-raw://a0a107160525724f9e1bbbab031defc2f298296dd9e331f16a6f7130cec32146",
+          "dweb:/ipfs/QmemujxSd7gX8A9M8UwmNbz4Ms3U9FG9QfudUgxwvTmPWf"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/utils/Address.sol": {
+        "keccak256": "0x006dd67219697fe68d7fbfdea512e7c4cb64a43565ed86171d67e844982da6fa",
+        "urls": [
+          "bzz-raw://2455248c8ddd9cc6a7af76a13973cddf222072427e7b0e2a7d1aff345145e931",
+          "dweb:/ipfs/QmfYjnjRbWqYpuxurqveE6HtzsY1Xx323J428AKQgtBJZm"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/utils/Context.sol": {
+        "keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+        "urls": [
+          "bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+          "dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/utils/Strings.sol": {
+        "keccak256": "0x3088eb2868e8d13d89d16670b5f8612c4ab9ff8956272837d8e90106c59c14a0",
+        "urls": [
+          "bzz-raw://b81d9ff6559ea5c47fc573e17ece6d9ba5d6839e213e6ebc3b4c5c8fe4199d7f",
+          "dweb:/ipfs/QmPCW1bFisUzJkyjroY3yipwfism9RRCigCcK1hbXtVM8n"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/utils/introspection/ERC165.sol": {
+        "keccak256": "0xd10975de010d89fd1c78dc5e8a9a7e7f496198085c151648f20cba166b32582b",
+        "urls": [
+          "bzz-raw://fb0048dee081f6fffa5f74afc3fb328483c2a30504e94a0ddd2a5114d731ec4d",
+          "dweb:/ipfs/QmZptt1nmYoA5SgjwnSgWqgUSDgm4q52Yos3xhnMv3MV43"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol": {
+        "keccak256": "0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1",
+        "urls": [
+          "bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f",
+          "dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/utils/math/Math.sol": {
+        "keccak256": "0xe4455ac1eb7fc497bb7402579e7b4d64d928b846fce7d2b6fde06d366f21c2b3",
+        "urls": [
+          "bzz-raw://cc8841b3cd48ad125e2f46323c8bad3aa0e88e399ec62acb9e57efa7e7c8058c",
+          "dweb:/ipfs/QmSqE4mXHA2BXW58deDbXE8MTcsL5JSKNDbm23sVQxRLPS"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/utils/math/SignedMath.sol": {
+        "keccak256": "0xf92515413956f529d95977adc9b0567d583c6203fc31ab1c23824c35187e3ddc",
+        "urls": [
+          "bzz-raw://c50fcc459e49a9858b6d8ad5f911295cb7c9ab57567845a250bf0153f84a95c7",
+          "dweb:/ipfs/QmcEW85JRzvDkQggxiBBLVAasXWdkhEysqypj9EaB6H2g6"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/games/bidtactoe/MercuryBidTacToeDeployer.sol",
+    "id": 4142,
+    "exportedSymbols": {
+      "BidTacToe": [
+        3364
+      ],
+      "BidTacToeProxy": [
+        3421
+      ],
+      "MercuryBidTacToe": [
+        3975
+      ],
+      "MercuryBidTacToeDeployer": [
+        4141
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "32:1812:10",
+    "nodes": [
+      {
+        "id": 3977,
+        "nodeType": "PragmaDirective",
+        "src": "32:23:10",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 3979,
+        "nodeType": "ImportDirective",
+        "src": "57:56:10",
+        "nodes": [],
+        "absolutePath": "contracts/games/bidtactoe/MercuryBidTacToe.sol",
+        "file": "./MercuryBidTacToe.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 4142,
+        "sourceUnit": 3976,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 3978,
+              "name": "MercuryBidTacToe",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 3975,
+              "src": "66:15:10",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 3981,
+        "nodeType": "ImportDirective",
+        "src": "114:44:10",
+        "nodes": [],
+        "absolutePath": "contracts/games/bidtactoe/BidTacToe.sol",
+        "file": "./BidTacToe.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 4142,
+        "sourceUnit": 3365,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 3980,
+              "name": "BidTacToe",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 3364,
+              "src": "123:9:10",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 3983,
+        "nodeType": "ImportDirective",
+        "src": "159:54:10",
+        "nodes": [],
+        "absolutePath": "contracts/games/bidtactoe/BidTacToeProxy.sol",
+        "file": "./BidTacToeProxy.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 4142,
+        "sourceUnit": 3422,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 3982,
+              "name": "BidTacToeProxy",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 3421,
+              "src": "168:14:10",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 4141,
+        "nodeType": "ContractDefinition",
+        "src": "215:1629:10",
+        "nodes": [
+          {
+            "id": 3998,
+            "nodeType": "FunctionDefinition",
+            "src": "255:147:10",
+            "nodes": [],
+            "body": {
+              "id": 3997,
+              "nodeType": "Block",
+              "src": "338:64:10",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "hexValue": "33",
+                        "id": 3991,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "382:1:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_3_by_1",
+                          "typeString": "int_const 3"
+                        },
+                        "value": "3"
+                      },
+                      {
+                        "hexValue": "33",
+                        "id": 3992,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "385:1:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_3_by_1",
+                          "typeString": "int_const 3"
+                        },
+                        "value": "3"
+                      },
+                      {
+                        "hexValue": "33",
+                        "id": 3993,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "388:1:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_3_by_1",
+                          "typeString": "int_const 3"
+                        },
+                        "value": "3"
+                      },
+                      {
+                        "hexValue": "313030",
+                        "id": 3994,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "391:3:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_100_by_1",
+                          "typeString": "int_const 100"
+                        },
+                        "value": "100"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_rational_3_by_1",
+                          "typeString": "int_const 3"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_3_by_1",
+                          "typeString": "int_const 3"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_3_by_1",
+                          "typeString": "int_const 3"
+                        },
+                        {
+                          "typeIdentifier": "t_rational_100_by_1",
+                          "typeString": "int_const 100"
+                        }
+                      ],
+                      "expression": {
+                        "id": 3989,
+                        "name": "MercuryBidTacToe",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3975,
+                        "src": "355:15:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_MercuryBidTacToe_$3975_$",
+                          "typeString": "type(contract MercuryBidTacToe)"
+                        }
+                      },
+                      "id": 3990,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "371:10:10",
+                      "memberName": "GameParams",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3439,
+                      "src": "355:26:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_GameParams_$3439_storage_ptr_$",
+                        "typeString": "type(struct MercuryBidTacToe.GameParams storage pointer)"
+                      }
+                    },
+                    "id": 3995,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "355:40:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                      "typeString": "struct MercuryBidTacToe.GameParams memory"
+                    }
+                  },
+                  "functionReturnParameters": 3988,
+                  "id": 3996,
+                  "nodeType": "Return",
+                  "src": "348:47:10"
+                }
+              ]
+            },
+            "functionSelector": "615dfa5c",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "defaultParams",
+            "nameLocation": "264:13:10",
+            "parameters": {
+              "id": 3984,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "277:2:10"
+            },
+            "returnParameters": {
+              "id": 3988,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3987,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3998,
+                  "src": "303:33:10",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                    "typeString": "struct MercuryBidTacToe.GameParams"
+                  },
+                  "typeName": {
+                    "id": 3986,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 3985,
+                      "name": "MercuryBidTacToe.GameParams",
+                      "nameLocations": [
+                        "303:15:10",
+                        "319:10:10"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 3439,
+                      "src": "303:26:10"
+                    },
+                    "referencedDeclaration": 3439,
+                    "src": "303:26:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_GameParams_$3439_storage_ptr",
+                      "typeString": "struct MercuryBidTacToe.GameParams"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "302:35:10"
+            },
+            "scope": 4141,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 4102,
+            "nodeType": "FunctionDefinition",
+            "src": "408:1135:10",
+            "nodes": [],
+            "body": {
+              "id": 4101,
+              "nodeType": "Block",
+              "src": "556:987:10",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 4019,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          },
+                          "id": 4014,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 4011,
+                              "name": "gameParams",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4001,
+                              "src": "633:10:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                "typeString": "struct MercuryBidTacToe.GameParams memory"
+                              }
+                            },
+                            "id": 4012,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "644:9:10",
+                            "memberName": "gridWidth",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 3432,
+                            "src": "633:20:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "hexValue": "33",
+                            "id": 4013,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "657:1:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_3_by_1",
+                              "typeString": "int_const 3"
+                            },
+                            "value": "3"
+                          },
+                          "src": "633:25:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "||",
+                        "rightExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          },
+                          "id": 4018,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 4015,
+                              "name": "gameParams",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4001,
+                              "src": "662:10:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                "typeString": "struct MercuryBidTacToe.GameParams memory"
+                              }
+                            },
+                            "id": 4016,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "673:9:10",
+                            "memberName": "gridWidth",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 3432,
+                            "src": "662:20:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "hexValue": "35",
+                            "id": 4017,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "686:1:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_5_by_1",
+                              "typeString": "int_const 5"
+                            },
+                            "value": "5"
+                          },
+                          "src": "662:25:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "633:54:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "536b796c6162426964546163546f65506172616d56657269666965723a2067726964576964746820696e636f7272656374",
+                        "id": 4020,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "689:51:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_f8ae6dd6749b66608d6988ba71904a29b94263d958c711f1cb3f9d80c9146e5a",
+                          "typeString": "literal_string \"MercuryBidTacToeParamVerifier: gridWidth incorrect\""
+                        },
+                        "value": "MercuryBidTacToeParamVerifier: gridWidth incorrect"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_f8ae6dd6749b66608d6988ba71904a29b94263d958c711f1cb3f9d80c9146e5a",
+                          "typeString": "literal_string \"MercuryBidTacToeParamVerifier: gridWidth incorrect\""
+                        }
+                      ],
+                      "id": 4010,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "625:7:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4021,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "625:116:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4022,
+                  "nodeType": "ExpressionStatement",
+                  "src": "625:116:10"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 4032,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          },
+                          "id": 4027,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 4024,
+                              "name": "gameParams",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4001,
+                              "src": "759:10:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                "typeString": "struct MercuryBidTacToe.GameParams memory"
+                              }
+                            },
+                            "id": 4025,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "770:10:10",
+                            "memberName": "gridHeight",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 3434,
+                            "src": "759:21:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "hexValue": "33",
+                            "id": 4026,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "784:1:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_3_by_1",
+                              "typeString": "int_const 3"
+                            },
+                            "value": "3"
+                          },
+                          "src": "759:26:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "||",
+                        "rightExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          },
+                          "id": 4031,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 4028,
+                              "name": "gameParams",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4001,
+                              "src": "789:10:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                "typeString": "struct MercuryBidTacToe.GameParams memory"
+                              }
+                            },
+                            "id": 4029,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "800:10:10",
+                            "memberName": "gridHeight",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 3434,
+                            "src": "789:21:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "==",
+                          "rightExpression": {
+                            "hexValue": "35",
+                            "id": 4030,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "814:1:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_5_by_1",
+                              "typeString": "int_const 5"
+                            },
+                            "value": "5"
+                          },
+                          "src": "789:26:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "759:56:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "536b796c6162426964546163546f65506172616d56657269666965723a206772696448656967687420696e636f7272656374",
+                        "id": 4033,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "817:52:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_5ef87a428c55721bbcbbf54c385e055d2a557609692f567b84c44397d7768185",
+                          "typeString": "literal_string \"MercuryBidTacToeParamVerifier: gridHeight incorrect\""
+                        },
+                        "value": "MercuryBidTacToeParamVerifier: gridHeight incorrect"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_5ef87a428c55721bbcbbf54c385e055d2a557609692f567b84c44397d7768185",
+                          "typeString": "literal_string \"MercuryBidTacToeParamVerifier: gridHeight incorrect\""
+                        }
+                      ],
+                      "id": 4023,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "751:7:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4034,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "751:119:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4035,
+                  "nodeType": "ExpressionStatement",
+                  "src": "751:119:10"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 4050,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          },
+                          "id": 4040,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 4037,
+                              "name": "gameParams",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4001,
+                              "src": "888:10:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                "typeString": "struct MercuryBidTacToe.GameParams memory"
+                              }
+                            },
+                            "id": 4038,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "899:11:10",
+                            "memberName": "lengthToWin",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 3436,
+                            "src": "888:22:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": ">=",
+                          "rightExpression": {
+                            "hexValue": "33",
+                            "id": 4039,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "914:1:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_3_by_1",
+                              "typeString": "int_const 3"
+                            },
+                            "value": "3"
+                          },
+                          "src": "888:27:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "&&",
+                        "rightExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "id": 4049,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 4041,
+                              "name": "gameParams",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4001,
+                              "src": "919:10:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                "typeString": "struct MercuryBidTacToe.GameParams memory"
+                              }
+                            },
+                            "id": 4042,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "930:11:10",
+                            "memberName": "lengthToWin",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 3436,
+                            "src": "919:22:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "<=",
+                          "rightExpression": {
+                            "arguments": [
+                              {
+                                "expression": {
+                                  "id": 4044,
+                                  "name": "gameParams",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 4001,
+                                  "src": "949:10:10",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                    "typeString": "struct MercuryBidTacToe.GameParams memory"
+                                  }
+                                },
+                                "id": 4045,
+                                "isConstant": false,
+                                "isLValue": true,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "memberLocation": "960:9:10",
+                                "memberName": "gridWidth",
+                                "nodeType": "MemberAccess",
+                                "referencedDeclaration": 3432,
+                                "src": "949:20:10",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint64",
+                                  "typeString": "uint64"
+                                }
+                              },
+                              {
+                                "expression": {
+                                  "id": 4046,
+                                  "name": "gameParams",
+                                  "nodeType": "Identifier",
+                                  "overloadedDeclarations": [],
+                                  "referencedDeclaration": 4001,
+                                  "src": "971:10:10",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                    "typeString": "struct MercuryBidTacToe.GameParams memory"
+                                  }
+                                },
+                                "id": 4047,
+                                "isConstant": false,
+                                "isLValue": true,
+                                "isPure": false,
+                                "lValueRequested": false,
+                                "memberLocation": "982:10:10",
+                                "memberName": "gridHeight",
+                                "nodeType": "MemberAccess",
+                                "referencedDeclaration": 3434,
+                                "src": "971:21:10",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint64",
+                                  "typeString": "uint64"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_uint64",
+                                  "typeString": "uint64"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint64",
+                                  "typeString": "uint64"
+                                }
+                              ],
+                              "id": 4043,
+                              "name": "max",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4140,
+                              "src": "945:3:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$",
+                                "typeString": "function (uint256,uint256) pure returns (uint256)"
+                              }
+                            },
+                            "id": 4048,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "945:48:10",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "src": "919:74:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "888:105:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "536b796c6162426964546163546f65506172616d56657269666965723a206c656e677468546f57696e20696e636f7272656374",
+                        "id": 4051,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "995:53:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_6ae29c8b50fc5ee0d8be2beb35729cb476a575c73ca52249c3e6def571071b76",
+                          "typeString": "literal_string \"MercuryBidTacToeParamVerifier: lengthToWin incorrect\""
+                        },
+                        "value": "MercuryBidTacToeParamVerifier: lengthToWin incorrect"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_6ae29c8b50fc5ee0d8be2beb35729cb476a575c73ca52249c3e6def571071b76",
+                          "typeString": "literal_string \"MercuryBidTacToeParamVerifier: lengthToWin incorrect\""
+                        }
+                      ],
+                      "id": 4036,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "880:7:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4052,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "880:169:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4053,
+                  "nodeType": "ExpressionStatement",
+                  "src": "880:169:10"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 4063,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          },
+                          "id": 4058,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 4055,
+                              "name": "gameParams",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4001,
+                              "src": "1067:10:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                "typeString": "struct MercuryBidTacToe.GameParams memory"
+                              }
+                            },
+                            "id": 4056,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1078:14:10",
+                            "memberName": "initialBalance",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 3438,
+                            "src": "1067:25:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": ">=",
+                          "rightExpression": {
+                            "hexValue": "313030",
+                            "id": 4057,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1096:3:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_100_by_1",
+                              "typeString": "int_const 100"
+                            },
+                            "value": "100"
+                          },
+                          "src": "1067:32:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "&&",
+                        "rightExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint64",
+                            "typeString": "uint64"
+                          },
+                          "id": 4062,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "id": 4059,
+                              "name": "gameParams",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4001,
+                              "src": "1103:10:10",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                                "typeString": "struct MercuryBidTacToe.GameParams memory"
+                              }
+                            },
+                            "id": 4060,
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberLocation": "1114:14:10",
+                            "memberName": "initialBalance",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 3438,
+                            "src": "1103:25:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint64",
+                              "typeString": "uint64"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": "<=",
+                          "rightExpression": {
+                            "hexValue": "3130303030",
+                            "id": 4061,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1132:5:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_10000_by_1",
+                              "typeString": "int_const 10000"
+                            },
+                            "value": "10000"
+                          },
+                          "src": "1103:34:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "1067:70:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "536b796c6162426964546163546f65506172616d56657269666965723a20696e697469616c42616c616e636520696e636f7272656374",
+                        "id": 4064,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1139:56:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_4f19bf44044dea4bdd2deb7efeda3de268d1d5cabd7a0ab2a6587f63d1029857",
+                          "typeString": "literal_string \"MercuryBidTacToeParamVerifier: initialBalance incorrect\""
+                        },
+                        "value": "MercuryBidTacToeParamVerifier: initialBalance incorrect"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_4f19bf44044dea4bdd2deb7efeda3de268d1d5cabd7a0ab2a6587f63d1029857",
+                          "typeString": "literal_string \"MercuryBidTacToeParamVerifier: initialBalance incorrect\""
+                        }
+                      ],
+                      "id": 4054,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1059:7:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4065,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1059:137:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4066,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1059:137:10"
+                },
+                {
+                  "assignments": [
+                    4069
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 4069,
+                      "mutability": "mutable",
+                      "name": "bidTacToeProxy",
+                      "nameLocation": "1221:14:10",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 4101,
+                      "src": "1206:29:10",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_BidTacToeProxy_$3421",
+                        "typeString": "contract BidTacToeProxy"
+                      },
+                      "typeName": {
+                        "id": 4068,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 4067,
+                          "name": "BidTacToeProxy",
+                          "nameLocations": [
+                            "1206:14:10"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 3421,
+                          "src": "1206:14:10"
+                        },
+                        "referencedDeclaration": 3421,
+                        "src": "1206:14:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BidTacToeProxy_$3421",
+                          "typeString": "contract BidTacToeProxy"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 4074,
+                  "initialValue": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 4072,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "1238:18:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_BidTacToeProxy_$3421_$",
+                        "typeString": "function () returns (contract BidTacToeProxy)"
+                      },
+                      "typeName": {
+                        "id": 4071,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 4070,
+                          "name": "BidTacToeProxy",
+                          "nameLocations": [
+                            "1242:14:10"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 3421,
+                          "src": "1242:14:10"
+                        },
+                        "referencedDeclaration": 3421,
+                        "src": "1242:14:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BidTacToeProxy_$3421",
+                          "typeString": "contract BidTacToeProxy"
+                        }
+                      }
+                    },
+                    "id": 4073,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1238:20:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BidTacToeProxy_$3421",
+                      "typeString": "contract BidTacToeProxy"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1206:52:10"
+                },
+                {
+                  "assignments": [
+                    4076,
+                    null
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 4076,
+                      "mutability": "mutable",
+                      "name": "suceed",
+                      "nameLocation": "1274:6:10",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 4101,
+                      "src": "1269:11:10",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      },
+                      "typeName": {
+                        "id": 4075,
+                        "name": "bool",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1269:4:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      "visibility": "internal"
+                    },
+                    null
+                  ],
+                  "id": 4090,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "arguments": [
+                          {
+                            "hexValue": "696e697469616c697a65282875696e7436342c75696e7436342c75696e7436342c75696e743634292c616464726573732c6164647265737329",
+                            "id": 4084,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "string",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1338:59:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_stringliteral_bfa4e241134053baa66b0a40d6e88ada5a709509f166f04ca0ef298fd3a4448e",
+                              "typeString": "literal_string \"initialize((uint64,uint64,uint64,uint64),address,address)\""
+                            },
+                            "value": "initialize((uint64,uint64,uint64,uint64),address,address)"
+                          },
+                          {
+                            "id": 4085,
+                            "name": "gameParams",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4001,
+                            "src": "1399:10:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                              "typeString": "struct MercuryBidTacToe.GameParams memory"
+                            }
+                          },
+                          {
+                            "id": 4086,
+                            "name": "playerAddress",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4003,
+                            "src": "1411:13:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 4087,
+                            "name": "mercuryBidTacToeAddress",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4005,
+                            "src": "1426:22:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_stringliteral_bfa4e241134053baa66b0a40d6e88ada5a709509f166f04ca0ef298fd3a4448e",
+                              "typeString": "literal_string \"initialize((uint64,uint64,uint64,uint64),address,address)\""
+                            },
+                            {
+                              "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                              "typeString": "struct MercuryBidTacToe.GameParams memory"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "expression": {
+                            "id": 4082,
+                            "name": "abi",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -1,
+                            "src": "1314:3:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_abi",
+                              "typeString": "abi"
+                            }
+                          },
+                          "id": 4083,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "memberLocation": "1318:19:10",
+                          "memberName": "encodeWithSignature",
+                          "nodeType": "MemberAccess",
+                          "src": "1314:23:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_abiencodewithsignature_pure$_t_string_memory_ptr_$returns$_t_bytes_memory_ptr_$",
+                            "typeString": "function (string memory) pure returns (bytes memory)"
+                          }
+                        },
+                        "id": 4088,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1314:135:10",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "arguments": [
+                          {
+                            "id": 4079,
+                            "name": "bidTacToeProxy",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4069,
+                            "src": "1293:14:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_BidTacToeProxy_$3421",
+                              "typeString": "contract BidTacToeProxy"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_BidTacToeProxy_$3421",
+                              "typeString": "contract BidTacToeProxy"
+                            }
+                          ],
+                          "id": 4078,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1285:7:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": {
+                            "id": 4077,
+                            "name": "address",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1285:7:10",
+                            "typeDescriptions": {}
+                          }
+                        },
+                        "id": 4080,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1285:23:10",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "id": 4081,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1309:4:10",
+                      "memberName": "call",
+                      "nodeType": "MemberAccess",
+                      "src": "1285:28:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_barecall_payable$_t_bytes_memory_ptr_$returns$_t_bool_$_t_bytes_memory_ptr_$",
+                        "typeString": "function (bytes memory) payable returns (bool,bytes memory)"
+                      }
+                    },
+                    "id": 4089,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1285:165:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$_t_bool_$_t_bytes_memory_ptr_$",
+                      "typeString": "tuple(bool,bytes memory)"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1268:182:10"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 4092,
+                        "name": "suceed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4076,
+                        "src": "1468:6:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "6372656174652067616d65206661696c64",
+                        "id": 4093,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1476:19:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_129b618bb3676267db36855cffe106d665079869b08f035289b1af488b38500b",
+                          "typeString": "literal_string \"create game faild\""
+                        },
+                        "value": "create game faild"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_129b618bb3676267db36855cffe106d665079869b08f035289b1af488b38500b",
+                          "typeString": "literal_string \"create game faild\""
+                        }
+                      ],
+                      "id": 4091,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "1460:7:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4094,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1460:36:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4095,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1460:36:10"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 4098,
+                        "name": "bidTacToeProxy",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4069,
+                        "src": "1521:14:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BidTacToeProxy_$3421",
+                          "typeString": "contract BidTacToeProxy"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_BidTacToeProxy_$3421",
+                          "typeString": "contract BidTacToeProxy"
+                        }
+                      ],
+                      "id": 4097,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "1513:7:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_$",
+                        "typeString": "type(address)"
+                      },
+                      "typeName": {
+                        "id": 4096,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1513:7:10",
+                        "typeDescriptions": {}
+                      }
+                    },
+                    "id": 4099,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1513:23:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 4009,
+                  "id": 4100,
+                  "nodeType": "Return",
+                  "src": "1506:30:10"
+                }
+              ]
+            },
+            "functionSelector": "64dcddeb",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createGame",
+            "nameLocation": "417:10:10",
+            "parameters": {
+              "id": 4006,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4001,
+                  "mutability": "mutable",
+                  "name": "gameParams",
+                  "nameLocation": "462:10:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4102,
+                  "src": "428:44:10",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_GameParams_$3439_memory_ptr",
+                    "typeString": "struct MercuryBidTacToe.GameParams"
+                  },
+                  "typeName": {
+                    "id": 4000,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 3999,
+                      "name": "MercuryBidTacToe.GameParams",
+                      "nameLocations": [
+                        "428:15:10",
+                        "444:10:10"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 3439,
+                      "src": "428:26:10"
+                    },
+                    "referencedDeclaration": 3439,
+                    "src": "428:26:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_GameParams_$3439_storage_ptr",
+                      "typeString": "struct MercuryBidTacToe.GameParams"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4003,
+                  "mutability": "mutable",
+                  "name": "playerAddress",
+                  "nameLocation": "482:13:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4102,
+                  "src": "474:21:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4002,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "474:7:10",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4005,
+                  "mutability": "mutable",
+                  "name": "mercuryBidTacToeAddress",
+                  "nameLocation": "505:22:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4102,
+                  "src": "497:30:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4004,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "497:7:10",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "427:101:10"
+            },
+            "returnParameters": {
+              "id": 4009,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4008,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4102,
+                  "src": "547:7:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4007,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "547:7:10",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "546:9:10"
+            },
+            "scope": 4141,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 4123,
+            "nodeType": "FunctionDefinition",
+            "src": "1549:181:10",
+            "nodes": [],
+            "body": {
+              "id": 4122,
+              "nodeType": "Block",
+              "src": "1620:110:10",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    4111
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 4111,
+                      "mutability": "mutable",
+                      "name": "existingGame",
+                      "nameLocation": "1640:12:10",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 4122,
+                      "src": "1630:22:10",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_BidTacToe_$3364",
+                        "typeString": "contract BidTacToe"
+                      },
+                      "typeName": {
+                        "id": 4110,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 4109,
+                          "name": "BidTacToe",
+                          "nameLocations": [
+                            "1630:9:10"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 3364,
+                          "src": "1630:9:10"
+                        },
+                        "referencedDeclaration": 3364,
+                        "src": "1630:9:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BidTacToe_$3364",
+                          "typeString": "contract BidTacToe"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 4115,
+                  "initialValue": {
+                    "arguments": [
+                      {
+                        "id": 4113,
+                        "name": "gameAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4104,
+                        "src": "1665:11:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 4112,
+                      "name": "BidTacToe",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3364,
+                      "src": "1655:9:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_BidTacToe_$3364_$",
+                        "typeString": "type(contract BidTacToe)"
+                      }
+                    },
+                    "id": 4114,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1655:22:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_BidTacToe_$3364",
+                      "typeString": "contract BidTacToe"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1630:47:10"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 4119,
+                        "name": "playerAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4106,
+                        "src": "1709:13:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "id": 4116,
+                        "name": "existingGame",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4111,
+                        "src": "1687:12:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_BidTacToe_$3364",
+                          "typeString": "contract BidTacToe"
+                        }
+                      },
+                      "id": 4118,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1700:8:10",
+                      "memberName": "joinGame",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2684,
+                      "src": "1687:21:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address) external"
+                      }
+                    },
+                    "id": 4120,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1687:36:10",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4121,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1687:36:10"
+                }
+              ]
+            },
+            "functionSelector": "93dae5eb",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "joinGame",
+            "nameLocation": "1558:8:10",
+            "parameters": {
+              "id": 4107,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4104,
+                  "mutability": "mutable",
+                  "name": "gameAddress",
+                  "nameLocation": "1575:11:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4123,
+                  "src": "1567:19:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4103,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1567:7:10",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4106,
+                  "mutability": "mutable",
+                  "name": "playerAddress",
+                  "nameLocation": "1596:13:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4123,
+                  "src": "1588:21:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4105,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1588:7:10",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1566:44:10"
+            },
+            "returnParameters": {
+              "id": 4108,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1620:0:10"
+            },
+            "scope": 4141,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 4140,
+            "nodeType": "FunctionDefinition",
+            "src": "1736:105:10",
+            "nodes": [],
+            "body": {
+              "id": 4139,
+              "nodeType": "Block",
+              "src": "1803:38:10",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 4134,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "id": 4132,
+                        "name": "a",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4125,
+                        "src": "1820:1:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": ">=",
+                      "rightExpression": {
+                        "id": 4133,
+                        "name": "b",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4127,
+                        "src": "1825:1:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "src": "1820:6:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseExpression": {
+                      "id": 4136,
+                      "name": "b",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4127,
+                      "src": "1833:1:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 4137,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "Conditional",
+                    "src": "1820:14:10",
+                    "trueExpression": {
+                      "id": 4135,
+                      "name": "a",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4125,
+                      "src": "1829:1:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 4131,
+                  "id": 4138,
+                  "nodeType": "Return",
+                  "src": "1813:21:10"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "max",
+            "nameLocation": "1745:3:10",
+            "parameters": {
+              "id": 4128,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4125,
+                  "mutability": "mutable",
+                  "name": "a",
+                  "nameLocation": "1757:1:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4140,
+                  "src": "1749:9:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4124,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1749:7:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4127,
+                  "mutability": "mutable",
+                  "name": "b",
+                  "nameLocation": "1768:1:10",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4140,
+                  "src": "1760:9:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4126,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1760:7:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1748:22:10"
+            },
+            "returnParameters": {
+              "id": 4131,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4130,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4140,
+                  "src": "1794:7:10",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4129,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1794:7:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1793:9:10"
+            },
+            "scope": 4141,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "MercuryBidTacToeDeployer",
+        "contractDependencies": [
+          3421
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          4141
+        ],
+        "name": "MercuryBidTacToeDeployer",
+        "nameLocation": "224:23:10",
+        "scope": 4142,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 10
+}

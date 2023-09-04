@@ -1,0 +1,938 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "payee",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "weiAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Deposited",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "payee",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "weiAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Withdrawn",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "payee",
+          "type": "address"
+        }
+      ],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "payee",
+          "type": "address"
+        }
+      ],
+      "name": "depositsOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "payee",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "allowed",
+          "type": "bool"
+        }
+      ],
+      "name": "setAllowed",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address payable",
+          "name": "payee",
+          "type": "address"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "payee",
+          "type": "address"
+        }
+      ],
+      "name": "withdrawalAllowed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080806040523461005b5760008054336001600160a01b0319821681178355916001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09080a36105be90816100618239f35b600080fdfe60406080815260048036101561001457600080fd5b600091823560e01c80634697f05d146104cb57806351cff8d9146102be578063685ca19414610280578063715018a6146102235780638da5cb5b146101fb578063e3a9db1a146101bf578063f2fde38b146100fc5763f340fa011461007857600080fd5b60203660031901126100f85761008c610515565b610094610530565b6001600160a01b03168084526001602052818420805491933483019283106100e5575055513481527f2da466a7b24304f47e87fa2e1e5a81b9831ce54fec19055ce277ca2f39ba42c490602090a280f35b634e487b7160e01b865260119052602485fd5b8280fd5b5090346100f85760203660031901126100f857610117610515565b90610120610530565b6001600160a01b0391821692831561016d57505082546001600160a01b0319811683178455167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08380a380f35b906020608492519162461bcd60e51b8352820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152fd5b8382346101f75760203660031901126101f75760209181906001600160a01b036101e7610515565b1681526001845220549051908152f35b5080fd5b8382346101f757816003193601126101f757905490516001600160a01b039091168152602090f35b833461027d578060031936011261027d5761023c610530565b80546001600160a01b03198116825581906001600160a01b03167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a380f35b80fd5b8382346101f75760203660031901126101f75760209160ff9082906001600160a01b036102ab610515565b1681526002855220541690519015158152f35b5090346100f857602090816003193601126104c75780356001600160a01b03811693908490036104c3578385526002835260ff81862054161561046657610303610530565b83855260018352808520918583549355824710610425578580808086895af13d156104205767ffffffffffffffff3d81811161040d57845191601f8201601f19908116603f01168301908111838210176103fa578552815287863d92013e5b156103935750519081527f7084f5476618d8e60b11ef0d7d3f06914655adb8793e28ff7f018d4c76d505d59190a280f35b83608492519162461bcd60e51b8352820152603a60248201527f416464726573733a20756e61626c6520746f2073656e642076616c75652c207260448201527f6563697069656e74206d617920686176652072657665727465640000000000006064820152fd5b634e487b7160e01b8a526041855260248afd5b634e487b7160e01b895260418452602489fd5b610362565b83606492519162461bcd60e51b8352820152601d60248201527f416464726573733a20696e73756666696369656e742062616c616e63650000006044820152fd5b91608492519162461bcd60e51b8352820152603360248201527f436f6e646974696f6e616c457363726f773a207061796565206973206e6f7420604482015272616c6c6f77656420746f20776974686472617760681b6064820152fd5b8480fd5b8380fd5b8382346101f757806003193601126101f7576104e5610515565b90602435918215158093036104c75760018060a01b03168352600260205282209060ff8019835416911617905580f35b600435906001600160a01b038216820361052b57565b600080fd5b6000546001600160a01b0316330361054457565b606460405162461bcd60e51b815260206004820152602060248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152fdfea2646970667358221220d242b70f856ee6e691000026a65a0a9c42e41ca6ae97ab54a76c374640bf91b864736f6c63430008130033",
+    "sourceMap": "145:329:58:-:0;;;;;;;2518:6:6;145:329:58;;719:10:178;-1:-1:-1;;;;;;145:329:58;;;;;;719:10:178;-1:-1:-1;;;;;145:329:58;;;;2566:40:6;;2518:6;2566:40;145:329:58;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x60406080815260048036101561001457600080fd5b600091823560e01c80634697f05d146104cb57806351cff8d9146102be578063685ca19414610280578063715018a6146102235780638da5cb5b146101fb578063e3a9db1a146101bf578063f2fde38b146100fc5763f340fa011461007857600080fd5b60203660031901126100f85761008c610515565b610094610530565b6001600160a01b03168084526001602052818420805491933483019283106100e5575055513481527f2da466a7b24304f47e87fa2e1e5a81b9831ce54fec19055ce277ca2f39ba42c490602090a280f35b634e487b7160e01b865260119052602485fd5b8280fd5b5090346100f85760203660031901126100f857610117610515565b90610120610530565b6001600160a01b0391821692831561016d57505082546001600160a01b0319811683178455167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08380a380f35b906020608492519162461bcd60e51b8352820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b6064820152fd5b8382346101f75760203660031901126101f75760209181906001600160a01b036101e7610515565b1681526001845220549051908152f35b5080fd5b8382346101f757816003193601126101f757905490516001600160a01b039091168152602090f35b833461027d578060031936011261027d5761023c610530565b80546001600160a01b03198116825581906001600160a01b03167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a380f35b80fd5b8382346101f75760203660031901126101f75760209160ff9082906001600160a01b036102ab610515565b1681526002855220541690519015158152f35b5090346100f857602090816003193601126104c75780356001600160a01b03811693908490036104c3578385526002835260ff81862054161561046657610303610530565b83855260018352808520918583549355824710610425578580808086895af13d156104205767ffffffffffffffff3d81811161040d57845191601f8201601f19908116603f01168301908111838210176103fa578552815287863d92013e5b156103935750519081527f7084f5476618d8e60b11ef0d7d3f06914655adb8793e28ff7f018d4c76d505d59190a280f35b83608492519162461bcd60e51b8352820152603a60248201527f416464726573733a20756e61626c6520746f2073656e642076616c75652c207260448201527f6563697069656e74206d617920686176652072657665727465640000000000006064820152fd5b634e487b7160e01b8a526041855260248afd5b634e487b7160e01b895260418452602489fd5b610362565b83606492519162461bcd60e51b8352820152601d60248201527f416464726573733a20696e73756666696369656e742062616c616e63650000006044820152fd5b91608492519162461bcd60e51b8352820152603360248201527f436f6e646974696f6e616c457363726f773a207061796565206973206e6f7420604482015272616c6c6f77656420746f20776974686472617760681b6064820152fd5b8480fd5b8380fd5b8382346101f757806003193601126101f7576104e5610515565b90602435918215158093036104c75760018060a01b03168352600260205282209060ff8019835416911617905580f35b600435906001600160a01b038216820361052b57565b600080fd5b6000546001600160a01b0316330361054457565b606460405162461bcd60e51b815260206004820152602060248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152fdfea2646970667358221220d242b70f856ee6e691000026a65a0a9c42e41ca6ae97ab54a76c374640bf91b864736f6c63430008130033",
+    "sourceMap": "145:329:58:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;145:329:58;;;;;;:::i;:::-;1063:62:6;;:::i;:::-;-1:-1:-1;;;;;145:329:58;;;;;;;;;;;;;;1457:9:189;145:329:58;;;;-1:-1:-1;145:329:58;;-1:-1:-1;145:329:58;;1457:9:189;145:329:58;;1517:24:189;;145:329:58;;1517:24:189;145:329:58;;;-1:-1:-1;;;145:329:58;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;145:329:58;;;;;;:::i;:::-;1063:62:6;;;:::i;:::-;-1:-1:-1;;;;;145:329:58;;;;2162:22:6;;145:329:58;;-1:-1:-1;;145:329:58;;-1:-1:-1;;;;;;145:329:58;;;;;;;2566:40:6;145:329:58;;2566:40:6;145:329:58;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;145:329:58;;;;;;;;;;;;;-1:-1:-1;;145:329:58;;;;;;;;-1:-1:-1;;;;;145:329:58;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;145:329:58;;;;;;;;;;;;;;;;;;;;;1063:62:6;;:::i;:::-;145:329:58;;-1:-1:-1;;;;;;145:329:58;;;;;;-1:-1:-1;;;;;145:329:58;2566:40:6;145:329:58;;2566:40:6;145:329:58;;;;;;;;;;;;;-1:-1:-1;;145:329:58;;;;;;;;;;-1:-1:-1;;;;;145:329:58;;:::i;:::-;;;;450:8;145:329;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;145:329:58;;;;;;;;;;;;450:8;145:329;;;;;;;;;;;1063:62:6;;:::i;:::-;145:329:58;;;;;;;;;;;;;;;2736:21:175;;:31;145:329:58;;2830:33:175;;;;;;;;145:329:58;;;;;;;;;;;;;;;;;-1:-1:-1;;145:329:58;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;145:329:58;;;;2219:25:189;;145:329:58;2219:25:189;145:329:58;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;145:329:58;;;;;;;;;-1:-1:-1;;;145:329:58;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;145:329:58;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;317:8;145:329;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;145:329:58;;;;;;:::o;:::-;;;;1359:130:6;1273:6;145:329:58;-1:-1:-1;;;;;145:329:58;719:10:178;1422:23:6;145:329:58;;1359:130:6:o;145:329:58:-;;;;;;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "deposit(address)": "f340fa01",
+    "depositsOf(address)": "e3a9db1a",
+    "owner()": "8da5cb5b",
+    "renounceOwnership()": "715018a6",
+    "setAllowed(address,bool)": "4697f05d",
+    "transferOwnership(address)": "f2fde38b",
+    "withdraw(address)": "51cff8d9",
+    "withdrawalAllowed(address)": "685ca194"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"payee\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"weiAmount\",\"type\":\"uint256\"}],\"name\":\"Deposited\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"payee\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"weiAmount\",\"type\":\"uint256\"}],\"name\":\"Withdrawn\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"payee\",\"type\":\"address\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"payee\",\"type\":\"address\"}],\"name\":\"depositsOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"payee\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"allowed\",\"type\":\"bool\"}],\"name\":\"setAllowed\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"payee\",\"type\":\"address\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"payee\",\"type\":\"address\"}],\"name\":\"withdrawalAllowed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"deposit(address)\":{\"details\":\"Stores the sent amount as credit to be withdrawn.\",\"params\":{\"payee\":\"The destination address of the funds. Emits a {Deposited} event.\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"withdraw(address)\":{\"details\":\"Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.\",\"params\":{\"payee\":\"The address whose funds will be withdrawn and transferred to. Emits a {Withdrawn} event.\"}},\"withdrawalAllowed(address)\":{\"details\":\"Returns whether an address is allowed to withdraw their funds. To be implemented by derived contracts.\",\"params\":{\"payee\":\"The destination address of the funds.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/openzeppelin/local/mocks/ConditionalEscrowMock.sol\":\"ConditionalEscrowMock\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/openzeppelin/local/access/Ownable.sol\":{\"keccak256\":\"0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fc980984badf3984b6303b377711220e067722bbd6a135b24669ff5069ef9f32\",\"dweb:/ipfs/QmPHXMSXj99XjSVM21YsY6aNtLLjLVXDbyN76J5HQYvvrz\"]},\"contracts/.cache/openzeppelin/local/mocks/ConditionalEscrowMock.sol\":{\"keccak256\":\"0xeb263e4ae0c063737086108005178cc4efc81a9a3e3415718d3c8ca0e16dd65f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://85730a2f24a7416de323711ab1ca2d157de27cdabc3ecf799f4adbda5b941428\",\"dweb:/ipfs/QmTnhnhUDLuoukUadKr6rpMB2AzHfWV2hgGAaT12DuyBd3\"]},\"contracts/.cache/openzeppelin/local/utils/Address.sol\":{\"keccak256\":\"0x277775f22320f32702fd59efea3ce2758a29ab81cf2493fa7ed56514c57e7444\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4fca7b7cf5c2f491133149ea6b44519030daf917867406935b25e6f6b2fb61ac\",\"dweb:/ipfs/QmZZHqpknhqvtBST1JNefHXPe4U7EzefQdySDsemf41qrn\"]},\"contracts/.cache/openzeppelin/local/utils/Context.sol\":{\"keccak256\":\"0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92\",\"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3\"]},\"contracts/.cache/openzeppelin/local/utils/escrow/ConditionalEscrow.sol\":{\"keccak256\":\"0xf71d228abc2df1a5020ba208b237718e22cad6b3532f5e8f1021f4f15068e290\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e42465b2c37a5d9286678ad167ed75691cb7bd2f6abcb677e7820ac58263a723\",\"dweb:/ipfs/QmdxVmnFC6ELiJLcQauqJxR353hjT2eNQ5ELHv1j46KeHi\"]},\"contracts/.cache/openzeppelin/local/utils/escrow/Escrow.sol\":{\"keccak256\":\"0xabdff382f93edb8bd94b227798fc0daf64abe891403e1e525f5870c2cae8bf65\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://402701e1bf7c6314463211809668b51986f27695b5d552dcd51aed0730c66680\",\"dweb:/ipfs/QmRLv8Tr9ZV7QABCSr2ri4N1EsKGebFC87ti9794GMGLiL\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "payee",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "weiAmount",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Deposited",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "payee",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "weiAmount",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Withdrawn",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "payee",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "deposit"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "payee",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "depositsOf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "owner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "renounceOwnership"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "payee",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "allowed",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setAllowed"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "transferOwnership"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address payable",
+              "name": "payee",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "withdraw"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "payee",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "withdrawalAllowed",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "deposit(address)": {
+            "details": "Stores the sent amount as credit to be withdrawn.",
+            "params": {
+              "payee": "The destination address of the funds. Emits a {Deposited} event."
+            }
+          },
+          "owner()": {
+            "details": "Returns the address of the current owner."
+          },
+          "renounceOwnership()": {
+            "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+          },
+          "transferOwnership(address)": {
+            "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+          },
+          "withdraw(address)": {
+            "details": "Withdraw accumulated balance for a payee, forwarding all gas to the recipient. WARNING: Forwarding all gas opens the door to reentrancy vulnerabilities. Make sure you trust the recipient, or are either following the checks-effects-interactions pattern or using {ReentrancyGuard}.",
+            "params": {
+              "payee": "The address whose funds will be withdrawn and transferred to. Emits a {Withdrawn} event."
+            }
+          },
+          "withdrawalAllowed(address)": {
+            "details": "Returns whether an address is allowed to withdraw their funds. To be implemented by derived contracts.",
+            "params": {
+              "payee": "The destination address of the funds."
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/openzeppelin/local/mocks/ConditionalEscrowMock.sol": "ConditionalEscrowMock"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/openzeppelin/local/access/Ownable.sol": {
+        "keccak256": "0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218",
+        "urls": [
+          "bzz-raw://fc980984badf3984b6303b377711220e067722bbd6a135b24669ff5069ef9f32",
+          "dweb:/ipfs/QmPHXMSXj99XjSVM21YsY6aNtLLjLVXDbyN76J5HQYvvrz"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/openzeppelin/local/mocks/ConditionalEscrowMock.sol": {
+        "keccak256": "0xeb263e4ae0c063737086108005178cc4efc81a9a3e3415718d3c8ca0e16dd65f",
+        "urls": [
+          "bzz-raw://85730a2f24a7416de323711ab1ca2d157de27cdabc3ecf799f4adbda5b941428",
+          "dweb:/ipfs/QmTnhnhUDLuoukUadKr6rpMB2AzHfWV2hgGAaT12DuyBd3"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/openzeppelin/local/utils/Address.sol": {
+        "keccak256": "0x277775f22320f32702fd59efea3ce2758a29ab81cf2493fa7ed56514c57e7444",
+        "urls": [
+          "bzz-raw://4fca7b7cf5c2f491133149ea6b44519030daf917867406935b25e6f6b2fb61ac",
+          "dweb:/ipfs/QmZZHqpknhqvtBST1JNefHXPe4U7EzefQdySDsemf41qrn"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/openzeppelin/local/utils/Context.sol": {
+        "keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+        "urls": [
+          "bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+          "dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/openzeppelin/local/utils/escrow/ConditionalEscrow.sol": {
+        "keccak256": "0xf71d228abc2df1a5020ba208b237718e22cad6b3532f5e8f1021f4f15068e290",
+        "urls": [
+          "bzz-raw://e42465b2c37a5d9286678ad167ed75691cb7bd2f6abcb677e7820ac58263a723",
+          "dweb:/ipfs/QmdxVmnFC6ELiJLcQauqJxR353hjT2eNQ5ELHv1j46KeHi"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/openzeppelin/local/utils/escrow/Escrow.sol": {
+        "keccak256": "0xabdff382f93edb8bd94b227798fc0daf64abe891403e1e525f5870c2cae8bf65",
+        "urls": [
+          "bzz-raw://402701e1bf7c6314463211809668b51986f27695b5d552dcd51aed0730c66680",
+          "dweb:/ipfs/QmRLv8Tr9ZV7QABCSr2ri4N1EsKGebFC87ti9794GMGLiL"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/openzeppelin/local/mocks/ConditionalEscrowMock.sol",
+    "id": 9761,
+    "exportedSymbols": {
+      "Address": [
+        28167
+      ],
+      "ConditionalEscrow": [
+        31802
+      ],
+      "ConditionalEscrowMock": [
+        9760
+      ],
+      "Context": [
+        29886
+      ],
+      "Escrow": [
+        31898
+      ],
+      "Ownable": [
+        1424
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:442:58",
+    "nodes": [
+      {
+        "id": 9725,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:58",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 9726,
+        "nodeType": "ImportDirective",
+        "src": "58:47:58",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/openzeppelin/local/utils/escrow/ConditionalEscrow.sol",
+        "file": "../utils/escrow/ConditionalEscrow.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 9761,
+        "sourceUnit": 31803,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 9760,
+        "nodeType": "ContractDefinition",
+        "src": "145:329:58",
+        "nodes": [
+          {
+            "id": 9732,
+            "nodeType": "VariableDeclaration",
+            "src": "203:41:58",
+            "nodes": [],
+            "constant": false,
+            "mutability": "mutable",
+            "name": "_allowed",
+            "nameLocation": "236:8:58",
+            "scope": 9760,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+              "typeString": "mapping(address => bool)"
+            },
+            "typeName": {
+              "id": 9731,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 9729,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "211:7:58",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "203:24:58",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                "typeString": "mapping(address => bool)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 9730,
+                "name": "bool",
+                "nodeType": "ElementaryTypeName",
+                "src": "222:4:58",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                }
+              }
+            },
+            "visibility": "private"
+          },
+          {
+            "id": 9746,
+            "nodeType": "FunctionDefinition",
+            "src": "251:98:58",
+            "nodes": [],
+            "body": {
+              "id": 9745,
+              "nodeType": "Block",
+              "src": "307:42:58",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 9743,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "baseExpression": {
+                        "id": 9739,
+                        "name": "_allowed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 9732,
+                        "src": "317:8:58",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                          "typeString": "mapping(address => bool)"
+                        }
+                      },
+                      "id": 9741,
+                      "indexExpression": {
+                        "id": 9740,
+                        "name": "payee",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 9734,
+                        "src": "326:5:58",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "317:15:58",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 9742,
+                      "name": "allowed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 9736,
+                      "src": "335:7:58",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "317:25:58",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 9744,
+                  "nodeType": "ExpressionStatement",
+                  "src": "317:25:58"
+                }
+              ]
+            },
+            "functionSelector": "4697f05d",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setAllowed",
+            "nameLocation": "260:10:58",
+            "parameters": {
+              "id": 9737,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9734,
+                  "mutability": "mutable",
+                  "name": "payee",
+                  "nameLocation": "279:5:58",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9746,
+                  "src": "271:13:58",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9733,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "271:7:58",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 9736,
+                  "mutability": "mutable",
+                  "name": "allowed",
+                  "nameLocation": "291:7:58",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9746,
+                  "src": "286:12:58",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 9735,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "286:4:58",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "270:29:58"
+            },
+            "returnParameters": {
+              "id": 9738,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "307:0:58"
+            },
+            "scope": 9760,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "id": 9759,
+            "nodeType": "FunctionDefinition",
+            "src": "355:117:58",
+            "nodes": [],
+            "body": {
+              "id": 9758,
+              "nodeType": "Block",
+              "src": "433:39:58",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "baseExpression": {
+                      "id": 9754,
+                      "name": "_allowed",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 9732,
+                      "src": "450:8:58",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
+                        "typeString": "mapping(address => bool)"
+                      }
+                    },
+                    "id": 9756,
+                    "indexExpression": {
+                      "id": 9755,
+                      "name": "payee",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 9748,
+                      "src": "459:5:58",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "450:15:58",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 9753,
+                  "id": 9757,
+                  "nodeType": "Return",
+                  "src": "443:22:58"
+                }
+              ]
+            },
+            "baseFunctions": [
+              31781
+            ],
+            "functionSelector": "685ca194",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "withdrawalAllowed",
+            "nameLocation": "364:17:58",
+            "overrides": {
+              "id": 9750,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "409:8:58"
+            },
+            "parameters": {
+              "id": 9749,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9748,
+                  "mutability": "mutable",
+                  "name": "payee",
+                  "nameLocation": "390:5:58",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9759,
+                  "src": "382:13:58",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 9747,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "382:7:58",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "381:15:58"
+            },
+            "returnParameters": {
+              "id": 9753,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 9752,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 9759,
+                  "src": "427:4:58",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 9751,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "427:4:58",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "426:6:58"
+            },
+            "scope": 9760,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 9727,
+              "name": "ConditionalEscrow",
+              "nameLocations": [
+                "179:17:58"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 31802,
+              "src": "179:17:58"
+            },
+            "id": 9728,
+            "nodeType": "InheritanceSpecifier",
+            "src": "179:17:58"
+          }
+        ],
+        "canonicalName": "ConditionalEscrowMock",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          9760,
+          31802,
+          31898,
+          1424,
+          29886
+        ],
+        "name": "ConditionalEscrowMock",
+        "nameLocation": "154:21:58",
+        "scope": 9761,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 58
+}

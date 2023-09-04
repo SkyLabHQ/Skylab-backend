@@ -1,0 +1,347 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "Pausable__NotPaused",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Pausable__Paused",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "Paused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "Unpaused",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "paused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "paused()": "5c975abb"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"Pausable__NotPaused\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Pausable__Paused\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"paused()\":{\"returns\":{\"status\":\"whether contract is paused\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"paused()\":{\"notice\":\"query whether contract is paused\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/security/pausable/IPausable.sol\":\"IPausable\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/security/pausable/IPausable.sol\":{\"keccak256\":\"0x2c72b12d33ceda6a9f9c2d9daf5bbe8b2f141e42ca043eb97d8b4c1e5ec8423f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://79bf378ace1b0b42afa4aa545921476a9a9169eb1f2592e2f575b96dd487c426\",\"dweb:/ipfs/QmS1Wh4MUDMmDYRfAr4zDp3KoYhNnXsqFnwaHSpJaH9tL4\"]},\"contracts/.cache/solidstate/local/security/pausable/IPausableInternal.sol\":{\"keccak256\":\"0xe54f7b8380acdc3b67d2f59325c2bc7241271b926436ba86f396cd22b3d046d1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6d8787ac0cbb34d05164840719e28c33f43deb2ed5fcee14ea159238b603af67\",\"dweb:/ipfs/QmR9GmqrVvoT4TzvWrUR9EdssSubAE2a9aWLR2yvkfsVpD\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Pausable__NotPaused"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Pausable__Paused"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Paused",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Unpaused",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "paused",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "status",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "paused()": {
+            "returns": {
+              "status": "whether contract is paused"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "paused()": {
+            "notice": "query whether contract is paused"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/security/pausable/IPausable.sol": "IPausable"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/security/pausable/IPausable.sol": {
+        "keccak256": "0x2c72b12d33ceda6a9f9c2d9daf5bbe8b2f141e42ca043eb97d8b4c1e5ec8423f",
+        "urls": [
+          "bzz-raw://79bf378ace1b0b42afa4aa545921476a9a9169eb1f2592e2f575b96dd487c426",
+          "dweb:/ipfs/QmS1Wh4MUDMmDYRfAr4zDp3KoYhNnXsqFnwaHSpJaH9tL4"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/pausable/IPausableInternal.sol": {
+        "keccak256": "0xe54f7b8380acdc3b67d2f59325c2bc7241271b926436ba86f396cd22b3d046d1",
+        "urls": [
+          "bzz-raw://6d8787ac0cbb34d05164840719e28c33f43deb2ed5fcee14ea159238b603af67",
+          "dweb:/ipfs/QmR9GmqrVvoT4TzvWrUR9EdssSubAE2a9aWLR2yvkfsVpD"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/security/pausable/IPausable.sol",
+    "id": 49269,
+    "exportedSymbols": {
+      "IPausable": [
+        49268
+      ],
+      "IPausableInternal": [
+        49283
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:302:342",
+    "nodes": [
+      {
+        "id": 49257,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:342",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 49259,
+        "nodeType": "ImportDirective",
+        "src": "58:58:342",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/security/pausable/IPausableInternal.sol",
+        "file": "./IPausableInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49269,
+        "sourceUnit": 49284,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49258,
+              "name": "IPausableInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49283,
+              "src": "66:17:342",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49268,
+        "nodeType": "ContractDefinition",
+        "src": "118:216:342",
+        "nodes": [
+          {
+            "id": 49267,
+            "nodeType": "FunctionDefinition",
+            "src": "278:54:342",
+            "nodes": [],
+            "documentation": {
+              "id": 49262,
+              "nodeType": "StructuredDocumentation",
+              "src": "165:108:342",
+              "text": " @notice query whether contract is paused\n @return status whether contract is paused"
+            },
+            "functionSelector": "5c975abb",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "paused",
+            "nameLocation": "287:6:342",
+            "parameters": {
+              "id": 49263,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "293:2:342"
+            },
+            "returnParameters": {
+              "id": 49266,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49265,
+                  "mutability": "mutable",
+                  "name": "status",
+                  "nameLocation": "324:6:342",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49267,
+                  "src": "319:11:342",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 49264,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "319:4:342",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "318:13:342"
+            },
+            "scope": 49268,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 49260,
+              "name": "IPausableInternal",
+              "nameLocations": [
+                "141:17:342"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49283,
+              "src": "141:17:342"
+            },
+            "id": 49261,
+            "nodeType": "InheritanceSpecifier",
+            "src": "141:17:342"
+          }
+        ],
+        "canonicalName": "IPausable",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          49268,
+          49283
+        ],
+        "name": "IPausable",
+        "nameLocation": "128:9:342",
+        "scope": 49269,
+        "usedErrors": [
+          49272,
+          49274
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 342
+}

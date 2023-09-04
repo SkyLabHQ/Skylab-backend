@@ -1,0 +1,663 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ERC1155Base__ArrayLengthMismatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__BalanceQueryZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__BurnExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__BurnFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__ERC1155ReceiverNotImplemented",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__ERC1155ReceiverRejected",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__MintToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__NotOwnerOrApproved",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__SelfApproval",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__TransferExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__TransferToZeroAddress",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "approved",
+          "type": "bool"
+        }
+      ],
+      "name": "ApprovalForAll",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "values",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "TransferBatch",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "TransferSingle",
+      "type": "event"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"ERC1155Base__ArrayLengthMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__BalanceQueryZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__BurnExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__BurnFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__ERC1155ReceiverNotImplemented\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__ERC1155ReceiverRejected\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__MintToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__NotOwnerOrApproved\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__SelfApproval\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__TransferExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__TransferToZeroAddress\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"ERC1155 base interface\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155BaseInternal.sol\":\"IERC1155BaseInternal\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/interfaces/IERC1155Internal.sol\":{\"keccak256\":\"0x4d8b4b042d583ea627144b40f3d658dc3167c35c87b6a9efe606f2f48e4c5338\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://46d13fde37a720d99b3ec91f3d95ff1ce4fcbb04a78e323337f8f48a58a78226\",\"dweb:/ipfs/QmQZLAhS1X4QomAgX2Nwk14FWBR8XP8f8yrFMypwxMuCfp\"]},\"contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155BaseInternal.sol\":{\"keccak256\":\"0xc31f629926516726479db8444f20d59c8f69c36c25a36129f04fa21573180530\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e6568919706ea2a3620e8786a15ea4a986eb935444148ba8758b1ec2d6c27ba5\",\"dweb:/ipfs/QmPZmeYZSgXRK86GWfmMP28E2iUbFpWvni2n1H5foDBKYZ\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__ArrayLengthMismatch"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__BalanceQueryZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__BurnExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__BurnFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__ERC1155ReceiverNotImplemented"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__ERC1155ReceiverRejected"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__MintToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__NotOwnerOrApproved"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__SelfApproval"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__TransferExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__TransferToZeroAddress"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "operator",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "bool",
+              "name": "approved",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "ApprovalForAll",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "operator",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "ids",
+              "type": "uint256[]",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "values",
+              "type": "uint256[]",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "TransferBatch",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "operator",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "TransferSingle",
+          "anonymous": false
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155BaseInternal.sol": "IERC1155BaseInternal"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/interfaces/IERC1155Internal.sol": {
+        "keccak256": "0x4d8b4b042d583ea627144b40f3d658dc3167c35c87b6a9efe606f2f48e4c5338",
+        "urls": [
+          "bzz-raw://46d13fde37a720d99b3ec91f3d95ff1ce4fcbb04a78e323337f8f48a58a78226",
+          "dweb:/ipfs/QmQZLAhS1X4QomAgX2Nwk14FWBR8XP8f8yrFMypwxMuCfp"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155BaseInternal.sol": {
+        "keccak256": "0xc31f629926516726479db8444f20d59c8f69c36c25a36129f04fa21573180530",
+        "urls": [
+          "bzz-raw://e6568919706ea2a3620e8786a15ea4a986eb935444148ba8758b1ec2d6c27ba5",
+          "dweb:/ipfs/QmPZmeYZSgXRK86GWfmMP28E2iUbFpWvni2n1H5foDBKYZ"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155BaseInternal.sol",
+    "id": 51573,
+    "exportedSymbols": {
+      "IERC1155BaseInternal": [
+        51572
+      ],
+      "IERC1155Internal": [
+        44758
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:715:372",
+    "nodes": [
+      {
+        "id": 51544,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:372",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 51546,
+        "nodeType": "ImportDirective",
+        "src": "58:74:372",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/interfaces/IERC1155Internal.sol",
+        "file": "../../../interfaces/IERC1155Internal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 51573,
+        "sourceUnit": 44759,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 51545,
+              "name": "IERC1155Internal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 44758,
+              "src": "66:16:372",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 51572,
+        "nodeType": "ContractDefinition",
+        "src": "175:572:372",
+        "nodes": [
+          {
+            "id": 51551,
+            "nodeType": "ErrorDefinition",
+            "src": "232:41:372",
+            "nodes": [],
+            "errorSelector": "7cfc16da",
+            "name": "ERC1155Base__ArrayLengthMismatch",
+            "nameLocation": "238:32:372",
+            "parameters": {
+              "id": 51550,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "270:2:372"
+            }
+          },
+          {
+            "id": 51553,
+            "nodeType": "ErrorDefinition",
+            "src": "278:45:372",
+            "nodes": [],
+            "errorSelector": "db5d8797",
+            "name": "ERC1155Base__BalanceQueryZeroAddress",
+            "nameLocation": "284:36:372",
+            "parameters": {
+              "id": 51552,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "320:2:372"
+            }
+          },
+          {
+            "id": 51555,
+            "nodeType": "ErrorDefinition",
+            "src": "328:40:372",
+            "nodes": [],
+            "errorSelector": "25dfda00",
+            "name": "ERC1155Base__NotOwnerOrApproved",
+            "nameLocation": "334:31:372",
+            "parameters": {
+              "id": 51554,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "365:2:372"
+            }
+          },
+          {
+            "id": 51557,
+            "nodeType": "ErrorDefinition",
+            "src": "373:34:372",
+            "nodes": [],
+            "errorSelector": "f6615266",
+            "name": "ERC1155Base__SelfApproval",
+            "nameLocation": "379:25:372",
+            "parameters": {
+              "id": 51556,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "404:2:372"
+            }
+          },
+          {
+            "id": 51559,
+            "nodeType": "ErrorDefinition",
+            "src": "412:40:372",
+            "nodes": [],
+            "errorSelector": "4190713d",
+            "name": "ERC1155Base__BurnExceedsBalance",
+            "nameLocation": "418:31:372",
+            "parameters": {
+              "id": 51558,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "449:2:372"
+            }
+          },
+          {
+            "id": 51561,
+            "nodeType": "ErrorDefinition",
+            "src": "457:41:372",
+            "nodes": [],
+            "errorSelector": "baa75df7",
+            "name": "ERC1155Base__BurnFromZeroAddress",
+            "nameLocation": "463:32:372",
+            "parameters": {
+              "id": 51560,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "495:2:372"
+            }
+          },
+          {
+            "id": 51563,
+            "nodeType": "ErrorDefinition",
+            "src": "503:45:372",
+            "nodes": [],
+            "errorSelector": "3744db29",
+            "name": "ERC1155Base__ERC1155ReceiverRejected",
+            "nameLocation": "509:36:372",
+            "parameters": {
+              "id": 51562,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "545:2:372"
+            }
+          },
+          {
+            "id": 51565,
+            "nodeType": "ErrorDefinition",
+            "src": "553:51:372",
+            "nodes": [],
+            "errorSelector": "380147a9",
+            "name": "ERC1155Base__ERC1155ReceiverNotImplemented",
+            "nameLocation": "559:42:372",
+            "parameters": {
+              "id": 51564,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "601:2:372"
+            }
+          },
+          {
+            "id": 51567,
+            "nodeType": "ErrorDefinition",
+            "src": "609:39:372",
+            "nodes": [],
+            "errorSelector": "0391df7e",
+            "name": "ERC1155Base__MintToZeroAddress",
+            "nameLocation": "615:30:372",
+            "parameters": {
+              "id": 51566,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "645:2:372"
+            }
+          },
+          {
+            "id": 51569,
+            "nodeType": "ErrorDefinition",
+            "src": "653:44:372",
+            "nodes": [],
+            "errorSelector": "8cd635d8",
+            "name": "ERC1155Base__TransferExceedsBalance",
+            "nameLocation": "659:35:372",
+            "parameters": {
+              "id": 51568,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "694:2:372"
+            }
+          },
+          {
+            "id": 51571,
+            "nodeType": "ErrorDefinition",
+            "src": "702:43:372",
+            "nodes": [],
+            "errorSelector": "f5cadad5",
+            "name": "ERC1155Base__TransferToZeroAddress",
+            "nameLocation": "708:34:372",
+            "parameters": {
+              "id": 51570,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "742:2:372"
+            }
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 51548,
+              "name": "IERC1155Internal",
+              "nameLocations": [
+                "209:16:372"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 44758,
+              "src": "209:16:372"
+            },
+            "id": 51549,
+            "nodeType": "InheritanceSpecifier",
+            "src": "209:16:372"
+          }
+        ],
+        "canonicalName": "IERC1155BaseInternal",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 51547,
+          "nodeType": "StructuredDocumentation",
+          "src": "134:40:372",
+          "text": " @title ERC1155 base interface"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          51572,
+          44758
+        ],
+        "name": "IERC1155BaseInternal",
+        "nameLocation": "185:20:372",
+        "scope": 51573,
+        "usedErrors": [
+          51551,
+          51553,
+          51555,
+          51557,
+          51559,
+          51561,
+          51563,
+          51565,
+          51567,
+          51569,
+          51571
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 372
+}

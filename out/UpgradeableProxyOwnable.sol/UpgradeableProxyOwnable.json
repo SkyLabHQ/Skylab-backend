@@ -1,0 +1,632 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Proxy__ImplementationIsNotContract",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "implementation",
+          "type": "address"
+        }
+      ],
+      "name": "setImplementation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "setImplementation(address)": "d784d426"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"Ownable__NotOwner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Ownable__NotTransitiveOwner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Proxy__ImplementationIsNotContract\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"setImplementation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"setImplementation(address)\":{\"params\":{\"implementation\":\"implementation address\"}}},\"title\":\"Proxy with upgradeable implementation controlled by ERC171 owner\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"setImplementation(address)\":{\"notice\":\"set logic implementation address\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxyOwnable.sol\":\"UpgradeableProxyOwnable\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/access/ownable/IOwnableInternal.sol\":{\"keccak256\":\"0x0983a6fb097ce9707ba4ea1dbf1211603bc0f27d0f96b80e3627211c4cc3f463\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://89b36889e3f57c5560eb4d6e4da11a6cc55a1fa105cfc12890791e7dfeaf9b07\",\"dweb:/ipfs/QmcSi5vDK5qxCsN4TQCdhcTasoX3nNCTKnwww4HVTm6vGc\"]},\"contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol\":{\"keccak256\":\"0x5ea184c231770722d68e1d26f12c92a5728a922cb15ec917973c124febeb1ecd\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c0bad43f787110a77a438e6e2e4345970f601deb94e12651d444b77b766dfb14\",\"dweb:/ipfs/QmW7YjVBNPWhjEuGSRwcYL3csGR8EVr7mDSPDHwvXVgZBx\"]},\"contracts/.cache/solidstate/local/access/ownable/OwnableStorage.sol\":{\"keccak256\":\"0x7069594ee0eef486fb11dd2472f274e8627990a5af95712e0baf865300aff218\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4a09ad96ba21b8f7cbcf9d7c84455424051359f0aa5540950b082c1212301b65\",\"dweb:/ipfs/QmUDWkJAyqNiLb8vrDMphemBuBaZSRvpFvgF4b42AZMHBq\"]},\"contracts/.cache/solidstate/local/interfaces/IERC173.sol\":{\"keccak256\":\"0xf1c1fbf0ec82110c29d549db1fbd8ec728ba0b995dc5f087e0a5464243135dce\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://16c7f3eba0547576833d0c1fddb7ec34aeba4f28b4ce9e878c3bd3ebc9c8d3d1\",\"dweb:/ipfs/Qme79eYLo7dinnhotgC4bvYnCg4doBDShHeCajrf5zpAUF\"]},\"contracts/.cache/solidstate/local/interfaces/IERC173Internal.sol\":{\"keccak256\":\"0xbd1b10afb3f0e0628f077296268a3b3d6ce92b0c481234c03bb93a82c08dbc48\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://72f2c4693435b8899495eeb9222c0fa6596b5e8a9fee001da0fbdecad202ff4b\",\"dweb:/ipfs/QmcugENqTFqiboof9DwTZAdeLn3PSvXCCAm27CJ2UVgZkW\"]},\"contracts/.cache/solidstate/local/proxy/IProxy.sol\":{\"keccak256\":\"0x2a06657ce005059e60a0765fe090240732d910fc38de43ca8fd48804bb86c5e4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f893e1d80c28099c028560f96fdbc77fb28c5f3a5d30197e8274a130aa50c20b\",\"dweb:/ipfs/QmQ2WReybvHmivdwmSdZa4G3sCPJnJ4Ars9fYvb1byUPrw\"]},\"contracts/.cache/solidstate/local/proxy/Proxy.sol\":{\"keccak256\":\"0x4d1e2891667e4e40f4c2c0279e905d6214eed2089762318c7a18897615ade0ec\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://33dc0fb90fc0b5e83783b63f8a4f1689c034d8c02f2d17ed121737ed7a350c14\",\"dweb:/ipfs/QmZFMYq8e8QVsZwCD8zdh2ZKnpGEHc7SSoq8KdNddJBtJX\"]},\"contracts/.cache/solidstate/local/proxy/upgradeable/IUpgradeableProxy.sol\":{\"keccak256\":\"0x41b1d309874637764392536479fa12f83f1988eea786856c8cbf0056423afba0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5f0a90307e632bd2cefc78d4a20e67476f76d8d7ffe921641c5efa9ef4853470\",\"dweb:/ipfs/QmRw1bLD6rY1mfmbeQv6Swv7c9cW3ij4tRfZvTQPyPYGAr\"]},\"contracts/.cache/solidstate/local/proxy/upgradeable/IUpgradeableProxyOwnable.sol\":{\"keccak256\":\"0x441d8c3cdada4ed71e0fae7ab62d9b9344ff738243c6788dab9c12044fb89ff3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://eecb5ef8a1399d5b3ee47b97f3e395303e2bc9329c3d9029fe3dd08105323127\",\"dweb:/ipfs/Qmc18o8heaWeTn73pdJhJRGHi932krCPRkk5mVMT8H28na\"]},\"contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxy.sol\":{\"keccak256\":\"0x73545366057d96e3c4d39c577dc7adb561a2e163a54656388f044dca5d01ccb4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6f17b8fd6dceed27f9a2677702f584574c0d8ef51dd071a1317b0ead780cf198\",\"dweb:/ipfs/QmTsukGdeBvFC7MUaAyVTcGKjkDzFmuifUhL2mdkgChCyP\"]},\"contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxyOwnable.sol\":{\"keccak256\":\"0x13d25ad3f9e41d50f1e08b35ead49773a5e3ad79022ce725c8b4bcb7b0335c94\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6dc2baa94ad0975c5a24193bee4e42f3a47b102bb1ad2d14677f267236f77944\",\"dweb:/ipfs/QmV7Y6qbzVk1d8KQdxrg9t9GPGHVGRNh1fRNwTYmVAGmsv\"]},\"contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxyStorage.sol\":{\"keccak256\":\"0x95f4e49d6c2c404366c42a2c415e89a11f177ebc6c2152b862903cca099f64d6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ad7103f973615f0593af6f2d19f0e4abdc91c12be294e6c2ad25bf8bedd99945\",\"dweb:/ipfs/QmPzkAyaRu7XPEzzGsiYiNdFfAKxJoib6CdX25ordCaXZx\"]},\"contracts/.cache/solidstate/local/utils/AddressUtils.sol\":{\"keccak256\":\"0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e\",\"dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF\"]},\"contracts/.cache/solidstate/local/utils/UintUtils.sol\":{\"keccak256\":\"0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2\",\"dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotOwner"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotTransitiveOwner"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Proxy__ImplementationIsNotContract"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "payable",
+          "type": "fallback"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "implementation",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setImplementation"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "setImplementation(address)": {
+            "params": {
+              "implementation": "implementation address"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "setImplementation(address)": {
+            "notice": "set logic implementation address"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxyOwnable.sol": "UpgradeableProxyOwnable"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/access/ownable/IOwnableInternal.sol": {
+        "keccak256": "0x0983a6fb097ce9707ba4ea1dbf1211603bc0f27d0f96b80e3627211c4cc3f463",
+        "urls": [
+          "bzz-raw://89b36889e3f57c5560eb4d6e4da11a6cc55a1fa105cfc12890791e7dfeaf9b07",
+          "dweb:/ipfs/QmcSi5vDK5qxCsN4TQCdhcTasoX3nNCTKnwww4HVTm6vGc"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol": {
+        "keccak256": "0x5ea184c231770722d68e1d26f12c92a5728a922cb15ec917973c124febeb1ecd",
+        "urls": [
+          "bzz-raw://c0bad43f787110a77a438e6e2e4345970f601deb94e12651d444b77b766dfb14",
+          "dweb:/ipfs/QmW7YjVBNPWhjEuGSRwcYL3csGR8EVr7mDSPDHwvXVgZBx"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/access/ownable/OwnableStorage.sol": {
+        "keccak256": "0x7069594ee0eef486fb11dd2472f274e8627990a5af95712e0baf865300aff218",
+        "urls": [
+          "bzz-raw://4a09ad96ba21b8f7cbcf9d7c84455424051359f0aa5540950b082c1212301b65",
+          "dweb:/ipfs/QmUDWkJAyqNiLb8vrDMphemBuBaZSRvpFvgF4b42AZMHBq"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC173.sol": {
+        "keccak256": "0xf1c1fbf0ec82110c29d549db1fbd8ec728ba0b995dc5f087e0a5464243135dce",
+        "urls": [
+          "bzz-raw://16c7f3eba0547576833d0c1fddb7ec34aeba4f28b4ce9e878c3bd3ebc9c8d3d1",
+          "dweb:/ipfs/Qme79eYLo7dinnhotgC4bvYnCg4doBDShHeCajrf5zpAUF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC173Internal.sol": {
+        "keccak256": "0xbd1b10afb3f0e0628f077296268a3b3d6ce92b0c481234c03bb93a82c08dbc48",
+        "urls": [
+          "bzz-raw://72f2c4693435b8899495eeb9222c0fa6596b5e8a9fee001da0fbdecad202ff4b",
+          "dweb:/ipfs/QmcugENqTFqiboof9DwTZAdeLn3PSvXCCAm27CJ2UVgZkW"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/IProxy.sol": {
+        "keccak256": "0x2a06657ce005059e60a0765fe090240732d910fc38de43ca8fd48804bb86c5e4",
+        "urls": [
+          "bzz-raw://f893e1d80c28099c028560f96fdbc77fb28c5f3a5d30197e8274a130aa50c20b",
+          "dweb:/ipfs/QmQ2WReybvHmivdwmSdZa4G3sCPJnJ4Ars9fYvb1byUPrw"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/Proxy.sol": {
+        "keccak256": "0x4d1e2891667e4e40f4c2c0279e905d6214eed2089762318c7a18897615ade0ec",
+        "urls": [
+          "bzz-raw://33dc0fb90fc0b5e83783b63f8a4f1689c034d8c02f2d17ed121737ed7a350c14",
+          "dweb:/ipfs/QmZFMYq8e8QVsZwCD8zdh2ZKnpGEHc7SSoq8KdNddJBtJX"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/upgradeable/IUpgradeableProxy.sol": {
+        "keccak256": "0x41b1d309874637764392536479fa12f83f1988eea786856c8cbf0056423afba0",
+        "urls": [
+          "bzz-raw://5f0a90307e632bd2cefc78d4a20e67476f76d8d7ffe921641c5efa9ef4853470",
+          "dweb:/ipfs/QmRw1bLD6rY1mfmbeQv6Swv7c9cW3ij4tRfZvTQPyPYGAr"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/upgradeable/IUpgradeableProxyOwnable.sol": {
+        "keccak256": "0x441d8c3cdada4ed71e0fae7ab62d9b9344ff738243c6788dab9c12044fb89ff3",
+        "urls": [
+          "bzz-raw://eecb5ef8a1399d5b3ee47b97f3e395303e2bc9329c3d9029fe3dd08105323127",
+          "dweb:/ipfs/Qmc18o8heaWeTn73pdJhJRGHi932krCPRkk5mVMT8H28na"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxy.sol": {
+        "keccak256": "0x73545366057d96e3c4d39c577dc7adb561a2e163a54656388f044dca5d01ccb4",
+        "urls": [
+          "bzz-raw://6f17b8fd6dceed27f9a2677702f584574c0d8ef51dd071a1317b0ead780cf198",
+          "dweb:/ipfs/QmTsukGdeBvFC7MUaAyVTcGKjkDzFmuifUhL2mdkgChCyP"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxyOwnable.sol": {
+        "keccak256": "0x13d25ad3f9e41d50f1e08b35ead49773a5e3ad79022ce725c8b4bcb7b0335c94",
+        "urls": [
+          "bzz-raw://6dc2baa94ad0975c5a24193bee4e42f3a47b102bb1ad2d14677f267236f77944",
+          "dweb:/ipfs/QmV7Y6qbzVk1d8KQdxrg9t9GPGHVGRNh1fRNwTYmVAGmsv"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxyStorage.sol": {
+        "keccak256": "0x95f4e49d6c2c404366c42a2c415e89a11f177ebc6c2152b862903cca099f64d6",
+        "urls": [
+          "bzz-raw://ad7103f973615f0593af6f2d19f0e4abdc91c12be294e6c2ad25bf8bedd99945",
+          "dweb:/ipfs/QmPzkAyaRu7XPEzzGsiYiNdFfAKxJoib6CdX25ordCaXZx"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/AddressUtils.sol": {
+        "keccak256": "0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c",
+        "urls": [
+          "bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e",
+          "dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/UintUtils.sol": {
+        "keccak256": "0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c",
+        "urls": [
+          "bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2",
+          "dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxyOwnable.sol",
+    "id": 48778,
+    "exportedSymbols": {
+      "IUpgradeableProxyOwnable": [
+        48655
+      ],
+      "OwnableInternal": [
+        37887
+      ],
+      "UpgradeableProxy": [
+        48707
+      ],
+      "UpgradeableProxyOwnable": [
+        48777
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:664:327",
+    "nodes": [
+      {
+        "id": 48750,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:327",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 48752,
+        "nodeType": "ImportDirective",
+        "src": "58:73:327",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol",
+        "file": "../../access/ownable/OwnableInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 48778,
+        "sourceUnit": 37888,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 48751,
+              "name": "OwnableInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 37887,
+              "src": "66:15:327",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 48754,
+        "nodeType": "ImportDirective",
+        "src": "132:72:327",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/proxy/upgradeable/IUpgradeableProxyOwnable.sol",
+        "file": "./IUpgradeableProxyOwnable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 48778,
+        "sourceUnit": 48656,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 48753,
+              "name": "IUpgradeableProxyOwnable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 48655,
+              "src": "140:24:327",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 48756,
+        "nodeType": "ImportDirective",
+        "src": "205:56:327",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/proxy/upgradeable/UpgradeableProxy.sol",
+        "file": "./UpgradeableProxy.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 48778,
+        "sourceUnit": 48708,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 48755,
+              "name": "UpgradeableProxy",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 48707,
+              "src": "213:16:327",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 48777,
+        "nodeType": "ContractDefinition",
+        "src": "346:350:327",
+        "nodes": [
+          {
+            "id": 48776,
+            "nodeType": "FunctionDefinition",
+            "src": "573:121:327",
+            "nodes": [],
+            "body": {
+              "id": 48775,
+              "nodeType": "Block",
+              "src": "643:51:327",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 48772,
+                        "name": "implementation",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 48766,
+                        "src": "672:14:327",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 48771,
+                      "name": "_setImplementation",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 48706,
+                      "src": "653:18:327",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 48773,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "653:34:327",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 48774,
+                  "nodeType": "ExpressionStatement",
+                  "src": "653:34:327"
+                }
+              ]
+            },
+            "baseFunctions": [
+              48654
+            ],
+            "documentation": {
+              "id": 48764,
+              "nodeType": "StructuredDocumentation",
+              "src": "457:111:327",
+              "text": " @notice set logic implementation address\n @param implementation implementation address"
+            },
+            "functionSelector": "d784d426",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 48769,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 48768,
+                  "name": "onlyOwner",
+                  "nameLocations": [
+                    "633:9:327"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 37790,
+                  "src": "633:9:327"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "633:9:327"
+              }
+            ],
+            "name": "setImplementation",
+            "nameLocation": "582:17:327",
+            "parameters": {
+              "id": 48767,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 48766,
+                  "mutability": "mutable",
+                  "name": "implementation",
+                  "nameLocation": "608:14:327",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 48776,
+                  "src": "600:22:327",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 48765,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "600:7:327",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "599:24:327"
+            },
+            "returnParameters": {
+              "id": 48770,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "643:0:327"
+            },
+            "scope": 48777,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 48758,
+              "name": "IUpgradeableProxyOwnable",
+              "nameLocations": [
+                "391:24:327"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 48655,
+              "src": "391:24:327"
+            },
+            "id": 48759,
+            "nodeType": "InheritanceSpecifier",
+            "src": "391:24:327"
+          },
+          {
+            "baseName": {
+              "id": 48760,
+              "name": "UpgradeableProxy",
+              "nameLocations": [
+                "417:16:327"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 48707,
+              "src": "417:16:327"
+            },
+            "id": 48761,
+            "nodeType": "InheritanceSpecifier",
+            "src": "417:16:327"
+          },
+          {
+            "baseName": {
+              "id": 48762,
+              "name": "OwnableInternal",
+              "nameLocations": [
+                "435:15:327"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 37887,
+              "src": "435:15:327"
+            },
+            "id": 48763,
+            "nodeType": "InheritanceSpecifier",
+            "src": "435:15:327"
+          }
+        ],
+        "canonicalName": "UpgradeableProxyOwnable",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 48757,
+          "nodeType": "StructuredDocumentation",
+          "src": "263:82:327",
+          "text": " @title Proxy with upgradeable implementation controlled by ERC171 owner"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          48777,
+          37887,
+          37695,
+          44903,
+          48707,
+          46203,
+          48655,
+          48642,
+          46164
+        ],
+        "name": "UpgradeableProxyOwnable",
+        "nameLocation": "364:23:327",
+        "scope": 48778,
+        "usedErrors": [
+          37692,
+          37694,
+          46160
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 327
+}

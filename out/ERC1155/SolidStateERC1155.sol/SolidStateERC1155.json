@@ -1,0 +1,2098 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ERC1155Base__ArrayLengthMismatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__BalanceQueryZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__BurnExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__BurnFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__ERC1155ReceiverNotImplemented",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__ERC1155ReceiverRejected",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__MintToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__NotOwnerOrApproved",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__SelfApproval",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__TransferExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC1155Base__TransferToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC165Base__InvalidInterfaceId",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "EnumerableSet__IndexOutOfBounds",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "approved",
+          "type": "bool"
+        }
+      ],
+      "name": "ApprovalForAll",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "values",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "TransferBatch",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "TransferSingle",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "URI",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "accountsByToken",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "accounts",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "balanceOfBatch",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        }
+      ],
+      "name": "isApprovedForAll",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "ids",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "amounts",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "safeBatchTransferFrom",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "safeTransferFrom",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "name": "setApprovalForAll",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "tokensByAccount",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "totalHolders",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "uri",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "accountsByToken(uint256)": "6dcfd841",
+    "balanceOf(address,uint256)": "00fdd58e",
+    "balanceOfBatch(address[],uint256[])": "4e1273f4",
+    "isApprovedForAll(address,address)": "e985e9c5",
+    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": "2eb2c2d6",
+    "safeTransferFrom(address,address,uint256,uint256,bytes)": "f242432a",
+    "setApprovalForAll(address,bool)": "a22cb465",
+    "supportsInterface(bytes4)": "01ffc9a7",
+    "tokensByAccount(address)": "85bff2e7",
+    "totalHolders(uint256)": "13ba55df",
+    "totalSupply(uint256)": "bd85b039",
+    "uri(uint256)": "0e89341c"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"ERC1155Base__ArrayLengthMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__BalanceQueryZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__BurnExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__BurnFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__ERC1155ReceiverNotImplemented\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__ERC1155ReceiverRejected\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__MintToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__NotOwnerOrApproved\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__SelfApproval\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__TransferExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC1155Base__TransferToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC165Base__InvalidInterfaceId\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"EnumerableSet__IndexOutOfBounds\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"approved\",\"type\":\"bool\"}],\"name\":\"ApprovalForAll\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"values\",\"type\":\"uint256[]\"}],\"name\":\"TransferBatch\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"TransferSingle\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"accountsByToken\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"accounts\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"}],\"name\":\"balanceOfBatch\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"isApprovedForAll\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"ids\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeBatchTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"safeTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"}],\"name\":\"setApprovalForAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"tokensByAccount\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"totalHolders\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"}],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"accountsByToken(uint256)\":{\"params\":{\"id\":\"token id to query\"},\"returns\":{\"_0\":\"list of holder addresses\"}},\"balanceOf(address,uint256)\":{\"params\":{\"account\":\"address to query\",\"id\":\"token to query\"},\"returns\":{\"_0\":\"token balance\"}},\"balanceOfBatch(address[],uint256[])\":{\"params\":{\"accounts\":\"addresss to query\",\"ids\":\"tokens to query\"},\"returns\":{\"_0\":\"token balances\"}},\"isApprovedForAll(address,address)\":{\"params\":{\"account\":\"address to query for approval granted\",\"operator\":\"address to query for approval received\"},\"returns\":{\"_0\":\"whether operator is approved to spend tokens held by account\"}},\"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)\":{\"params\":{\"amounts\":\"list of quantities of tokens to transfer\",\"data\":\"data payload\",\"from\":\"sender of tokens\",\"ids\":\"list of token IDs\",\"to\":\"receiver of tokens\"}},\"safeTransferFrom(address,address,uint256,uint256,bytes)\":{\"params\":{\"amount\":\"quantity of tokens to transfer\",\"data\":\"data payload\",\"from\":\"sender of tokens\",\"id\":\"token ID\",\"to\":\"receiver of tokens\"}},\"setApprovalForAll(address,bool)\":{\"params\":{\"operator\":\"address whose approval status to update\",\"status\":\"whether operator should be considered approved\"}},\"supportsInterface(bytes4)\":{\"params\":{\"interfaceId\":\"interface id\"},\"returns\":{\"_0\":\"bool whether interface is supported\"}},\"tokensByAccount(address)\":{\"params\":{\"account\":\"address to query\"},\"returns\":{\"_0\":\"list of token ids\"}},\"totalHolders(uint256)\":{\"params\":{\"id\":\"token id to query\"},\"returns\":{\"_0\":\"quantity of holders\"}},\"totalSupply(uint256)\":{\"params\":{\"id\":\"token id to query\"},\"returns\":{\"_0\":\"token supply\"}}},\"title\":\"SolidState ERC1155 implementation\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"accountsByToken(uint256)\":{\"notice\":\"query holders of given token\"},\"balanceOf(address,uint256)\":{\"notice\":\"query the balance of given token held by given address\"},\"balanceOfBatch(address[],uint256[])\":{\"notice\":\"query the balances of given tokens held by given addresses\"},\"isApprovedForAll(address,address)\":{\"notice\":\"query approval status of given operator with respect to given address\"},\"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)\":{\"notice\":\"transfer batch of tokens between given addresses, checking for ERC1155Receiver implementation if applicable\"},\"safeTransferFrom(address,address,uint256,uint256,bytes)\":{\"notice\":\"transfer tokens between given addresses, checking for ERC1155Receiver implementation if applicable\"},\"setApprovalForAll(address,bool)\":{\"notice\":\"grant approval to or revoke approval from given operator to spend held tokens\"},\"supportsInterface(bytes4)\":{\"notice\":\"query whether contract has registered support for given interface\"},\"tokensByAccount(address)\":{\"notice\":\"query tokens held by given address\"},\"totalHolders(uint256)\":{\"notice\":\"query total number of holders for given token\"},\"totalSupply(uint256)\":{\"notice\":\"query total minted supply of given token\"},\"uri(uint256)\":{\"notice\":\"inheritdoc IERC1155Metadata\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/token/ERC1155/SolidStateERC1155.sol\":\"SolidStateERC1155\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/data/EnumerableSet.sol\":{\"keccak256\":\"0x326ce85b4b1343d8a50bc7ab25f74e7ba71cf4d5b09b3e9f4393d1ca7a9427ef\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0523ca1759b659b81d271a504053a1382d4b0ef128ec85923924363df1285053\",\"dweb:/ipfs/QmeFXAehR5XhpmJRq1V48iPsVkWrg4TyQLzxWKDuYGiBVA\"]},\"contracts/.cache/solidstate/local/interfaces/IERC1155.sol\":{\"keccak256\":\"0xc45c6358fc0b76b25f5a0014b5b85859ade082d4b9c68a1567b41f3df933ef08\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a83868f3dc7d48ab5f0238b8b2d2cf2b9764d93c793b3c7ceca7c881c2bd67df\",\"dweb:/ipfs/QmbVK9n71Fg1TfM8LGQ4awVeyFrzVNtqSsjtWTiut6sUkj\"]},\"contracts/.cache/solidstate/local/interfaces/IERC1155Internal.sol\":{\"keccak256\":\"0x4d8b4b042d583ea627144b40f3d658dc3167c35c87b6a9efe606f2f48e4c5338\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://46d13fde37a720d99b3ec91f3d95ff1ce4fcbb04a78e323337f8f48a58a78226\",\"dweb:/ipfs/QmQZLAhS1X4QomAgX2Nwk14FWBR8XP8f8yrFMypwxMuCfp\"]},\"contracts/.cache/solidstate/local/interfaces/IERC1155Receiver.sol\":{\"keccak256\":\"0x892b18ee4475b9702fab30298bd0fa5bd7f90871b47b0bb7f378fcd64fad9fb9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://26c9a1a84e7fbce8b7d848f393de6d898401d97f2fc116c6594211c65690abae\",\"dweb:/ipfs/Qmb9mq3b6HeipzaqLt4pnfGyfNGyA6hckJ7S6JtSCTyvgQ\"]},\"contracts/.cache/solidstate/local/interfaces/IERC165.sol\":{\"keccak256\":\"0x202330e82a9a4bbfd02818be9b57bb2bd9478855d88a35763b1b9d4cf546b474\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://db938f09d621674a5bc0982a318caa3e0a42423cf0fbbf266c3b98cc4bb14af8\",\"dweb:/ipfs/QmVQRaWF652Vg88XRWRwGJZUnGnvbKndPSGtbn6qo8LmLz\"]},\"contracts/.cache/solidstate/local/interfaces/IERC165Internal.sol\":{\"keccak256\":\"0x626713a260515152d863adc259f8cc8495a19b763ff7c02733b85e46284fa3f1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://92bb4d794a939c24783bc14a85a7a9f5cd2e2b0799e1da61f31e9dd658f91b84\",\"dweb:/ipfs/QmYyQbqUWddcQFMa36j4wNju4ivUZ6r2UyefbY9aJ2mBsG\"]},\"contracts/.cache/solidstate/local/introspection/ERC165/base/ERC165Base.sol\":{\"keccak256\":\"0x21bc2d50b968c56bba784628eda9539e3e1787cb02046b77d118487d7363fb01\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a3a741988f8ef9cb28e362093df76594368197814f2aa89df034c1177d2f44c4\",\"dweb:/ipfs/QmNVXsKue9XgbH2WRCKQtrSHSSearf3L5cAf3AeYg9zgKw\"]},\"contracts/.cache/solidstate/local/introspection/ERC165/base/ERC165BaseInternal.sol\":{\"keccak256\":\"0xbfa7e958e4116c647f44831f73e8d47e81db2455b0de7f8949094ede6de37f03\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1b7add8f7efbff7c65c69b6e65de21f94ac7dc08d9b67e4fda8485ab08b13c8d\",\"dweb:/ipfs/QmPsZgbGWgWyjSZP9NNpWrKriAuGETnDAdD9dLMuYsNggN\"]},\"contracts/.cache/solidstate/local/introspection/ERC165/base/ERC165BaseStorage.sol\":{\"keccak256\":\"0x47dd23b677e2fb240e0f92971783830f5a29b9b50c06eca86fa2b6baa0146f38\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1849ef9cf1b70c39778b01c1c1a6a60964290f51814b6bfefd7b036ec7974408\",\"dweb:/ipfs/QmcxkHJpZZdoQHwr62R5f1qRM8fALN67L2vBbEoLJ3nFj7\"]},\"contracts/.cache/solidstate/local/introspection/ERC165/base/IERC165Base.sol\":{\"keccak256\":\"0x20b5586e912b7604696452e9eae4d2b09ad53160763d4982b6ef9efa59a427d3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e45d6c5d08a0afc612207ac69f83eaa4281d25238b08e48710a19c4b8ebea980\",\"dweb:/ipfs/QmPdniT21DjFt4zg7cZxCMhVsh9uCWq1AC6upB6ufG56n8\"]},\"contracts/.cache/solidstate/local/introspection/ERC165/base/IERC165BaseInternal.sol\":{\"keccak256\":\"0x5f085ac880fa7aa82968be5a64739cafe55c63470d53d4cad6361e0bf597c4a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://92469eddb373614e08b68732aa4a74491805160e5d9551dc3bc9fffcd831928d\",\"dweb:/ipfs/QmZWV3TUzr6gQ42tqyERJoqQUabRLXYmpY1uAKEVZBobQb\"]},\"contracts/.cache/solidstate/local/token/ERC1155/ISolidStateERC1155.sol\":{\"keccak256\":\"0x9be79229b30d0216aff1effca638d729e5f4f32da4cbdd97a2de3d17504b70ad\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://65dc1523d3f5ac1d9559519093f110c641b275fa45e081a00747a6bbd585708c\",\"dweb:/ipfs/QmejrJg8mFcUxDQocUhceGiArr8DCfHjUoveUq4ebQ6CBB\"]},\"contracts/.cache/solidstate/local/token/ERC1155/SolidStateERC1155.sol\":{\"keccak256\":\"0x17fbeb4678ddf2f2d3757ebb8a56f04bfb77556f6a4e308d6c4a5b5c00fd46f7\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://13cd93089d272a8a5e3d8db3bb05eff222c4ee3db138d3cdb79ad7250d5c2b49\",\"dweb:/ipfs/Qmd5xrVNnKKB8CoAzvTCL3GVZxVA5MRMbgWAit671FEbCG\"]},\"contracts/.cache/solidstate/local/token/ERC1155/base/ERC1155Base.sol\":{\"keccak256\":\"0xafd02528db0f2c935210d049fb300764c71fd18b9ac61bd940e024093d86276d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d00ee407cd2fab559169236f36c0b906bb7ad9b91463074b4acb58e10a1e9a35\",\"dweb:/ipfs/QmcJLaMyDg3dxhFd97uRBw7rxBK5pXajwVoW8KE6ZPh43X\"]},\"contracts/.cache/solidstate/local/token/ERC1155/base/ERC1155BaseInternal.sol\":{\"keccak256\":\"0x23d42f28eab83eae1aac85cedc6b109ab816fd75532d81fee6957a445f49fc3c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b1a0721942b95e96107fabb44b2fd99d0f8fe6510e1b2e0a2277292f315e5e73\",\"dweb:/ipfs/QmYjN56M2afVgVZFnMujJAt98FGf1DrHAEqbkJZmysHq4o\"]},\"contracts/.cache/solidstate/local/token/ERC1155/base/ERC1155BaseStorage.sol\":{\"keccak256\":\"0x02b0356ffade65659c8fbf1aceb4a40cd689e02bae07585655b68b37b99c64c0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4b0193a2e47f3ef6dd064d2138a189601740d3b4978b5ba41d90ea62248f8490\",\"dweb:/ipfs/QmTKjjz1vRa38QJdvhHc7BRhgihQgzG2TqAm8BC1yvEPvW\"]},\"contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155Base.sol\":{\"keccak256\":\"0x9b995b146cdda23078313138f12e49695a69657040c3415e62327306e6772f2f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://334ddcff99e3680981d1a126a4e8fb2753336f6887ce4ea172f304402eafe024\",\"dweb:/ipfs/QmX6qTPnmwwVMMbUiysdWhLx5svHwg2HpqTEHvTpWPPap5\"]},\"contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155BaseInternal.sol\":{\"keccak256\":\"0xc31f629926516726479db8444f20d59c8f69c36c25a36129f04fa21573180530\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e6568919706ea2a3620e8786a15ea4a986eb935444148ba8758b1ec2d6c27ba5\",\"dweb:/ipfs/QmPZmeYZSgXRK86GWfmMP28E2iUbFpWvni2n1H5foDBKYZ\"]},\"contracts/.cache/solidstate/local/token/ERC1155/enumerable/ERC1155Enumerable.sol\":{\"keccak256\":\"0xbe44a4b1f76452320b3ca2abe720d810b6a3483308692f7cebdea088ae21749b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://358937b42bceb57731254d4658d2bba4407b071b42cf1e4da62ad6d2c3bb2d95\",\"dweb:/ipfs/QmSJVX9YzTEqdCvDV6fqhrP1zabvosNvWTz6i2QuQQ6yny\"]},\"contracts/.cache/solidstate/local/token/ERC1155/enumerable/ERC1155EnumerableInternal.sol\":{\"keccak256\":\"0xa38635b3190dff60e5df91cf4b79f1c80ede8f6581d37b80a87c65577887be9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fd4c2d202134400da91acd22b4e63f1caed13df6fcc21a1be62888cb314d237e\",\"dweb:/ipfs/QmbHuE92qEchAuzRQt9g4LehDpzjTwJRPawdZfctNBXmvF\"]},\"contracts/.cache/solidstate/local/token/ERC1155/enumerable/ERC1155EnumerableStorage.sol\":{\"keccak256\":\"0xcd0504a596d42eb79022f6c2607b1f2d3da6605657e8fbde3a64bee73c823474\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e33922ab3f45781c61d8408908cf89c0d0be43dfc849e4d426e99c33167cd5d9\",\"dweb:/ipfs/QmSGV61L72SnsTvTiaMq4Dd76tUMa6aHiVxKDrv8HQVi1o\"]},\"contracts/.cache/solidstate/local/token/ERC1155/enumerable/IERC1155Enumerable.sol\":{\"keccak256\":\"0x89cf371e45e4dbf6fa295b2ad53e3ddbb5a294bcb8c37799e777c544656720ba\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f7ebae1d0419aea9c9472921b07a4c394ffb0fc59995000ad2eab9aaa55f5214\",\"dweb:/ipfs/QmTmDz9Z4WXRHUyDyRbGtcd7YS3usi9TekQnuga7vtcDNo\"]},\"contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155Metadata.sol\":{\"keccak256\":\"0x6cd9c889dbc0e244d23d298edb8aa9a51d8d1871bc64cc8afc5ab5ce337e96d1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1ec4dda6da7697a46c6b14e43327b2a08dab1a0432420a15d45bd11d1460ab0f\",\"dweb:/ipfs/QmU3VgS22MUYvDgSUEvJvMNPBL4hpeygKzUviSoGBV11ei\"]},\"contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataInternal.sol\":{\"keccak256\":\"0x602da6e8790cf1516729cc6cc5c914a122b0103c82bbe76f6d0352f2c2c71d21\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://cdfcabaefd8ccbc1baff99d63bee7f414eebdde9884e6e1b10012b3dfd700bb4\",\"dweb:/ipfs/QmXaHPjuR8KknAULPoxK714W2Zr3n8t25Fo5wUkxUAcVTA\"]},\"contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataStorage.sol\":{\"keccak256\":\"0xd90329704ba78b0b9b41353668446b0e0891d8e21e045d6a6a07379675964384\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://244cf56b50f50741ab02609bfc59ca67e3b46919c6a24a5185e12ea2f8d9f4e8\",\"dweb:/ipfs/QmdR6KnsLB2AFDifT4FUyjY9fZJvVC9EM3b6eWuwpCSrZ9\"]},\"contracts/.cache/solidstate/local/token/ERC1155/metadata/IERC1155Metadata.sol\":{\"keccak256\":\"0x3f1b6410b94e4dddd95052a0bcea80ad8f57ed3af9991d7a32f1cc206aeb92b6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fb61f620fe37f3d97719b0d2ddc35ecdd74d452efca4b332797fa9541b59351c\",\"dweb:/ipfs/QmefFJLQRmJqHuHsKLPVR8Rfg3vC16z3DtURGBbsCXtP8W\"]},\"contracts/.cache/solidstate/local/token/ERC1155/metadata/IERC1155MetadataInternal.sol\":{\"keccak256\":\"0x394093a86fbfebdcda356fe9407480d81434aa162afc6a3e8efbf72a4c05b98d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://afd12f43c0ba7b94ebd701da54b200074f464c16861bb14adcf5593f0f854c17\",\"dweb:/ipfs/QmWCmvKp1dRce5uaGrNog1pmt5pQCzsjcFuALJqn6kLxLD\"]},\"contracts/.cache/solidstate/local/utils/AddressUtils.sol\":{\"keccak256\":\"0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e\",\"dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF\"]},\"contracts/.cache/solidstate/local/utils/UintUtils.sol\":{\"keccak256\":\"0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2\",\"dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__ArrayLengthMismatch"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__BalanceQueryZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__BurnExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__BurnFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__ERC1155ReceiverNotImplemented"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__ERC1155ReceiverRejected"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__MintToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__NotOwnerOrApproved"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__SelfApproval"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__TransferExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC1155Base__TransferToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC165Base__InvalidInterfaceId"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "EnumerableSet__IndexOutOfBounds"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "operator",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "bool",
+              "name": "approved",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "ApprovalForAll",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "operator",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "ids",
+              "type": "uint256[]",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "values",
+              "type": "uint256[]",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "TransferBatch",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "operator",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "TransferSingle",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "value",
+              "type": "string",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "URI",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "accountsByToken",
+          "outputs": [
+            {
+              "internalType": "address[]",
+              "name": "",
+              "type": "address[]"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "balanceOf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "accounts",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "ids",
+              "type": "uint256[]"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "balanceOfBatch",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "operator",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "isApprovedForAll",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "ids",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "amounts",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "safeBatchTransferFrom"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "safeTransferFrom"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "operator",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "status",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "setApprovalForAll"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes4",
+              "name": "interfaceId",
+              "type": "bytes4"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "supportsInterface",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "tokensByAccount",
+          "outputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "totalHolders",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "totalSupply",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "uri",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "accountsByToken(uint256)": {
+            "params": {
+              "id": "token id to query"
+            },
+            "returns": {
+              "_0": "list of holder addresses"
+            }
+          },
+          "balanceOf(address,uint256)": {
+            "params": {
+              "account": "address to query",
+              "id": "token to query"
+            },
+            "returns": {
+              "_0": "token balance"
+            }
+          },
+          "balanceOfBatch(address[],uint256[])": {
+            "params": {
+              "accounts": "addresss to query",
+              "ids": "tokens to query"
+            },
+            "returns": {
+              "_0": "token balances"
+            }
+          },
+          "isApprovedForAll(address,address)": {
+            "params": {
+              "account": "address to query for approval granted",
+              "operator": "address to query for approval received"
+            },
+            "returns": {
+              "_0": "whether operator is approved to spend tokens held by account"
+            }
+          },
+          "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+            "params": {
+              "amounts": "list of quantities of tokens to transfer",
+              "data": "data payload",
+              "from": "sender of tokens",
+              "ids": "list of token IDs",
+              "to": "receiver of tokens"
+            }
+          },
+          "safeTransferFrom(address,address,uint256,uint256,bytes)": {
+            "params": {
+              "amount": "quantity of tokens to transfer",
+              "data": "data payload",
+              "from": "sender of tokens",
+              "id": "token ID",
+              "to": "receiver of tokens"
+            }
+          },
+          "setApprovalForAll(address,bool)": {
+            "params": {
+              "operator": "address whose approval status to update",
+              "status": "whether operator should be considered approved"
+            }
+          },
+          "supportsInterface(bytes4)": {
+            "params": {
+              "interfaceId": "interface id"
+            },
+            "returns": {
+              "_0": "bool whether interface is supported"
+            }
+          },
+          "tokensByAccount(address)": {
+            "params": {
+              "account": "address to query"
+            },
+            "returns": {
+              "_0": "list of token ids"
+            }
+          },
+          "totalHolders(uint256)": {
+            "params": {
+              "id": "token id to query"
+            },
+            "returns": {
+              "_0": "quantity of holders"
+            }
+          },
+          "totalSupply(uint256)": {
+            "params": {
+              "id": "token id to query"
+            },
+            "returns": {
+              "_0": "token supply"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "accountsByToken(uint256)": {
+            "notice": "query holders of given token"
+          },
+          "balanceOf(address,uint256)": {
+            "notice": "query the balance of given token held by given address"
+          },
+          "balanceOfBatch(address[],uint256[])": {
+            "notice": "query the balances of given tokens held by given addresses"
+          },
+          "isApprovedForAll(address,address)": {
+            "notice": "query approval status of given operator with respect to given address"
+          },
+          "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+            "notice": "transfer batch of tokens between given addresses, checking for ERC1155Receiver implementation if applicable"
+          },
+          "safeTransferFrom(address,address,uint256,uint256,bytes)": {
+            "notice": "transfer tokens between given addresses, checking for ERC1155Receiver implementation if applicable"
+          },
+          "setApprovalForAll(address,bool)": {
+            "notice": "grant approval to or revoke approval from given operator to spend held tokens"
+          },
+          "supportsInterface(bytes4)": {
+            "notice": "query whether contract has registered support for given interface"
+          },
+          "tokensByAccount(address)": {
+            "notice": "query tokens held by given address"
+          },
+          "totalHolders(uint256)": {
+            "notice": "query total number of holders for given token"
+          },
+          "totalSupply(uint256)": {
+            "notice": "query total minted supply of given token"
+          },
+          "uri(uint256)": {
+            "notice": "inheritdoc IERC1155Metadata"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/token/ERC1155/SolidStateERC1155.sol": "SolidStateERC1155"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/data/EnumerableSet.sol": {
+        "keccak256": "0x326ce85b4b1343d8a50bc7ab25f74e7ba71cf4d5b09b3e9f4393d1ca7a9427ef",
+        "urls": [
+          "bzz-raw://0523ca1759b659b81d271a504053a1382d4b0ef128ec85923924363df1285053",
+          "dweb:/ipfs/QmeFXAehR5XhpmJRq1V48iPsVkWrg4TyQLzxWKDuYGiBVA"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC1155.sol": {
+        "keccak256": "0xc45c6358fc0b76b25f5a0014b5b85859ade082d4b9c68a1567b41f3df933ef08",
+        "urls": [
+          "bzz-raw://a83868f3dc7d48ab5f0238b8b2d2cf2b9764d93c793b3c7ceca7c881c2bd67df",
+          "dweb:/ipfs/QmbVK9n71Fg1TfM8LGQ4awVeyFrzVNtqSsjtWTiut6sUkj"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC1155Internal.sol": {
+        "keccak256": "0x4d8b4b042d583ea627144b40f3d658dc3167c35c87b6a9efe606f2f48e4c5338",
+        "urls": [
+          "bzz-raw://46d13fde37a720d99b3ec91f3d95ff1ce4fcbb04a78e323337f8f48a58a78226",
+          "dweb:/ipfs/QmQZLAhS1X4QomAgX2Nwk14FWBR8XP8f8yrFMypwxMuCfp"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC1155Receiver.sol": {
+        "keccak256": "0x892b18ee4475b9702fab30298bd0fa5bd7f90871b47b0bb7f378fcd64fad9fb9",
+        "urls": [
+          "bzz-raw://26c9a1a84e7fbce8b7d848f393de6d898401d97f2fc116c6594211c65690abae",
+          "dweb:/ipfs/Qmb9mq3b6HeipzaqLt4pnfGyfNGyA6hckJ7S6JtSCTyvgQ"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC165.sol": {
+        "keccak256": "0x202330e82a9a4bbfd02818be9b57bb2bd9478855d88a35763b1b9d4cf546b474",
+        "urls": [
+          "bzz-raw://db938f09d621674a5bc0982a318caa3e0a42423cf0fbbf266c3b98cc4bb14af8",
+          "dweb:/ipfs/QmVQRaWF652Vg88XRWRwGJZUnGnvbKndPSGtbn6qo8LmLz"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC165Internal.sol": {
+        "keccak256": "0x626713a260515152d863adc259f8cc8495a19b763ff7c02733b85e46284fa3f1",
+        "urls": [
+          "bzz-raw://92bb4d794a939c24783bc14a85a7a9f5cd2e2b0799e1da61f31e9dd658f91b84",
+          "dweb:/ipfs/QmYyQbqUWddcQFMa36j4wNju4ivUZ6r2UyefbY9aJ2mBsG"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/introspection/ERC165/base/ERC165Base.sol": {
+        "keccak256": "0x21bc2d50b968c56bba784628eda9539e3e1787cb02046b77d118487d7363fb01",
+        "urls": [
+          "bzz-raw://a3a741988f8ef9cb28e362093df76594368197814f2aa89df034c1177d2f44c4",
+          "dweb:/ipfs/QmNVXsKue9XgbH2WRCKQtrSHSSearf3L5cAf3AeYg9zgKw"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/introspection/ERC165/base/ERC165BaseInternal.sol": {
+        "keccak256": "0xbfa7e958e4116c647f44831f73e8d47e81db2455b0de7f8949094ede6de37f03",
+        "urls": [
+          "bzz-raw://1b7add8f7efbff7c65c69b6e65de21f94ac7dc08d9b67e4fda8485ab08b13c8d",
+          "dweb:/ipfs/QmPsZgbGWgWyjSZP9NNpWrKriAuGETnDAdD9dLMuYsNggN"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/introspection/ERC165/base/ERC165BaseStorage.sol": {
+        "keccak256": "0x47dd23b677e2fb240e0f92971783830f5a29b9b50c06eca86fa2b6baa0146f38",
+        "urls": [
+          "bzz-raw://1849ef9cf1b70c39778b01c1c1a6a60964290f51814b6bfefd7b036ec7974408",
+          "dweb:/ipfs/QmcxkHJpZZdoQHwr62R5f1qRM8fALN67L2vBbEoLJ3nFj7"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/introspection/ERC165/base/IERC165Base.sol": {
+        "keccak256": "0x20b5586e912b7604696452e9eae4d2b09ad53160763d4982b6ef9efa59a427d3",
+        "urls": [
+          "bzz-raw://e45d6c5d08a0afc612207ac69f83eaa4281d25238b08e48710a19c4b8ebea980",
+          "dweb:/ipfs/QmPdniT21DjFt4zg7cZxCMhVsh9uCWq1AC6upB6ufG56n8"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/introspection/ERC165/base/IERC165BaseInternal.sol": {
+        "keccak256": "0x5f085ac880fa7aa82968be5a64739cafe55c63470d53d4cad6361e0bf597c4a0",
+        "urls": [
+          "bzz-raw://92469eddb373614e08b68732aa4a74491805160e5d9551dc3bc9fffcd831928d",
+          "dweb:/ipfs/QmZWV3TUzr6gQ42tqyERJoqQUabRLXYmpY1uAKEVZBobQb"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/ISolidStateERC1155.sol": {
+        "keccak256": "0x9be79229b30d0216aff1effca638d729e5f4f32da4cbdd97a2de3d17504b70ad",
+        "urls": [
+          "bzz-raw://65dc1523d3f5ac1d9559519093f110c641b275fa45e081a00747a6bbd585708c",
+          "dweb:/ipfs/QmejrJg8mFcUxDQocUhceGiArr8DCfHjUoveUq4ebQ6CBB"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/SolidStateERC1155.sol": {
+        "keccak256": "0x17fbeb4678ddf2f2d3757ebb8a56f04bfb77556f6a4e308d6c4a5b5c00fd46f7",
+        "urls": [
+          "bzz-raw://13cd93089d272a8a5e3d8db3bb05eff222c4ee3db138d3cdb79ad7250d5c2b49",
+          "dweb:/ipfs/Qmd5xrVNnKKB8CoAzvTCL3GVZxVA5MRMbgWAit671FEbCG"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/base/ERC1155Base.sol": {
+        "keccak256": "0xafd02528db0f2c935210d049fb300764c71fd18b9ac61bd940e024093d86276d",
+        "urls": [
+          "bzz-raw://d00ee407cd2fab559169236f36c0b906bb7ad9b91463074b4acb58e10a1e9a35",
+          "dweb:/ipfs/QmcJLaMyDg3dxhFd97uRBw7rxBK5pXajwVoW8KE6ZPh43X"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/base/ERC1155BaseInternal.sol": {
+        "keccak256": "0x23d42f28eab83eae1aac85cedc6b109ab816fd75532d81fee6957a445f49fc3c",
+        "urls": [
+          "bzz-raw://b1a0721942b95e96107fabb44b2fd99d0f8fe6510e1b2e0a2277292f315e5e73",
+          "dweb:/ipfs/QmYjN56M2afVgVZFnMujJAt98FGf1DrHAEqbkJZmysHq4o"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/base/ERC1155BaseStorage.sol": {
+        "keccak256": "0x02b0356ffade65659c8fbf1aceb4a40cd689e02bae07585655b68b37b99c64c0",
+        "urls": [
+          "bzz-raw://4b0193a2e47f3ef6dd064d2138a189601740d3b4978b5ba41d90ea62248f8490",
+          "dweb:/ipfs/QmTKjjz1vRa38QJdvhHc7BRhgihQgzG2TqAm8BC1yvEPvW"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155Base.sol": {
+        "keccak256": "0x9b995b146cdda23078313138f12e49695a69657040c3415e62327306e6772f2f",
+        "urls": [
+          "bzz-raw://334ddcff99e3680981d1a126a4e8fb2753336f6887ce4ea172f304402eafe024",
+          "dweb:/ipfs/QmX6qTPnmwwVMMbUiysdWhLx5svHwg2HpqTEHvTpWPPap5"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/base/IERC1155BaseInternal.sol": {
+        "keccak256": "0xc31f629926516726479db8444f20d59c8f69c36c25a36129f04fa21573180530",
+        "urls": [
+          "bzz-raw://e6568919706ea2a3620e8786a15ea4a986eb935444148ba8758b1ec2d6c27ba5",
+          "dweb:/ipfs/QmPZmeYZSgXRK86GWfmMP28E2iUbFpWvni2n1H5foDBKYZ"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/enumerable/ERC1155Enumerable.sol": {
+        "keccak256": "0xbe44a4b1f76452320b3ca2abe720d810b6a3483308692f7cebdea088ae21749b",
+        "urls": [
+          "bzz-raw://358937b42bceb57731254d4658d2bba4407b071b42cf1e4da62ad6d2c3bb2d95",
+          "dweb:/ipfs/QmSJVX9YzTEqdCvDV6fqhrP1zabvosNvWTz6i2QuQQ6yny"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/enumerable/ERC1155EnumerableInternal.sol": {
+        "keccak256": "0xa38635b3190dff60e5df91cf4b79f1c80ede8f6581d37b80a87c65577887be9f",
+        "urls": [
+          "bzz-raw://fd4c2d202134400da91acd22b4e63f1caed13df6fcc21a1be62888cb314d237e",
+          "dweb:/ipfs/QmbHuE92qEchAuzRQt9g4LehDpzjTwJRPawdZfctNBXmvF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/enumerable/ERC1155EnumerableStorage.sol": {
+        "keccak256": "0xcd0504a596d42eb79022f6c2607b1f2d3da6605657e8fbde3a64bee73c823474",
+        "urls": [
+          "bzz-raw://e33922ab3f45781c61d8408908cf89c0d0be43dfc849e4d426e99c33167cd5d9",
+          "dweb:/ipfs/QmSGV61L72SnsTvTiaMq4Dd76tUMa6aHiVxKDrv8HQVi1o"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/enumerable/IERC1155Enumerable.sol": {
+        "keccak256": "0x89cf371e45e4dbf6fa295b2ad53e3ddbb5a294bcb8c37799e777c544656720ba",
+        "urls": [
+          "bzz-raw://f7ebae1d0419aea9c9472921b07a4c394ffb0fc59995000ad2eab9aaa55f5214",
+          "dweb:/ipfs/QmTmDz9Z4WXRHUyDyRbGtcd7YS3usi9TekQnuga7vtcDNo"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155Metadata.sol": {
+        "keccak256": "0x6cd9c889dbc0e244d23d298edb8aa9a51d8d1871bc64cc8afc5ab5ce337e96d1",
+        "urls": [
+          "bzz-raw://1ec4dda6da7697a46c6b14e43327b2a08dab1a0432420a15d45bd11d1460ab0f",
+          "dweb:/ipfs/QmU3VgS22MUYvDgSUEvJvMNPBL4hpeygKzUviSoGBV11ei"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataInternal.sol": {
+        "keccak256": "0x602da6e8790cf1516729cc6cc5c914a122b0103c82bbe76f6d0352f2c2c71d21",
+        "urls": [
+          "bzz-raw://cdfcabaefd8ccbc1baff99d63bee7f414eebdde9884e6e1b10012b3dfd700bb4",
+          "dweb:/ipfs/QmXaHPjuR8KknAULPoxK714W2Zr3n8t25Fo5wUkxUAcVTA"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155MetadataStorage.sol": {
+        "keccak256": "0xd90329704ba78b0b9b41353668446b0e0891d8e21e045d6a6a07379675964384",
+        "urls": [
+          "bzz-raw://244cf56b50f50741ab02609bfc59ca67e3b46919c6a24a5185e12ea2f8d9f4e8",
+          "dweb:/ipfs/QmdR6KnsLB2AFDifT4FUyjY9fZJvVC9EM3b6eWuwpCSrZ9"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/metadata/IERC1155Metadata.sol": {
+        "keccak256": "0x3f1b6410b94e4dddd95052a0bcea80ad8f57ed3af9991d7a32f1cc206aeb92b6",
+        "urls": [
+          "bzz-raw://fb61f620fe37f3d97719b0d2ddc35ecdd74d452efca4b332797fa9541b59351c",
+          "dweb:/ipfs/QmefFJLQRmJqHuHsKLPVR8Rfg3vC16z3DtURGBbsCXtP8W"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC1155/metadata/IERC1155MetadataInternal.sol": {
+        "keccak256": "0x394093a86fbfebdcda356fe9407480d81434aa162afc6a3e8efbf72a4c05b98d",
+        "urls": [
+          "bzz-raw://afd12f43c0ba7b94ebd701da54b200074f464c16861bb14adcf5593f0f854c17",
+          "dweb:/ipfs/QmWCmvKp1dRce5uaGrNog1pmt5pQCzsjcFuALJqn6kLxLD"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/AddressUtils.sol": {
+        "keccak256": "0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c",
+        "urls": [
+          "bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e",
+          "dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/UintUtils.sol": {
+        "keccak256": "0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c",
+        "urls": [
+          "bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2",
+          "dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/SolidStateERC1155.sol",
+    "id": 49993,
+    "exportedSymbols": {
+      "ERC1155Base": [
+        50319
+      ],
+      "ERC1155BaseInternal": [
+        51253
+      ],
+      "ERC1155Enumerable": [
+        51651
+      ],
+      "ERC1155EnumerableInternal": [
+        52003
+      ],
+      "ERC1155Metadata": [
+        52281
+      ],
+      "ERC165Base": [
+        45438
+      ],
+      "ISolidStateERC1155": [
+        49932
+      ],
+      "SolidStateERC1155": [
+        49992
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:1062:365",
+    "nodes": [
+      {
+        "id": 49934,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:365",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 49936,
+        "nodeType": "ImportDirective",
+        "src": "58:74:365",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/introspection/ERC165/base/ERC165Base.sol",
+        "file": "../../introspection/ERC165/base/ERC165Base.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49993,
+        "sourceUnit": 45439,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49935,
+              "name": "ERC165Base",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 45438,
+              "src": "66:10:365",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49939,
+        "nodeType": "ImportDirective",
+        "src": "133:72:365",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/base/ERC1155Base.sol",
+        "file": "./base/ERC1155Base.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49993,
+        "sourceUnit": 50320,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49937,
+              "name": "ERC1155Base",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 50319,
+              "src": "141:11:365",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          },
+          {
+            "foreign": {
+              "id": 49938,
+              "name": "ERC1155BaseInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 51253,
+              "src": "154:19:365",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49941,
+        "nodeType": "ImportDirective",
+        "src": "206:69:365",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/enumerable/ERC1155Enumerable.sol",
+        "file": "./enumerable/ERC1155Enumerable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49993,
+        "sourceUnit": 51652,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49940,
+              "name": "ERC1155Enumerable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 51651,
+              "src": "214:17:365",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49943,
+        "nodeType": "ImportDirective",
+        "src": "276:85:365",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/enumerable/ERC1155EnumerableInternal.sol",
+        "file": "./enumerable/ERC1155EnumerableInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49993,
+        "sourceUnit": 52004,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49942,
+              "name": "ERC1155EnumerableInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 52003,
+              "src": "284:25:365",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49945,
+        "nodeType": "ImportDirective",
+        "src": "362:63:365",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/metadata/ERC1155Metadata.sol",
+        "file": "./metadata/ERC1155Metadata.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49993,
+        "sourceUnit": 52282,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49944,
+              "name": "ERC1155Metadata",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 52281,
+              "src": "370:15:365",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49947,
+        "nodeType": "ImportDirective",
+        "src": "426:60:365",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC1155/ISolidStateERC1155.sol",
+        "file": "./ISolidStateERC1155.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49993,
+        "sourceUnit": 49933,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49946,
+              "name": "ISolidStateERC1155",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49932,
+              "src": "434:18:365",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49992,
+        "nodeType": "ContractDefinition",
+        "src": "540:554:365",
+        "nodes": [
+          {
+            "id": 49991,
+            "nodeType": "FunctionDefinition",
+            "src": "740:352:365",
+            "nodes": [],
+            "body": {
+              "id": 49990,
+              "nodeType": "Block",
+              "src": "1009:83:365",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 49982,
+                        "name": "operator",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49961,
+                        "src": "1046:8:365",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 49983,
+                        "name": "from",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49963,
+                        "src": "1056:4:365",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 49984,
+                        "name": "to",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49965,
+                        "src": "1062:2:365",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 49985,
+                        "name": "ids",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49968,
+                        "src": "1066:3:365",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                          "typeString": "uint256[] memory"
+                        }
+                      },
+                      {
+                        "id": 49986,
+                        "name": "amounts",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49971,
+                        "src": "1071:7:365",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                          "typeString": "uint256[] memory"
+                        }
+                      },
+                      {
+                        "id": 49987,
+                        "name": "data",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49973,
+                        "src": "1080:4:365",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                          "typeString": "uint256[] memory"
+                        },
+                        {
+                          "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                          "typeString": "uint256[] memory"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 49979,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -25,
+                        "src": "1019:5:365",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_super$_SolidStateERC1155_$49992_$",
+                          "typeString": "type(contract super SolidStateERC1155)"
+                        }
+                      },
+                      "id": 49981,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1025:20:365",
+                      "memberName": "_beforeTokenTransfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 52002,
+                      "src": "1019:26:365",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$_t_address_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_array$_t_uint256_$dyn_memory_ptr_$_t_bytes_memory_ptr_$returns$__$",
+                        "typeString": "function (address,address,address,uint256[] memory,uint256[] memory,bytes memory)"
+                      }
+                    },
+                    "id": 49988,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1019:66:365",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 49989,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1019:66:365"
+                }
+              ]
+            },
+            "baseFunctions": [
+              51252,
+              52002
+            ],
+            "documentation": {
+              "id": 49959,
+              "nodeType": "StructuredDocumentation",
+              "src": "685:50:365",
+              "text": " @inheritdoc ERC1155BaseInternal"
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_beforeTokenTransfer",
+            "nameLocation": "749:20:365",
+            "overrides": {
+              "id": 49977,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [
+                {
+                  "id": 49975,
+                  "name": "ERC1155BaseInternal",
+                  "nameLocations": [
+                    "961:19:365"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 51253,
+                  "src": "961:19:365"
+                },
+                {
+                  "id": 49976,
+                  "name": "ERC1155EnumerableInternal",
+                  "nameLocations": [
+                    "982:25:365"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 52003,
+                  "src": "982:25:365"
+                }
+              ],
+              "src": "952:56:365"
+            },
+            "parameters": {
+              "id": 49974,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49961,
+                  "mutability": "mutable",
+                  "name": "operator",
+                  "nameLocation": "787:8:365",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49991,
+                  "src": "779:16:365",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 49960,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "779:7:365",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 49963,
+                  "mutability": "mutable",
+                  "name": "from",
+                  "nameLocation": "813:4:365",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49991,
+                  "src": "805:12:365",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 49962,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "805:7:365",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 49965,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nameLocation": "835:2:365",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49991,
+                  "src": "827:10:365",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 49964,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "827:7:365",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 49968,
+                  "mutability": "mutable",
+                  "name": "ids",
+                  "nameLocation": "864:3:365",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49991,
+                  "src": "847:20:365",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 49966,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "847:7:365",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 49967,
+                    "nodeType": "ArrayTypeName",
+                    "src": "847:9:365",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 49971,
+                  "mutability": "mutable",
+                  "name": "amounts",
+                  "nameLocation": "894:7:365",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49991,
+                  "src": "877:24:365",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 49969,
+                      "name": "uint256",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "877:7:365",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 49970,
+                    "nodeType": "ArrayTypeName",
+                    "src": "877:9:365",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 49973,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "924:4:365",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49991,
+                  "src": "911:17:365",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 49972,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "911:5:365",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "769:165:365"
+            },
+            "returnParameters": {
+              "id": 49978,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1009:0:365"
+            },
+            "scope": 49992,
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 49949,
+              "name": "ISolidStateERC1155",
+              "nameLocations": [
+                "583:18:365"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49932,
+              "src": "583:18:365"
+            },
+            "id": 49950,
+            "nodeType": "InheritanceSpecifier",
+            "src": "583:18:365"
+          },
+          {
+            "baseName": {
+              "id": 49951,
+              "name": "ERC1155Base",
+              "nameLocations": [
+                "607:11:365"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 50319,
+              "src": "607:11:365"
+            },
+            "id": 49952,
+            "nodeType": "InheritanceSpecifier",
+            "src": "607:11:365"
+          },
+          {
+            "baseName": {
+              "id": 49953,
+              "name": "ERC1155Enumerable",
+              "nameLocations": [
+                "624:17:365"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 51651,
+              "src": "624:17:365"
+            },
+            "id": 49954,
+            "nodeType": "InheritanceSpecifier",
+            "src": "624:17:365"
+          },
+          {
+            "baseName": {
+              "id": 49955,
+              "name": "ERC1155Metadata",
+              "nameLocations": [
+                "647:15:365"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 52281,
+              "src": "647:15:365"
+            },
+            "id": 49956,
+            "nodeType": "InheritanceSpecifier",
+            "src": "647:15:365"
+          },
+          {
+            "baseName": {
+              "id": 49957,
+              "name": "ERC165Base",
+              "nameLocations": [
+                "668:10:365"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 45438,
+              "src": "668:10:365"
+            },
+            "id": 49958,
+            "nodeType": "InheritanceSpecifier",
+            "src": "668:10:365"
+          }
+        ],
+        "canonicalName": "SolidStateERC1155",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 49948,
+          "nodeType": "StructuredDocumentation",
+          "src": "488:51:365",
+          "text": " @title SolidState ERC1155 implementation"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          49992,
+          45438,
+          45490,
+          45578,
+          45587,
+          52281,
+          52330,
+          51651,
+          52003,
+          50319,
+          51253,
+          49932,
+          52400,
+          52410,
+          52191,
+          51542,
+          44720,
+          44869,
+          44873,
+          51572,
+          44758
+        ],
+        "name": "SolidStateERC1155",
+        "nameLocation": "558:17:365",
+        "scope": 49993,
+        "usedErrors": [
+          42723,
+          45586,
+          51551,
+          51553,
+          51555,
+          51557,
+          51559,
+          51561,
+          51563,
+          51565,
+          51567,
+          51569,
+          51571
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 365
+}

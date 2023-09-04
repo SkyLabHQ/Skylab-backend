@@ -1,0 +1,2598 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212205412cef7a842bef26d1bcc498ac87f101730bea08aa7a38372503899b192e6d064736f6c63430008130033",
+    "sourceMap": "279:1873:228:-:0;;;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x600080fdfea26469706673582212205412cef7a842bef26d1bcc498ac87f101730bea08aa7a38372503899b192e6d064736f6c63430008130033",
+    "sourceMap": "279:1873:228:-:0;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Tooling for timepoints, timers and delays CAUTION: This file is deprecated as of 4.9 and will be removed in the next major release.\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/openzeppelin/local/utils/Timers.sol\":\"Timers\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/openzeppelin/local/utils/Timers.sol\":{\"keccak256\":\"0x413dd6eccfbd25fff5e6c45500e049fc3b66f1a6c7d482d3ab88b8f4a5060ede\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6f12296326560a2591d1e8d5cabcb55a1a82209a6752fe6a08b46bd9a3f9835f\",\"dweb:/ipfs/QmTgY5GkmvuMsrB4bzsfXj6SALnshYyXpKKR8WCXaMpoPM\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/openzeppelin/local/utils/Timers.sol": "Timers"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/openzeppelin/local/utils/Timers.sol": {
+        "keccak256": "0x413dd6eccfbd25fff5e6c45500e049fc3b66f1a6c7d482d3ab88b8f4a5060ede",
+        "urls": [
+          "bzz-raw://6f12296326560a2591d1e8d5cabcb55a1a82209a6752fe6a08b46bd9a3f9835f",
+          "dweb:/ipfs/QmTgY5GkmvuMsrB4bzsfXj6SALnshYyXpKKR8WCXaMpoPM"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/openzeppelin/local/utils/Timers.sol",
+    "id": 33291,
+    "exportedSymbols": {
+      "Timers": [
+        33290
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "100:2053:228",
+    "nodes": [
+      {
+        "id": 33078,
+        "nodeType": "PragmaDirective",
+        "src": "100:23:228",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 33290,
+        "nodeType": "ContractDefinition",
+        "src": "279:1873:228",
+        "nodes": [
+          {
+            "id": 33082,
+            "nodeType": "StructDefinition",
+            "src": "300:50:228",
+            "nodes": [],
+            "canonicalName": "Timers.Timestamp",
+            "members": [
+              {
+                "constant": false,
+                "id": 33081,
+                "mutability": "mutable",
+                "name": "_deadline",
+                "nameLocation": "334:9:228",
+                "nodeType": "VariableDeclaration",
+                "scope": 33082,
+                "src": "327:16:228",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 33080,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "327:6:228",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Timestamp",
+            "nameLocation": "307:9:228",
+            "scope": 33290,
+            "visibility": "public"
+          },
+          {
+            "id": 33094,
+            "nodeType": "FunctionDefinition",
+            "src": "356:115:228",
+            "nodes": [],
+            "body": {
+              "id": 33093,
+              "nodeType": "Block",
+              "src": "432:39:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "expression": {
+                      "id": 33090,
+                      "name": "timer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33085,
+                      "src": "449:5:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                        "typeString": "struct Timers.Timestamp memory"
+                      }
+                    },
+                    "id": 33091,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "455:9:228",
+                    "memberName": "_deadline",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 33081,
+                    "src": "449:15:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "functionReturnParameters": 33089,
+                  "id": 33092,
+                  "nodeType": "Return",
+                  "src": "442:22:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getDeadline",
+            "nameLocation": "365:11:228",
+            "parameters": {
+              "id": 33086,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33085,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "394:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33094,
+                  "src": "377:22:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                    "typeString": "struct Timers.Timestamp"
+                  },
+                  "typeName": {
+                    "id": 33084,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33083,
+                      "name": "Timestamp",
+                      "nameLocations": [
+                        "377:9:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33082,
+                      "src": "377:9:228"
+                    },
+                    "referencedDeclaration": 33082,
+                    "src": "377:9:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                      "typeString": "struct Timers.Timestamp"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "376:24:228"
+            },
+            "returnParameters": {
+              "id": 33089,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33088,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33094,
+                  "src": "424:6:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 33087,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "424:6:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "423:8:228"
+            },
+            "scope": 33290,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33109,
+            "nodeType": "FunctionDefinition",
+            "src": "477:117:228",
+            "nodes": [],
+            "body": {
+              "id": 33108,
+              "nodeType": "Block",
+              "src": "550:44:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 33106,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "id": 33102,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33097,
+                        "src": "560:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                          "typeString": "struct Timers.Timestamp storage pointer"
+                        }
+                      },
+                      "id": 33104,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "566:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33081,
+                      "src": "560:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 33105,
+                      "name": "timestamp",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33099,
+                      "src": "578:9:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "src": "560:27:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "id": 33107,
+                  "nodeType": "ExpressionStatement",
+                  "src": "560:27:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setDeadline",
+            "nameLocation": "486:11:228",
+            "parameters": {
+              "id": 33100,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33097,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "516:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33109,
+                  "src": "498:23:228",
+                  "stateVariable": false,
+                  "storageLocation": "storage",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                    "typeString": "struct Timers.Timestamp"
+                  },
+                  "typeName": {
+                    "id": 33096,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33095,
+                      "name": "Timestamp",
+                      "nameLocations": [
+                        "498:9:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33082,
+                      "src": "498:9:228"
+                    },
+                    "referencedDeclaration": 33082,
+                    "src": "498:9:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                      "typeString": "struct Timers.Timestamp"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33099,
+                  "mutability": "mutable",
+                  "name": "timestamp",
+                  "nameLocation": "530:9:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33109,
+                  "src": "523:16:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 33098,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "523:6:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "497:43:228"
+            },
+            "returnParameters": {
+              "id": 33101,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "550:0:228"
+            },
+            "scope": 33290,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33122,
+            "nodeType": "FunctionDefinition",
+            "src": "600:85:228",
+            "nodes": [],
+            "body": {
+              "id": 33121,
+              "nodeType": "Block",
+              "src": "649:36:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 33119,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "id": 33115,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33112,
+                        "src": "659:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                          "typeString": "struct Timers.Timestamp storage pointer"
+                        }
+                      },
+                      "id": 33117,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "665:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33081,
+                      "src": "659:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "hexValue": "30",
+                      "id": 33118,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "677:1:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "659:19:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "id": 33120,
+                  "nodeType": "ExpressionStatement",
+                  "src": "659:19:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "reset",
+            "nameLocation": "609:5:228",
+            "parameters": {
+              "id": 33113,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33112,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "633:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33122,
+                  "src": "615:23:228",
+                  "stateVariable": false,
+                  "storageLocation": "storage",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                    "typeString": "struct Timers.Timestamp"
+                  },
+                  "typeName": {
+                    "id": 33111,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33110,
+                      "name": "Timestamp",
+                      "nameLocations": [
+                        "615:9:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33082,
+                      "src": "615:9:228"
+                    },
+                    "referencedDeclaration": 33082,
+                    "src": "615:9:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                      "typeString": "struct Timers.Timestamp"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "614:25:228"
+            },
+            "returnParameters": {
+              "id": 33114,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "649:0:228"
+            },
+            "scope": 33290,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33136,
+            "nodeType": "FunctionDefinition",
+            "src": "691:114:228",
+            "nodes": [],
+            "body": {
+              "id": 33135,
+              "nodeType": "Block",
+              "src": "761:44:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    },
+                    "id": 33133,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 33130,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33125,
+                        "src": "778:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                          "typeString": "struct Timers.Timestamp memory"
+                        }
+                      },
+                      "id": 33131,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "784:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33081,
+                      "src": "778:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "hexValue": "30",
+                      "id": 33132,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "797:1:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "778:20:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33129,
+                  "id": 33134,
+                  "nodeType": "Return",
+                  "src": "771:27:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isUnset",
+            "nameLocation": "700:7:228",
+            "parameters": {
+              "id": 33126,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33125,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "725:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33136,
+                  "src": "708:22:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                    "typeString": "struct Timers.Timestamp"
+                  },
+                  "typeName": {
+                    "id": 33124,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33123,
+                      "name": "Timestamp",
+                      "nameLocations": [
+                        "708:9:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33082,
+                      "src": "708:9:228"
+                    },
+                    "referencedDeclaration": 33082,
+                    "src": "708:9:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                      "typeString": "struct Timers.Timestamp"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "707:24:228"
+            },
+            "returnParameters": {
+              "id": 33129,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33128,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33136,
+                  "src": "755:4:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33127,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "755:4:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "754:6:228"
+            },
+            "scope": 33290,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33150,
+            "nodeType": "FunctionDefinition",
+            "src": "811:115:228",
+            "nodes": [],
+            "body": {
+              "id": 33149,
+              "nodeType": "Block",
+              "src": "883:43:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    },
+                    "id": 33147,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 33144,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33139,
+                        "src": "900:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                          "typeString": "struct Timers.Timestamp memory"
+                        }
+                      },
+                      "id": 33145,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "906:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33081,
+                      "src": "900:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": ">",
+                    "rightExpression": {
+                      "hexValue": "30",
+                      "id": 33146,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "918:1:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "900:19:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33143,
+                  "id": 33148,
+                  "nodeType": "Return",
+                  "src": "893:26:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isStarted",
+            "nameLocation": "820:9:228",
+            "parameters": {
+              "id": 33140,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33139,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "847:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33150,
+                  "src": "830:22:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                    "typeString": "struct Timers.Timestamp"
+                  },
+                  "typeName": {
+                    "id": 33138,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33137,
+                      "name": "Timestamp",
+                      "nameLocations": [
+                        "830:9:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33082,
+                      "src": "830:9:228"
+                    },
+                    "referencedDeclaration": 33082,
+                    "src": "830:9:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                      "typeString": "struct Timers.Timestamp"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "829:24:228"
+            },
+            "returnParameters": {
+              "id": 33143,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33142,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33150,
+                  "src": "877:4:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33141,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "877:4:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "876:6:228"
+            },
+            "scope": 33290,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33165,
+            "nodeType": "FunctionDefinition",
+            "src": "932:129:228",
+            "nodes": [],
+            "body": {
+              "id": 33164,
+              "nodeType": "Block",
+              "src": "1004:57:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 33162,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 33158,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33153,
+                        "src": "1021:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                          "typeString": "struct Timers.Timestamp memory"
+                        }
+                      },
+                      "id": 33159,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1027:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33081,
+                      "src": "1021:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": ">",
+                    "rightExpression": {
+                      "expression": {
+                        "id": 33160,
+                        "name": "block",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -4,
+                        "src": "1039:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_block",
+                          "typeString": "block"
+                        }
+                      },
+                      "id": 33161,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1045:9:228",
+                      "memberName": "timestamp",
+                      "nodeType": "MemberAccess",
+                      "src": "1039:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1021:33:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33157,
+                  "id": 33163,
+                  "nodeType": "Return",
+                  "src": "1014:40:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isPending",
+            "nameLocation": "941:9:228",
+            "parameters": {
+              "id": 33154,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33153,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "968:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33165,
+                  "src": "951:22:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                    "typeString": "struct Timers.Timestamp"
+                  },
+                  "typeName": {
+                    "id": 33152,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33151,
+                      "name": "Timestamp",
+                      "nameLocations": [
+                        "951:9:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33082,
+                      "src": "951:9:228"
+                    },
+                    "referencedDeclaration": 33082,
+                    "src": "951:9:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                      "typeString": "struct Timers.Timestamp"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "950:24:228"
+            },
+            "returnParameters": {
+              "id": 33157,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33156,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33165,
+                  "src": "998:4:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33155,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "998:4:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "997:6:228"
+            },
+            "scope": 33290,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33184,
+            "nodeType": "FunctionDefinition",
+            "src": "1067:150:228",
+            "nodes": [],
+            "body": {
+              "id": 33183,
+              "nodeType": "Block",
+              "src": "1139:78:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 33181,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "arguments": [
+                        {
+                          "id": 33174,
+                          "name": "timer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 33168,
+                          "src": "1166:5:228",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                            "typeString": "struct Timers.Timestamp memory"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                            "typeString": "struct Timers.Timestamp memory"
+                          }
+                        ],
+                        "id": 33173,
+                        "name": "isStarted",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [
+                          33150,
+                          33255
+                        ],
+                        "referencedDeclaration": 33150,
+                        "src": "1156:9:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_pure$_t_struct$_Timestamp_$33082_memory_ptr_$returns$_t_bool_$",
+                          "typeString": "function (struct Timers.Timestamp memory) pure returns (bool)"
+                        }
+                      },
+                      "id": 33175,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "1156:16:228",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "&&",
+                    "rightExpression": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 33180,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "expression": {
+                          "id": 33176,
+                          "name": "timer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 33168,
+                          "src": "1176:5:228",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                            "typeString": "struct Timers.Timestamp memory"
+                          }
+                        },
+                        "id": 33177,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1182:9:228",
+                        "memberName": "_deadline",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 33081,
+                        "src": "1176:15:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "<=",
+                      "rightExpression": {
+                        "expression": {
+                          "id": 33178,
+                          "name": "block",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -4,
+                          "src": "1195:5:228",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_block",
+                            "typeString": "block"
+                          }
+                        },
+                        "id": 33179,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "1201:9:228",
+                        "memberName": "timestamp",
+                        "nodeType": "MemberAccess",
+                        "src": "1195:15:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "src": "1176:34:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "1156:54:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33172,
+                  "id": 33182,
+                  "nodeType": "Return",
+                  "src": "1149:61:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isExpired",
+            "nameLocation": "1076:9:228",
+            "parameters": {
+              "id": 33169,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33168,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "1103:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33184,
+                  "src": "1086:22:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Timestamp_$33082_memory_ptr",
+                    "typeString": "struct Timers.Timestamp"
+                  },
+                  "typeName": {
+                    "id": 33167,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33166,
+                      "name": "Timestamp",
+                      "nameLocations": [
+                        "1086:9:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33082,
+                      "src": "1086:9:228"
+                    },
+                    "referencedDeclaration": 33082,
+                    "src": "1086:9:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Timestamp_$33082_storage_ptr",
+                      "typeString": "struct Timers.Timestamp"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1085:24:228"
+            },
+            "returnParameters": {
+              "id": 33172,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33171,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33184,
+                  "src": "1133:4:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33170,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1133:4:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1132:6:228"
+            },
+            "scope": 33290,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33187,
+            "nodeType": "StructDefinition",
+            "src": "1223:52:228",
+            "nodes": [],
+            "canonicalName": "Timers.BlockNumber",
+            "members": [
+              {
+                "constant": false,
+                "id": 33186,
+                "mutability": "mutable",
+                "name": "_deadline",
+                "nameLocation": "1259:9:228",
+                "nodeType": "VariableDeclaration",
+                "scope": 33187,
+                "src": "1252:16:228",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 33185,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "1252:6:228",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "BlockNumber",
+            "nameLocation": "1230:11:228",
+            "scope": 33290,
+            "visibility": "public"
+          },
+          {
+            "id": 33199,
+            "nodeType": "FunctionDefinition",
+            "src": "1281:117:228",
+            "nodes": [],
+            "body": {
+              "id": 33198,
+              "nodeType": "Block",
+              "src": "1359:39:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "expression": {
+                      "id": 33195,
+                      "name": "timer",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33190,
+                      "src": "1376:5:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                        "typeString": "struct Timers.BlockNumber memory"
+                      }
+                    },
+                    "id": 33196,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "1382:9:228",
+                    "memberName": "_deadline",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 33186,
+                    "src": "1376:15:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "functionReturnParameters": 33194,
+                  "id": 33197,
+                  "nodeType": "Return",
+                  "src": "1369:22:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getDeadline",
+            "nameLocation": "1290:11:228",
+            "parameters": {
+              "id": 33191,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33190,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "1321:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33199,
+                  "src": "1302:24:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                    "typeString": "struct Timers.BlockNumber"
+                  },
+                  "typeName": {
+                    "id": 33189,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33188,
+                      "name": "BlockNumber",
+                      "nameLocations": [
+                        "1302:11:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33187,
+                      "src": "1302:11:228"
+                    },
+                    "referencedDeclaration": 33187,
+                    "src": "1302:11:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                      "typeString": "struct Timers.BlockNumber"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1301:26:228"
+            },
+            "returnParameters": {
+              "id": 33194,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33193,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33199,
+                  "src": "1351:6:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 33192,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1351:6:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1350:8:228"
+            },
+            "scope": 33290,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33214,
+            "nodeType": "FunctionDefinition",
+            "src": "1404:119:228",
+            "nodes": [],
+            "body": {
+              "id": 33213,
+              "nodeType": "Block",
+              "src": "1479:44:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 33211,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "id": 33207,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33202,
+                        "src": "1489:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                          "typeString": "struct Timers.BlockNumber storage pointer"
+                        }
+                      },
+                      "id": 33209,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "1495:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33186,
+                      "src": "1489:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "id": 33210,
+                      "name": "timestamp",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 33204,
+                      "src": "1507:9:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "src": "1489:27:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "id": 33212,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1489:27:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setDeadline",
+            "nameLocation": "1413:11:228",
+            "parameters": {
+              "id": 33205,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33202,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "1445:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33214,
+                  "src": "1425:25:228",
+                  "stateVariable": false,
+                  "storageLocation": "storage",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                    "typeString": "struct Timers.BlockNumber"
+                  },
+                  "typeName": {
+                    "id": 33201,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33200,
+                      "name": "BlockNumber",
+                      "nameLocations": [
+                        "1425:11:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33187,
+                      "src": "1425:11:228"
+                    },
+                    "referencedDeclaration": 33187,
+                    "src": "1425:11:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                      "typeString": "struct Timers.BlockNumber"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 33204,
+                  "mutability": "mutable",
+                  "name": "timestamp",
+                  "nameLocation": "1459:9:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33214,
+                  "src": "1452:16:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 33203,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1452:6:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1424:45:228"
+            },
+            "returnParameters": {
+              "id": 33206,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1479:0:228"
+            },
+            "scope": 33290,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33227,
+            "nodeType": "FunctionDefinition",
+            "src": "1529:87:228",
+            "nodes": [],
+            "body": {
+              "id": 33226,
+              "nodeType": "Block",
+              "src": "1580:36:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 33224,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "expression": {
+                        "id": 33220,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33217,
+                        "src": "1590:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                          "typeString": "struct Timers.BlockNumber storage pointer"
+                        }
+                      },
+                      "id": 33222,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberLocation": "1596:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33186,
+                      "src": "1590:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "hexValue": "30",
+                      "id": 33223,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1608:1:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "1590:19:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "id": 33225,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1590:19:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "reset",
+            "nameLocation": "1538:5:228",
+            "parameters": {
+              "id": 33218,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33217,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "1564:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33227,
+                  "src": "1544:25:228",
+                  "stateVariable": false,
+                  "storageLocation": "storage",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                    "typeString": "struct Timers.BlockNumber"
+                  },
+                  "typeName": {
+                    "id": 33216,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33215,
+                      "name": "BlockNumber",
+                      "nameLocations": [
+                        "1544:11:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33187,
+                      "src": "1544:11:228"
+                    },
+                    "referencedDeclaration": 33187,
+                    "src": "1544:11:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                      "typeString": "struct Timers.BlockNumber"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1543:27:228"
+            },
+            "returnParameters": {
+              "id": 33219,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1580:0:228"
+            },
+            "scope": 33290,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33241,
+            "nodeType": "FunctionDefinition",
+            "src": "1622:116:228",
+            "nodes": [],
+            "body": {
+              "id": 33240,
+              "nodeType": "Block",
+              "src": "1694:44:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    },
+                    "id": 33238,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 33235,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33230,
+                        "src": "1711:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                          "typeString": "struct Timers.BlockNumber memory"
+                        }
+                      },
+                      "id": 33236,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1717:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33186,
+                      "src": "1711:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "hexValue": "30",
+                      "id": 33237,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1730:1:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "1711:20:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33234,
+                  "id": 33239,
+                  "nodeType": "Return",
+                  "src": "1704:27:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isUnset",
+            "nameLocation": "1631:7:228",
+            "parameters": {
+              "id": 33231,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33230,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "1658:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33241,
+                  "src": "1639:24:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                    "typeString": "struct Timers.BlockNumber"
+                  },
+                  "typeName": {
+                    "id": 33229,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33228,
+                      "name": "BlockNumber",
+                      "nameLocations": [
+                        "1639:11:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33187,
+                      "src": "1639:11:228"
+                    },
+                    "referencedDeclaration": 33187,
+                    "src": "1639:11:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                      "typeString": "struct Timers.BlockNumber"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1638:26:228"
+            },
+            "returnParameters": {
+              "id": 33234,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33233,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33241,
+                  "src": "1688:4:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33232,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1688:4:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1687:6:228"
+            },
+            "scope": 33290,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33255,
+            "nodeType": "FunctionDefinition",
+            "src": "1744:117:228",
+            "nodes": [],
+            "body": {
+              "id": 33254,
+              "nodeType": "Block",
+              "src": "1818:43:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    },
+                    "id": 33252,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 33249,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33244,
+                        "src": "1835:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                          "typeString": "struct Timers.BlockNumber memory"
+                        }
+                      },
+                      "id": 33250,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1841:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33186,
+                      "src": "1835:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": ">",
+                    "rightExpression": {
+                      "hexValue": "30",
+                      "id": 33251,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "1853:1:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "1835:19:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33248,
+                  "id": 33253,
+                  "nodeType": "Return",
+                  "src": "1828:26:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isStarted",
+            "nameLocation": "1753:9:228",
+            "parameters": {
+              "id": 33245,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33244,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "1782:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33255,
+                  "src": "1763:24:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                    "typeString": "struct Timers.BlockNumber"
+                  },
+                  "typeName": {
+                    "id": 33243,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33242,
+                      "name": "BlockNumber",
+                      "nameLocations": [
+                        "1763:11:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33187,
+                      "src": "1763:11:228"
+                    },
+                    "referencedDeclaration": 33187,
+                    "src": "1763:11:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                      "typeString": "struct Timers.BlockNumber"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1762:26:228"
+            },
+            "returnParameters": {
+              "id": 33248,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33247,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33255,
+                  "src": "1812:4:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33246,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1812:4:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1811:6:228"
+            },
+            "scope": 33290,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33270,
+            "nodeType": "FunctionDefinition",
+            "src": "1867:128:228",
+            "nodes": [],
+            "body": {
+              "id": 33269,
+              "nodeType": "Block",
+              "src": "1941:54:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 33267,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "id": 33263,
+                        "name": "timer",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33258,
+                        "src": "1958:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                          "typeString": "struct Timers.BlockNumber memory"
+                        }
+                      },
+                      "id": 33264,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1964:9:228",
+                      "memberName": "_deadline",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 33186,
+                      "src": "1958:15:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint64",
+                        "typeString": "uint64"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": ">",
+                    "rightExpression": {
+                      "expression": {
+                        "id": 33265,
+                        "name": "block",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -4,
+                        "src": "1976:5:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_magic_block",
+                          "typeString": "block"
+                        }
+                      },
+                      "id": 33266,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "1982:6:228",
+                      "memberName": "number",
+                      "nodeType": "MemberAccess",
+                      "src": "1976:12:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1958:30:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33262,
+                  "id": 33268,
+                  "nodeType": "Return",
+                  "src": "1951:37:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isPending",
+            "nameLocation": "1876:9:228",
+            "parameters": {
+              "id": 33259,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33258,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "1905:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33270,
+                  "src": "1886:24:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                    "typeString": "struct Timers.BlockNumber"
+                  },
+                  "typeName": {
+                    "id": 33257,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33256,
+                      "name": "BlockNumber",
+                      "nameLocations": [
+                        "1886:11:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33187,
+                      "src": "1886:11:228"
+                    },
+                    "referencedDeclaration": 33187,
+                    "src": "1886:11:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                      "typeString": "struct Timers.BlockNumber"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1885:26:228"
+            },
+            "returnParameters": {
+              "id": 33262,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33261,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33270,
+                  "src": "1935:4:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33260,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1935:4:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1934:6:228"
+            },
+            "scope": 33290,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          },
+          {
+            "id": 33289,
+            "nodeType": "FunctionDefinition",
+            "src": "2001:149:228",
+            "nodes": [],
+            "body": {
+              "id": 33288,
+              "nodeType": "Block",
+              "src": "2075:75:228",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "commonType": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    },
+                    "id": 33286,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "arguments": [
+                        {
+                          "id": 33279,
+                          "name": "timer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 33273,
+                          "src": "2102:5:228",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                            "typeString": "struct Timers.BlockNumber memory"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                            "typeString": "struct Timers.BlockNumber memory"
+                          }
+                        ],
+                        "id": 33278,
+                        "name": "isStarted",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [
+                          33150,
+                          33255
+                        ],
+                        "referencedDeclaration": 33255,
+                        "src": "2092:9:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_pure$_t_struct$_BlockNumber_$33187_memory_ptr_$returns$_t_bool_$",
+                          "typeString": "function (struct Timers.BlockNumber memory) pure returns (bool)"
+                        }
+                      },
+                      "id": 33280,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "2092:16:228",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "&&",
+                    "rightExpression": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 33285,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "expression": {
+                          "id": 33281,
+                          "name": "timer",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 33273,
+                          "src": "2112:5:228",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                            "typeString": "struct Timers.BlockNumber memory"
+                          }
+                        },
+                        "id": 33282,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2118:9:228",
+                        "memberName": "_deadline",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 33186,
+                        "src": "2112:15:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint64",
+                          "typeString": "uint64"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": "<=",
+                      "rightExpression": {
+                        "expression": {
+                          "id": 33283,
+                          "name": "block",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -4,
+                          "src": "2131:5:228",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_block",
+                            "typeString": "block"
+                          }
+                        },
+                        "id": 33284,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "2137:6:228",
+                        "memberName": "number",
+                        "nodeType": "MemberAccess",
+                        "src": "2131:12:228",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "src": "2112:31:228",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "2092:51:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 33277,
+                  "id": 33287,
+                  "nodeType": "Return",
+                  "src": "2085:58:228"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isExpired",
+            "nameLocation": "2010:9:228",
+            "parameters": {
+              "id": 33274,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33273,
+                  "mutability": "mutable",
+                  "name": "timer",
+                  "nameLocation": "2039:5:228",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33289,
+                  "src": "2020:24:228",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_BlockNumber_$33187_memory_ptr",
+                    "typeString": "struct Timers.BlockNumber"
+                  },
+                  "typeName": {
+                    "id": 33272,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 33271,
+                      "name": "BlockNumber",
+                      "nameLocations": [
+                        "2020:11:228"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 33187,
+                      "src": "2020:11:228"
+                    },
+                    "referencedDeclaration": 33187,
+                    "src": "2020:11:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_BlockNumber_$33187_storage_ptr",
+                      "typeString": "struct Timers.BlockNumber"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2019:26:228"
+            },
+            "returnParameters": {
+              "id": 33277,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33276,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 33289,
+                  "src": "2069:4:228",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33275,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2069:4:228",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2068:6:228"
+            },
+            "scope": 33290,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "Timers",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": {
+          "id": 33079,
+          "nodeType": "StructuredDocumentation",
+          "src": "125:153:228",
+          "text": " @dev Tooling for timepoints, timers and delays\n CAUTION: This file is deprecated as of 4.9 and will be removed in the next major release."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          33290
+        ],
+        "name": "Timers",
+        "nameLocation": "287:6:228",
+        "scope": 33291,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 228
+}

@@ -1,0 +1,927 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "DiamondWritable__InvalidInitializationParameters",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "DiamondWritable__RemoveTargetNotZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "DiamondWritable__ReplaceTargetIsIdentical",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "DiamondWritable__SelectorAlreadyAdded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "DiamondWritable__SelectorIsImmutable",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "DiamondWritable__SelectorNotFound",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "DiamondWritable__SelectorNotSpecified",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "DiamondWritable__TargetHasNoCode",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Ownable__NotTransitiveOwner",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "target",
+              "type": "address"
+            },
+            {
+              "internalType": "enum IDiamondWritableInternal.FacetCutAction",
+              "name": "action",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes4[]",
+              "name": "selectors",
+              "type": "bytes4[]"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct IDiamondWritableInternal.FacetCut[]",
+          "name": "facetCuts",
+          "type": "tuple[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "DiamondCut",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "target",
+              "type": "address"
+            },
+            {
+              "internalType": "enum IDiamondWritableInternal.FacetCutAction",
+              "name": "action",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes4[]",
+              "name": "selectors",
+              "type": "bytes4[]"
+            }
+          ],
+          "internalType": "struct IDiamondWritableInternal.FacetCut[]",
+          "name": "facetCuts",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "address",
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "diamondCut",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "diamondCut((address,uint8,bytes4[])[],address,bytes)": "1f931c1c"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"DiamondWritable__InvalidInitializationParameters\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DiamondWritable__RemoveTargetNotZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DiamondWritable__ReplaceTargetIsIdentical\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DiamondWritable__SelectorAlreadyAdded\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DiamondWritable__SelectorIsImmutable\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DiamondWritable__SelectorNotFound\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DiamondWritable__SelectorNotSpecified\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DiamondWritable__TargetHasNoCode\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Ownable__NotOwner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Ownable__NotTransitiveOwner\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"},{\"internalType\":\"enum IDiamondWritableInternal.FacetCutAction\",\"name\":\"action\",\"type\":\"uint8\"},{\"internalType\":\"bytes4[]\",\"name\":\"selectors\",\"type\":\"bytes4[]\"}],\"indexed\":false,\"internalType\":\"struct IDiamondWritableInternal.FacetCut[]\",\"name\":\"facetCuts\",\"type\":\"tuple[]\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"DiamondCut\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"},{\"internalType\":\"enum IDiamondWritableInternal.FacetCutAction\",\"name\":\"action\",\"type\":\"uint8\"},{\"internalType\":\"bytes4[]\",\"name\":\"selectors\",\"type\":\"bytes4[]\"}],\"internalType\":\"struct IDiamondWritableInternal.FacetCut[]\",\"name\":\"facetCuts\",\"type\":\"tuple[]\"},{\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"diamondCut\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"diamondCut((address,uint8,bytes4[])[],address,bytes)\":{\"params\":{\"data\":\"optional initialization function call data\",\"facetCuts\":\"array of structured Diamond facet update data\",\"target\":\"optional target of initialization delegatecall\"}}},\"title\":\"EIP-2535 \\\"Diamond\\\" proxy update contract\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"diamondCut((address,uint8,bytes4[])[],address,bytes)\":{\"notice\":\"update diamond facets and optionally execute arbitrary initialization function\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/proxy/diamond/writable/DiamondWritable.sol\":\"DiamondWritable\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/access/ownable/IOwnableInternal.sol\":{\"keccak256\":\"0x0983a6fb097ce9707ba4ea1dbf1211603bc0f27d0f96b80e3627211c4cc3f463\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://89b36889e3f57c5560eb4d6e4da11a6cc55a1fa105cfc12890791e7dfeaf9b07\",\"dweb:/ipfs/QmcSi5vDK5qxCsN4TQCdhcTasoX3nNCTKnwww4HVTm6vGc\"]},\"contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol\":{\"keccak256\":\"0x5ea184c231770722d68e1d26f12c92a5728a922cb15ec917973c124febeb1ecd\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c0bad43f787110a77a438e6e2e4345970f601deb94e12651d444b77b766dfb14\",\"dweb:/ipfs/QmW7YjVBNPWhjEuGSRwcYL3csGR8EVr7mDSPDHwvXVgZBx\"]},\"contracts/.cache/solidstate/local/access/ownable/OwnableStorage.sol\":{\"keccak256\":\"0x7069594ee0eef486fb11dd2472f274e8627990a5af95712e0baf865300aff218\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4a09ad96ba21b8f7cbcf9d7c84455424051359f0aa5540950b082c1212301b65\",\"dweb:/ipfs/QmUDWkJAyqNiLb8vrDMphemBuBaZSRvpFvgF4b42AZMHBq\"]},\"contracts/.cache/solidstate/local/interfaces/IERC173.sol\":{\"keccak256\":\"0xf1c1fbf0ec82110c29d549db1fbd8ec728ba0b995dc5f087e0a5464243135dce\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://16c7f3eba0547576833d0c1fddb7ec34aeba4f28b4ce9e878c3bd3ebc9c8d3d1\",\"dweb:/ipfs/Qme79eYLo7dinnhotgC4bvYnCg4doBDShHeCajrf5zpAUF\"]},\"contracts/.cache/solidstate/local/interfaces/IERC173Internal.sol\":{\"keccak256\":\"0xbd1b10afb3f0e0628f077296268a3b3d6ce92b0c481234c03bb93a82c08dbc48\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://72f2c4693435b8899495eeb9222c0fa6596b5e8a9fee001da0fbdecad202ff4b\",\"dweb:/ipfs/QmcugENqTFqiboof9DwTZAdeLn3PSvXCCAm27CJ2UVgZkW\"]},\"contracts/.cache/solidstate/local/proxy/diamond/base/DiamondBaseStorage.sol\":{\"keccak256\":\"0xe355178ce344f7d677a1fe8c94f2560c0b4e6be8ad1a449e856ac3ebf2a12900\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2851ed84710be19eb0aad34b41214a380c9fdf18f5fabc11166760e39c78f977\",\"dweb:/ipfs/Qmb1of29KymSq1Keow3CLFApXGfRgJ2Z9LxhMbbMzrc4U8\"]},\"contracts/.cache/solidstate/local/proxy/diamond/writable/DiamondWritable.sol\":{\"keccak256\":\"0xfa5661d439a3438aa36121499d24dbe3926ef5714f3320d7bd846e76e30fcb37\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f0e3256ca9fa1267ec00cb5d8a011d7a79c504476512c22667e12580a1880517\",\"dweb:/ipfs/QmNoJQUcwE8vzGa57PPH54MjTWpGFvoVyTho68gG3x13Y9\"]},\"contracts/.cache/solidstate/local/proxy/diamond/writable/DiamondWritableInternal.sol\":{\"keccak256\":\"0x31068c54fbe1196c7badf665729b8349eeb337fdf681cfdab14e43caecae5974\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e365f7b1fbbf1fca2d70a0b2fc5c47eb516c54bf2822c5f0a2b97c212177ea72\",\"dweb:/ipfs/QmaV4gmdkaaTdNWszPc1MqycphktYSrWMEmZtEET8PZ4u1\"]},\"contracts/.cache/solidstate/local/proxy/diamond/writable/IDiamondWritable.sol\":{\"keccak256\":\"0x17802157e99a8762663afbc5748dc55f052353b5654d5894f5361ed605f79a1d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://394424f28e5e97ec11b97e3e8890bb74d9573dc9b57870947bdee3d8c387a8e6\",\"dweb:/ipfs/QmXDxZzirAsbA8S3t9gAZnDRJoHBaNFHh6iixkoTAefyN1\"]},\"contracts/.cache/solidstate/local/proxy/diamond/writable/IDiamondWritableInternal.sol\":{\"keccak256\":\"0x82e0eeb28c8b8bd1ee9c5dd3247fa3d4062d5c6d43061833714c88741ecb5605\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4488dbd8056f270930da3ecae6f42037274fcac0444cacc25a57153541acb740\",\"dweb:/ipfs/QmURtgVddgar1YecAXZDEDStGaX7tBZTmcuZQJkeiA9NzZ\"]},\"contracts/.cache/solidstate/local/utils/AddressUtils.sol\":{\"keccak256\":\"0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e\",\"dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF\"]},\"contracts/.cache/solidstate/local/utils/UintUtils.sol\":{\"keccak256\":\"0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2\",\"dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "DiamondWritable__InvalidInitializationParameters"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "DiamondWritable__RemoveTargetNotZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "DiamondWritable__ReplaceTargetIsIdentical"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "DiamondWritable__SelectorAlreadyAdded"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "DiamondWritable__SelectorIsImmutable"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "DiamondWritable__SelectorNotFound"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "DiamondWritable__SelectorNotSpecified"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "DiamondWritable__TargetHasNoCode"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotOwner"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Ownable__NotTransitiveOwner"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct IDiamondWritableInternal.FacetCut[]",
+              "name": "facetCuts",
+              "type": "tuple[]",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "target",
+                  "type": "address"
+                },
+                {
+                  "internalType": "enum IDiamondWritableInternal.FacetCutAction",
+                  "name": "action",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "bytes4[]",
+                  "name": "selectors",
+                  "type": "bytes4[]"
+                }
+              ],
+              "indexed": false
+            },
+            {
+              "internalType": "address",
+              "name": "target",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "DiamondCut",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct IDiamondWritableInternal.FacetCut[]",
+              "name": "facetCuts",
+              "type": "tuple[]",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "target",
+                  "type": "address"
+                },
+                {
+                  "internalType": "enum IDiamondWritableInternal.FacetCutAction",
+                  "name": "action",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "bytes4[]",
+                  "name": "selectors",
+                  "type": "bytes4[]"
+                }
+              ]
+            },
+            {
+              "internalType": "address",
+              "name": "target",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "data",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "diamondCut"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "diamondCut((address,uint8,bytes4[])[],address,bytes)": {
+            "params": {
+              "data": "optional initialization function call data",
+              "facetCuts": "array of structured Diamond facet update data",
+              "target": "optional target of initialization delegatecall"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "diamondCut((address,uint8,bytes4[])[],address,bytes)": {
+            "notice": "update diamond facets and optionally execute arbitrary initialization function"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/proxy/diamond/writable/DiamondWritable.sol": "DiamondWritable"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/access/ownable/IOwnableInternal.sol": {
+        "keccak256": "0x0983a6fb097ce9707ba4ea1dbf1211603bc0f27d0f96b80e3627211c4cc3f463",
+        "urls": [
+          "bzz-raw://89b36889e3f57c5560eb4d6e4da11a6cc55a1fa105cfc12890791e7dfeaf9b07",
+          "dweb:/ipfs/QmcSi5vDK5qxCsN4TQCdhcTasoX3nNCTKnwww4HVTm6vGc"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol": {
+        "keccak256": "0x5ea184c231770722d68e1d26f12c92a5728a922cb15ec917973c124febeb1ecd",
+        "urls": [
+          "bzz-raw://c0bad43f787110a77a438e6e2e4345970f601deb94e12651d444b77b766dfb14",
+          "dweb:/ipfs/QmW7YjVBNPWhjEuGSRwcYL3csGR8EVr7mDSPDHwvXVgZBx"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/access/ownable/OwnableStorage.sol": {
+        "keccak256": "0x7069594ee0eef486fb11dd2472f274e8627990a5af95712e0baf865300aff218",
+        "urls": [
+          "bzz-raw://4a09ad96ba21b8f7cbcf9d7c84455424051359f0aa5540950b082c1212301b65",
+          "dweb:/ipfs/QmUDWkJAyqNiLb8vrDMphemBuBaZSRvpFvgF4b42AZMHBq"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC173.sol": {
+        "keccak256": "0xf1c1fbf0ec82110c29d549db1fbd8ec728ba0b995dc5f087e0a5464243135dce",
+        "urls": [
+          "bzz-raw://16c7f3eba0547576833d0c1fddb7ec34aeba4f28b4ce9e878c3bd3ebc9c8d3d1",
+          "dweb:/ipfs/Qme79eYLo7dinnhotgC4bvYnCg4doBDShHeCajrf5zpAUF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC173Internal.sol": {
+        "keccak256": "0xbd1b10afb3f0e0628f077296268a3b3d6ce92b0c481234c03bb93a82c08dbc48",
+        "urls": [
+          "bzz-raw://72f2c4693435b8899495eeb9222c0fa6596b5e8a9fee001da0fbdecad202ff4b",
+          "dweb:/ipfs/QmcugENqTFqiboof9DwTZAdeLn3PSvXCCAm27CJ2UVgZkW"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/diamond/base/DiamondBaseStorage.sol": {
+        "keccak256": "0xe355178ce344f7d677a1fe8c94f2560c0b4e6be8ad1a449e856ac3ebf2a12900",
+        "urls": [
+          "bzz-raw://2851ed84710be19eb0aad34b41214a380c9fdf18f5fabc11166760e39c78f977",
+          "dweb:/ipfs/Qmb1of29KymSq1Keow3CLFApXGfRgJ2Z9LxhMbbMzrc4U8"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/diamond/writable/DiamondWritable.sol": {
+        "keccak256": "0xfa5661d439a3438aa36121499d24dbe3926ef5714f3320d7bd846e76e30fcb37",
+        "urls": [
+          "bzz-raw://f0e3256ca9fa1267ec00cb5d8a011d7a79c504476512c22667e12580a1880517",
+          "dweb:/ipfs/QmNoJQUcwE8vzGa57PPH54MjTWpGFvoVyTho68gG3x13Y9"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/diamond/writable/DiamondWritableInternal.sol": {
+        "keccak256": "0x31068c54fbe1196c7badf665729b8349eeb337fdf681cfdab14e43caecae5974",
+        "urls": [
+          "bzz-raw://e365f7b1fbbf1fca2d70a0b2fc5c47eb516c54bf2822c5f0a2b97c212177ea72",
+          "dweb:/ipfs/QmaV4gmdkaaTdNWszPc1MqycphktYSrWMEmZtEET8PZ4u1"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/diamond/writable/IDiamondWritable.sol": {
+        "keccak256": "0x17802157e99a8762663afbc5748dc55f052353b5654d5894f5361ed605f79a1d",
+        "urls": [
+          "bzz-raw://394424f28e5e97ec11b97e3e8890bb74d9573dc9b57870947bdee3d8c387a8e6",
+          "dweb:/ipfs/QmXDxZzirAsbA8S3t9gAZnDRJoHBaNFHh6iixkoTAefyN1"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/proxy/diamond/writable/IDiamondWritableInternal.sol": {
+        "keccak256": "0x82e0eeb28c8b8bd1ee9c5dd3247fa3d4062d5c6d43061833714c88741ecb5605",
+        "urls": [
+          "bzz-raw://4488dbd8056f270930da3ecae6f42037274fcac0444cacc25a57153541acb740",
+          "dweb:/ipfs/QmURtgVddgar1YecAXZDEDStGaX7tBZTmcuZQJkeiA9NzZ"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/AddressUtils.sol": {
+        "keccak256": "0x2e73aa25851f4a2d9dabf638088bd488eee4d2aef007936c2cfd041e404f8c4c",
+        "urls": [
+          "bzz-raw://184478851fbb151471a83dec76e74cf01099e714f1ad9a123f2857cdaf02bd0e",
+          "dweb:/ipfs/QmT8duP3XrMaaURrgbow9y9udmEFWio2o6U58yxY3NsyoF"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/utils/UintUtils.sol": {
+        "keccak256": "0x704c10b8b23713ae4b368c4fd2af5f9946f97b8b84913ee9e560bf9d70ef4a3c",
+        "urls": [
+          "bzz-raw://9903c784bdff9fbff0e69bbd1239fae04dc5b7592ef6810a4e7454b8f079ced2",
+          "dweb:/ipfs/QmYXbidoUoK9S2Mc64WyUtG4vny9zvECaGK52z5kTr2boB"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/proxy/diamond/writable/DiamondWritable.sol",
+    "id": 47475,
+    "exportedSymbols": {
+      "DiamondWritable": [
+        47474
+      ],
+      "DiamondWritableInternal": [
+        48293
+      ],
+      "IDiamondWritable": [
+        48362
+      ],
+      "OwnableInternal": [
+        37887
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:607:312",
+    "nodes": [
+      {
+        "id": 47439,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:312",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 47441,
+        "nodeType": "ImportDirective",
+        "src": "58:76:312",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/access/ownable/OwnableInternal.sol",
+        "file": "../../../access/ownable/OwnableInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 47475,
+        "sourceUnit": 37888,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 47440,
+              "name": "OwnableInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 37887,
+              "src": "66:15:312",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 47443,
+        "nodeType": "ImportDirective",
+        "src": "135:56:312",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/proxy/diamond/writable/IDiamondWritable.sol",
+        "file": "./IDiamondWritable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 47475,
+        "sourceUnit": 48363,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 47442,
+              "name": "IDiamondWritable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 48362,
+              "src": "143:16:312",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 47445,
+        "nodeType": "ImportDirective",
+        "src": "192:70:312",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/proxy/diamond/writable/DiamondWritableInternal.sol",
+        "file": "./DiamondWritableInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 47475,
+        "sourceUnit": 48294,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 47444,
+              "name": "DiamondWritableInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 48293,
+              "src": "200:23:312",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 47474,
+        "nodeType": "ContractDefinition",
+        "src": "323:316:312",
+        "nodes": [
+          {
+            "id": 47473,
+            "nodeType": "FunctionDefinition",
+            "src": "477:160:312",
+            "nodes": [],
+            "body": {
+              "id": 47472,
+              "nodeType": "Block",
+              "src": "584:53:312",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 47467,
+                        "name": "facetCuts",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 47457,
+                        "src": "606:9:312",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_FacetCut_$48403_calldata_ptr_$dyn_calldata_ptr",
+                          "typeString": "struct IDiamondWritableInternal.FacetCut calldata[] calldata"
+                        }
+                      },
+                      {
+                        "id": 47468,
+                        "name": "target",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 47459,
+                        "src": "617:6:312",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 47469,
+                        "name": "data",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 47461,
+                        "src": "625:4:312",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_calldata_ptr",
+                          "typeString": "bytes calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_array$_t_struct$_FacetCut_$48403_calldata_ptr_$dyn_calldata_ptr",
+                          "typeString": "struct IDiamondWritableInternal.FacetCut calldata[] calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes_calldata_ptr",
+                          "typeString": "bytes calldata"
+                        }
+                      ],
+                      "id": 47466,
+                      "name": "_diamondCut",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 47680,
+                      "src": "594:11:312",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_array$_t_struct$_FacetCut_$48403_memory_ptr_$dyn_memory_ptr_$_t_address_$_t_bytes_memory_ptr_$returns$__$",
+                        "typeString": "function (struct IDiamondWritableInternal.FacetCut memory[] memory,address,bytes memory)"
+                      }
+                    },
+                    "id": 47470,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "594:36:312",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 47471,
+                  "nodeType": "ExpressionStatement",
+                  "src": "594:36:312"
+                }
+              ]
+            },
+            "baseFunctions": [
+              48361
+            ],
+            "documentation": {
+              "id": 47453,
+              "nodeType": "StructuredDocumentation",
+              "src": "425:47:312",
+              "text": " @inheritdoc IDiamondWritable"
+            },
+            "functionSelector": "1f931c1c",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "id": 47464,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 47463,
+                  "name": "onlyOwner",
+                  "nameLocations": [
+                    "574:9:312"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 37790,
+                  "src": "574:9:312"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "574:9:312"
+              }
+            ],
+            "name": "diamondCut",
+            "nameLocation": "486:10:312",
+            "parameters": {
+              "id": 47462,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 47457,
+                  "mutability": "mutable",
+                  "name": "facetCuts",
+                  "nameLocation": "517:9:312",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47473,
+                  "src": "497:29:312",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_FacetCut_$48403_calldata_ptr_$dyn_calldata_ptr",
+                    "typeString": "struct IDiamondWritableInternal.FacetCut[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 47455,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 47454,
+                        "name": "FacetCut",
+                        "nameLocations": [
+                          "497:8:312"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 48403,
+                        "src": "497:8:312"
+                      },
+                      "referencedDeclaration": 48403,
+                      "src": "497:8:312",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_FacetCut_$48403_storage_ptr",
+                        "typeString": "struct IDiamondWritableInternal.FacetCut"
+                      }
+                    },
+                    "id": 47456,
+                    "nodeType": "ArrayTypeName",
+                    "src": "497:10:312",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_FacetCut_$48403_storage_$dyn_storage_ptr",
+                      "typeString": "struct IDiamondWritableInternal.FacetCut[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 47459,
+                  "mutability": "mutable",
+                  "name": "target",
+                  "nameLocation": "536:6:312",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47473,
+                  "src": "528:14:312",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 47458,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "528:7:312",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 47461,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "559:4:312",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 47473,
+                  "src": "544:19:312",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 47460,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "544:5:312",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "496:68:312"
+            },
+            "returnParameters": {
+              "id": 47465,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "584:0:312"
+            },
+            "scope": 47474,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 47447,
+              "name": "IDiamondWritable",
+              "nameLocations": [
+                "360:16:312"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 48362,
+              "src": "360:16:312"
+            },
+            "id": 47448,
+            "nodeType": "InheritanceSpecifier",
+            "src": "360:16:312"
+          },
+          {
+            "baseName": {
+              "id": 47449,
+              "name": "DiamondWritableInternal",
+              "nameLocations": [
+                "378:23:312"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 48293,
+              "src": "378:23:312"
+            },
+            "id": 47450,
+            "nodeType": "InheritanceSpecifier",
+            "src": "378:23:312"
+          },
+          {
+            "baseName": {
+              "id": 47451,
+              "name": "OwnableInternal",
+              "nameLocations": [
+                "403:15:312"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 37887,
+              "src": "403:15:312"
+            },
+            "id": 47452,
+            "nodeType": "InheritanceSpecifier",
+            "src": "403:15:312"
+          }
+        ],
+        "canonicalName": "DiamondWritable",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 47446,
+          "nodeType": "StructuredDocumentation",
+          "src": "264:58:312",
+          "text": " @title EIP-2535 \"Diamond\" proxy update contract"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          47474,
+          37887,
+          37695,
+          44903,
+          48293,
+          48362,
+          48404
+        ],
+        "name": "DiamondWritable",
+        "nameLocation": "341:15:312",
+        "scope": 47475,
+        "usedErrors": [
+          37692,
+          37694,
+          48380,
+          48382,
+          48384,
+          48386,
+          48388,
+          48390,
+          48392,
+          48394
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 312
+}

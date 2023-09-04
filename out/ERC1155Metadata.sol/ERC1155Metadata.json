@@ -1,0 +1,1332 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "URI",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        }
+      ],
+      "name": "uri",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "uri(uint256)": "0e89341c"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"value\",\"type\":\"string\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"URI\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"uri\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"ERC1155 metadata extensions\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"uri(uint256)\":{\"notice\":\"inheritdoc IERC1155Metadata\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155Metadata.sol\":\"ERC1155Metadata\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155Metadata.sol\":{\"keccak256\":\"0x6ea046fa006ec93948d00a4c93d0423d2cc3fa7f6bb5a4f4fa7dd59f8025404e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0bdead3b8a0c8dca4cff7c814fafe43afcdb432ef923a90d651d89f4e3a4b0f6\",\"dweb:/ipfs/Qma4FJanVEk9zynRiuZrJRoxxX2tERmNKfeMBC2MJwRbBM\"]},\"lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155MetadataInternal.sol\":{\"keccak256\":\"0xaf972740ad8d28ccc306fa49c5b0e581fc637f3706eb77fd5bb08d02b3b2a762\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2bc2893cb85228604b160cf06f3664be994b1e5bb84a09cb32485ef9da08f1c4\",\"dweb:/ipfs/QmPMh8KjFmsAsd2VKmmz6vjLfXDvY1Koj1TboNhArYXd6F\"]},\"lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155MetadataStorage.sol\":{\"keccak256\":\"0x67e8228a4c843b8bb45252d360370ba12839e7bb53a3f6c97b1aee482d77d4ec\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://221b21013ea512d23a05f5de717bc42fda041c09f8da1a422590785e216a7417\",\"dweb:/ipfs/QmWdHYmrjBDKGjJmjm4wKzeAvLRVUXH1xqsAr4j8GHaG8z\"]},\"lib/solidstate-solidity/contracts/token/ERC1155/metadata/IERC1155Metadata.sol\":{\"keccak256\":\"0x5996ccbe41ca8000926401f9172fe777853be594ca516bed5d56513f24b35798\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bf39d593cd22490c4048c654249e76eb2b9468acf7c4186c3859f51ebb0d1cd2\",\"dweb:/ipfs/Qmctmaqf57FN6Lw6kueCUYhEyYR4PVTT8gwRioZvBeBv7e\"]},\"lib/solidstate-solidity/contracts/token/ERC1155/metadata/IERC1155MetadataInternal.sol\":{\"keccak256\":\"0x394093a86fbfebdcda356fe9407480d81434aa162afc6a3e8efbf72a4c05b98d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://afd12f43c0ba7b94ebd701da54b200074f464c16861bb14adcf5593f0f854c17\",\"dweb:/ipfs/QmWCmvKp1dRce5uaGrNog1pmt5pQCzsjcFuALJqn6kLxLD\"]},\"lib/solidstate-solidity/contracts/utils/UintUtils.sol\":{\"keccak256\":\"0x5aaeaea22a0800402c6f2d8ce6185293bc64f74f6c390c1b1c53b624b43972f8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8b1c95c745da8ca4de7b68e65ef9122dab4e748c3ae3c9f5fd5aa7c65887c9d2\",\"dweb:/ipfs/QmX2KURY4JbM4NVFp5KPYsNxoJGA8n8w6SdAFdD5Pasgza\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "value",
+              "type": "string",
+              "indexed": false
+            },
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256",
+              "indexed": true
+            }
+          ],
+          "type": "event",
+          "name": "URI",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "uri",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "uri(uint256)": {
+            "notice": "inheritdoc IERC1155Metadata"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155Metadata.sol": "ERC1155Metadata"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155Metadata.sol": {
+        "keccak256": "0x6ea046fa006ec93948d00a4c93d0423d2cc3fa7f6bb5a4f4fa7dd59f8025404e",
+        "urls": [
+          "bzz-raw://0bdead3b8a0c8dca4cff7c814fafe43afcdb432ef923a90d651d89f4e3a4b0f6",
+          "dweb:/ipfs/Qma4FJanVEk9zynRiuZrJRoxxX2tERmNKfeMBC2MJwRbBM"
+        ],
+        "license": "MIT"
+      },
+      "lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155MetadataInternal.sol": {
+        "keccak256": "0xaf972740ad8d28ccc306fa49c5b0e581fc637f3706eb77fd5bb08d02b3b2a762",
+        "urls": [
+          "bzz-raw://2bc2893cb85228604b160cf06f3664be994b1e5bb84a09cb32485ef9da08f1c4",
+          "dweb:/ipfs/QmPMh8KjFmsAsd2VKmmz6vjLfXDvY1Koj1TboNhArYXd6F"
+        ],
+        "license": "MIT"
+      },
+      "lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155MetadataStorage.sol": {
+        "keccak256": "0x67e8228a4c843b8bb45252d360370ba12839e7bb53a3f6c97b1aee482d77d4ec",
+        "urls": [
+          "bzz-raw://221b21013ea512d23a05f5de717bc42fda041c09f8da1a422590785e216a7417",
+          "dweb:/ipfs/QmWdHYmrjBDKGjJmjm4wKzeAvLRVUXH1xqsAr4j8GHaG8z"
+        ],
+        "license": "MIT"
+      },
+      "lib/solidstate-solidity/contracts/token/ERC1155/metadata/IERC1155Metadata.sol": {
+        "keccak256": "0x5996ccbe41ca8000926401f9172fe777853be594ca516bed5d56513f24b35798",
+        "urls": [
+          "bzz-raw://bf39d593cd22490c4048c654249e76eb2b9468acf7c4186c3859f51ebb0d1cd2",
+          "dweb:/ipfs/Qmctmaqf57FN6Lw6kueCUYhEyYR4PVTT8gwRioZvBeBv7e"
+        ],
+        "license": "MIT"
+      },
+      "lib/solidstate-solidity/contracts/token/ERC1155/metadata/IERC1155MetadataInternal.sol": {
+        "keccak256": "0x394093a86fbfebdcda356fe9407480d81434aa162afc6a3e8efbf72a4c05b98d",
+        "urls": [
+          "bzz-raw://afd12f43c0ba7b94ebd701da54b200074f464c16861bb14adcf5593f0f854c17",
+          "dweb:/ipfs/QmWCmvKp1dRce5uaGrNog1pmt5pQCzsjcFuALJqn6kLxLD"
+        ],
+        "license": "MIT"
+      },
+      "lib/solidstate-solidity/contracts/utils/UintUtils.sol": {
+        "keccak256": "0x5aaeaea22a0800402c6f2d8ce6185293bc64f74f6c390c1b1c53b624b43972f8",
+        "urls": [
+          "bzz-raw://8b1c95c745da8ca4de7b68e65ef9122dab4e748c3ae3c9f5fd5aa7c65887c9d2",
+          "dweb:/ipfs/QmX2KURY4JbM4NVFp5KPYsNxoJGA8n8w6SdAFdD5Pasgza"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155Metadata.sol",
+    "id": 131110,
+    "exportedSymbols": {
+      "ERC1155Metadata": [
+        131109
+      ],
+      "ERC1155MetadataInternal": [
+        131158
+      ],
+      "ERC1155MetadataStorage": [
+        131186
+      ],
+      "IERC1155Metadata": [
+        131202
+      ],
+      "UintUtils": [
+        133305
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:1084:620",
+    "nodes": [
+      {
+        "id": 131021,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:620",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 131023,
+        "nodeType": "ImportDirective",
+        "src": "58:57:620",
+        "nodes": [],
+        "absolutePath": "lib/solidstate-solidity/contracts/utils/UintUtils.sol",
+        "file": "../../../utils/UintUtils.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 131110,
+        "sourceUnit": 133306,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 131022,
+              "name": "UintUtils",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 133305,
+              "src": "67:9:620",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 131025,
+        "nodeType": "ImportDirective",
+        "src": "116:58:620",
+        "nodes": [],
+        "absolutePath": "lib/solidstate-solidity/contracts/token/ERC1155/metadata/IERC1155Metadata.sol",
+        "file": "./IERC1155Metadata.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 131110,
+        "sourceUnit": 131203,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 131024,
+              "name": "IERC1155Metadata",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 131202,
+              "src": "125:16:620",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 131027,
+        "nodeType": "ImportDirective",
+        "src": "175:72:620",
+        "nodes": [],
+        "absolutePath": "lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155MetadataInternal.sol",
+        "file": "./ERC1155MetadataInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 131110,
+        "sourceUnit": 131159,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 131026,
+              "name": "ERC1155MetadataInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 131158,
+              "src": "184:23:620",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 131029,
+        "nodeType": "ImportDirective",
+        "src": "248:70:620",
+        "nodes": [],
+        "absolutePath": "lib/solidstate-solidity/contracts/token/ERC1155/metadata/ERC1155MetadataStorage.sol",
+        "file": "./ERC1155MetadataStorage.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 131110,
+        "sourceUnit": 131187,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 131028,
+              "name": "ERC1155MetadataStorage",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 131186,
+              "src": "257:22:620",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 131109,
+        "nodeType": "ContractDefinition",
+        "src": "366:750:620",
+        "nodes": [
+          {
+            "id": 131037,
+            "nodeType": "UsingForDirective",
+            "src": "451:28:620",
+            "nodes": [],
+            "global": false,
+            "libraryName": {
+              "id": 131035,
+              "name": "UintUtils",
+              "nameLocations": [
+                "457:9:620"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 133305,
+              "src": "457:9:620"
+            },
+            "typeName": {
+              "id": 131036,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "471:7:620",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "id": 131108,
+            "nodeType": "FunctionDefinition",
+            "src": "544:570:620",
+            "nodes": [],
+            "body": {
+              "id": 131107,
+              "nodeType": "Block",
+              "src": "618:496:620",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    131049
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 131049,
+                      "mutability": "mutable",
+                      "name": "l",
+                      "nameLocation": "666:1:620",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 131107,
+                      "src": "628:39:620",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Layout_$131173_storage_ptr",
+                        "typeString": "struct ERC1155MetadataStorage.Layout"
+                      },
+                      "typeName": {
+                        "id": 131048,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 131047,
+                          "name": "ERC1155MetadataStorage.Layout",
+                          "nameLocations": [
+                            "628:22:620",
+                            "651:6:620"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 131173,
+                          "src": "628:29:620"
+                        },
+                        "referencedDeclaration": 131173,
+                        "src": "628:29:620",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Layout_$131173_storage_ptr",
+                          "typeString": "struct ERC1155MetadataStorage.Layout"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 131053,
+                  "initialValue": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "id": 131050,
+                        "name": "ERC1155MetadataStorage",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 131186,
+                        "src": "670:22:620",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_ERC1155MetadataStorage_$131186_$",
+                          "typeString": "type(library ERC1155MetadataStorage)"
+                        }
+                      },
+                      "id": 131051,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "706:6:620",
+                      "memberName": "layout",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 131185,
+                      "src": "670:42:620",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$__$returns$_t_struct$_Layout_$131173_storage_ptr_$",
+                        "typeString": "function () pure returns (struct ERC1155MetadataStorage.Layout storage pointer)"
+                      }
+                    },
+                    "id": 131052,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "670:44:620",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Layout_$131173_storage_ptr",
+                      "typeString": "struct ERC1155MetadataStorage.Layout storage pointer"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "628:86:620"
+                },
+                {
+                  "assignments": [
+                    131055
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 131055,
+                      "mutability": "mutable",
+                      "name": "tokenIdURI",
+                      "nameLocation": "739:10:620",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 131107,
+                      "src": "725:24:620",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string"
+                      },
+                      "typeName": {
+                        "id": 131054,
+                        "name": "string",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "725:6:620",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_storage_ptr",
+                          "typeString": "string"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 131060,
+                  "initialValue": {
+                    "baseExpression": {
+                      "expression": {
+                        "id": 131056,
+                        "name": "l",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 131049,
+                        "src": "752:1:620",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Layout_$131173_storage_ptr",
+                          "typeString": "struct ERC1155MetadataStorage.Layout storage pointer"
+                        }
+                      },
+                      "id": 131057,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "754:9:620",
+                      "memberName": "tokenURIs",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 131172,
+                      "src": "752:11:620",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_uint256_$_t_string_storage_$",
+                        "typeString": "mapping(uint256 => string storage ref)"
+                      }
+                    },
+                    "id": 131059,
+                    "indexExpression": {
+                      "id": 131058,
+                      "name": "tokenId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 131040,
+                      "src": "764:7:620",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "752:20:620",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "725:47:620"
+                },
+                {
+                  "assignments": [
+                    131062
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 131062,
+                      "mutability": "mutable",
+                      "name": "baseURI",
+                      "nameLocation": "796:7:620",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 131107,
+                      "src": "782:21:620",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string"
+                      },
+                      "typeName": {
+                        "id": 131061,
+                        "name": "string",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "782:6:620",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_storage_ptr",
+                          "typeString": "string"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 131065,
+                  "initialValue": {
+                    "expression": {
+                      "id": 131063,
+                      "name": "l",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 131049,
+                      "src": "806:1:620",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Layout_$131173_storage_ptr",
+                        "typeString": "struct ERC1155MetadataStorage.Layout storage pointer"
+                      }
+                    },
+                    "id": 131064,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberLocation": "808:7:620",
+                    "memberName": "baseURI",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": 131168,
+                    "src": "806:9:620",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "782:33:620"
+                },
+                {
+                  "condition": {
+                    "commonType": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    },
+                    "id": 131072,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftExpression": {
+                      "expression": {
+                        "arguments": [
+                          {
+                            "id": 131068,
+                            "name": "baseURI",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 131062,
+                            "src": "836:7:620",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          ],
+                          "id": 131067,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "830:5:620",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_bytes_storage_ptr_$",
+                            "typeString": "type(bytes storage pointer)"
+                          },
+                          "typeName": {
+                            "id": 131066,
+                            "name": "bytes",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "830:5:620",
+                            "typeDescriptions": {}
+                          }
+                        },
+                        "id": 131069,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "nameLocations": [],
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "830:14:620",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      "id": 131070,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "845:6:620",
+                      "memberName": "length",
+                      "nodeType": "MemberAccess",
+                      "src": "830:21:620",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "BinaryOperation",
+                    "operator": "==",
+                    "rightExpression": {
+                      "hexValue": "30",
+                      "id": 131071,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "number",
+                      "lValueRequested": false,
+                      "nodeType": "Literal",
+                      "src": "855:1:620",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_rational_0_by_1",
+                        "typeString": "int_const 0"
+                      },
+                      "value": "0"
+                    },
+                    "src": "830:26:620",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "falseBody": {
+                    "condition": {
+                      "commonType": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "id": 131082,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "leftExpression": {
+                        "expression": {
+                          "arguments": [
+                            {
+                              "id": 131078,
+                              "name": "tokenIdURI",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 131055,
+                              "src": "916:10:620",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_string_memory_ptr",
+                                "typeString": "string memory"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_string_memory_ptr",
+                                "typeString": "string memory"
+                              }
+                            ],
+                            "id": 131077,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "910:5:620",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_bytes_storage_ptr_$",
+                              "typeString": "type(bytes storage pointer)"
+                            },
+                            "typeName": {
+                              "id": 131076,
+                              "name": "bytes",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "910:5:620",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 131079,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "nameLocations": [],
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "910:17:620",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes_memory_ptr",
+                            "typeString": "bytes memory"
+                          }
+                        },
+                        "id": 131080,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberLocation": "928:6:620",
+                        "memberName": "length",
+                        "nodeType": "MemberAccess",
+                        "src": "910:24:620",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "nodeType": "BinaryOperation",
+                      "operator": ">",
+                      "rightExpression": {
+                        "hexValue": "30",
+                        "id": 131081,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "937:1:620",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_0_by_1",
+                          "typeString": "int_const 0"
+                        },
+                        "value": "0"
+                      },
+                      "src": "910:28:620",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "falseBody": {
+                      "id": 131104,
+                      "nodeType": "Block",
+                      "src": "1023:85:620",
+                      "statements": [
+                        {
+                          "expression": {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "id": 131097,
+                                    "name": "baseURI",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 131062,
+                                    "src": "1068:7:620",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_string_memory_ptr",
+                                      "typeString": "string memory"
+                                    }
+                                  },
+                                  {
+                                    "arguments": [],
+                                    "expression": {
+                                      "argumentTypes": [],
+                                      "expression": {
+                                        "id": 131098,
+                                        "name": "tokenId",
+                                        "nodeType": "Identifier",
+                                        "overloadedDeclarations": [],
+                                        "referencedDeclaration": 131040,
+                                        "src": "1077:7:620",
+                                        "typeDescriptions": {
+                                          "typeIdentifier": "t_uint256",
+                                          "typeString": "uint256"
+                                        }
+                                      },
+                                      "id": 131099,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "memberLocation": "1085:8:620",
+                                      "memberName": "toString",
+                                      "nodeType": "MemberAccess",
+                                      "referencedDeclaration": 133187,
+                                      "src": "1077:16:620",
+                                      "typeDescriptions": {
+                                        "typeIdentifier": "t_function_internal_pure$_t_uint256_$returns$_t_string_memory_ptr_$attached_to$_t_uint256_$",
+                                        "typeString": "function (uint256) pure returns (string memory)"
+                                      }
+                                    },
+                                    "id": 131100,
+                                    "isConstant": false,
+                                    "isLValue": false,
+                                    "isPure": false,
+                                    "kind": "functionCall",
+                                    "lValueRequested": false,
+                                    "nameLocations": [],
+                                    "names": [],
+                                    "nodeType": "FunctionCall",
+                                    "src": "1077:18:620",
+                                    "tryCall": false,
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_string_memory_ptr",
+                                      "typeString": "string memory"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_string_memory_ptr",
+                                      "typeString": "string memory"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_string_memory_ptr",
+                                      "typeString": "string memory"
+                                    }
+                                  ],
+                                  "expression": {
+                                    "id": 131095,
+                                    "name": "abi",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": -1,
+                                    "src": "1051:3:620",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_magic_abi",
+                                      "typeString": "abi"
+                                    }
+                                  },
+                                  "id": 131096,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "memberLocation": "1055:12:620",
+                                  "memberName": "encodePacked",
+                                  "nodeType": "MemberAccess",
+                                  "src": "1051:16:620",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
+                                    "typeString": "function () pure returns (bytes memory)"
+                                  }
+                                },
+                                "id": 131101,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "functionCall",
+                                "lValueRequested": false,
+                                "nameLocations": [],
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "1051:45:620",
+                                "tryCall": false,
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes_memory_ptr",
+                                  "typeString": "bytes memory"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bytes_memory_ptr",
+                                  "typeString": "bytes memory"
+                                }
+                              ],
+                              "id": 131094,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "1044:6:620",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_string_storage_ptr_$",
+                                "typeString": "type(string storage pointer)"
+                              },
+                              "typeName": {
+                                "id": 131093,
+                                "name": "string",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "1044:6:620",
+                                "typeDescriptions": {}
+                              }
+                            },
+                            "id": 131102,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "1044:53:620",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          "functionReturnParameters": 131044,
+                          "id": 131103,
+                          "nodeType": "Return",
+                          "src": "1037:60:620"
+                        }
+                      ]
+                    },
+                    "id": 131105,
+                    "nodeType": "IfStatement",
+                    "src": "906:202:620",
+                    "trueBody": {
+                      "id": 131092,
+                      "nodeType": "Block",
+                      "src": "940:77:620",
+                      "statements": [
+                        {
+                          "expression": {
+                            "arguments": [
+                              {
+                                "arguments": [
+                                  {
+                                    "id": 131087,
+                                    "name": "baseURI",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 131062,
+                                    "src": "985:7:620",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_string_memory_ptr",
+                                      "typeString": "string memory"
+                                    }
+                                  },
+                                  {
+                                    "id": 131088,
+                                    "name": "tokenIdURI",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 131055,
+                                    "src": "994:10:620",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_string_memory_ptr",
+                                      "typeString": "string memory"
+                                    }
+                                  }
+                                ],
+                                "expression": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_string_memory_ptr",
+                                      "typeString": "string memory"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_string_memory_ptr",
+                                      "typeString": "string memory"
+                                    }
+                                  ],
+                                  "expression": {
+                                    "id": 131085,
+                                    "name": "abi",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": -1,
+                                    "src": "968:3:620",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_magic_abi",
+                                      "typeString": "abi"
+                                    }
+                                  },
+                                  "id": 131086,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "memberLocation": "972:12:620",
+                                  "memberName": "encodePacked",
+                                  "nodeType": "MemberAccess",
+                                  "src": "968:16:620",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
+                                    "typeString": "function () pure returns (bytes memory)"
+                                  }
+                                },
+                                "id": 131089,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "functionCall",
+                                "lValueRequested": false,
+                                "nameLocations": [],
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "968:37:620",
+                                "tryCall": false,
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_bytes_memory_ptr",
+                                  "typeString": "bytes memory"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bytes_memory_ptr",
+                                  "typeString": "bytes memory"
+                                }
+                              ],
+                              "id": 131084,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "961:6:620",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_string_storage_ptr_$",
+                                "typeString": "type(string storage pointer)"
+                              },
+                              "typeName": {
+                                "id": 131083,
+                                "name": "string",
+                                "nodeType": "ElementaryTypeName",
+                                "src": "961:6:620",
+                                "typeDescriptions": {}
+                              }
+                            },
+                            "id": 131090,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "nameLocations": [],
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "961:45:620",
+                            "tryCall": false,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          "functionReturnParameters": 131044,
+                          "id": 131091,
+                          "nodeType": "Return",
+                          "src": "954:52:620"
+                        }
+                      ]
+                    }
+                  },
+                  "id": 131106,
+                  "nodeType": "IfStatement",
+                  "src": "826:282:620",
+                  "trueBody": {
+                    "id": 131075,
+                    "nodeType": "Block",
+                    "src": "858:42:620",
+                    "statements": [
+                      {
+                        "expression": {
+                          "id": 131073,
+                          "name": "tokenIdURI",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 131055,
+                          "src": "879:10:620",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        "functionReturnParameters": 131044,
+                        "id": 131074,
+                        "nodeType": "Return",
+                        "src": "872:17:620"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "baseFunctions": [
+              131201
+            ],
+            "documentation": {
+              "id": 131038,
+              "nodeType": "StructuredDocumentation",
+              "src": "485:54:620",
+              "text": " @notice inheritdoc IERC1155Metadata"
+            },
+            "functionSelector": "0e89341c",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "uri",
+            "nameLocation": "553:3:620",
+            "parameters": {
+              "id": 131041,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 131040,
+                  "mutability": "mutable",
+                  "name": "tokenId",
+                  "nameLocation": "565:7:620",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 131108,
+                  "src": "557:15:620",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 131039,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "557:7:620",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "556:17:620"
+            },
+            "returnParameters": {
+              "id": 131044,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 131043,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 131108,
+                  "src": "603:13:620",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 131042,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "603:6:620",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "602:15:620"
+            },
+            "scope": 131109,
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "public"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 131031,
+              "name": "IERC1155Metadata",
+              "nameLocations": [
+                "403:16:620"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 131202,
+              "src": "403:16:620"
+            },
+            "id": 131032,
+            "nodeType": "InheritanceSpecifier",
+            "src": "403:16:620"
+          },
+          {
+            "baseName": {
+              "id": 131033,
+              "name": "ERC1155MetadataInternal",
+              "nameLocations": [
+                "421:23:620"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 131158,
+              "src": "421:23:620"
+            },
+            "id": 131034,
+            "nodeType": "InheritanceSpecifier",
+            "src": "421:23:620"
+          }
+        ],
+        "canonicalName": "ERC1155Metadata",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 131030,
+          "nodeType": "StructuredDocumentation",
+          "src": "320:45:620",
+          "text": " @title ERC1155 metadata extensions"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          131109,
+          131158,
+          131202,
+          131212
+        ],
+        "name": "ERC1155Metadata",
+        "nameLocation": "384:15:620",
+        "scope": 131110,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 620
+}

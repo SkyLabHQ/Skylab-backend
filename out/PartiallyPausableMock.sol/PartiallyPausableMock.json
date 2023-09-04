@@ -1,0 +1,1095 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "PartiallyPausable__NotPartiallyPaused",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PartiallyPausable__PartiallyPaused",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "PartiallyPaused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "PartiallyUnpaused",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "__partiallyPause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "__partiallyPaused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "__partiallyUnpause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "modifier_whenNotPartiallyPaused",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "modifier_whenPartiallyPaused",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "partiallyPaused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x60808060405234610016576102b4908161001c8239f35b600080fdfe60406080815260048036101561001457600080fd5b600091823560e01c8063145b90641461021b5780631dab4420146101d65780632d34139314610144578063453e35dd146100ae578063467e55c3146100a95763963e6b0e1461006257600080fd5b346100a55760203660031901126100a5578135835260008051602061025f83398151915260205260ff8184205416610098578280f35b5163d73a2c8760e01b8152fd5b8280fd5b61021b565b50346100a55760203660031901126100a55781359182845260008051602061025f833981519152908160205260ff838620541661013657508284526020908152818420805460ff191660011790559051338152908101919091527ff660874355fff2c701b92220ef82c3424a8c6541f48eeddef68ecb4b2d4fc3339080604081015b0390a180f35b825163d73a2c8760e01b8152fd5b50346100a55760203660031901126100a55781359182845260008051602061025f833981519152908160205260ff8386205416156101c857508284526020908152818420805460ff191690559051338152908101919091527f1133548fecf4d1f7cd87c1aad587c67387b14cd29c969adf1b1bc22fcabb144a908060408101610130565b825163cb34aad760e01b8152fd5b50346100a55760203660031901126100a5578135835260008051602061025f83398151915260205260ff81842054161561020e578280f35b5163cb34aad760e01b8152fd5b346102595760203660031901126102595760043560005260008051602061025f833981519152602052602060ff604060002054166040519015158152f35b600080fdfeb2b4df8db6c86b643bc9671655af7ecab384d088ad8b388456cdc1f36f10ab45a2646970667358221220c87058acc93281eda9c95fbab9783429cba9ba3b110c358087c65d68423c807064736f6c63430008130033",
+    "sourceMap": "118:615:340:-:0;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x60406080815260048036101561001457600080fd5b600091823560e01c8063145b90641461021b5780631dab4420146101d65780632d34139314610144578063453e35dd146100ae578063467e55c3146100a95763963e6b0e1461006257600080fd5b346100a55760203660031901126100a5578135835260008051602061025f83398151915260205260ff8184205416610098578280f35b5163d73a2c8760e01b8152fd5b8280fd5b61021b565b50346100a55760203660031901126100a55781359182845260008051602061025f833981519152908160205260ff838620541661013657508284526020908152818420805460ff191660011790559051338152908101919091527ff660874355fff2c701b92220ef82c3424a8c6541f48eeddef68ecb4b2d4fc3339080604081015b0390a180f35b825163d73a2c8760e01b8152fd5b50346100a55760203660031901126100a55781359182845260008051602061025f833981519152908160205260ff8386205416156101c857508284526020908152818420805460ff191690559051338152908101919091527f1133548fecf4d1f7cd87c1aad587c67387b14cd29c969adf1b1bc22fcabb144a908060408101610130565b825163cb34aad760e01b8152fd5b50346100a55760203660031901126100a5578135835260008051602061025f83398151915260205260ff81842054161561020e578280f35b5163cb34aad760e01b8152fd5b346102595760203660031901126102595760043560005260008051602061025f833981519152602052602060ff604060002054166040519015158152f35b600080fdfeb2b4df8db6c86b643bc9671655af7ecab384d088ad8b388456cdc1f36f10ab45a2646970667358221220c87058acc93281eda9c95fbab9783429cba9ba3b110c358087c65d68423c807064736f6c63430008130033",
+    "sourceMap": "118:615:340:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;118:615:340;;;;;;;;-1:-1:-1;;;;;;;;;;;118:615:340;;;;;;;;428:70:339;;118:615:340;;;428:70:339;118:615:340;-1:-1:-1;;;462:36:339;;;118:615:340;;;;;;:::i;:::-;;;;;;;-1:-1:-1;;118:615:340;;;;;;;;;;-1:-1:-1;;;;;;;;;;;118:615:340;;;;;;;;;;428:70:339;;-1:-1:-1;118:615:340;;;;;;;;;;;;-1:-1:-1;;118:615:340;;;;;;;1338:10:339;118:615:340;;;;;;;;;1322:32:339;;118:615:340;;;;1322:32:339;;;;118:615:340;;428:70:339;118:615:340;;-1:-1:-1;;;462:36:339;;;118:615:340;;;;;;;-1:-1:-1;;118:615:340;;;;;;;;;;-1:-1:-1;;;;;;;;;;;118:615:340;;;;;;;;;;578:22:339;574:99;;-1:-1:-1;118:615:340;;;;;;;;;;;;-1:-1:-1;;118:615:340;;;;;1672:10:339;118:615:340;;;;;;;;;1654:34:339;;118:615:340;;;;1654:34:339;118:615:340;574:99:339;118:615:340;;-1:-1:-1;;;623:39:339;;;118:615:340;;;;;;;-1:-1:-1;;118:615:340;;;;;;;;-1:-1:-1;;;;;;;;;;;118:615:340;;;;;;;;578:22:339;574:99;;118:615:340;;;574:99:339;118:615:340;-1:-1:-1;;;623:39:339;;;118:615:340;;;;;;-1:-1:-1;;118:615:340;;;;;;-1:-1:-1;118:615:340;-1:-1:-1;;;;;;;;;;;118:615:340;;;;;-1:-1:-1;118:615:340;;;;;;;;;;;;-1:-1:-1;118:615:340;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "__partiallyPause(bytes32)": "453e35dd",
+    "__partiallyPaused(bytes32)": "145b9064",
+    "__partiallyUnpause(bytes32)": "2d341393",
+    "modifier_whenNotPartiallyPaused(bytes32)": "963e6b0e",
+    "modifier_whenPartiallyPaused(bytes32)": "1dab4420",
+    "partiallyPaused(bytes32)": "467e55c3"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"PartiallyPausable__NotPartiallyPaused\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"PartiallyPausable__PartiallyPaused\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"PartiallyPaused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"PartiallyUnpaused\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"__partiallyPause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"__partiallyPaused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"__partiallyUnpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"modifier_whenNotPartiallyPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"modifier_whenPartiallyPaused\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"partiallyPaused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"partiallyPaused(bytes32)\":{\"returns\":{\"status\":\"whether contract is paused in the scope of given key\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"partiallyPaused(bytes32)\":{\"notice\":\"query whether contract is paused in the scope of given key\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableMock.sol\":\"PartiallyPausableMock\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausable.sol\":{\"keccak256\":\"0x4b5934ba916234965d66cc5dc0bd04d39a2859817390ff2a917c40566b37d321\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://001dd1f506322480b6fbdd80e6244197b6508cc3af715c81d27e7d1846f7dbe3\",\"dweb:/ipfs/QmQ3ArMQuiFRgDuCJLPe8sPgJvAc9buTEZRhpqKV4eoTUy\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausableInternal.sol\":{\"keccak256\":\"0xf4419586687f7b8c077a660d8bfd903e0f713cd9af759a8d3c45c06d3d49ae22\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://25e81b264ff712d6bfc47098a5667e022f294dcb4e2223a75102e01c6adc4cfd\",\"dweb:/ipfs/QmSgGWVjo1pnLv9SQHY2kNyujsNra3iGiZV6DwJJgfviRm\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausable.sol\":{\"keccak256\":\"0xf2bf41f910df5c829a0068ce59ddc9c9dd60bd52d0a1073368e318c1690b2337\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d65aef72647d55fc92fb91618ca0dc7d5274caf30f0ea5f92ce96ebaa83c0115\",\"dweb:/ipfs/QmRuRrj5rdAmjyCwGgD5XrMhAqyVcqFJhEQYhpv58Yu3tt\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableInternal.sol\":{\"keccak256\":\"0xca36823d29766246e3c737175a73a953d1d4edc61c2168e408ac6c95b86435e8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d8bf7d253a34e2d9b5aca77ec2cc305679916b60e4cdf1b592b836415e7b20a3\",\"dweb:/ipfs/QmaSNQJ3heLddHAwRy3bgB7EcpxJiX1KH5Gk6ErtbGpe6z\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableMock.sol\":{\"keccak256\":\"0xe73e87d7a7743f32442700314487bb1e3e6979ed1f1fd55dcd152beb2368e949\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://67b9f5fdd3b87b05e592939b523a7da3ebb113767c8444d33a64599c07af1723\",\"dweb:/ipfs/QmTXca7SmGsPgFNvn2k3pfvp2rd2ef4Mzm51EvAVmeKFY3\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol\":{\"keccak256\":\"0xe7e2327b7e27509aa5b6e570eb8832608fea7e3874b6cbfd80bcd8c2c5a50514\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ec79aa915b054b430cce19ab015dc0b604562123f37a43b196aa85528b51426a\",\"dweb:/ipfs/QmaK8m51es6vLyJfNnz89igNSvKD6BXo7gDNHj7yrPMEH1\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "PartiallyPausable__NotPartiallyPaused"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "PartiallyPausable__PartiallyPaused"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "PartiallyPaused",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "PartiallyUnpaused",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "__partiallyPause"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "__partiallyPaused",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "status",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "__partiallyUnpause"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "modifier_whenNotPartiallyPaused"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "modifier_whenPartiallyPaused"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "partiallyPaused",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "status",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "partiallyPaused(bytes32)": {
+            "returns": {
+              "status": "whether contract is paused in the scope of given key"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "partiallyPaused(bytes32)": {
+            "notice": "query whether contract is paused in the scope of given key"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableMock.sol": "PartiallyPausableMock"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausable.sol": {
+        "keccak256": "0x4b5934ba916234965d66cc5dc0bd04d39a2859817390ff2a917c40566b37d321",
+        "urls": [
+          "bzz-raw://001dd1f506322480b6fbdd80e6244197b6508cc3af715c81d27e7d1846f7dbe3",
+          "dweb:/ipfs/QmQ3ArMQuiFRgDuCJLPe8sPgJvAc9buTEZRhpqKV4eoTUy"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausableInternal.sol": {
+        "keccak256": "0xf4419586687f7b8c077a660d8bfd903e0f713cd9af759a8d3c45c06d3d49ae22",
+        "urls": [
+          "bzz-raw://25e81b264ff712d6bfc47098a5667e022f294dcb4e2223a75102e01c6adc4cfd",
+          "dweb:/ipfs/QmSgGWVjo1pnLv9SQHY2kNyujsNra3iGiZV6DwJJgfviRm"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausable.sol": {
+        "keccak256": "0xf2bf41f910df5c829a0068ce59ddc9c9dd60bd52d0a1073368e318c1690b2337",
+        "urls": [
+          "bzz-raw://d65aef72647d55fc92fb91618ca0dc7d5274caf30f0ea5f92ce96ebaa83c0115",
+          "dweb:/ipfs/QmRuRrj5rdAmjyCwGgD5XrMhAqyVcqFJhEQYhpv58Yu3tt"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableInternal.sol": {
+        "keccak256": "0xca36823d29766246e3c737175a73a953d1d4edc61c2168e408ac6c95b86435e8",
+        "urls": [
+          "bzz-raw://d8bf7d253a34e2d9b5aca77ec2cc305679916b60e4cdf1b592b836415e7b20a3",
+          "dweb:/ipfs/QmaSNQJ3heLddHAwRy3bgB7EcpxJiX1KH5Gk6ErtbGpe6z"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableMock.sol": {
+        "keccak256": "0xe73e87d7a7743f32442700314487bb1e3e6979ed1f1fd55dcd152beb2368e949",
+        "urls": [
+          "bzz-raw://67b9f5fdd3b87b05e592939b523a7da3ebb113767c8444d33a64599c07af1723",
+          "dweb:/ipfs/QmTXca7SmGsPgFNvn2k3pfvp2rd2ef4Mzm51EvAVmeKFY3"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol": {
+        "keccak256": "0xe7e2327b7e27509aa5b6e570eb8832608fea7e3874b6cbfd80bcd8c2c5a50514",
+        "urls": [
+          "bzz-raw://ec79aa915b054b430cce19ab015dc0b604562123f37a43b196aa85528b51426a",
+          "dweb:/ipfs/QmaK8m51es6vLyJfNnz89igNSvKD6BXo7gDNHj7yrPMEH1"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableMock.sol",
+    "id": 49231,
+    "exportedSymbols": {
+      "PartiallyPausable": [
+        49065
+      ],
+      "PartiallyPausableMock": [
+        49230
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:701:340",
+    "nodes": [
+      {
+        "id": 49173,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:340",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 49175,
+        "nodeType": "ImportDirective",
+        "src": "58:58:340",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausable.sol",
+        "file": "./PartiallyPausable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49231,
+        "sourceUnit": 49066,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49174,
+              "name": "PartiallyPausable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49065,
+              "src": "66:17:340",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49230,
+        "nodeType": "ContractDefinition",
+        "src": "118:615:340",
+        "nodes": [
+          {
+            "id": 49186,
+            "nodeType": "FunctionDefinition",
+            "src": "176:120:340",
+            "nodes": [],
+            "body": {
+              "id": 49185,
+              "nodeType": "Block",
+              "src": "267:29:340",
+              "nodes": [],
+              "statements": []
+            },
+            "functionSelector": "963e6b0e",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "id": 49182,
+                    "name": "key",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 49179,
+                    "src": "262:3:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 49183,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 49181,
+                  "name": "whenNotPartiallyPaused",
+                  "nameLocations": [
+                    "239:22:340"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 49087,
+                  "src": "239:22:340"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "239:27:340"
+              }
+            ],
+            "name": "modifier_whenNotPartiallyPaused",
+            "nameLocation": "185:31:340",
+            "parameters": {
+              "id": 49180,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49179,
+                  "mutability": "mutable",
+                  "name": "key",
+                  "nameLocation": "225:3:340",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49186,
+                  "src": "217:11:340",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 49178,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "217:7:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "216:13:340"
+            },
+            "returnParameters": {
+              "id": 49184,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "267:0:340"
+            },
+            "scope": 49230,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 49195,
+            "nodeType": "FunctionDefinition",
+            "src": "302:114:340",
+            "nodes": [],
+            "body": {
+              "id": 49194,
+              "nodeType": "Block",
+              "src": "387:29:340",
+              "nodes": [],
+              "statements": []
+            },
+            "functionSelector": "1dab4420",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "id": 49191,
+                    "name": "key",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 49188,
+                    "src": "382:3:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  }
+                ],
+                "id": 49192,
+                "kind": "modifierInvocation",
+                "modifierName": {
+                  "id": 49190,
+                  "name": "whenPartiallyPaused",
+                  "nameLocations": [
+                    "362:19:340"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 49102,
+                  "src": "362:19:340"
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "362:24:340"
+              }
+            ],
+            "name": "modifier_whenPartiallyPaused",
+            "nameLocation": "311:28:340",
+            "parameters": {
+              "id": 49189,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49188,
+                  "mutability": "mutable",
+                  "name": "key",
+                  "nameLocation": "348:3:340",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49195,
+                  "src": "340:11:340",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 49187,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "340:7:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "339:13:340"
+            },
+            "returnParameters": {
+              "id": 49193,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "387:0:340"
+            },
+            "scope": 49230,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 49209,
+            "nodeType": "FunctionDefinition",
+            "src": "422:123:340",
+            "nodes": [],
+            "body": {
+              "id": 49208,
+              "nodeType": "Block",
+              "src": "498:47:340",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 49206,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 49202,
+                      "name": "status",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49200,
+                      "src": "508:6:340",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 49204,
+                          "name": "key",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 49197,
+                          "src": "534:3:340",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        ],
+                        "id": 49203,
+                        "name": "_partiallyPaused",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49120,
+                        "src": "517:16:340",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_view$_t_bytes32_$returns$_t_bool_$",
+                          "typeString": "function (bytes32) view returns (bool)"
+                        }
+                      },
+                      "id": 49205,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "517:21:340",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "508:30:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 49207,
+                  "nodeType": "ExpressionStatement",
+                  "src": "508:30:340"
+                }
+              ]
+            },
+            "functionSelector": "145b9064",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__partiallyPaused",
+            "nameLocation": "431:17:340",
+            "parameters": {
+              "id": 49198,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49197,
+                  "mutability": "mutable",
+                  "name": "key",
+                  "nameLocation": "457:3:340",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49209,
+                  "src": "449:11:340",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 49196,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "449:7:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "448:13:340"
+            },
+            "returnParameters": {
+              "id": 49201,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49200,
+                  "mutability": "mutable",
+                  "name": "status",
+                  "nameLocation": "490:6:340",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49209,
+                  "src": "485:11:340",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 49199,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "485:4:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "484:13:340"
+            },
+            "scope": 49230,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 49219,
+            "nodeType": "FunctionDefinition",
+            "src": "551:85:340",
+            "nodes": [],
+            "body": {
+              "id": 49218,
+              "nodeType": "Block",
+              "src": "599:37:340",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 49215,
+                        "name": "key",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49211,
+                        "src": "625:3:340",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 49214,
+                      "name": "_partiallyPause",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49146,
+                      "src": "609:15:340",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$returns$__$",
+                        "typeString": "function (bytes32)"
+                      }
+                    },
+                    "id": 49216,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "609:20:340",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 49217,
+                  "nodeType": "ExpressionStatement",
+                  "src": "609:20:340"
+                }
+              ]
+            },
+            "functionSelector": "453e35dd",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__partiallyPause",
+            "nameLocation": "560:16:340",
+            "parameters": {
+              "id": 49212,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49211,
+                  "mutability": "mutable",
+                  "name": "key",
+                  "nameLocation": "585:3:340",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49219,
+                  "src": "577:11:340",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 49210,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "577:7:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "576:13:340"
+            },
+            "returnParameters": {
+              "id": 49213,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "599:0:340"
+            },
+            "scope": 49230,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 49229,
+            "nodeType": "FunctionDefinition",
+            "src": "642:89:340",
+            "nodes": [],
+            "body": {
+              "id": 49228,
+              "nodeType": "Block",
+              "src": "692:39:340",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 49225,
+                        "name": "key",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49221,
+                        "src": "720:3:340",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 49224,
+                      "name": "_partiallyUnpause",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49170,
+                      "src": "702:17:340",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$returns$__$",
+                        "typeString": "function (bytes32)"
+                      }
+                    },
+                    "id": 49226,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "702:22:340",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 49227,
+                  "nodeType": "ExpressionStatement",
+                  "src": "702:22:340"
+                }
+              ]
+            },
+            "functionSelector": "2d341393",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "__partiallyUnpause",
+            "nameLocation": "651:18:340",
+            "parameters": {
+              "id": 49222,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49221,
+                  "mutability": "mutable",
+                  "name": "key",
+                  "nameLocation": "678:3:340",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49229,
+                  "src": "670:11:340",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 49220,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "670:7:340",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "669:13:340"
+            },
+            "returnParameters": {
+              "id": 49223,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "692:0:340"
+            },
+            "scope": 49230,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 49176,
+              "name": "PartiallyPausable",
+              "nameLocations": [
+                "152:17:340"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49065,
+              "src": "152:17:340"
+            },
+            "id": 49177,
+            "nodeType": "InheritanceSpecifier",
+            "src": "152:17:340"
+          }
+        ],
+        "canonicalName": "PartiallyPausableMock",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          49230,
+          49065,
+          49171,
+          49019,
+          49038
+        ],
+        "name": "PartiallyPausableMock",
+        "nameLocation": "127:21:340",
+        "scope": 49231,
+        "usedErrors": [
+          49023,
+          49025
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 340
+}

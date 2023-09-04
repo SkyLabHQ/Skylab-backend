@@ -1,0 +1,496 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "Pausable__NotPaused",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Pausable__Paused",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "Paused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "Unpaused",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "paused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "paused()": "5c975abb"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"Pausable__NotPaused\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"Pausable__Paused\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"paused()\":{\"returns\":{\"status\":\"whether contract is paused\"}}},\"title\":\"Pausable security control module.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"paused()\":{\"notice\":\"query whether contract is paused\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/security/pausable/Pausable.sol\":\"Pausable\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/security/pausable/IPausable.sol\":{\"keccak256\":\"0x2c72b12d33ceda6a9f9c2d9daf5bbe8b2f141e42ca043eb97d8b4c1e5ec8423f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://79bf378ace1b0b42afa4aa545921476a9a9169eb1f2592e2f575b96dd487c426\",\"dweb:/ipfs/QmS1Wh4MUDMmDYRfAr4zDp3KoYhNnXsqFnwaHSpJaH9tL4\"]},\"contracts/.cache/solidstate/local/security/pausable/IPausableInternal.sol\":{\"keccak256\":\"0xe54f7b8380acdc3b67d2f59325c2bc7241271b926436ba86f396cd22b3d046d1\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6d8787ac0cbb34d05164840719e28c33f43deb2ed5fcee14ea159238b603af67\",\"dweb:/ipfs/QmR9GmqrVvoT4TzvWrUR9EdssSubAE2a9aWLR2yvkfsVpD\"]},\"contracts/.cache/solidstate/local/security/pausable/Pausable.sol\":{\"keccak256\":\"0x30548d35c3537ec2a4721d2e3f5d1b0b0b1d6c5aa2492e0c7ef9ec644312cba6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0308e80f2088f2cfef9d9715c4e8aaf8e194ceafbf8c1363915e31c852befa81\",\"dweb:/ipfs/QmTALvZ1LGiGYva75SFU8EfXSsXGwjXT2tiL3XtQM5XBAj\"]},\"contracts/.cache/solidstate/local/security/pausable/PausableInternal.sol\":{\"keccak256\":\"0xa77e2c3ef1b49df8bc4fead7c1e59db899960cd0216452581e6794ec87da38a9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5db749640885a638abb987251f5fbdb181cbe52b2076b9d0fb6680a6b67395e4\",\"dweb:/ipfs/Qmf7V6sCPSQnNsCefzxz3ED1KJnMRmTnTaCY7ZGGGy5P8w\"]},\"contracts/.cache/solidstate/local/security/pausable/PausableStorage.sol\":{\"keccak256\":\"0x692125a62ee9e0ef20ee79c27a9154cb20afdc94e39804c9eb57aea175a6c706\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://50e45957f166601834a88f88ee5445b210a4ee34936cecd41a473b610a4e2738\",\"dweb:/ipfs/QmYFUgRF2KqaXPYhzmEwr8k3TmDpLzXAkyZVXDH6pXSk7a\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Pausable__NotPaused"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "Pausable__Paused"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Paused",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Unpaused",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "paused",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "status",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "paused()": {
+            "returns": {
+              "status": "whether contract is paused"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "paused()": {
+            "notice": "query whether contract is paused"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/security/pausable/Pausable.sol": "Pausable"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/security/pausable/IPausable.sol": {
+        "keccak256": "0x2c72b12d33ceda6a9f9c2d9daf5bbe8b2f141e42ca043eb97d8b4c1e5ec8423f",
+        "urls": [
+          "bzz-raw://79bf378ace1b0b42afa4aa545921476a9a9169eb1f2592e2f575b96dd487c426",
+          "dweb:/ipfs/QmS1Wh4MUDMmDYRfAr4zDp3KoYhNnXsqFnwaHSpJaH9tL4"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/pausable/IPausableInternal.sol": {
+        "keccak256": "0xe54f7b8380acdc3b67d2f59325c2bc7241271b926436ba86f396cd22b3d046d1",
+        "urls": [
+          "bzz-raw://6d8787ac0cbb34d05164840719e28c33f43deb2ed5fcee14ea159238b603af67",
+          "dweb:/ipfs/QmR9GmqrVvoT4TzvWrUR9EdssSubAE2a9aWLR2yvkfsVpD"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/pausable/Pausable.sol": {
+        "keccak256": "0x30548d35c3537ec2a4721d2e3f5d1b0b0b1d6c5aa2492e0c7ef9ec644312cba6",
+        "urls": [
+          "bzz-raw://0308e80f2088f2cfef9d9715c4e8aaf8e194ceafbf8c1363915e31c852befa81",
+          "dweb:/ipfs/QmTALvZ1LGiGYva75SFU8EfXSsXGwjXT2tiL3XtQM5XBAj"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/pausable/PausableInternal.sol": {
+        "keccak256": "0xa77e2c3ef1b49df8bc4fead7c1e59db899960cd0216452581e6794ec87da38a9",
+        "urls": [
+          "bzz-raw://5db749640885a638abb987251f5fbdb181cbe52b2076b9d0fb6680a6b67395e4",
+          "dweb:/ipfs/Qmf7V6sCPSQnNsCefzxz3ED1KJnMRmTnTaCY7ZGGGy5P8w"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/pausable/PausableStorage.sol": {
+        "keccak256": "0x692125a62ee9e0ef20ee79c27a9154cb20afdc94e39804c9eb57aea175a6c706",
+        "urls": [
+          "bzz-raw://50e45957f166601834a88f88ee5445b210a4ee34936cecd41a473b610a4e2738",
+          "dweb:/ipfs/QmYFUgRF2KqaXPYhzmEwr8k3TmDpLzXAkyZVXDH6pXSk7a"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/security/pausable/Pausable.sol",
+    "id": 49308,
+    "exportedSymbols": {
+      "IPausable": [
+        49268
+      ],
+      "Pausable": [
+        49307
+      ],
+      "PausableInternal": [
+        49390
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:387:344",
+    "nodes": [
+      {
+        "id": 49285,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:344",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 49287,
+        "nodeType": "ImportDirective",
+        "src": "58:42:344",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/security/pausable/IPausable.sol",
+        "file": "./IPausable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49308,
+        "sourceUnit": 49269,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49286,
+              "name": "IPausable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49268,
+              "src": "66:9:344",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49289,
+        "nodeType": "ImportDirective",
+        "src": "101:56:344",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/security/pausable/PausableInternal.sol",
+        "file": "./PausableInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49308,
+        "sourceUnit": 49391,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49288,
+              "name": "PausableInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49390,
+              "src": "109:16:344",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49307,
+        "nodeType": "ContractDefinition",
+        "src": "211:208:344",
+        "nodes": [
+          {
+            "id": 49306,
+            "nodeType": "FunctionDefinition",
+            "src": "320:97:344",
+            "nodes": [],
+            "body": {
+              "id": 49305,
+              "nodeType": "Block",
+              "src": "382:35:344",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 49303,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 49300,
+                      "name": "status",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49298,
+                      "src": "392:6:344",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [],
+                      "expression": {
+                        "argumentTypes": [],
+                        "id": 49301,
+                        "name": "_paused",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49351,
+                        "src": "401:7:344",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_view$__$returns$_t_bool_$",
+                          "typeString": "function () view returns (bool)"
+                        }
+                      },
+                      "id": 49302,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "401:9:344",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "392:18:344",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 49304,
+                  "nodeType": "ExpressionStatement",
+                  "src": "392:18:344"
+                }
+              ]
+            },
+            "baseFunctions": [
+              49267
+            ],
+            "documentation": {
+              "id": 49295,
+              "nodeType": "StructuredDocumentation",
+              "src": "275:40:344",
+              "text": " @inheritdoc IPausable"
+            },
+            "functionSelector": "5c975abb",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "paused",
+            "nameLocation": "329:6:344",
+            "parameters": {
+              "id": 49296,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "335:2:344"
+            },
+            "returnParameters": {
+              "id": 49299,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49298,
+                  "mutability": "mutable",
+                  "name": "status",
+                  "nameLocation": "374:6:344",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49306,
+                  "src": "369:11:344",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 49297,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "369:4:344",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "368:13:344"
+            },
+            "scope": 49307,
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 49291,
+              "name": "IPausable",
+              "nameLocations": [
+                "241:9:344"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49268,
+              "src": "241:9:344"
+            },
+            "id": 49292,
+            "nodeType": "InheritanceSpecifier",
+            "src": "241:9:344"
+          },
+          {
+            "baseName": {
+              "id": 49293,
+              "name": "PausableInternal",
+              "nameLocations": [
+                "252:16:344"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49390,
+              "src": "252:16:344"
+            },
+            "id": 49294,
+            "nodeType": "InheritanceSpecifier",
+            "src": "252:16:344"
+          }
+        ],
+        "canonicalName": "Pausable",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 49290,
+          "nodeType": "StructuredDocumentation",
+          "src": "159:51:344",
+          "text": " @title Pausable security control module."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          49307,
+          49390,
+          49268,
+          49283
+        ],
+        "name": "Pausable",
+        "nameLocation": "229:8:344",
+        "scope": 49308,
+        "usedErrors": [
+          49272,
+          49274
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 344
+}

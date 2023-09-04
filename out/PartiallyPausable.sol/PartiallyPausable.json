@@ -1,0 +1,578 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "PartiallyPausable__NotPartiallyPaused",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PartiallyPausable__PartiallyPaused",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "PartiallyPaused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "PartiallyUnpaused",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "partiallyPaused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "status",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "partiallyPaused(bytes32)": "467e55c3"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"PartiallyPausable__NotPartiallyPaused\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"PartiallyPausable__PartiallyPaused\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"PartiallyPaused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"PartiallyUnpaused\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"partiallyPaused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"status\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"partiallyPaused(bytes32)\":{\"returns\":{\"status\":\"whether contract is paused in the scope of given key\"}}},\"title\":\"PartiallyPausable security control module.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"partiallyPaused(bytes32)\":{\"notice\":\"query whether contract is paused in the scope of given key\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausable.sol\":\"PartiallyPausable\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausable.sol\":{\"keccak256\":\"0x4b5934ba916234965d66cc5dc0bd04d39a2859817390ff2a917c40566b37d321\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://001dd1f506322480b6fbdd80e6244197b6508cc3af715c81d27e7d1846f7dbe3\",\"dweb:/ipfs/QmQ3ArMQuiFRgDuCJLPe8sPgJvAc9buTEZRhpqKV4eoTUy\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausableInternal.sol\":{\"keccak256\":\"0xf4419586687f7b8c077a660d8bfd903e0f713cd9af759a8d3c45c06d3d49ae22\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://25e81b264ff712d6bfc47098a5667e022f294dcb4e2223a75102e01c6adc4cfd\",\"dweb:/ipfs/QmSgGWVjo1pnLv9SQHY2kNyujsNra3iGiZV6DwJJgfviRm\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausable.sol\":{\"keccak256\":\"0xf2bf41f910df5c829a0068ce59ddc9c9dd60bd52d0a1073368e318c1690b2337\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d65aef72647d55fc92fb91618ca0dc7d5274caf30f0ea5f92ce96ebaa83c0115\",\"dweb:/ipfs/QmRuRrj5rdAmjyCwGgD5XrMhAqyVcqFJhEQYhpv58Yu3tt\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableInternal.sol\":{\"keccak256\":\"0xca36823d29766246e3c737175a73a953d1d4edc61c2168e408ac6c95b86435e8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d8bf7d253a34e2d9b5aca77ec2cc305679916b60e4cdf1b592b836415e7b20a3\",\"dweb:/ipfs/QmaSNQJ3heLddHAwRy3bgB7EcpxJiX1KH5Gk6ErtbGpe6z\"]},\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol\":{\"keccak256\":\"0xe7e2327b7e27509aa5b6e570eb8832608fea7e3874b6cbfd80bcd8c2c5a50514\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ec79aa915b054b430cce19ab015dc0b604562123f37a43b196aa85528b51426a\",\"dweb:/ipfs/QmaK8m51es6vLyJfNnz89igNSvKD6BXo7gDNHj7yrPMEH1\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "PartiallyPausable__NotPartiallyPaused"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "PartiallyPausable__PartiallyPaused"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "PartiallyPaused",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "PartiallyUnpaused",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "key",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "partiallyPaused",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "status",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "partiallyPaused(bytes32)": {
+            "returns": {
+              "status": "whether contract is paused in the scope of given key"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "partiallyPaused(bytes32)": {
+            "notice": "query whether contract is paused in the scope of given key"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausable.sol": "PartiallyPausable"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausable.sol": {
+        "keccak256": "0x4b5934ba916234965d66cc5dc0bd04d39a2859817390ff2a917c40566b37d321",
+        "urls": [
+          "bzz-raw://001dd1f506322480b6fbdd80e6244197b6508cc3af715c81d27e7d1846f7dbe3",
+          "dweb:/ipfs/QmQ3ArMQuiFRgDuCJLPe8sPgJvAc9buTEZRhpqKV4eoTUy"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausableInternal.sol": {
+        "keccak256": "0xf4419586687f7b8c077a660d8bfd903e0f713cd9af759a8d3c45c06d3d49ae22",
+        "urls": [
+          "bzz-raw://25e81b264ff712d6bfc47098a5667e022f294dcb4e2223a75102e01c6adc4cfd",
+          "dweb:/ipfs/QmSgGWVjo1pnLv9SQHY2kNyujsNra3iGiZV6DwJJgfviRm"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausable.sol": {
+        "keccak256": "0xf2bf41f910df5c829a0068ce59ddc9c9dd60bd52d0a1073368e318c1690b2337",
+        "urls": [
+          "bzz-raw://d65aef72647d55fc92fb91618ca0dc7d5274caf30f0ea5f92ce96ebaa83c0115",
+          "dweb:/ipfs/QmRuRrj5rdAmjyCwGgD5XrMhAqyVcqFJhEQYhpv58Yu3tt"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableInternal.sol": {
+        "keccak256": "0xca36823d29766246e3c737175a73a953d1d4edc61c2168e408ac6c95b86435e8",
+        "urls": [
+          "bzz-raw://d8bf7d253a34e2d9b5aca77ec2cc305679916b60e4cdf1b592b836415e7b20a3",
+          "dweb:/ipfs/QmaSNQJ3heLddHAwRy3bgB7EcpxJiX1KH5Gk6ErtbGpe6z"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol": {
+        "keccak256": "0xe7e2327b7e27509aa5b6e570eb8832608fea7e3874b6cbfd80bcd8c2c5a50514",
+        "urls": [
+          "bzz-raw://ec79aa915b054b430cce19ab015dc0b604562123f37a43b196aa85528b51426a",
+          "dweb:/ipfs/QmaK8m51es6vLyJfNnz89igNSvKD6BXo7gDNHj7yrPMEH1"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausable.sol",
+    "id": 49066,
+    "exportedSymbols": {
+      "IPartiallyPausable": [
+        49019
+      ],
+      "PartiallyPausable": [
+        49065
+      ],
+      "PartiallyPausableInternal": [
+        49171
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:500:338",
+    "nodes": [
+      {
+        "id": 49040,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:338",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 49042,
+        "nodeType": "ImportDirective",
+        "src": "58:60:338",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/security/partially_pausable/IPartiallyPausable.sol",
+        "file": "./IPartiallyPausable.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49066,
+        "sourceUnit": 49020,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49041,
+              "name": "IPartiallyPausable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49019,
+              "src": "66:18:338",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49044,
+        "nodeType": "ImportDirective",
+        "src": "119:74:338",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableInternal.sol",
+        "file": "./PartiallyPausableInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 49066,
+        "sourceUnit": 49172,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 49043,
+              "name": "PartiallyPausableInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 49171,
+              "src": "127:25:338",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 49065,
+        "nodeType": "ContractDefinition",
+        "src": "256:276:338",
+        "nodes": [
+          {
+            "id": 49064,
+            "nodeType": "FunctionDefinition",
+            "src": "401:129:338",
+            "nodes": [],
+            "body": {
+              "id": 49063,
+              "nodeType": "Block",
+              "src": "483:47:338",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "id": 49061,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "id": 49057,
+                      "name": "status",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 49055,
+                      "src": "493:6:338",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "arguments": [
+                        {
+                          "id": 49059,
+                          "name": "key",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 49052,
+                          "src": "519:3:338",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_bytes32",
+                            "typeString": "bytes32"
+                          }
+                        ],
+                        "id": 49058,
+                        "name": "_partiallyPaused",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 49120,
+                        "src": "502:16:338",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_view$_t_bytes32_$returns$_t_bool_$",
+                          "typeString": "function (bytes32) view returns (bool)"
+                        }
+                      },
+                      "id": 49060,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "nameLocations": [],
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "502:21:338",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "src": "493:30:338",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "id": 49062,
+                  "nodeType": "ExpressionStatement",
+                  "src": "493:30:338"
+                }
+              ]
+            },
+            "baseFunctions": [
+              49018
+            ],
+            "documentation": {
+              "id": 49050,
+              "nodeType": "StructuredDocumentation",
+              "src": "347:49:338",
+              "text": " @inheritdoc IPartiallyPausable"
+            },
+            "functionSelector": "467e55c3",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "partiallyPaused",
+            "nameLocation": "410:15:338",
+            "parameters": {
+              "id": 49053,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49052,
+                  "mutability": "mutable",
+                  "name": "key",
+                  "nameLocation": "434:3:338",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49064,
+                  "src": "426:11:338",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 49051,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "426:7:338",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "425:13:338"
+            },
+            "returnParameters": {
+              "id": 49056,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49055,
+                  "mutability": "mutable",
+                  "name": "status",
+                  "nameLocation": "475:6:338",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49064,
+                  "src": "470:11:338",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 49054,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "470:4:338",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "469:13:338"
+            },
+            "scope": 49065,
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "external"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 49046,
+              "name": "IPartiallyPausable",
+              "nameLocations": [
+                "295:18:338"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49019,
+              "src": "295:18:338"
+            },
+            "id": 49047,
+            "nodeType": "InheritanceSpecifier",
+            "src": "295:18:338"
+          },
+          {
+            "baseName": {
+              "id": 49048,
+              "name": "PartiallyPausableInternal",
+              "nameLocations": [
+                "315:25:338"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 49171,
+              "src": "315:25:338"
+            },
+            "id": 49049,
+            "nodeType": "InheritanceSpecifier",
+            "src": "315:25:338"
+          }
+        ],
+        "canonicalName": "PartiallyPausable",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 49045,
+          "nodeType": "StructuredDocumentation",
+          "src": "195:60:338",
+          "text": " @title PartiallyPausable security control module."
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          49065,
+          49171,
+          49019,
+          49038
+        ],
+        "name": "PartiallyPausable",
+        "nameLocation": "274:17:338",
+        "scope": 49066,
+        "usedErrors": [
+          49023,
+          49025
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 338
+}

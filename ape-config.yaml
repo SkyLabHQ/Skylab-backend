@@ -1,0 +1,23 @@
+name: mecrcury_protocol
+
+plugins:
+  - name: solidity
+  - name: foundry
+
+dependencies:
+  - name: openzeppelin
+    local: ./lib/openzeppelin-contracts
+    contracts_folder: contracts
+  - name: solidstate
+    local: ./lib/solidstate-solidity
+    contracts_folder: contracts
+
+solidity:
+  via_ir: True
+  import_remapping:
+    - "@openzeppelin/contracts/=openzeppelin/local"
+    - "@solidstate/=solidstate"
+
+ethereum:
+  local:
+    default_provider: foundry

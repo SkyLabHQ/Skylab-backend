@@ -1,0 +1,427 @@
+{
+  "abi": [],
+  "bytecode": {
+    "object": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea264697066735822122090a42f3d5dce0054635efa2e9256fddeff89e20735f4f6c74181c8bfbf1cb87464736f6c63430008130033",
+    "sourceMap": "58:384:341:-:0;;;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x600080fdfea264697066735822122090a42f3d5dce0054635efa2e9256fddeff89e20735f4f6c74181c8bfbf1cb87464736f6c63430008130033",
+    "sourceMap": "58:384:341:-:0;;",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {},
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol\":\"PartiallyPausableStorage\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol\":{\"keccak256\":\"0xe7e2327b7e27509aa5b6e570eb8832608fea7e3874b6cbfd80bcd8c2c5a50514\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ec79aa915b054b430cce19ab015dc0b604562123f37a43b196aa85528b51426a\",\"dweb:/ipfs/QmaK8m51es6vLyJfNnz89igNSvKD6BXo7gDNHj7yrPMEH1\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol": "PartiallyPausableStorage"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol": {
+        "keccak256": "0xe7e2327b7e27509aa5b6e570eb8832608fea7e3874b6cbfd80bcd8c2c5a50514",
+        "urls": [
+          "bzz-raw://ec79aa915b054b430cce19ab015dc0b604562123f37a43b196aa85528b51426a",
+          "dweb:/ipfs/QmaK8m51es6vLyJfNnz89igNSvKD6BXo7gDNHj7yrPMEH1"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/security/partially_pausable/PartiallyPausableStorage.sol",
+    "id": 49256,
+    "exportedSymbols": {
+      "PartiallyPausableStorage": [
+        49255
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:410:341",
+    "nodes": [
+      {
+        "id": 49232,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:341",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 49255,
+        "nodeType": "ContractDefinition",
+        "src": "58:384:341",
+        "nodes": [
+          {
+            "id": 49237,
+            "nodeType": "StructDefinition",
+            "src": "97:71:341",
+            "nodes": [],
+            "canonicalName": "PartiallyPausableStorage.Layout",
+            "members": [
+              {
+                "constant": false,
+                "id": 49236,
+                "mutability": "mutable",
+                "name": "partiallyPaused",
+                "nameLocation": "146:15:341",
+                "nodeType": "VariableDeclaration",
+                "scope": 49237,
+                "src": "121:40:341",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_bytes32_$_t_bool_$",
+                  "typeString": "mapping(bytes32 => bool)"
+                },
+                "typeName": {
+                  "id": 49235,
+                  "keyName": "",
+                  "keyNameLocation": "-1:-1:-1",
+                  "keyType": {
+                    "id": 49233,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "129:7:341",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "nodeType": "Mapping",
+                  "src": "121:24:341",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_mapping$_t_bytes32_$_t_bool_$",
+                    "typeString": "mapping(bytes32 => bool)"
+                  },
+                  "valueName": "",
+                  "valueNameLocation": "-1:-1:-1",
+                  "valueType": {
+                    "id": 49234,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "140:4:341",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Layout",
+            "nameLocation": "104:6:341",
+            "scope": 49255,
+            "visibility": "public"
+          },
+          {
+            "id": 49242,
+            "nodeType": "VariableDeclaration",
+            "src": "174:100:341",
+            "nodes": [],
+            "constant": true,
+            "mutability": "constant",
+            "name": "STORAGE_SLOT",
+            "nameLocation": "200:12:341",
+            "scope": 49255,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 49238,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "174:7:341",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "value": {
+              "arguments": [
+                {
+                  "hexValue": "736f6c696473746174652e636f6e7472616374732e73746f726167652e5061727469616c6c795061757361626c65",
+                  "id": 49240,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "string",
+                  "lValueRequested": false,
+                  "nodeType": "Literal",
+                  "src": "225:48:341",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_stringliteral_b2b4df8db6c86b643bc9671655af7ecab384d088ad8b388456cdc1f36f10ab45",
+                    "typeString": "literal_string \"solidstate.contracts.storage.PartiallyPausable\""
+                  },
+                  "value": "solidstate.contracts.storage.PartiallyPausable"
+                }
+              ],
+              "expression": {
+                "argumentTypes": [
+                  {
+                    "typeIdentifier": "t_stringliteral_b2b4df8db6c86b643bc9671655af7ecab384d088ad8b388456cdc1f36f10ab45",
+                    "typeString": "literal_string \"solidstate.contracts.storage.PartiallyPausable\""
+                  }
+                ],
+                "id": 49239,
+                "name": "keccak256",
+                "nodeType": "Identifier",
+                "overloadedDeclarations": [],
+                "referencedDeclaration": -8,
+                "src": "215:9:341",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                  "typeString": "function (bytes memory) pure returns (bytes32)"
+                }
+              },
+              "id": 49241,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "functionCall",
+              "lValueRequested": false,
+              "nameLocations": [],
+              "names": [],
+              "nodeType": "FunctionCall",
+              "src": "215:59:341",
+              "tryCall": false,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "id": 49254,
+            "nodeType": "FunctionDefinition",
+            "src": "281:159:341",
+            "nodes": [],
+            "body": {
+              "id": 49253,
+              "nodeType": "Block",
+              "src": "340:100:341",
+              "nodes": [],
+              "statements": [
+                {
+                  "assignments": [
+                    49249
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 49249,
+                      "mutability": "mutable",
+                      "name": "slot",
+                      "nameLocation": "358:4:341",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 49253,
+                      "src": "350:12:341",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bytes32",
+                        "typeString": "bytes32"
+                      },
+                      "typeName": {
+                        "id": 49248,
+                        "name": "bytes32",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "350:7:341",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      },
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 49251,
+                  "initialValue": {
+                    "id": 49250,
+                    "name": "STORAGE_SLOT",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 49242,
+                    "src": "365:12:341",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "350:27:341"
+                },
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "396:38:341",
+                    "statements": [
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "410:14:341",
+                        "value": {
+                          "name": "slot",
+                          "nodeType": "YulIdentifier",
+                          "src": "420:4:341"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "l.slot",
+                            "nodeType": "YulIdentifier",
+                            "src": "410:6:341"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "paris",
+                  "externalReferences": [
+                    {
+                      "declaration": 49246,
+                      "isOffset": false,
+                      "isSlot": true,
+                      "src": "410:6:341",
+                      "suffix": "slot",
+                      "valueSize": 1
+                    },
+                    {
+                      "declaration": 49249,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "420:4:341",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 49252,
+                  "nodeType": "InlineAssembly",
+                  "src": "387:47:341"
+                }
+              ]
+            },
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "layout",
+            "nameLocation": "290:6:341",
+            "parameters": {
+              "id": 49243,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "296:2:341"
+            },
+            "returnParameters": {
+              "id": 49247,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 49246,
+                  "mutability": "mutable",
+                  "name": "l",
+                  "nameLocation": "337:1:341",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 49254,
+                  "src": "322:16:341",
+                  "stateVariable": false,
+                  "storageLocation": "storage",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Layout_$49237_storage_ptr",
+                    "typeString": "struct PartiallyPausableStorage.Layout"
+                  },
+                  "typeName": {
+                    "id": 49245,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 49244,
+                      "name": "Layout",
+                      "nameLocations": [
+                        "322:6:341"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 49237,
+                      "src": "322:6:341"
+                    },
+                    "referencedDeclaration": 49237,
+                    "src": "322:6:341",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Layout_$49237_storage_ptr",
+                      "typeString": "struct PartiallyPausableStorage.Layout"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "321:18:341"
+            },
+            "scope": 49255,
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "PartiallyPausableStorage",
+        "contractDependencies": [],
+        "contractKind": "library",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          49255
+        ],
+        "name": "PartiallyPausableStorage",
+        "nameLocation": "66:24:341",
+        "scope": 49256,
+        "usedErrors": []
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 341
+}

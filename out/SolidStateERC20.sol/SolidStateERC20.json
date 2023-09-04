@@ -1,0 +1,1826 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "ECDSA__InvalidS",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ECDSA__InvalidSignature",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ECDSA__InvalidV",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__ApproveFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__ApproveToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__BurnExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__BurnFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__InsufficientAllowance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__MintToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferExceedsBalance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferFromZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Base__TransferToZeroAddress",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Extended__ExcessiveAllowance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Extended__InsufficientAllowance",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Permit__ExpiredDeadline",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ERC20Permit__InvalidSignature",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DOMAIN_SEPARATOR",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "domainSeparator",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "holder",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "decreaseAllowance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "increaseAllowance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "nonces",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deadline",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "v",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "r",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "s",
+          "type": "bytes32"
+        }
+      ],
+      "name": "permit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "holder",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "DOMAIN_SEPARATOR()": "3644e515",
+    "allowance(address,address)": "dd62ed3e",
+    "approve(address,uint256)": "095ea7b3",
+    "balanceOf(address)": "70a08231",
+    "decimals()": "313ce567",
+    "decreaseAllowance(address,uint256)": "a457c2d7",
+    "increaseAllowance(address,uint256)": "39509351",
+    "name()": "06fdde03",
+    "nonces(address)": "7ecebe00",
+    "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": "d505accf",
+    "symbol()": "95d89b41",
+    "totalSupply()": "18160ddd",
+    "transfer(address,uint256)": "a9059cbb",
+    "transferFrom(address,address,uint256)": "23b872dd"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.19+commit.7dd6d404\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"ECDSA__InvalidS\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ECDSA__InvalidSignature\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ECDSA__InvalidV\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__ApproveFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__ApproveToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__BurnExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__BurnFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__InsufficientAllowance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__MintToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferExceedsBalance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferFromZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Base__TransferToZeroAddress\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Extended__ExcessiveAllowance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Extended__InsufficientAllowance\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Permit__ExpiredDeadline\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ERC20Permit__InvalidSignature\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DOMAIN_SEPARATOR\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"domainSeparator\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"holder\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"nonces\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"permit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"holder\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"DOMAIN_SEPARATOR()\":{\"returns\":{\"domainSeparator\":\"domain separator\"}},\"allowance(address,address)\":{\"params\":{\"holder\":\"approver of allowance\",\"spender\":\"recipient of allowance\"},\"returns\":{\"_0\":\"token allowance\"}},\"approve(address,uint256)\":{\"details\":\"prefer ERC20Extended functions to avoid transaction-ordering vulnerability (see https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729)\",\"params\":{\"amount\":\"quantity of tokens approved for spending\",\"spender\":\"recipient of allowance\"},\"returns\":{\"_0\":\"success status (always true; otherwise function should revert)\"}},\"balanceOf(address)\":{\"params\":{\"account\":\"address to query\"},\"returns\":{\"_0\":\"token balance\"}},\"decimals()\":{\"returns\":{\"_0\":\"token decimals\"}},\"decreaseAllowance(address,uint256)\":{\"params\":{\"amount\":\"quantity by which to decrease allowance\",\"spender\":\"address whose allowance to decrease\"},\"returns\":{\"_0\":\"success status (always true; otherwise function will revert)\"}},\"increaseAllowance(address,uint256)\":{\"params\":{\"amount\":\"quantity by which to increase allowance\",\"spender\":\"address whose allowance to increase\"},\"returns\":{\"_0\":\"success status (always true; otherwise function will revert)\"}},\"name()\":{\"returns\":{\"_0\":\"token name\"}},\"nonces(address)\":{\"returns\":{\"_0\":\"current nonce\"}},\"permit(address,address,uint256,uint256,uint8,bytes32,bytes32)\":{\"details\":\"this function may be vulnerable to approval replay attacks\",\"params\":{\"amount\":\"quantity of tokens to approve\",\"owner\":\"holder of tokens and signer of permit\",\"r\":\"secp256k1 'r' value\",\"s\":\"secp256k1 's' value\",\"spender\":\"beneficiary of approval\",\"v\":\"secp256k1 'v' value\"}},\"symbol()\":{\"returns\":{\"_0\":\"token symbol\"}},\"totalSupply()\":{\"returns\":{\"_0\":\"token supply\"}},\"transfer(address,uint256)\":{\"params\":{\"amount\":\"quantity of tokens to transfer\",\"recipient\":\"beneficiary of token transfer\"},\"returns\":{\"_0\":\"success status (always true; otherwise function should revert)\"}},\"transferFrom(address,address,uint256)\":{\"params\":{\"amount\":\"quantity of tokens to transfer\",\"holder\":\"holder of tokens prior to transfer\",\"recipient\":\"beneficiary of token transfer\"},\"returns\":{\"_0\":\"success status (always true; otherwise function should revert)\"}}},\"title\":\"SolidState ERC20 implementation, including recommended extensions\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"DOMAIN_SEPARATOR()\":{\"notice\":\"return the EIP-712 domain separator unique to contract and chain\"},\"allowance(address,address)\":{\"notice\":\"query the allowance granted from given holder to given spender\"},\"approve(address,uint256)\":{\"notice\":\"grant approval to spender to spend tokens\"},\"balanceOf(address)\":{\"notice\":\"query the token balance of given account\"},\"decimals()\":{\"notice\":\"return token decimals, generally used only for display purposes\"},\"decreaseAllowance(address,uint256)\":{\"notice\":\"decrease spend amount granted to spender\"},\"increaseAllowance(address,uint256)\":{\"notice\":\"increase spend amount granted to spender\"},\"name()\":{\"notice\":\"return token name\"},\"nonces(address)\":{\"notice\":\"get the current ERC2612 nonce for the given address\"},\"permit(address,address,uint256,uint256,uint8,bytes32,bytes32)\":{\"notice\":\"approve spender to transfer tokens held by owner via signature\"},\"symbol()\":{\"notice\":\"return token symbol\"},\"totalSupply()\":{\"notice\":\"query the total minted token supply\"},\"transfer(address,uint256)\":{\"notice\":\"transfer tokens to given recipient\"},\"transferFrom(address,address,uint256)\":{\"notice\":\"transfer tokens to given recipient on behalf of given holder\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/.cache/solidstate/local/token/ERC20/SolidStateERC20.sol\":\"SolidStateERC20\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/=lib/openzeppelin-contracts/\",\":@solidstate/=lib/solidstate-solidity/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/contracts/\",\":solidstate-solidity/=lib/solidstate-solidity/contracts/\"],\"viaIR\":true},\"sources\":{\"contracts/.cache/solidstate/local/cryptography/ECDSA.sol\":{\"keccak256\":\"0xebe2da1787e7830c80fae48c6d1a6f5708bf86a25edf30be5c1ff4887fbb6306\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://19ac83051cf9bc3f2ecf631f81349ababf6e8de5e0ad6dc4d8abf06290881ada\",\"dweb:/ipfs/QmWgSMb2RrFNWtEngLhwBoqMu4LqZ2wS8vgWVa4iATYT73\"]},\"contracts/.cache/solidstate/local/cryptography/EIP712.sol\":{\"keccak256\":\"0x68706e604ded9cc81cce0a2dd8ac3a741b5bacf1e2cbceaa52589fbee7aa5a7a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://144fda0cc369253fffd5f4c1566802dec9aa53c100f7521921383b874d7cf3dc\",\"dweb:/ipfs/QmNXmAo2aSk8GT56guLTyTRLsCVwjkbKh7BQkHoXn43qHL\"]},\"contracts/.cache/solidstate/local/interfaces/IERC20.sol\":{\"keccak256\":\"0x197de4843756480d31552af560f57bcf85e4a38476da34082865b1df41717681\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://00f00a993061a7305dffa0c6cd2535a0eaa8b55054ca2986e6d9e12d9ee113ae\",\"dweb:/ipfs/QmYCsGKZHzcgJ5HWXzJg72gm2nmNS1jWgdjto3HvGqctkW\"]},\"contracts/.cache/solidstate/local/interfaces/IERC20Internal.sol\":{\"keccak256\":\"0xca66b9db15c1c8884f5f8939fd7add412600f8edc5e97aecd092c63c9e1b38ca\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d73acdeb1648dd67ff232ba4c13154481d4b5d721c7165f17a9cf4366f3ad56f\",\"dweb:/ipfs/QmWQ8Xb2tFTv7zqtpGCHB1rnhYBZaFvdkAzQ4rNAATqcPi\"]},\"contracts/.cache/solidstate/local/token/ERC20/ISolidStateERC20.sol\":{\"keccak256\":\"0x4800d771e5606f791a7c2662802718a727c361aaf547df8e6e849165ef91e9df\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a470452a22d4e680b6c1bc50df9ff39ca8de006a475990d907cfd47ebef39f39\",\"dweb:/ipfs/QmS2c5s5zQcJ2yoGsNLDJNc1Ysf7wvw2eqrkzzE7G3zmQ2\"]},\"contracts/.cache/solidstate/local/token/ERC20/SolidStateERC20.sol\":{\"keccak256\":\"0xe9b8e0d7e0b48546053b89d8fcf6bb55f5f7d9b2e21c334e4a1eac37d9a7f253\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a63227c3507c499184a1575f1fe9d77a50f427adca9154c912014000c095e05a\",\"dweb:/ipfs/QmbjytwFAKmw1ZSteXK3QtuSmtmXAR1rn1SoH8H6qJnGHD\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/ERC20Base.sol\":{\"keccak256\":\"0xaa37e5e9a6c30f492708c0d2d7dce68219b54323ef4d3def9960bc04c9990270\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://299c4e0fd40f5f16023435908ac7d98d10adc5e136ec5c617a4db8291fbcae30\",\"dweb:/ipfs/QmbiVucTsyus2YModFP4QYj8Avc5NFBxZovXPRLQRAL9qz\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/ERC20BaseInternal.sol\":{\"keccak256\":\"0x1338104cff2a16603fe2f0cebdc465b9bff8b0381ce0b82a9c2ae20a18a11265\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://529f72519296e24796f5c0614e4118f49a0e5b378cc0cc1b38dc2671939959bf\",\"dweb:/ipfs/QmZSfd5Gp4hXJERSWGSNEejkbtCNmq9xCxdV8MuVKrvzcy\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/ERC20BaseStorage.sol\":{\"keccak256\":\"0x7abb2c7bccbf39980de5302a5275e144d88465d08d19266774ca3b776c2a7025\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8efbe58144a3d6d4893ce83f7177dc9dad8777279e2fd489dce6c46f317d6183\",\"dweb:/ipfs/QmR8ot1KGe9DrEQH9Zk95A7h5ySUn7kGNcKGAquPErDV4B\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/IERC20Base.sol\":{\"keccak256\":\"0xd633d2b3875b8c62728eb2435a0d9009e057106bea3dbbef7c89a314745beabe\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://22983bd3cd83272c348a280c55f7aac1699a8debf2456f92764b9847731d928d\",\"dweb:/ipfs/QmQxeaAqrQiPNTuPBZS9Wz3BRJC3EZXsXgUFWowkRZfrrd\"]},\"contracts/.cache/solidstate/local/token/ERC20/base/IERC20BaseInternal.sol\":{\"keccak256\":\"0x81e5eee95fd70949ef5c02ecaa7c09609d72f5104a099d0bd3321a27bb39560e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://42648f57c064d10dd984266edd67ebd10791c665593008b5a2f0a7f9618832cd\",\"dweb:/ipfs/QmQpG97o26ZZTQce9Lixhytx9AshFTrn3QBAkiAc75NwiE\"]},\"contracts/.cache/solidstate/local/token/ERC20/extended/ERC20Extended.sol\":{\"keccak256\":\"0x46c171274b1c35c1aaa4d23b74938acf5e62da861cf62ca7c8c7fded0b149d6b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://35bfb7a40260915ccb3b1d7bfc1c99fd947fbedcfb2c7804e000f125142f74a5\",\"dweb:/ipfs/QmadZ1C87qNoqecJwznG5sdwLKt2ptqkDy7iZ39DM5D6pn\"]},\"contracts/.cache/solidstate/local/token/ERC20/extended/ERC20ExtendedInternal.sol\":{\"keccak256\":\"0xf4b03b0ab8a3c85695e4480594139440baf0c078073cc552340719a36dceec42\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d2e007f78d29e941cdbfe28d556cd921e78f97e0e385a0b02a6579bddc302e12\",\"dweb:/ipfs/QmVzpcwZ9zZRD5YTnL24V7tdsby6RvQGXN7P5J8b8jxGRq\"]},\"contracts/.cache/solidstate/local/token/ERC20/extended/IERC20Extended.sol\":{\"keccak256\":\"0x56bf28297ad06334258a95cd309519a2f2c4c044067879345d8cfd7b245eb183\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://99500b6a5985ad03c82db57d9e1aebf605e06bd3b2150a8a3731cb6298febb38\",\"dweb:/ipfs/QmV3dpw39wM8neQVMdb2CfbxCuDeymSs3dzviEkuj3Qe1g\"]},\"contracts/.cache/solidstate/local/token/ERC20/extended/IERC20ExtendedInternal.sol\":{\"keccak256\":\"0x3f67f65e6b05deff9ba4720b7bdf905c3a258766e7a9fdee535546ae237934da\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://47238ea39e3b721c6f05c6fac9cf92c4fa6de84457b9ebe0bf341f2d74d5d815\",\"dweb:/ipfs/QmTMAwSFb8R2JfNd1yoVzfNNdr85k6SdwuxLB9CnZ6jzcS\"]},\"contracts/.cache/solidstate/local/token/ERC20/metadata/ERC20Metadata.sol\":{\"keccak256\":\"0xc65c32023e0c452e8dc0de8b61ec74d23bb9cdd8a567525f51410e4e21b49167\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fa8a317e2646bfb49f89691293df4bad63fbd843f80b7f13d23919ab8c45b1e2\",\"dweb:/ipfs/Qmcvh8sMH9unQA8jihsTkv5gbHxXEpJm1GrF4Sbt13C3pD\"]},\"contracts/.cache/solidstate/local/token/ERC20/metadata/ERC20MetadataInternal.sol\":{\"keccak256\":\"0xcedf8baf3402d89cb9da914b111c9ad3e77a085e47dda7f848f5942c795ab0e6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5f2b6f41bce869fe06ba8341e3c46799c4a91b29d81f03fe02e46581f17792d6\",\"dweb:/ipfs/QmSCGJTwgg8Ti2HwaZdCpgh3vs9yG3RrbsKsWnJejA2Y5o\"]},\"contracts/.cache/solidstate/local/token/ERC20/metadata/ERC20MetadataStorage.sol\":{\"keccak256\":\"0x1e248a48639dc39986b02ba0dd452d84ee3818c77a3a4f2342051696b1284911\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://da1edca66a064bed13a4a20b4c199fbca7a42eb5996a487a0d1f2305e414c8f5\",\"dweb:/ipfs/QmVcHK7nnRMWK6jLXepYwEEpmZiySL6fUyftdjttG5ZnF5\"]},\"contracts/.cache/solidstate/local/token/ERC20/metadata/IERC20Metadata.sol\":{\"keccak256\":\"0xe4356349f1c11ebf95d5ec29dc5d26fba7e3868f83b28e3d117ecdcfed149395\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ee6e2d611601c3e3e8fcfaec02e64e455ef64f2ba2d1af498a05103ab09af809\",\"dweb:/ipfs/QmP5SNSNYoLN8tpX9fwhgwYQVRG6j11gM95avQzEuPsGw7\"]},\"contracts/.cache/solidstate/local/token/ERC20/metadata/IERC20MetadataInternal.sol\":{\"keccak256\":\"0xeea01e2e586f2b16f9293734348eb67d7d8da90676f758587dbcdffb9aa59a60\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4a34c15861cd2bb269a1219bdf26ad3e857b6152dcd073e7b29d537d73d8a8cf\",\"dweb:/ipfs/QmV9vJq4pjDwMneCBhTw51ucSEpUu2Se2pJs1DiPkDjwpG\"]},\"contracts/.cache/solidstate/local/token/ERC20/permit/ERC20Permit.sol\":{\"keccak256\":\"0xe119091d77b13a384006134b9cfb9c446908d7c32d5dd00595a1ce49b6800544\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://54b4b0b7e46b8201516e46a14c99afc3c1f1a77194727a3f4bbfaa39c150e4f0\",\"dweb:/ipfs/QmWpsZNmVVLgJaYsHEL4K7bRJ2GPZcKMDqgy9SiqyvYmp5\"]},\"contracts/.cache/solidstate/local/token/ERC20/permit/ERC20PermitInternal.sol\":{\"keccak256\":\"0x38333b57f8f6424f0311a2bd65af702c9117a09dd2dd2d0a26dd845dcd06af4d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1ef3ccd774967230d81f523ff1b3509af694d068433ef6223556c9b797dacc6a\",\"dweb:/ipfs/QmXo34Dc1dDBaCTZpGdEW2NSFgPBGiTfzGS1RNt2ZL71yi\"]},\"contracts/.cache/solidstate/local/token/ERC20/permit/ERC20PermitStorage.sol\":{\"keccak256\":\"0x5b6b14d032792f1f947e7ca988ae642c180a1ed8f13ef7a5ccb41cc95eea2155\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8438091da43648fc4af90ed33dfc0f32a9e9c679369755c3e5f665030e611000\",\"dweb:/ipfs/QmP3RHrzgs9Hrjb5mLWu9YRLso9pDA9b15AZS6X7RBCSmv\"]},\"contracts/.cache/solidstate/local/token/ERC20/permit/IERC20Permit.sol\":{\"keccak256\":\"0x7db515db8520fae8dea8f5b673f199c7476215d4e94ce49947ab2cdd9ddcce22\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://62f6fe9a1d4f52a0b57bb664574b754d01319f63d804bc27ef78ad3283580b5a\",\"dweb:/ipfs/QmZjWtmv8cLeKCzviZvB6ya16Y3S7dgg6qdt74i5iGdxmZ\"]},\"contracts/.cache/solidstate/local/token/ERC20/permit/IERC20PermitInternal.sol\":{\"keccak256\":\"0x4f6e12f9e07cc66ca9ee57a25c40d9d2f55d3e800a3d6577c9d883068423eb22\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e8d626e9f9527fda26f30d811007fd087a4fd520ca56ab3f7821d22298981faf\",\"dweb:/ipfs/QmZCouA4wmAJP9bFvTjF9gnJiEAn7wYTr7GypkP2i6HsXL\"]},\"contracts/.cache/solidstate/local/token/ERC20/permit/IERC2612.sol\":{\"keccak256\":\"0x902349370028c8a0026f3b7b3060b0581dd143d9de1e3d41d7bf2c194cee1889\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9ce1d971c8fe0b08b0fd00baed385555abb8bcaf6cbdc66e54cef56edc5d0dd7\",\"dweb:/ipfs/QmVfKUw4ShkmfK1qT4NaLjGAG2FFaVyM1zzhoaDL3kLLzN\"]},\"contracts/.cache/solidstate/local/token/ERC20/permit/IERC2612Internal.sol\":{\"keccak256\":\"0xdca4b94537ab13936677c889a29267e506f2f23da6f5f541f73a95e2db5b4db9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b59db5b753c269d10c4d71e375384c8612f477679715afe8b35ba6e4d4f67f1d\",\"dweb:/ipfs/QmUk4McXaQeFVZ3b4XsLJsWEdoKdxTLGSFQDi2Qe54oy6z\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.19+commit.7dd6d404"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ECDSA__InvalidS"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ECDSA__InvalidSignature"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ECDSA__InvalidV"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__ApproveFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__ApproveToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__BurnExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__BurnFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__InsufficientAllowance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__MintToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferExceedsBalance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferFromZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Base__TransferToZeroAddress"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Extended__ExcessiveAllowance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Extended__InsufficientAllowance"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Permit__ExpiredDeadline"
+        },
+        {
+          "inputs": [],
+          "type": "error",
+          "name": "ERC20Permit__InvalidSignature"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Approval",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "from",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "to",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "Transfer",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "DOMAIN_SEPARATOR",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "domainSeparator",
+              "type": "bytes32"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "holder",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "allowance",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "approve",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "balanceOf",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "decimals",
+          "outputs": [
+            {
+              "internalType": "uint8",
+              "name": "",
+              "type": "uint8"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "decreaseAllowance",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "increaseAllowance",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "name",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "nonces",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "v",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "r",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "s",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "permit"
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "symbol",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "totalSupply",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "transfer",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "holder",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "transferFrom",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "DOMAIN_SEPARATOR()": {
+            "returns": {
+              "domainSeparator": "domain separator"
+            }
+          },
+          "allowance(address,address)": {
+            "params": {
+              "holder": "approver of allowance",
+              "spender": "recipient of allowance"
+            },
+            "returns": {
+              "_0": "token allowance"
+            }
+          },
+          "approve(address,uint256)": {
+            "details": "prefer ERC20Extended functions to avoid transaction-ordering vulnerability (see https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729)",
+            "params": {
+              "amount": "quantity of tokens approved for spending",
+              "spender": "recipient of allowance"
+            },
+            "returns": {
+              "_0": "success status (always true; otherwise function should revert)"
+            }
+          },
+          "balanceOf(address)": {
+            "params": {
+              "account": "address to query"
+            },
+            "returns": {
+              "_0": "token balance"
+            }
+          },
+          "decimals()": {
+            "returns": {
+              "_0": "token decimals"
+            }
+          },
+          "decreaseAllowance(address,uint256)": {
+            "params": {
+              "amount": "quantity by which to decrease allowance",
+              "spender": "address whose allowance to decrease"
+            },
+            "returns": {
+              "_0": "success status (always true; otherwise function will revert)"
+            }
+          },
+          "increaseAllowance(address,uint256)": {
+            "params": {
+              "amount": "quantity by which to increase allowance",
+              "spender": "address whose allowance to increase"
+            },
+            "returns": {
+              "_0": "success status (always true; otherwise function will revert)"
+            }
+          },
+          "name()": {
+            "returns": {
+              "_0": "token name"
+            }
+          },
+          "nonces(address)": {
+            "returns": {
+              "_0": "current nonce"
+            }
+          },
+          "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": {
+            "details": "this function may be vulnerable to approval replay attacks",
+            "params": {
+              "amount": "quantity of tokens to approve",
+              "owner": "holder of tokens and signer of permit",
+              "r": "secp256k1 'r' value",
+              "s": "secp256k1 's' value",
+              "spender": "beneficiary of approval",
+              "v": "secp256k1 'v' value"
+            }
+          },
+          "symbol()": {
+            "returns": {
+              "_0": "token symbol"
+            }
+          },
+          "totalSupply()": {
+            "returns": {
+              "_0": "token supply"
+            }
+          },
+          "transfer(address,uint256)": {
+            "params": {
+              "amount": "quantity of tokens to transfer",
+              "recipient": "beneficiary of token transfer"
+            },
+            "returns": {
+              "_0": "success status (always true; otherwise function should revert)"
+            }
+          },
+          "transferFrom(address,address,uint256)": {
+            "params": {
+              "amount": "quantity of tokens to transfer",
+              "holder": "holder of tokens prior to transfer",
+              "recipient": "beneficiary of token transfer"
+            },
+            "returns": {
+              "_0": "success status (always true; otherwise function should revert)"
+            }
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "DOMAIN_SEPARATOR()": {
+            "notice": "return the EIP-712 domain separator unique to contract and chain"
+          },
+          "allowance(address,address)": {
+            "notice": "query the allowance granted from given holder to given spender"
+          },
+          "approve(address,uint256)": {
+            "notice": "grant approval to spender to spend tokens"
+          },
+          "balanceOf(address)": {
+            "notice": "query the token balance of given account"
+          },
+          "decimals()": {
+            "notice": "return token decimals, generally used only for display purposes"
+          },
+          "decreaseAllowance(address,uint256)": {
+            "notice": "decrease spend amount granted to spender"
+          },
+          "increaseAllowance(address,uint256)": {
+            "notice": "increase spend amount granted to spender"
+          },
+          "name()": {
+            "notice": "return token name"
+          },
+          "nonces(address)": {
+            "notice": "get the current ERC2612 nonce for the given address"
+          },
+          "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": {
+            "notice": "approve spender to transfer tokens held by owner via signature"
+          },
+          "symbol()": {
+            "notice": "return token symbol"
+          },
+          "totalSupply()": {
+            "notice": "query the total minted token supply"
+          },
+          "transfer(address,uint256)": {
+            "notice": "transfer tokens to given recipient"
+          },
+          "transferFrom(address,address,uint256)": {
+            "notice": "transfer tokens to given recipient on behalf of given holder"
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/=lib/openzeppelin-contracts/",
+        "@solidstate/=lib/solidstate-solidity/contracts/",
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        "openzeppelin/=lib/openzeppelin-contracts/contracts/",
+        "solidstate-solidity/=lib/solidstate-solidity/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/.cache/solidstate/local/token/ERC20/SolidStateERC20.sol": "SolidStateERC20"
+      },
+      "libraries": {},
+      "viaIR": true
+    },
+    "sources": {
+      "contracts/.cache/solidstate/local/cryptography/ECDSA.sol": {
+        "keccak256": "0xebe2da1787e7830c80fae48c6d1a6f5708bf86a25edf30be5c1ff4887fbb6306",
+        "urls": [
+          "bzz-raw://19ac83051cf9bc3f2ecf631f81349ababf6e8de5e0ad6dc4d8abf06290881ada",
+          "dweb:/ipfs/QmWgSMb2RrFNWtEngLhwBoqMu4LqZ2wS8vgWVa4iATYT73"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/cryptography/EIP712.sol": {
+        "keccak256": "0x68706e604ded9cc81cce0a2dd8ac3a741b5bacf1e2cbceaa52589fbee7aa5a7a",
+        "urls": [
+          "bzz-raw://144fda0cc369253fffd5f4c1566802dec9aa53c100f7521921383b874d7cf3dc",
+          "dweb:/ipfs/QmNXmAo2aSk8GT56guLTyTRLsCVwjkbKh7BQkHoXn43qHL"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC20.sol": {
+        "keccak256": "0x197de4843756480d31552af560f57bcf85e4a38476da34082865b1df41717681",
+        "urls": [
+          "bzz-raw://00f00a993061a7305dffa0c6cd2535a0eaa8b55054ca2986e6d9e12d9ee113ae",
+          "dweb:/ipfs/QmYCsGKZHzcgJ5HWXzJg72gm2nmNS1jWgdjto3HvGqctkW"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/interfaces/IERC20Internal.sol": {
+        "keccak256": "0xca66b9db15c1c8884f5f8939fd7add412600f8edc5e97aecd092c63c9e1b38ca",
+        "urls": [
+          "bzz-raw://d73acdeb1648dd67ff232ba4c13154481d4b5d721c7165f17a9cf4366f3ad56f",
+          "dweb:/ipfs/QmWQ8Xb2tFTv7zqtpGCHB1rnhYBZaFvdkAzQ4rNAATqcPi"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/ISolidStateERC20.sol": {
+        "keccak256": "0x4800d771e5606f791a7c2662802718a727c361aaf547df8e6e849165ef91e9df",
+        "urls": [
+          "bzz-raw://a470452a22d4e680b6c1bc50df9ff39ca8de006a475990d907cfd47ebef39f39",
+          "dweb:/ipfs/QmS2c5s5zQcJ2yoGsNLDJNc1Ysf7wvw2eqrkzzE7G3zmQ2"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/SolidStateERC20.sol": {
+        "keccak256": "0xe9b8e0d7e0b48546053b89d8fcf6bb55f5f7d9b2e21c334e4a1eac37d9a7f253",
+        "urls": [
+          "bzz-raw://a63227c3507c499184a1575f1fe9d77a50f427adca9154c912014000c095e05a",
+          "dweb:/ipfs/QmbjytwFAKmw1ZSteXK3QtuSmtmXAR1rn1SoH8H6qJnGHD"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/ERC20Base.sol": {
+        "keccak256": "0xaa37e5e9a6c30f492708c0d2d7dce68219b54323ef4d3def9960bc04c9990270",
+        "urls": [
+          "bzz-raw://299c4e0fd40f5f16023435908ac7d98d10adc5e136ec5c617a4db8291fbcae30",
+          "dweb:/ipfs/QmbiVucTsyus2YModFP4QYj8Avc5NFBxZovXPRLQRAL9qz"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/ERC20BaseInternal.sol": {
+        "keccak256": "0x1338104cff2a16603fe2f0cebdc465b9bff8b0381ce0b82a9c2ae20a18a11265",
+        "urls": [
+          "bzz-raw://529f72519296e24796f5c0614e4118f49a0e5b378cc0cc1b38dc2671939959bf",
+          "dweb:/ipfs/QmZSfd5Gp4hXJERSWGSNEejkbtCNmq9xCxdV8MuVKrvzcy"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/ERC20BaseStorage.sol": {
+        "keccak256": "0x7abb2c7bccbf39980de5302a5275e144d88465d08d19266774ca3b776c2a7025",
+        "urls": [
+          "bzz-raw://8efbe58144a3d6d4893ce83f7177dc9dad8777279e2fd489dce6c46f317d6183",
+          "dweb:/ipfs/QmR8ot1KGe9DrEQH9Zk95A7h5ySUn7kGNcKGAquPErDV4B"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/IERC20Base.sol": {
+        "keccak256": "0xd633d2b3875b8c62728eb2435a0d9009e057106bea3dbbef7c89a314745beabe",
+        "urls": [
+          "bzz-raw://22983bd3cd83272c348a280c55f7aac1699a8debf2456f92764b9847731d928d",
+          "dweb:/ipfs/QmQxeaAqrQiPNTuPBZS9Wz3BRJC3EZXsXgUFWowkRZfrrd"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/base/IERC20BaseInternal.sol": {
+        "keccak256": "0x81e5eee95fd70949ef5c02ecaa7c09609d72f5104a099d0bd3321a27bb39560e",
+        "urls": [
+          "bzz-raw://42648f57c064d10dd984266edd67ebd10791c665593008b5a2f0a7f9618832cd",
+          "dweb:/ipfs/QmQpG97o26ZZTQce9Lixhytx9AshFTrn3QBAkiAc75NwiE"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/extended/ERC20Extended.sol": {
+        "keccak256": "0x46c171274b1c35c1aaa4d23b74938acf5e62da861cf62ca7c8c7fded0b149d6b",
+        "urls": [
+          "bzz-raw://35bfb7a40260915ccb3b1d7bfc1c99fd947fbedcfb2c7804e000f125142f74a5",
+          "dweb:/ipfs/QmadZ1C87qNoqecJwznG5sdwLKt2ptqkDy7iZ39DM5D6pn"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/extended/ERC20ExtendedInternal.sol": {
+        "keccak256": "0xf4b03b0ab8a3c85695e4480594139440baf0c078073cc552340719a36dceec42",
+        "urls": [
+          "bzz-raw://d2e007f78d29e941cdbfe28d556cd921e78f97e0e385a0b02a6579bddc302e12",
+          "dweb:/ipfs/QmVzpcwZ9zZRD5YTnL24V7tdsby6RvQGXN7P5J8b8jxGRq"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/extended/IERC20Extended.sol": {
+        "keccak256": "0x56bf28297ad06334258a95cd309519a2f2c4c044067879345d8cfd7b245eb183",
+        "urls": [
+          "bzz-raw://99500b6a5985ad03c82db57d9e1aebf605e06bd3b2150a8a3731cb6298febb38",
+          "dweb:/ipfs/QmV3dpw39wM8neQVMdb2CfbxCuDeymSs3dzviEkuj3Qe1g"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/extended/IERC20ExtendedInternal.sol": {
+        "keccak256": "0x3f67f65e6b05deff9ba4720b7bdf905c3a258766e7a9fdee535546ae237934da",
+        "urls": [
+          "bzz-raw://47238ea39e3b721c6f05c6fac9cf92c4fa6de84457b9ebe0bf341f2d74d5d815",
+          "dweb:/ipfs/QmTMAwSFb8R2JfNd1yoVzfNNdr85k6SdwuxLB9CnZ6jzcS"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/metadata/ERC20Metadata.sol": {
+        "keccak256": "0xc65c32023e0c452e8dc0de8b61ec74d23bb9cdd8a567525f51410e4e21b49167",
+        "urls": [
+          "bzz-raw://fa8a317e2646bfb49f89691293df4bad63fbd843f80b7f13d23919ab8c45b1e2",
+          "dweb:/ipfs/Qmcvh8sMH9unQA8jihsTkv5gbHxXEpJm1GrF4Sbt13C3pD"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/metadata/ERC20MetadataInternal.sol": {
+        "keccak256": "0xcedf8baf3402d89cb9da914b111c9ad3e77a085e47dda7f848f5942c795ab0e6",
+        "urls": [
+          "bzz-raw://5f2b6f41bce869fe06ba8341e3c46799c4a91b29d81f03fe02e46581f17792d6",
+          "dweb:/ipfs/QmSCGJTwgg8Ti2HwaZdCpgh3vs9yG3RrbsKsWnJejA2Y5o"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/metadata/ERC20MetadataStorage.sol": {
+        "keccak256": "0x1e248a48639dc39986b02ba0dd452d84ee3818c77a3a4f2342051696b1284911",
+        "urls": [
+          "bzz-raw://da1edca66a064bed13a4a20b4c199fbca7a42eb5996a487a0d1f2305e414c8f5",
+          "dweb:/ipfs/QmVcHK7nnRMWK6jLXepYwEEpmZiySL6fUyftdjttG5ZnF5"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/metadata/IERC20Metadata.sol": {
+        "keccak256": "0xe4356349f1c11ebf95d5ec29dc5d26fba7e3868f83b28e3d117ecdcfed149395",
+        "urls": [
+          "bzz-raw://ee6e2d611601c3e3e8fcfaec02e64e455ef64f2ba2d1af498a05103ab09af809",
+          "dweb:/ipfs/QmP5SNSNYoLN8tpX9fwhgwYQVRG6j11gM95avQzEuPsGw7"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/metadata/IERC20MetadataInternal.sol": {
+        "keccak256": "0xeea01e2e586f2b16f9293734348eb67d7d8da90676f758587dbcdffb9aa59a60",
+        "urls": [
+          "bzz-raw://4a34c15861cd2bb269a1219bdf26ad3e857b6152dcd073e7b29d537d73d8a8cf",
+          "dweb:/ipfs/QmV9vJq4pjDwMneCBhTw51ucSEpUu2Se2pJs1DiPkDjwpG"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/permit/ERC20Permit.sol": {
+        "keccak256": "0xe119091d77b13a384006134b9cfb9c446908d7c32d5dd00595a1ce49b6800544",
+        "urls": [
+          "bzz-raw://54b4b0b7e46b8201516e46a14c99afc3c1f1a77194727a3f4bbfaa39c150e4f0",
+          "dweb:/ipfs/QmWpsZNmVVLgJaYsHEL4K7bRJ2GPZcKMDqgy9SiqyvYmp5"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/permit/ERC20PermitInternal.sol": {
+        "keccak256": "0x38333b57f8f6424f0311a2bd65af702c9117a09dd2dd2d0a26dd845dcd06af4d",
+        "urls": [
+          "bzz-raw://1ef3ccd774967230d81f523ff1b3509af694d068433ef6223556c9b797dacc6a",
+          "dweb:/ipfs/QmXo34Dc1dDBaCTZpGdEW2NSFgPBGiTfzGS1RNt2ZL71yi"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/permit/ERC20PermitStorage.sol": {
+        "keccak256": "0x5b6b14d032792f1f947e7ca988ae642c180a1ed8f13ef7a5ccb41cc95eea2155",
+        "urls": [
+          "bzz-raw://8438091da43648fc4af90ed33dfc0f32a9e9c679369755c3e5f665030e611000",
+          "dweb:/ipfs/QmP3RHrzgs9Hrjb5mLWu9YRLso9pDA9b15AZS6X7RBCSmv"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/permit/IERC20Permit.sol": {
+        "keccak256": "0x7db515db8520fae8dea8f5b673f199c7476215d4e94ce49947ab2cdd9ddcce22",
+        "urls": [
+          "bzz-raw://62f6fe9a1d4f52a0b57bb664574b754d01319f63d804bc27ef78ad3283580b5a",
+          "dweb:/ipfs/QmZjWtmv8cLeKCzviZvB6ya16Y3S7dgg6qdt74i5iGdxmZ"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/permit/IERC20PermitInternal.sol": {
+        "keccak256": "0x4f6e12f9e07cc66ca9ee57a25c40d9d2f55d3e800a3d6577c9d883068423eb22",
+        "urls": [
+          "bzz-raw://e8d626e9f9527fda26f30d811007fd087a4fd520ca56ab3f7821d22298981faf",
+          "dweb:/ipfs/QmZCouA4wmAJP9bFvTjF9gnJiEAn7wYTr7GypkP2i6HsXL"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/permit/IERC2612.sol": {
+        "keccak256": "0x902349370028c8a0026f3b7b3060b0581dd143d9de1e3d41d7bf2c194cee1889",
+        "urls": [
+          "bzz-raw://9ce1d971c8fe0b08b0fd00baed385555abb8bcaf6cbdc66e54cef56edc5d0dd7",
+          "dweb:/ipfs/QmVfKUw4ShkmfK1qT4NaLjGAG2FFaVyM1zzhoaDL3kLLzN"
+        ],
+        "license": "MIT"
+      },
+      "contracts/.cache/solidstate/local/token/ERC20/permit/IERC2612Internal.sol": {
+        "keccak256": "0xdca4b94537ab13936677c889a29267e506f2f23da6f5f541f73a95e2db5b4db9",
+        "urls": [
+          "bzz-raw://b59db5b753c269d10c4d71e375384c8612f477679715afe8b35ba6e4d4f67f1d",
+          "dweb:/ipfs/QmUk4McXaQeFVZ3b4XsLJsWEdoKdxTLGSFQDi2Qe54oy6z"
+        ],
+        "license": "MIT"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/SolidStateERC20.sol",
+    "id": 52906,
+    "exportedSymbols": {
+      "ERC20Base": [
+        53078
+      ],
+      "ERC20Extended": [
+        53684
+      ],
+      "ERC20Metadata": [
+        54143
+      ],
+      "ERC20MetadataInternal": [
+        54231
+      ],
+      "ERC20Permit": [
+        54389
+      ],
+      "ERC20PermitInternal": [
+        54637
+      ],
+      "ISolidStateERC20": [
+        52862
+      ],
+      "SolidStateERC20": [
+        52905
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "33:845:394",
+    "nodes": [
+      {
+        "id": 52864,
+        "nodeType": "PragmaDirective",
+        "src": "33:23:394",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".8"
+        ]
+      },
+      {
+        "id": 52866,
+        "nodeType": "ImportDirective",
+        "src": "58:58:394",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/ISolidStateERC20.sol",
+        "file": "./ISolidStateERC20.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52906,
+        "sourceUnit": 52863,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52865,
+              "name": "ISolidStateERC20",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 52862,
+              "src": "67:16:394",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52868,
+        "nodeType": "ImportDirective",
+        "src": "117:49:394",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/base/ERC20Base.sol",
+        "file": "./base/ERC20Base.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52906,
+        "sourceUnit": 53079,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52867,
+              "name": "ERC20Base",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 53078,
+              "src": "126:9:394",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52870,
+        "nodeType": "ImportDirective",
+        "src": "167:61:394",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/extended/ERC20Extended.sol",
+        "file": "./extended/ERC20Extended.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52906,
+        "sourceUnit": 53685,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52869,
+              "name": "ERC20Extended",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 53684,
+              "src": "176:13:394",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52872,
+        "nodeType": "ImportDirective",
+        "src": "229:61:394",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/metadata/ERC20Metadata.sol",
+        "file": "./metadata/ERC20Metadata.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52906,
+        "sourceUnit": 54144,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52871,
+              "name": "ERC20Metadata",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 54143,
+              "src": "238:13:394",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52874,
+        "nodeType": "ImportDirective",
+        "src": "291:77:394",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/metadata/ERC20MetadataInternal.sol",
+        "file": "./metadata/ERC20MetadataInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52906,
+        "sourceUnit": 54232,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52873,
+              "name": "ERC20MetadataInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 54231,
+              "src": "300:21:394",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52876,
+        "nodeType": "ImportDirective",
+        "src": "369:55:394",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/permit/ERC20Permit.sol",
+        "file": "./permit/ERC20Permit.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52906,
+        "sourceUnit": 54390,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52875,
+              "name": "ERC20Permit",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 54389,
+              "src": "378:11:394",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52878,
+        "nodeType": "ImportDirective",
+        "src": "425:71:394",
+        "nodes": [],
+        "absolutePath": "contracts/.cache/solidstate/local/token/ERC20/permit/ERC20PermitInternal.sol",
+        "file": "./permit/ERC20PermitInternal.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 52906,
+        "sourceUnit": 54638,
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 52877,
+              "name": "ERC20PermitInternal",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": 54637,
+              "src": "434:19:394",
+              "typeDescriptions": {}
+            },
+            "nameLocation": "-1:-1:-1"
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "id": 52905,
+        "nodeType": "ContractDefinition",
+        "src": "582:295:394",
+        "nodes": [
+          {
+            "id": 52904,
+            "nodeType": "FunctionDefinition",
+            "src": "716:159:394",
+            "nodes": [],
+            "body": {
+              "id": 52903,
+              "nodeType": "Block",
+              "src": "838:37:394",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 52900,
+                        "name": "name",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 52891,
+                        "src": "863:4:394",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "expression": {
+                        "id": 52897,
+                        "name": "super",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": -25,
+                        "src": "848:5:394",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_super$_SolidStateERC20_$52905_$",
+                          "typeString": "type(contract super SolidStateERC20)"
+                        }
+                      },
+                      "id": 52899,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "854:8:394",
+                      "memberName": "_setName",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 54636,
+                      "src": "848:14:394",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (string memory)"
+                      }
+                    },
+                    "id": 52901,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "848:20:394",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 52902,
+                  "nodeType": "ExpressionStatement",
+                  "src": "848:20:394"
+                }
+              ]
+            },
+            "baseFunctions": [
+              54202,
+              54636
+            ],
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_setName",
+            "nameLocation": "725:8:394",
+            "overrides": {
+              "id": 52895,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [
+                {
+                  "id": 52893,
+                  "name": "ERC20MetadataInternal",
+                  "nameLocations": [
+                    "794:21:394"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 54231,
+                  "src": "794:21:394"
+                },
+                {
+                  "id": 52894,
+                  "name": "ERC20PermitInternal",
+                  "nameLocations": [
+                    "817:19:394"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 54637,
+                  "src": "817:19:394"
+                }
+              ],
+              "src": "785:52:394"
+            },
+            "parameters": {
+              "id": 52892,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 52891,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nameLocation": "757:4:394",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 52904,
+                  "src": "743:18:394",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 52890,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "743:6:394",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "733:34:394"
+            },
+            "returnParameters": {
+              "id": 52896,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "838:0:394"
+            },
+            "scope": 52905,
+            "stateMutability": "nonpayable",
+            "virtual": true,
+            "visibility": "internal"
+          }
+        ],
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 52880,
+              "name": "ISolidStateERC20",
+              "nameLocations": [
+                "623:16:394"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 52862,
+              "src": "623:16:394"
+            },
+            "id": 52881,
+            "nodeType": "InheritanceSpecifier",
+            "src": "623:16:394"
+          },
+          {
+            "baseName": {
+              "id": 52882,
+              "name": "ERC20Base",
+              "nameLocations": [
+                "645:9:394"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 53078,
+              "src": "645:9:394"
+            },
+            "id": 52883,
+            "nodeType": "InheritanceSpecifier",
+            "src": "645:9:394"
+          },
+          {
+            "baseName": {
+              "id": 52884,
+              "name": "ERC20Extended",
+              "nameLocations": [
+                "660:13:394"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 53684,
+              "src": "660:13:394"
+            },
+            "id": 52885,
+            "nodeType": "InheritanceSpecifier",
+            "src": "660:13:394"
+          },
+          {
+            "baseName": {
+              "id": 52886,
+              "name": "ERC20Metadata",
+              "nameLocations": [
+                "679:13:394"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 54143,
+              "src": "679:13:394"
+            },
+            "id": 52887,
+            "nodeType": "InheritanceSpecifier",
+            "src": "679:13:394"
+          },
+          {
+            "baseName": {
+              "id": 52888,
+              "name": "ERC20Permit",
+              "nameLocations": [
+                "698:11:394"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 54389,
+              "src": "698:11:394"
+            },
+            "id": 52889,
+            "nodeType": "InheritanceSpecifier",
+            "src": "698:11:394"
+          }
+        ],
+        "canonicalName": "SolidStateERC20",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 52879,
+          "nodeType": "StructuredDocumentation",
+          "src": "498:83:394",
+          "text": " @title SolidState ERC20 implementation, including recommended extensions"
+        },
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          52905,
+          54389,
+          54637,
+          54143,
+          53684,
+          53756,
+          53078,
+          52862,
+          54726,
+          54777,
+          54737,
+          54780,
+          54231,
+          54313,
+          54317,
+          53821,
+          53833,
+          53488,
+          53614,
+          44967,
+          53640,
+          44987
+        ],
+        "name": "SolidStateERC20",
+        "nameLocation": "600:15:394",
+        "scope": 52906,
+        "usedErrors": [
+          38208,
+          38210,
+          38214,
+          53623,
+          53625,
+          53627,
+          53629,
+          53631,
+          53633,
+          53635,
+          53637,
+          53639,
+          53830,
+          53832,
+          54734,
+          54736
+        ]
+      }
+    ],
+    "license": "MIT"
+  },
+  "id": 394
+}
