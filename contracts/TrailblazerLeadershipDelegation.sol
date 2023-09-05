@@ -17,14 +17,14 @@ contract TrailblazerLeadershipDelegation {
         if (round < _trailblazerTournament._currentRound()) {
             return _trailblazerTournament.leaderboardInfo(round);
         } else {
-            uint startIndex = _trailblazerTournament._lastIndexPerRound(round - 1) + 1;
+            uint startIndex = _trailblazerTournament.lastIndexPerRound(round - 1) + 1;
             uint endIndex = lastId;
             TrailblazerTournament.LeaderboardInfo[] memory leaderboardInfos = new TrailblazerTournament.LeaderboardInfo[](endIndex - startIndex + 1);
 
             uint index = 0;
             for (uint i = startIndex; i <= endIndex; i++) {
                 index = i - startIndex;
-                leaderboardInfos[index] = TrailblazerTournament.LeaderboardInfo(i, _trailblazerTournament._aviationLevels(i));
+                leaderboardInfos[index] = TrailblazerTournament.LeaderboardInfo(i, _trailblazerTournament.aviationLevels(i));
             }
             return leaderboardInfos;
         }

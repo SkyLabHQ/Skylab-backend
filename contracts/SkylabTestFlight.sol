@@ -10,11 +10,11 @@ contract SkylabTestFlight is SkylabBase {
     constructor(string memory baseURI) SkylabBase(baseURI, "SkylabTestFlight", "SKYLAB_TEST_FLIGHT") {}
 
     function playTestMint() external {
-        _safeMint(_msgSender(), _nextTokenID);
-        _aviationTradeLock[_nextTokenID] = true;
-        _aviationLevels[_nextTokenID] = 1;
-        _aviationPoints[_nextTokenID] = 1;
-        _nextTokenID++;
+        uint256 tokenId = super.totalSupply() + 1;
+        _safeMint(_msgSender(), tokenId);
+        aviationTradeLock[tokenId] = true;
+        aviationLevels[tokenId] = 1;
+        aviationPoints[tokenId] = 1;
         uint[] memory ids = new uint[](2);
         ids[0] = 0;
         ids[1] = 1;
@@ -40,7 +40,7 @@ contract SkylabTestFlight is SkylabBase {
         // If anything is trade locked, reject
         for (uint256 i = 0; i < ERC721.balanceOf(_owner); i++) {
             uint256 tokenId = tokenOfOwnerByIndex(_owner, i);
-            if (_aviationTradeLock[tokenId]) {
+            if (aviationTradeLock[tokenId]) {
                 return false;
             }
         }

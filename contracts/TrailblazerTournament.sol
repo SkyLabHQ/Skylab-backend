@@ -9,8 +9,8 @@ contract TrailblazerTournament is SkylabBase {
 
     // tournament variables
     uint public _currentRound = 0;
-    mapping(uint => uint) public _lastIndexPerRound;
-    mapping(uint => uint) public _aviationRounds;
+    mapping(uint => uint) public lastIndexPerRound;
+    mapping(uint => uint) public aviationRounds;
 
     struct LeaderboardInfo {
         uint tokenId;
@@ -18,7 +18,7 @@ contract TrailblazerTournament is SkylabBase {
     }
 
     constructor(string memory baseURI) SkylabBase(baseURI, "TrailblazerTournament", "TRAILBLAZER_TOURNAMENT") {
-        _lastIndexPerRound[0] = 0;
+        lastIndexPerRound[0] = 0;
     }
 
     function tournamentMint(address[] memory to, uint fuel, uint battery) external onlyOwner {
@@ -29,37 +29,38 @@ contract TrailblazerTournament is SkylabBase {
         resourceAmounts[0] = fuel;
         resourceAmounts[1] = battery;
         for (uint i = 0; i < to.length; i++) {
-            _safeMint(to[i], _nextTokenID);
-            _aviationLevels[_nextTokenID] = 1;
-            _aviationPoints[_nextTokenID] = 1;
-            _aviationRounds[_nextTokenID] =  _currentRound;
-            _nextTokenID++;
+            uint256 tokenId = super.totalSupply() + 1;
+            _safeMint(to[i], tokenId);
+            aviationLevels[tokenId] = 1;
+            aviationPoints[tokenId] = 1;
+            aviationRounds[tokenId] =  _currentRound;
             _skylabResources.playTestNuke(to[i], ids);
             _skylabResources.mintBatch(to[i], ids, resourceAmounts, "");
         }
     }
 
     function tournamentRoundOver() external onlyOwner{
-        _lastIndexPerRound[_currentRound] = _nextTokenID - 1;
+        uint256 tokenId = super.totalSupply() + 1;
+        lastIndexPerRound[_currentRound] = tokenId - 1;
         _currentRound++;
     }
 
     function leaderboardInfo(uint round) external view returns (LeaderboardInfo[] memory) {
-        uint startIndex = _lastIndexPerRound[round - 1] + 1;
-        uint endIndex = _lastIndexPerRound[round];
+        uint startIndex = lastIndexPerRound[round - 1] + 1;
+        uint endIndex = lastIndexPerRound[round];
         LeaderboardInfo[] memory leaderboardInfos = new LeaderboardInfo[](endIndex - startIndex + 1);
 
         uint index = 0;
         for (uint i = startIndex; i <= endIndex; i++) {
             index = i - startIndex;
-            leaderboardInfos[index] = LeaderboardInfo(i, _aviationLevels[i]);
+            leaderboardInfos[index] = LeaderboardInfo(i, aviationLevels[i]);
         }
         return leaderboardInfos;
     }
 
     function isAviationLocked(uint tokenId) override external view onlyGameAddresses returns (bool) {
         require(_exists(tokenId), "SkylabTournament: nonexistent token");
-        return _aviationRounds[tokenId] != _currentRound || _aviationTradeLock[tokenId];
+        return aviationRounds[tokenId] != _currentRound || aviationTradeLock[tokenId];
     }
 
     function isApprovedForAll(
@@ -69,7 +70,7 @@ contract TrailblazerTournament is SkylabBase {
         // If anything is trade locked, reject
         for (uint256 i = 0; i < ERC721.balanceOf(_owner); i++) {
             uint256 tokenId = tokenOfOwnerByIndex(_owner, i);
-            if (_aviationTradeLock[tokenId]) {
+            if (aviationTradeLock[tokenId]) {
                 return false;
             }
         }
@@ -93,9 +94,9 @@ contract TrailblazerTournament is SkylabBase {
 
         return _skylabMetadata.generateTokenMetadata(
             tokenId.toString(), 
-            string(abi.encodePacked(_metadataBaseURI, "Round", _aviationRounds[tokenId].toString(), "/", _aviationLevels[tokenId].toString(), ".png")),
-            _aviationLevels[tokenId].toString(),
-            _aviationPoints[tokenId].toString(),
+            string(abi.encodePacked(_metadataBaseURI, "Round", aviationRounds[tokenId].toString(), "/", aviationLevels[tokenId].toString(), ".png")),
+            aviationLevels[tokenId].toString(),
+            aviationPoints[tokenId].toString(),
             "None"
         );
     }
