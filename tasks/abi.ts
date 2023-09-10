@@ -9,7 +9,8 @@ const defaultContractABIExports = [
   'contracts/SkylabGameFlightRace.sol:SkylabGameFlightRace',
   'contracts/TrailblazerLeadershipDelegation.sol:TrailblazerLeadershipDelegation',
   'contracts/SkylabBidTacToe.sol:SkylabBidTacToe',
-  'contracts/BidTacToe.sol:BidTacToe'
+  'contracts/BidTacToe.sol:BidTacToe',
+  'contracts/SkylabTestFlight.sol:SkylabTestFlight'
 ];
 
 task('abi:clean', 'Clean exported ABI artifacts').setAction((taskArguments, hre) => {

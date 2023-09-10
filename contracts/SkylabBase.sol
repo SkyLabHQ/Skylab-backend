@@ -233,7 +233,7 @@ contract SkylabBase is ERC721Enumerable, Ownable {
 
         return _skylabMetadata.generateTokenMetadata(
             tokenId.toString(), 
-            string(abi.encodePacked(baseUrl, _aviationLevels[tokenId].toString(), ".png")),
+            string(abi.encodePacked(baseUrl, _aviationLevels[tokenId].toString(), ".svg")),
             _aviationLevels[tokenId].toString(),
             _aviationPoints[tokenId].toString(),
             pilotString

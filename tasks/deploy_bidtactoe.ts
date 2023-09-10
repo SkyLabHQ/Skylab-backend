@@ -35,6 +35,5 @@ task('deploy_bidtactoe')
       `npx hardhat verify --network ${network.name} ${skylabbidtactoe.target} ${skylabaddress} ${deployer.target}`
     );
 
-    // await verify(hre, flightRace.target, [skylabaddress, traverseVerifier.target, pathDataVerifier.target, maps.target])
   }
 )
