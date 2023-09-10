@@ -13,6 +13,10 @@ contract MercuryPilots is Ownable {
     mapping(address => Pilot) private activePilot;
     mapping(address => mapping(uint => uint)) public pilotXP;
 
+    mapping(uint => Pilot[]) private pilotXPGroups;
+    mapping(address => mapping(uint => uint)) public pilotGroupIndex;
+    uint public highestGroupIndex = 0;
+
     // Note: a pilot will remain in the mapping even if the pilot is sold, however, there should be no function that works when that's the case. 
     function setActivePilot(ERC721 collection, uint tokenId, address owner) external {
         // TODO: Check that collection is a valid collection against central index
@@ -35,9 +39,30 @@ contract MercuryPilots is Ownable {
         // TODO: Check that msg.sender is a valid MercuryBase
         Pilot memory pilot = getActivePilot(player);
         pilotXP[pilot.collectionAddress][pilot.pilotId] += xp;
+        uint newIndex = findXPGroup(pilotXP[pilot.collectionAddress][pilot.pilotId]);
+        if (newIndex != pilotGroupIndex[pilot.collectionAddress][pilot.pilotId]) {
+            pilotXPGroups[newIndex].push(pilot);
+            pilotGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
+            if (newIndex > highestGroupIndex) {
+                highestGroupIndex = newIndex;
+            }
+        }
+    }
+
+    function getPilotXPGroup(uint index) external view returns (Pilot[] memory) {
+        return pilotXPGroups[index];
     }
 
     function checkPilotOwned(Pilot memory pilot, address owner) private view returns (bool) {
         return ERC721(pilot.collectionAddress).ownerOf(pilot.pilotId) == owner;
+    }
+
+    function findXPGroup(uint xp) private pure returns (uint) {
+        for (uint i = 0; i <= type(uint256).max; i++) {
+            if (2**i > xp) {
+                return i;
+            }
+        }
+        return type(uint256).max;
     }
 }
