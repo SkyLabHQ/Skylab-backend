@@ -25,6 +25,6 @@ contract ComponentIndex is Ownable {
 
     function updatePilotCollection(address _pilot, bool _isValid) public onlyOwner {
         isPilotCollection[_pilot] = _isValid;
-        emit PilotCollection[_pilot, _isValid];
+        emit PilotCollection(_pilot, _isValid);
     }
 }
