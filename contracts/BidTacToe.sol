@@ -27,10 +27,12 @@ contract BidTacToe is Initializable {
     mapping(address => uint256) private commitedHashes;
     mapping(address => uint256[]) private revealedBids;
     mapping(address => uint256) private occupiedGridCounts;
+    mapping(address => uint256) public playerMessage;
+    mapping(address => uint256) public playerEmote;
     address public nextDrawWinner;
 
     // Static values
-    uint256 constant universalTimeout = 300;
+    uint256 constant universalTimeout = 60;
 
     /*
     *   State 1: next grid has been selected, both players are ready to bid for it
@@ -177,6 +179,14 @@ contract BidTacToe is Initializable {
 
     function surrender() external onlyPlayers {
         win(getOtherPlayer(), 8);
+    }
+
+    function setMessage(uint index) external onlyPlayers {
+        playerMessage[msg.sender] = index;
+    }
+
+    function setEmote(uint index) external onlyPlayers {
+        playerEmote[msg.sender] = index;
     }
 
     function generateNextGrid() internal {

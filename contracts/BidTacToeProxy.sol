@@ -33,7 +33,7 @@ contract BidTacToeProxy {
      * and {_fallback} should delegate.
      */
     function _implementation() internal pure returns (address) {
-        return address(0x7132BdD04a476d1165089C47B5623eB446C6BcF7); //bidtactoe address
+        return address(0xe9C5aaCe65088F875C001aA5f2a23d8E8fBDcC0e); //bidtactoe address
     }
 
     /**
