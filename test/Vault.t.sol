@@ -13,18 +13,18 @@ contract VaultTest is Test {
     function setUp() public {
         base = new TrailblazerTournament("");
         vault = new Vault(base);
-        base.setMintable(true);
+        //base.setMintable(true);
     }
 
     function test_receiveNFT() public {
-        base.mintAviation(address(this));
+        //base.mintAviation(address(this), 0);
         base.transferFrom(address(this), address(vault), 1);
         assertEq(base.ownerOf(1), address(vault));
     }
 
     function test_buyBack() public {
         vm.deal(address(this), 100 ether);
-        base.mintAviation(address(this));
+        //base.mintAviation(address(this), 0);
         base.approve(address(vault), 1);
         vault.BuyBack(1);
     }

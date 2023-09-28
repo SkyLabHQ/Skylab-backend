@@ -2,17 +2,17 @@
 pragma solidity ^0.8.0;
 
 import "../../../libraries/Base64.sol";
-import {MercuryResources} from "../../../protocol/MercuryResources.sol";
-import {ComponentIndex} from "../../../protocol/ComponentIndex.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import {ComponentIndex} from "../../../protocol/ComponentIndex.sol";
+import {MercuryResources} from "../../../protocol/MercuryResources.sol";
 
 library LibBase {
     using Strings for uint256;
 
+    uint256 constant MAXLEVEL = 16;
     bytes32 constant MERCURYBASE_STORAGE_POSITION = keccak256("diamond.standard.mercurybase.storage");
 
     struct MercuryBaseStorage {
-        bool mintable;
         string metadataBaseURI;
         address protocol;
         mapping(uint256 => uint256) aviationLevels;

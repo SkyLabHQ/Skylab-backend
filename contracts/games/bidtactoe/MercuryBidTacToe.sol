@@ -15,9 +15,6 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     constructor(address _protocol) MercuryGameBase(_protocol) {}
 
-    // token id => address
-    mapping(uint256 => address) private _gameApprovals;
-
     // Dynamic game data
     mapping(address => bool) private gameExists;
     mapping(address => address) public gamePerPlayer;

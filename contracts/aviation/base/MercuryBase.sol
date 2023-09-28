@@ -13,8 +13,6 @@ import {LibBase} from "./storage/LibBase.sol";
 abstract contract MercuryBase is SolidStateERC721 {
     using Strings for uint256;
 
-    uint256 constant MAXLEVEL = 16;
-
     constructor(string memory baseURI, string memory name, string memory symbol) {
         ERC721MetadataStorage.Layout storage layout = ERC721MetadataStorage.layout();
         layout.name = name;
@@ -27,21 +25,6 @@ abstract contract MercuryBase is SolidStateERC721 {
     modifier onlyGameAddresses() {
         require(LibBase.componentIndex().isValidGame(msg.sender), "MercuryBase: msg.sender is not a valid game address");
         _;
-    }
-
-    modifier onlyMintable() {
-        require(LibBase.layout().mintable, "MercuryBase: Mint not open");
-        _;
-    }
-
-    // ====================
-    // Mint
-    // ====================
-
-    function mintAviation(address to) external virtual onlyMintable {
-        uint256 tokenID = super.totalSupply() + 1;
-        _safeMint(to, tokenID);
-        LibBase.layout().aviationLevels[tokenID] = 1;
     }
 
     // ====================
@@ -132,14 +115,6 @@ abstract contract MercuryBase is SolidStateERC721 {
 
     function isApprovedOrOwner(address spender, uint256 tokenId) external view returns (bool) {
         return super._isApprovedOrOwner(spender, tokenId);
-    }
-
-    // =======================
-    // Admin Utility
-    // =======================
-    function setMintable(bool _mintable) external {
-        LibDiamond.enforceIsContractOwner();
-        LibBase.layout().mintable = _mintable;
     }
 
     function registerMetadataURI(string memory metadataURI) external {
