@@ -13,12 +13,20 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 initialBalance;
     }
 
+    struct PlaneMetadata {
+        uint64 token1Level;
+        uint64 token1Points;
+        uint64 token2Level;
+        uint64 token2Points;
+    }
+
     constructor(address _protocol) MercuryGameBase(_protocol) {}
 
     // Dynamic game data
     mapping(address => bool) private gameExists;
     mapping(address => address) public gamePerPlayer;
     mapping(address => GameParams) public paramsPerGame;
+    mapping(address => PlaneMetadata) public planeMetadataPerGame;
     mapping(address => address) public gameToCollection;
 
     address public defaultGameQueue;
@@ -29,16 +37,17 @@ contract MercuryBidTacToe is MercuryGameBase {
     function createLobby(uint64 gridWidth, uint64 gridHeight, uint64 lengthToWin, uint64 initialBalance, address collection) external {
         MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
         GameParams memory gameParams = GameParams(gridWidth, gridHeight, lengthToWin, initialBalance);
-        address newGame = createGame(gameParams);
+        address newGame = createGame(gameParams, collection);
         gameToCollection[newGame] = address(MercuryBase(collection));
         super.baseCreateLobby(newGame);
     }
 
-    function createGame(GameParams memory gameParams) internal returns (address) {
+    function createGame(GameParams memory gameParams, address collection) internal returns (address) {
         require(gamePerPlayer[msg.sender] == address(0), "MercuryBidTacToe: a game has already been created by caller");
         address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
 
         paramsPerGame[newGame] = gameParams;
+        planeMetadataPerGame[newGame] = PlaneMetadata(getAviationLevel(msg.sender, collection), getAviationPoints(msg.sender, collection), 0, 0);
         gameExists[newGame] = true;
         gamePerPlayer[msg.sender] = newGame;
         return newGame;
@@ -48,8 +57,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         require(gameToCollection[lobby] == collection, "MercuryBidTacToe: collection does not match");
         require(gameExists[lobby], "MercuryBidTacToe: lobby does not exist");
         MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
-        LibBidTacToe.joinGame(lobby, msg.sender);
-        gamePerPlayer[msg.sender] = lobby;
+        joinGame(lobby, msg.sender, collection);
         super.baseJoinLobby(lobby);
     }
 
@@ -59,11 +67,17 @@ contract MercuryBidTacToe is MercuryGameBase {
             defaultGameQueue = msg.sender;
         } else {
             address gameAddress = createGame(LibBidTacToe.defaultParams());
-            LibBidTacToe.joinGame(gameAddress, defaultGameQueue);
+            joinGame(gameAddress, defaultGameQueue, collection);
             gameToCollection[gameAddress] = collection;
-            gamePerPlayer[defaultGameQueue] = gameAddress;
             delete defaultGameQueue;
         }
+    }
+
+    function joinGame(address gameAddress, address player2, address collection) internal {
+        LibBidTacToe.joinGame(gameAddress, player2);
+        gamePerPlayer[player2] = gameAddress;
+        planeMetadataPerGame[gameAddress].token2Level = getAviationLevel(player2, collection);
+        planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, collection);
     }
 
     function withdrawFromQueue(address collection) external {
@@ -92,5 +106,13 @@ contract MercuryBidTacToe is MercuryGameBase {
         collection.aviationUnlock(tokenId);
         delete gamePerPlayer[burner];
         return tokenId;
+    }
+
+    function getAviationLevel(address burner, address collection) internal view returns (uint64) {
+        return uint64(MercuryBase(collection).aviationLevels(burnerAddressToTokenId(burner)));
+    }
+
+    function getAviationPoints(address burner, address collection) internal view returns (uint64) {
+        return uint64(MercuryBase(collection).aviationPoints(burnerAddressToTokenId(burner)));
     }
 }

@@ -40,12 +40,14 @@ abstract contract MercuryGameBase is ERC1155Holder {
 
     function approveForGame(address burner, uint256 tokenId, MercuryBase collection) public virtual {
         require(isApprovedForGame(tokenId, collection), "MercuryGameBase: caller is not token owner or approved");
+        require(!collection.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
         LibGameBase.layout().gameApprovals[tokenId] = burner;
         LibGameBase.layout().burnerAddressToTokenId[burner] = tokenId;
     }
 
     function unapproveForGame(uint256 tokenId, MercuryBase collection) public virtual {
         require(isApprovedForGame(tokenId, collection), "MercuryGameBase: caller is not token owner or approved");
+        require(!collection.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
         delete  LibGameBase.layout().gameApprovals[tokenId];
         delete LibGameBase.layout().burnerAddressToTokenId[msg.sender];
     }
