@@ -28,20 +28,12 @@ contract TrailblazerTournament is MercuryBase {
 
     function tournamentMint(address[] memory to, uint256 fuel, uint256 battery) external {
         LibDiamond.enforceIsContractOwner();
-        uint256[] memory ids = new uint[](2);
-        ids[0] = 0;
-        ids[1] = 1;
-        uint256[] memory resourceAmounts = new uint[](2);
-        resourceAmounts[0] = fuel;
-        resourceAmounts[1] = battery;
         for (uint256 i = 0; i < to.length; i++) {
             uint256 tokenId = super.totalSupply() + 1;
             _safeMint(to[i], tokenId);
             LibBase.layout().aviationLevels[tokenId] = 1;
             LibBase.layout().aviationPoints[tokenId] = 1;
             aviationRounds[tokenId] = _currentRound;
-            LibBase.mercuryResources().playTestNuke(to[i], ids);
-            LibBase.mercuryResources().mintBatch(to[i], ids, resourceAmounts, "");
         }
     }
 
@@ -105,15 +97,13 @@ contract TrailblazerTournament is MercuryBase {
             tokenId,
             string(
                 abi.encodePacked(
-                    sbs.metadataBaseURI,
                     "Round",
                     aviationRounds[tokenId].toString(),
                     "/",
                     sbs.aviationLevels[tokenId].toString(),
                     ".png"
                 )
-            ),
-            "None"
+            )
         );
     }
 }

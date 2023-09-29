@@ -20,14 +20,6 @@ contract MercuryTestFlight is MercuryBase {
         LibBase.layout().aviationTradeLock[tokenId] = true;
         LibBase.layout().aviationLevels[tokenId] = 1;
         LibBase.layout().aviationPoints[tokenId] = 1;
-        uint256[] memory ids = new uint[](2);
-        ids[0] = 0;
-        ids[1] = 1;
-        uint256[] memory resourceAmounts = new uint[](2);
-        resourceAmounts[0] = 25000;
-        resourceAmounts[1] = 25000;
-        LibBase.mercuryResources().mintBatch(msg.sender, ids, resourceAmounts, "");
-        LibBase.mercuryResources().playTestNuke(msg.sender, ids);
     }
 
     function aviationLock(uint256 tokenId) external override onlyGameAddresses {}

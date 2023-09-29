@@ -69,7 +69,6 @@ abstract contract MercuryBase is SolidStateERC721 {
     function burnAviation(uint256 tokenId) private {
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         _burn(tokenId);
-        sbs.pilotToToken[sbs.aviationPilotAddresses[tokenId]][sbs.aviationPilotIds[tokenId]] = 0;
     }
 
     // ====================
@@ -122,14 +121,6 @@ abstract contract MercuryBase is SolidStateERC721 {
         LibBase.layout().metadataBaseURI = metadataURI;
     }
 
-    function registerPilotAddress(address pilotAddress, string memory pilotCollectionName, string memory baseUrl)
-        external
-    {
-        LibDiamond.enforceIsContractOwner();
-        LibBase.layout().pilotAddressesToNames[pilotAddress] = pilotCollectionName;
-        LibBase.layout().pilotAddressesToUrls[pilotAddress] = baseUrl;
-    }
-
     function tokenURI(uint256 tokenId)
         public
         view
@@ -139,22 +130,8 @@ abstract contract MercuryBase is SolidStateERC721 {
     {
         require(_exists(tokenId), "ERC721: URI query for nonexistent token");
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
-        string memory pilotString = "None";
-        string memory baseUrl = sbs.metadataBaseURI;
-        address pilotAddress = sbs.aviationPilotAddresses[tokenId];
-        if (pilotAddress != address(0)) {
-            pilotString = string(
-                abi.encodePacked(
-                    sbs.pilotAddressesToNames[pilotAddress], " #", sbs.aviationPilotIds[tokenId].toString()
-                )
-            );
-            baseUrl = string(
-                abi.encodePacked(sbs.pilotAddressesToUrls[pilotAddress], sbs.aviationPilotIds[tokenId].toString(), "/")
-            );
-        }
-
         return LibBase.generateTokenMetadata(
-            tokenId, string(abi.encodePacked(baseUrl, sbs.aviationLevels[tokenId].toString(), ".svg")), pilotString
+            tokenId, string(abi.encodePacked(sbs.aviationLevels[tokenId].toString(), ".svg"))
         );
     }
 

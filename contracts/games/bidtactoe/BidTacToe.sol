@@ -33,7 +33,7 @@ contract BidTacToe is Initializable {
     address public nextDrawWinner;
 
     // Static values
-    uint256 constant universalTimeout = 60;
+    uint256 constant universalTimeout = 90;
 
     /*
     *   State 1: next grid has been selected, both players are ready to bid for it

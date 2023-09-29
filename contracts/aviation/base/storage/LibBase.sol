@@ -18,11 +18,6 @@ library LibBase {
         mapping(uint256 => uint256) aviationLevels;
         mapping(uint256 => uint256) aviationPoints;
         mapping(uint256 => bool) aviationTradeLock;
-        mapping(uint256 => uint256) aviationPilotIds;
-        mapping(uint256 => address) aviationPilotAddresses;
-        mapping(address => mapping(uint256 => uint256)) pilotToToken;
-        mapping(address => string) pilotAddressesToNames;
-        mapping(address => string) pilotAddressesToUrls;
     }
 
     event UpdateLevels(uint256 tokenID);
@@ -42,7 +37,7 @@ library LibBase {
         return ComponentIndex(layout().protocol);
     }
 
-    function generateTokenMetadata(uint256 tokenId, string memory imageUrl, string memory pilotString)
+    function generateTokenMetadata(uint256 tokenId, string memory imageUrlSuffix)
         internal
         view
         returns (string memory)
@@ -55,7 +50,7 @@ library LibBase {
                         tokenId.toString(),
                         '",',
                         '"image": "',
-                        imageUrl,
+                        string(abi.encodePacked(layout().metadataBaseURI, imageUrlSuffix)),
                         '",',
                         '"attributes": [',
                         "{",
@@ -67,12 +62,6 @@ library LibBase {
                         '"trait_type": "Point",',
                         '"value": ',
                         layout().aviationPoints[tokenId].toString(),
-                        "},",
-                        "{",
-                        '"trait_type": "Pilot",',
-                        '"value": "',
-                        pilotString,
-                        '"',
                         "}",
                         "]" "}"
                     )
