@@ -15,6 +15,14 @@ contract SkylabBidTacToe is Ownable {
         uint64 initialBalance;
     }
 
+    struct PlaneMetadata {
+        uint64 token1Level;
+        uint64 token1Points;
+        uint64 token2Level;
+        uint64 token2Points;
+
+    }
+
     SkylabBase internal _skylabBase;
     SkylabBidTacToeDeployer private deployer;
     // token id => address
@@ -27,6 +35,7 @@ contract SkylabBidTacToe is Ownable {
     mapping(address => bool) private gameExists;
     mapping(address => address) public gamePerPlayer;
     mapping(address => GameParams) public paramsPerGame;
+    mapping(address => PlaneMetadata) public planeMetadataPerGame;
 
     address[] public lobbyGameQueue;
     mapping(address => uint) private lobbyGameIndex;
@@ -53,6 +62,7 @@ contract SkylabBidTacToe is Ownable {
         address newGame = deployer.createGame(gameParams, msg.sender, address(this));
         
         paramsPerGame[newGame] = gameParams;
+        planeMetadataPerGame[newGame] = PlaneMetadata(getAviationLevel(msg.sender), getAviationPoints(msg.sender), 0, 0);
         gameExists[newGame] = true;
         gamePerPlayer[msg.sender] = newGame;
         return newGame;
@@ -61,7 +71,7 @@ contract SkylabBidTacToe is Ownable {
     function joinLobby(address lobby) external {
         require(gameExists[lobby], "SkylabBidTacToe: lobby does not exist");
         _skylabBase.aviationLock(burnerAddressToTokenId[msg.sender]);
-        deployer.joinGame(lobby, msg.sender);
+        joinGame(lobby, msg.sender);
         gamePerPlayer[msg.sender] = lobby;
 
         address swappedLobby = lobbyGameQueue[lobbyGameQueue.length - 1];
@@ -78,10 +88,16 @@ contract SkylabBidTacToe is Ownable {
             defaultGameQueue = msg.sender;
         } else {
             address gameAddress = createGame(deployer.defaultParams());
-            deployer.joinGame(gameAddress, defaultGameQueue);
-            gamePerPlayer[defaultGameQueue] = gameAddress;
+            joinGame(gameAddress, defaultGameQueue);
             delete defaultGameQueue;
         }
+    }
+
+    function joinGame(address gameAddress, address player2) internal {
+        deployer.joinGame(gameAddress, player2);
+        gamePerPlayer[player2] = gameAddress;
+        planeMetadataPerGame[gameAddress].token2Level = getAviationLevel(player2);
+        planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2);
     }
 
     function withdrawFromQueue() external {
@@ -109,6 +125,14 @@ contract SkylabBidTacToe is Ownable {
         return tokenId;
     }
 
+    function getAviationLevel(address burner) internal view returns (uint64) {
+        return uint64(_skylabBase._aviationLevels(burnerAddressToTokenId[burner]));
+    }
+
+    function getAviationPoints(address burner) internal view returns (uint64) {
+        return uint64(_skylabBase._aviationPoints(burnerAddressToTokenId[burner]));
+    }
+
     // =====================
     // Approval
     // =====================
@@ -118,12 +142,14 @@ contract SkylabBidTacToe is Ownable {
 
     function approveForGame(address to, uint tokenId) public virtual {
         require(isApprovedForGame(msg.sender, tokenId), "SkylabGameBase: caller is not token owner or approved");
+        require(!_skylabBase.isAviationLocked(tokenId), "SkylabGameBase: token has been locked");
         _gameApprovals[tokenId] = to;
         burnerAddressToTokenId[to] = tokenId;
     }
 
     function unapproveForGame(uint tokenId) public virtual {
         require(isApprovedForGame(msg.sender, tokenId), "SkylabGameBase: caller is not token owner or approved");
+        require(!_skylabBase.isAviationLocked(tokenId), "SkylabGameBase: token has been locked");
         delete _gameApprovals[tokenId];
         delete burnerAddressToTokenId[msg.sender];
     }
