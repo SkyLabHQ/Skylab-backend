@@ -22,12 +22,12 @@ abstract contract MercuryGameBase is ERC1155Holder {
         _;
     }
 
-    function baseCreateLobby(address newGame) internal {
-        LibGameBase.baseCreateLobby(newGame);
+    function baseCreateLobby(address newGame,address collection) internal {
+        LibGameBase.baseCreateLobby(newGame,collection);
     }
 
-    function baseJoinLobby(address lobby) internal {
-        LibGameBase.baseJoinLobby(lobby);
+    function baseJoinLobby(address lobby, address collection) internal {
+        LibGameBase.baseJoinLobby(lobby, collection);
     }
 
     // =====================

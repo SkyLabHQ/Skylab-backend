@@ -10,9 +10,9 @@ library LibGameBase {
         mapping(uint256 => address) gameApprovals;
         address contractOwner;
         // game  queue
-        address[] lobbyGameQueue;
+        // collection to lobbies
+        mapping(address => address[]) lobbyGameQueue;
         mapping(address => uint256) lobbyGameIndex;
-        mapping(address => address) userToCollection;
         mapping(address => uint256) burnerAddressToTokenId;
     }
 
@@ -25,7 +25,7 @@ library LibGameBase {
         }
     }
 
-    function burnerAddressToTokenId(address burner) internal view returns(uint256) {
+    function burnerAddressToTokenId(address burner) internal view returns (uint256) {
         return layout().burnerAddressToTokenId[burner];
     }
 
@@ -52,17 +52,17 @@ library LibGameBase {
         emit OwnershipTransferred(previousOwner, _newOwner);
     }
 
-    function baseCreateLobby(address newGame) internal {
-        layout().lobbyGameIndex[newGame] = layout().lobbyGameQueue.length;
-        layout().lobbyGameQueue.push(newGame);
+    function baseCreateLobby(address newGame, address collection) internal {
+        layout().lobbyGameIndex[newGame] = layout().lobbyGameQueue[collection].length;
+        layout().lobbyGameQueue[collection].push(newGame);
     }
 
-    function baseJoinLobby(address lobby) internal {
+    function baseJoinLobby(address lobby, address collection) internal {
         require(layout().lobbyGameIndex[lobby] != 0, "MercuryBidTacToe: lobby does not exist");
-        address swappedLobby = layout().lobbyGameQueue[layout().lobbyGameQueue.length - 1];
+        address swappedLobby = layout().lobbyGameQueue[collection][layout().lobbyGameQueue[collection].length - 1];
         uint256 index = layout().lobbyGameIndex[lobby];
-        layout().lobbyGameQueue[index] = swappedLobby;
-        layout().lobbyGameQueue.pop();
+        layout().lobbyGameQueue[collection][index] = swappedLobby;
+        layout().lobbyGameQueue[collection].pop();
         layout().lobbyGameIndex[swappedLobby] = index;
         delete layout().lobbyGameIndex[lobby];
     }

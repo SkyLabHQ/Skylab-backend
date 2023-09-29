@@ -298,22 +298,22 @@
   },
   "ast": {
     "absolutePath": "contracts/.cache/solidstate/local/multisig/IECDSAMultisigWallet.sol",
-    "id": 46122,
+    "id": 50530,
     "exportedSymbols": {
       "IECDSAMultisigWallet": [
-        46121
+        50529
       ],
       "IECDSAMultisigWalletInternal": [
-        46156
+        50564
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "33:662:294",
+    "src": "33:662:344",
     "nodes": [
       {
-        "id": 46103,
+        "id": 50511,
         "nodeType": "PragmaDirective",
-        "src": "33:23:294",
+        "src": "33:23:344",
         "nodes": [],
         "literals": [
           "solidity",
@@ -323,24 +323,24 @@
         ]
       },
       {
-        "id": 46105,
+        "id": 50513,
         "nodeType": "ImportDirective",
-        "src": "58:80:294",
+        "src": "58:80:344",
         "nodes": [],
         "absolutePath": "contracts/.cache/solidstate/local/multisig/IECDSAMultisigWalletInternal.sol",
         "file": "./IECDSAMultisigWalletInternal.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 46122,
-        "sourceUnit": 46157,
+        "scope": 50530,
+        "sourceUnit": 50565,
         "symbolAliases": [
           {
             "foreign": {
-              "id": 46104,
+              "id": 50512,
               "name": "IECDSAMultisigWalletInternal",
               "nodeType": "Identifier",
               "overloadedDeclarations": [],
-              "referencedDeclaration": 46156,
-              "src": "66:28:294",
+              "referencedDeclaration": 50564,
+              "src": "66:28:344",
               "typeDescriptions": {}
             },
             "nameLocation": "-1:-1:-1"
@@ -349,19 +349,19 @@
         "unitAlias": ""
       },
       {
-        "id": 46121,
+        "id": 50529,
         "nodeType": "ContractDefinition",
-        "src": "140:554:294",
+        "src": "140:554:344",
         "nodes": [
           {
-            "id": 46120,
+            "id": 50528,
             "nodeType": "FunctionDefinition",
-            "src": "541:151:294",
+            "src": "541:151:344",
             "nodes": [],
             "documentation": {
-              "id": 46108,
+              "id": 50516,
               "nodeType": "StructuredDocumentation",
-              "src": "209:327:294",
+              "src": "209:327:344",
               "text": " @notice verify signatures and execute \"call\" or \"delegatecall\" with given parameters\n @dev message parameters must be included in signature\n @param parameters structured call parameters (target, data, value, delegate)\n @param signatures array of structured signature data (signature, nonce)"
             },
             "functionSelector": "04887cf5",
@@ -369,43 +369,43 @@
             "kind": "function",
             "modifiers": [],
             "name": "verifyAndExecute",
-            "nameLocation": "550:16:294",
+            "nameLocation": "550:16:344",
             "parameters": {
-              "id": 46116,
+              "id": 50524,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 46111,
+                  "id": 50519,
                   "mutability": "mutable",
                   "name": "parameters",
-                  "nameLocation": "585:10:294",
+                  "nameLocation": "585:10:344",
                   "nodeType": "VariableDeclaration",
-                  "scope": 46120,
-                  "src": "567:28:294",
+                  "scope": 50528,
+                  "src": "567:28:344",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Parameters_$46150_memory_ptr",
+                    "typeIdentifier": "t_struct$_Parameters_$50558_memory_ptr",
                     "typeString": "struct IECDSAMultisigWalletInternal.Parameters"
                   },
                   "typeName": {
-                    "id": 46110,
+                    "id": 50518,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 46109,
+                      "id": 50517,
                       "name": "Parameters",
                       "nameLocations": [
-                        "567:10:294"
+                        "567:10:344"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 46150,
-                      "src": "567:10:294"
+                      "referencedDeclaration": 50558,
+                      "src": "567:10:344"
                     },
-                    "referencedDeclaration": 46150,
-                    "src": "567:10:294",
+                    "referencedDeclaration": 50558,
+                    "src": "567:10:344",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Parameters_$46150_storage_ptr",
+                      "typeIdentifier": "t_struct$_Parameters_$50558_storage_ptr",
                       "typeString": "struct IECDSAMultisigWalletInternal.Parameters"
                     }
                   },
@@ -413,66 +413,66 @@
                 },
                 {
                   "constant": false,
-                  "id": 46115,
+                  "id": 50523,
                   "mutability": "mutable",
                   "name": "signatures",
-                  "nameLocation": "616:10:294",
+                  "nameLocation": "616:10:344",
                   "nodeType": "VariableDeclaration",
-                  "scope": 46120,
-                  "src": "597:29:294",
+                  "scope": 50528,
+                  "src": "597:29:344",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_array$_t_struct$_Signature_$46155_memory_ptr_$dyn_memory_ptr",
+                    "typeIdentifier": "t_array$_t_struct$_Signature_$50563_memory_ptr_$dyn_memory_ptr",
                     "typeString": "struct IECDSAMultisigWalletInternal.Signature[]"
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 46113,
+                      "id": 50521,
                       "nodeType": "UserDefinedTypeName",
                       "pathNode": {
-                        "id": 46112,
+                        "id": 50520,
                         "name": "Signature",
                         "nameLocations": [
-                          "597:9:294"
+                          "597:9:344"
                         ],
                         "nodeType": "IdentifierPath",
-                        "referencedDeclaration": 46155,
-                        "src": "597:9:294"
+                        "referencedDeclaration": 50563,
+                        "src": "597:9:344"
                       },
-                      "referencedDeclaration": 46155,
-                      "src": "597:9:294",
+                      "referencedDeclaration": 50563,
+                      "src": "597:9:344",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Signature_$46155_storage_ptr",
+                        "typeIdentifier": "t_struct$_Signature_$50563_storage_ptr",
                         "typeString": "struct IECDSAMultisigWalletInternal.Signature"
                       }
                     },
-                    "id": 46114,
+                    "id": 50522,
                     "nodeType": "ArrayTypeName",
-                    "src": "597:11:294",
+                    "src": "597:11:344",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_array$_t_struct$_Signature_$46155_storage_$dyn_storage_ptr",
+                      "typeIdentifier": "t_array$_t_struct$_Signature_$50563_storage_$dyn_storage_ptr",
                       "typeString": "struct IECDSAMultisigWalletInternal.Signature[]"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "566:61:294"
+              "src": "566:61:344"
             },
             "returnParameters": {
-              "id": 46119,
+              "id": 50527,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 46118,
+                  "id": 50526,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 46120,
-                  "src": "678:12:294",
+                  "scope": 50528,
+                  "src": "678:12:344",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -480,10 +480,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 46117,
+                    "id": 50525,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "678:5:294",
+                    "src": "678:5:344",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -492,9 +492,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "677:14:294"
+              "src": "677:14:344"
             },
-            "scope": 46121,
+            "scope": 50529,
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "external"
@@ -504,18 +504,18 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 46106,
+              "id": 50514,
               "name": "IECDSAMultisigWalletInternal",
               "nameLocations": [
-                "174:28:294"
+                "174:28:344"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 46156,
-              "src": "174:28:294"
+              "referencedDeclaration": 50564,
+              "src": "174:28:344"
             },
-            "id": 46107,
+            "id": 50515,
             "nodeType": "InheritanceSpecifier",
-            "src": "174:28:294"
+            "src": "174:28:344"
           }
         ],
         "canonicalName": "IECDSAMultisigWallet",
@@ -523,26 +523,26 @@
         "contractKind": "interface",
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          46121,
-          46156
+          50529,
+          50564
         ],
         "name": "IECDSAMultisigWallet",
-        "nameLocation": "150:20:294",
-        "scope": 46122,
+        "nameLocation": "150:20:344",
+        "scope": 50530,
         "usedErrors": [
-          46125,
-          46127,
-          46129,
-          46131,
-          46133,
-          46135,
-          46137,
-          46139,
-          46141
+          50533,
+          50535,
+          50537,
+          50539,
+          50541,
+          50543,
+          50545,
+          50547,
+          50549
         ]
       }
     ],
     "license": "MIT"
   },
-  "id": 294
+  "id": 344
 }

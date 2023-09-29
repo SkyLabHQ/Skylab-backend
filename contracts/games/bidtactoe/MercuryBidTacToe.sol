@@ -20,18 +20,24 @@ contract MercuryBidTacToe is MercuryGameBase {
     mapping(address => address) public gamePerPlayer;
     mapping(address => GameParams) public paramsPerGame;
     mapping(address => address) public gameToCollection;
-
-    address public defaultGameQueue;
+    // collecton to default game queue
+    mapping(address => address) public defaultGameQueue;
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
 
-    function createLobby(uint64 gridWidth, uint64 gridHeight, uint64 lengthToWin, uint64 initialBalance, address collection) external {
+    function createLobby(
+        uint64 gridWidth,
+        uint64 gridHeight,
+        uint64 lengthToWin,
+        uint64 initialBalance,
+        address collection
+    ) external {
         MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
         GameParams memory gameParams = GameParams(gridWidth, gridHeight, lengthToWin, initialBalance);
         address newGame = createGame(gameParams);
-        gameToCollection[newGame] = address(MercuryBase(collection));
-        super.baseCreateLobby(newGame);
+        gameToCollection[newGame] = collection;
+        super.baseCreateLobby(newGame, collection);
     }
 
     function createGame(GameParams memory gameParams) internal returns (address) {
@@ -50,25 +56,25 @@ contract MercuryBidTacToe is MercuryGameBase {
         MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
         LibBidTacToe.joinGame(lobby, msg.sender);
         gamePerPlayer[msg.sender] = lobby;
-        super.baseJoinLobby(lobby);
+        super.baseJoinLobby(lobby, collection);
     }
 
     function createOrJoinDefault(address collection) external {
         MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
-        if (defaultGameQueue == address(0)) {
-            defaultGameQueue = msg.sender;
+        if (defaultGameQueue[collection] == address(0)) {
+            defaultGameQueue[collection] = msg.sender;
         } else {
             address gameAddress = createGame(LibBidTacToe.defaultParams());
-            LibBidTacToe.joinGame(gameAddress, defaultGameQueue);
+            LibBidTacToe.joinGame(gameAddress, defaultGameQueue[collection]);
             gameToCollection[gameAddress] = collection;
-            gamePerPlayer[defaultGameQueue] = gameAddress;
-            delete defaultGameQueue;
+            gamePerPlayer[defaultGameQueue[collection]] = gameAddress;
+            delete defaultGameQueue[collection];
         }
     }
 
     function withdrawFromQueue(address collection) external {
-        require(msg.sender == defaultGameQueue, "MercuryBidTacToe: msg.sender is not in default queue");
-        delete defaultGameQueue;
+        require(msg.sender == defaultGameQueue[collection], "MercuryBidTacToe: msg.sender is not in default queue");
+        delete defaultGameQueue[collection];
         MercuryBase(collection).aviationUnlock(burnerAddressToTokenId(msg.sender));
     }
 

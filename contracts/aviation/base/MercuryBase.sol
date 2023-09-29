@@ -55,14 +55,14 @@ abstract contract MercuryBase is SolidStateERC721 {
 
     function updateLevel(uint256 tokenId) private {
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
-        for (uint256 i = 0; i <= MAXLEVEL; i++) {
+        for (uint256 i = 0; i <= LibBase.MAXLEVEL; i++) {
             if (2 ** i > sbs.aviationPoints[tokenId]) {
                 sbs.aviationLevels[tokenId] = i;
                 emit LibBase.UpdateLevels(tokenId);
                 return;
             }
         }
-        sbs.aviationLevels[tokenId] = MAXLEVEL;
+        sbs.aviationLevels[tokenId] = LibBase.MAXLEVEL;
         emit LibBase.UpdateLevels(tokenId);
     }
 
