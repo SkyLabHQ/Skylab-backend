@@ -3,7 +3,7 @@ name: mecrcury_protocol
 plugins:
   - name: solidity
   - name: foundry
-
+  - name: polygon
 dependencies:
   - name: openzeppelin
     local: ./lib/openzeppelin-contracts
@@ -17,7 +17,12 @@ solidity:
   import_remapping:
     - "@openzeppelin/contracts/=openzeppelin/local"
     - "@solidstate/=solidstate"
-
+  evm_version: paris
+geth:
+  polygon:
+    testnet:
+      uri: https://polygon-mumbai.infura.io/v3/e2bd5b81da70452d8087087d86e54cc4
+      gas_limit: "auto"
 ethereum:
   local:
     default_provider: foundry

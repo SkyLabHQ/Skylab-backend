@@ -27,7 +27,6 @@ contract MercuryBidTacToe is MercuryGameBase {
     mapping(address => address) public gamePerPlayer;
     mapping(address => GameParams) public paramsPerGame;
     mapping(address => PlaneMetadata) public planeMetadataPerGame;
-    mapping(address => address) public gameToCollection;
     // collecton to default game queue
     mapping(address => address) public defaultGameQueue;
 
@@ -44,7 +43,6 @@ contract MercuryBidTacToe is MercuryGameBase {
         MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
         GameParams memory gameParams = GameParams(gridWidth, gridHeight, lengthToWin, initialBalance);
         address newGame = createGame(gameParams, collection);
-        gameToCollection[newGame] = collection;
         super.baseCreateLobby(newGame, collection);
     }
 
@@ -61,7 +59,7 @@ contract MercuryBidTacToe is MercuryGameBase {
     }
 
     function joinLobby(address lobby, address collection) external {
-        require(gameToCollection[lobby] == collection, "MercuryBidTacToe: collection does not match");
+        require(isIdenticalCollection(lobby, collection), "MercuryBidTacToe: collection does not match");
         require(gameExists[lobby], "MercuryBidTacToe: lobby does not exist");
         MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
         joinGame(lobby, msg.sender, collection);
@@ -75,7 +73,6 @@ contract MercuryBidTacToe is MercuryGameBase {
         } else {
             address gameAddress = createGame(LibBidTacToe.defaultParams(), collection);
             joinGame(gameAddress, defaultGameQueue[collection], collection);
-            gameToCollection[gameAddress] = collection;
             gamePerPlayer[defaultGameQueue[collection]] = gameAddress;
             delete defaultGameQueue[collection];
         }

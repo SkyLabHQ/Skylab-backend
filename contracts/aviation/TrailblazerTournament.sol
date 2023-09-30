@@ -26,7 +26,7 @@ contract TrailblazerTournament is MercuryBase {
         lastIndexPerRound[0] = 0;
     }
 
-    function tournamentMint(address[] memory to, uint256 fuel, uint256 battery) external {
+    function tournamentMint(address[] memory to) external {
         LibDiamond.enforceIsContractOwner();
         for (uint256 i = 0; i < to.length; i++) {
             uint256 tokenId = super.totalSupply() + 1;
@@ -97,11 +97,7 @@ contract TrailblazerTournament is MercuryBase {
             tokenId,
             string(
                 abi.encodePacked(
-                    "Round",
-                    aviationRounds[tokenId].toString(),
-                    "/",
-                    sbs.aviationLevels[tokenId].toString(),
-                    ".png"
+                    "Round", aviationRounds[tokenId].toString(), "/", sbs.aviationLevels[tokenId].toString(), ".png"
                 )
             )
         );

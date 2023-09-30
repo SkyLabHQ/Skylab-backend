@@ -8,7 +8,7 @@ cut = []
 
 diamond_address = ''
 
-account = accounts.load('test')
+account = accounts.load('deployer')
 
 # Note: contrat_name : constructor_args
 # replace it if needed
@@ -16,18 +16,15 @@ contract_params = {
     'Diamond': {},
     'ComponentIndex': {},
     'MercuryPilots': {},
-    'Vault': '0x9A676e781A523b5d0C0e43731313A708CB607508',
+    'MercuryResources': 'https://skylab.mypinata.cloud/ipfs/QmdF8YmF17JNm4LaYp4BU21rWcdoj4P6p9KN8JvqaFQpxB/',
+    'Vault': '0x27c38bABAe5a8A8d0302B66120D07E3457b48058',
 }
 
 # contract_params = {
 #     'Diamond': {},
-#     'TrailblazerTournament': 'baseURI'
+#     'MercuryTestFlight': 'https://gateway.pinata.cloud/ipfs/QmdAVTVehGVNRwTxKj9Tz4utEqh4CKf2YTaA9godJAGAFu/'
 # }
 
-contract_params = {
-    'Diamond': {},
-    'MercuryBidTacToe': {},
-}
     
 def get_selector(contract):
     file_path = f'{os.getcwd()}/out/{contract}.sol/{contract}.json'

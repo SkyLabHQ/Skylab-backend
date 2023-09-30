@@ -67,7 +67,6 @@ abstract contract MercuryBase is SolidStateERC721 {
     }
 
     function burnAviation(uint256 tokenId) private {
-        LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         _burn(tokenId);
     }
 

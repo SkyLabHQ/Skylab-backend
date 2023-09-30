@@ -72,4 +72,9 @@ abstract contract MercuryGameBase is ERC1155Holder {
     function burnerAddressToTokenId(address burner) public view returns (uint256) {
         return LibGameBase.burnerAddressToTokenId(burner);
     }
+
+    function isIdenticalCollection(address lobby, address collection) public view returns(bool) {
+        uint256 gameIndex = LibGameBase.layout().lobbyGameIndex[lobby];
+        return LibGameBase.layout().lobbyGameQueue[collection][gameIndex] == lobby;
+    }
 }
