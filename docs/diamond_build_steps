@@ -1,0 +1,29 @@
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+forge compile
+
+python3 -m venv /path/to/new/environment
+source /bin/activate
+deactivate
+pip install -U pip
+pip install eth-ape
+ape --version
+ape accounts import deployer
+ape plugins install polygon foundry infura solidity
+
+ape run scripts/deploy_diamond.py --network polygon:mumbai:infura
+ape run scripts/deploy_game.py --network polygon:mumbai:infura
+
+2023/9/30
+## MercuryTestFlight
+SUCCESS: Contract 'Diamond' deployed to: 0x27c38bABAe5a8A8d0302B66120D07E3457b48058
+
+## Protocal
+SUCCESS: Contract 'Diamond' deployed to: 0x4783c509578161e138E94f3D3B5A91Bf9b2Ce947
+
+
+## BidTacToe
+SUCCESS: Contract 'BidTacToe' deployed to: 0x6E496419eCD8f7bb92Ec3F42984Be70a1Fc59E80
+
+## MercuryBidTactoe
+Contract 'Diamond' deployed to: 0x2C73d1abCEbfD453d479432FD84060eE20A58e8F

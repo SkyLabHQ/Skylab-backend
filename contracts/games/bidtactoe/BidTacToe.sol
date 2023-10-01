@@ -30,6 +30,8 @@ contract BidTacToe is Initializable {
     mapping(address => uint256) private occupiedGridCounts;
     mapping(address => uint256) public playerMessage;
     mapping(address => uint256) public playerEmote;
+    
+    MercuryBase public collection;
     address public nextDrawWinner;
 
     // Static values
@@ -62,7 +64,7 @@ contract BidTacToe is Initializable {
         _;
     }
 
-    function initialize(MercuryBidTacToe.GameParams memory gameParams, address player, address callback)
+    function initialize(MercuryBidTacToe.GameParams memory gameParams, address player, address callback, address collection_)
         public
         initializer
     {
@@ -76,6 +78,7 @@ contract BidTacToe is Initializable {
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
         mercuryBidTacToe = MercuryBidTacToe(callback);
+        collection = MercuryBase(collection_);
     }
 
     function getGrid() external view returns (address[] memory) {
@@ -121,7 +124,7 @@ contract BidTacToe is Initializable {
         emit CommitBid(msg.sender, hash);
     }
 
-    function revealBid(uint256 bid, uint256 salt, MercuryBase collection) external onlyPlayers {
+    function revealBid(uint256 bid, uint256 salt) external onlyPlayers {
         require(gameStates[msg.sender] == 2, "BidTacToe: player gameState is not 2");
         require(gameStates[getOtherPlayer()] >= 2, "BidTacToe: opponent gameState is less than 2");
         require(
@@ -159,9 +162,9 @@ contract BidTacToe is Initializable {
             emit WinGrid(bidWinner, currentSelectedGrid);
 
             if (existsOverallWinner()) {
-                win(bidWinner, 4, collection);
+                win(bidWinner, 4);
             } else if (occupiedGridCounts[bidWinner] * 2 > gridWidth * gridHeight) {
-                win(bidWinner, 10, collection);
+                win(bidWinner, 10);
             } else {
                 generateNextGrid();
                 gameStates[player1] = 1;
@@ -171,15 +174,15 @@ contract BidTacToe is Initializable {
         }
     }
 
-    function claimTimeoutPenalty(MercuryBase collection) external onlyPlayers {
+    function claimTimeoutPenalty() external onlyPlayers {
         require(timeouts[getOtherPlayer()] > 0, "BidTacToe: timeout isn't defined");
         require(block.timestamp > timeouts[getOtherPlayer()], "BidTacToe: timeout didn't pass yet");
 
-        win(msg.sender, 6, collection);
+        win(msg.sender, 6);
     }
 
-    function surrender(MercuryBase collection) external onlyPlayers {
-        win(getOtherPlayer(), 8, collection);
+    function surrender() external onlyPlayers {
+        win(getOtherPlayer(), 8);
     }
 
     function setMessage(uint256 index) external onlyPlayers {
@@ -243,7 +246,7 @@ contract BidTacToe is Initializable {
         return currentLength;
     }
 
-    function win(address player, uint256 state, MercuryBase collection) private {
+    function win(address player, uint256 state) private {
         gameStates[player] = state;
         emit WinGame(player, state);
         address otherPlayer = getOtherPlayer(player);

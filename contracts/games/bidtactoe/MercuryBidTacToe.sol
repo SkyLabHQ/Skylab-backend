@@ -48,7 +48,7 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function createGame(GameParams memory gameParams, address collection) internal returns (address) {
         require(gamePerPlayer[msg.sender] == address(0), "MercuryBidTacToe: a game has already been created by caller");
-        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
+        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this), collection);
 
         paramsPerGame[newGame] = gameParams;
         planeMetadataPerGame[newGame] =

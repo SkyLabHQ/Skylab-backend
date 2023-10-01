@@ -9,10 +9,10 @@ cut = []
 diamond_address = ''
 
 account = accounts.load('deployer')
-component_index_address = '0x4783c509578161e138E94f3D3B5A91Bf9b2Ce947'
+protocol_address = '0x4783c509578161e138E94f3D3B5A91Bf9b2Ce947'
 contract_params = {
     'Diamond': {},
-    'MercuryBidTacToe': "0x4783c509578161e138E94f3D3B5A91Bf9b2Ce947", #protocol address
+    'MercuryBidTacToe': protocol_address,
 }
 
 def get_selector(contract):
@@ -24,7 +24,7 @@ def get_selector(contract):
         return selectors
 
 def main():
-    #bid_tac_toe = project.BidTacToe.deploy(sender=account)
+    # bid_tac_toe = project.BidTacToe.deploy(sender=account)
     for contract_name, constructor_args in contract_params.items():
         ContractClass = getattr(project, contract_name)
         selector = get_selector(contract_name)
@@ -46,5 +46,5 @@ def main():
     diamond = project.Diamond.at(diamond_address)
     diamond.diamondCut(cut, '0x'+'0'*40, '0x', sender=account)
 
-    index = project.ComponentIndex.at(component_index_address)
-    index.setValidGame('0xc4F184C891CB9CaEf7B913807647aCb38B05A532', True, sender=account)
+    index = project.ComponentIndex.at(protocol_address)
+    index.setValidGame(diamond_address, True, sender=account)
