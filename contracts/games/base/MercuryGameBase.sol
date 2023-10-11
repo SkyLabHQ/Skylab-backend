@@ -8,64 +8,72 @@ import {MercuryBase} from "../../aviation/base/MercuryBase.sol";
 import {LibGameBase} from "./storage/LibGameBase.sol";
 import {ComponentIndex} from "../../protocol/ComponentIndex.sol";
 import {IERC721} from "../../interfaces/IERC721.sol";
+import {MercuryPilots} from "../../protocol/MercuryPilots.sol";
 
 abstract contract MercuryGameBase is ERC1155Holder {
     using Strings for uint256;
 
-    constructor(address _protocol) {
-        LibGameBase.setContractOwner(msg.sender);
+    function initialize(address _protocol) public virtual {
+        LibDiamond.enforceIsContractOwner();
         LibGameBase.layout().protocol = _protocol;
     }
 
     modifier onlyOwner() {
-        require(LibGameBase.contractOwner() == msg.sender, "MercuryGameBase: caller is not the owner");
+        require(LibDiamond.contractOwner() == msg.sender, "MercuryGameBase: caller is not the owner");
         _;
     }
 
-    function baseCreateLobby(address newGame,address collection) internal {
-        LibGameBase.baseCreateLobby(newGame,collection);
+    function baseCreateLobby(address newGame, address aviation) internal {
+        LibGameBase.baseCreateLobby(newGame, aviation);
     }
 
-    function baseJoinLobby(address lobby, address collection) internal {
-        LibGameBase.baseJoinLobby(lobby, collection);
+    function baseJoinLobby(address lobby, address aviation) internal {
+        LibGameBase.baseJoinLobby(lobby, aviation);
     }
 
-    // =====================
-    // Approval
-    // =====================
-    function isApprovedForGame(uint256 tokenId, MercuryBase collection) public view virtual returns (bool) {
-        return collection.isApprovedOrOwner(msg.sender, tokenId)
-            || LibGameBase.gameApprovals(tokenId) == msg.sender;
+    function baseQuitLobby(address lobby, address aviation) internal {
+        LibGameBase.baseQuitLobby(lobby, aviation);
     }
 
-    function approveForGame(address burner, uint256 tokenId, MercuryBase collection) public virtual {
-        require(isApprovedForGame(tokenId, collection), "MercuryGameBase: caller is not token owner or approved");
-        require(!collection.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
+    function getLobbyOnGoingGames(address aviation) internal view returns (address[] memory) {
+        return LibGameBase.lobbyOnGoingGames(aviation);
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                            Approval Function
+    //////////////////////////////////////////////////////////////*/
+    function isApprovedForGame(uint256 tokenId, MercuryBase aviation) public view virtual returns (bool) {
+        return aviation.isApprovedOrOwner(msg.sender, tokenId) || LibGameBase.gameApprovals(tokenId) == msg.sender;
+    }
+
+    function approveForGame(address burner, uint256 tokenId, MercuryBase aviation) public virtual {
+        require(isApprovedForGame(tokenId, aviation), "MercuryGameBase: caller is not token owner or approved");
+        require(!aviation.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
         LibGameBase.layout().gameApprovals[tokenId] = burner;
         LibGameBase.layout().burnerAddressToTokenId[burner] = tokenId;
     }
 
-    function unapproveForGame(uint256 tokenId, MercuryBase collection) public virtual {
-        require(isApprovedForGame(tokenId, collection), "MercuryGameBase: caller is not token owner or approved");
-        require(!collection.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
+    function unapproveForGame(uint256 tokenId, MercuryBase aviation) public virtual {
+        require(isApprovedForGame(tokenId, aviation), "MercuryGameBase: caller is not token owner or approved");
+        require(!aviation.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
         delete  LibGameBase.layout().gameApprovals[tokenId];
         delete LibGameBase.layout().burnerAddressToTokenId[msg.sender];
     }
 
-    // =====================
-    // Utils
-    // =====================
+    /*//////////////////////////////////////////////////////////////
+                            Utils Function
+    //////////////////////////////////////////////////////////////*/
 
-    function transferOwnership(address _newOwner) external {
-        LibGameBase.enforceIsContractOwner();
-        LibGameBase.setContractOwner(_newOwner);
+    function setProtocol(address _protocol) public {
+        LibDiamond.enforceIsContractOwner();
+        LibGameBase.layout().protocol = _protocol;
     }
 
-    function owner() external view returns (address owner_) {
-        owner_ = LibGameBase.contractOwner();
+    function pilot() internal view returns (MercuryPilots) {
+        return MercuryPilots(LibGameBase.protocol());
     }
 
-    function componentIndex() public view returns (ComponentIndex) {
+    function componentIndex() internal view returns (ComponentIndex) {
         return ComponentIndex(LibGameBase.protocol());
     }
 
@@ -73,8 +81,8 @@ abstract contract MercuryGameBase is ERC1155Holder {
         return LibGameBase.burnerAddressToTokenId(burner);
     }
 
-    function isIdenticalCollection(address lobby, address collection) public view returns(bool) {
+    function isIdenticalAviation(address lobby, address aviation) internal view returns (bool) {
         uint256 gameIndex = LibGameBase.layout().lobbyGameIndex[lobby];
-        return LibGameBase.layout().lobbyGameQueue[collection][gameIndex] == lobby;
+        return LibGameBase.layout().lobbyGameQueue[aviation][gameIndex] == lobby;
     }
 }

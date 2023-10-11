@@ -2,12 +2,12 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import {Base64} from "../libraries/Base64.sol";
-import {LibDiamond} from "../libraries/LibDiamond.sol";
 
-contract BabyMercs is ERC721Enumerable {
+contract BabyMercs is ERC721Enumerable, Ownable {
     using Strings for uint256;
 
     string internal _imageBaseURI;
@@ -17,17 +17,15 @@ contract BabyMercs is ERC721Enumerable {
     }
 
     function publicMint(address to) public payable {
-        require(msg.value >= 25, "BabyMercs: 25 eth required");
+        // require(msg.value >= 25 ether, "BabyMercs: 25 eth required");
         _safeMint(to, totalSupply() + 1);
     }
 
-    function airdrop(address to) public {
-        LibDiamond.enforceIsContractOwner();
+    function airdrop(address to) public onlyOwner {
         _safeMint(to, totalSupply() + 1);
     }
 
-    function registerImageBaseURI(string memory baseURI) external {
-        LibDiamond.enforceIsContractOwner();
+    function registerImageBaseURI(string memory baseURI) external onlyOwner {
         _imageBaseURI = baseURI;
     }
 

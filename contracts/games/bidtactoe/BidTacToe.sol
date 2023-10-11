@@ -6,9 +6,9 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import {MercuryBase} from "../../aviation/base/MercuryBase.sol";
 
 contract BidTacToe is Initializable {
-    // ====================
-    // Static gameplay data
-    // ====================
+    /*//////////////////////////////////////////////////////////////
+                            Static Gameplay Data
+    //////////////////////////////////////////////////////////////*/
     address public player1;
     address public player2;
     uint256 public gridWidth;
@@ -16,9 +16,9 @@ contract BidTacToe is Initializable {
     uint256 public lengthToWin;
     MercuryBidTacToe public mercuryBidTacToe;
 
-    // ====================
-    // Dynamic gameplay data
-    // ====================
+    /*//////////////////////////////////////////////////////////////
+                            Dynamic gameplay data
+    //////////////////////////////////////////////////////////////*/
     address[] private grid;
     uint256 public currentSelectedGrid;
     uint256[] public allSelectedGrids;
@@ -30,8 +30,8 @@ contract BidTacToe is Initializable {
     mapping(address => uint256) private occupiedGridCounts;
     mapping(address => uint256) public playerMessage;
     mapping(address => uint256) public playerEmote;
-    
-    MercuryBase public collection;
+
+    MercuryBase public aviation;
     address public nextDrawWinner;
 
     // Static values
@@ -64,10 +64,12 @@ contract BidTacToe is Initializable {
         _;
     }
 
-    function initialize(MercuryBidTacToe.GameParams memory gameParams, address player, address callback, address collection_)
-        public
-        initializer
-    {
+    function initialize(
+        MercuryBidTacToe.GameParams memory gameParams,
+        address player,
+        address callback,
+        address aviation_
+    ) public initializer {
         player1 = player;
         gridWidth = gameParams.gridWidth;
         gridHeight = gameParams.gridHeight;
@@ -78,7 +80,7 @@ contract BidTacToe is Initializable {
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
         mercuryBidTacToe = MercuryBidTacToe(callback);
-        collection = MercuryBase(collection_);
+        aviation = MercuryBase(aviation_);
     }
 
     function getGrid() external view returns (address[] memory) {
@@ -253,6 +255,6 @@ contract BidTacToe is Initializable {
         gameStates[otherPlayer] = state + 1;
         emit LoseGame(otherPlayer, state + 1);
 
-        mercuryBidTacToe.handleWinLoss(player, otherPlayer, collection);
+        mercuryBidTacToe.handleWinLoss(player, otherPlayer, aviation);
     }
 }

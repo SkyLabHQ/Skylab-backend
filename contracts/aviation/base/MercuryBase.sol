@@ -13,11 +13,15 @@ import {LibBase} from "./storage/LibBase.sol";
 abstract contract MercuryBase is SolidStateERC721 {
     using Strings for uint256;
 
-    constructor(string memory baseURI, string memory name, string memory symbol) {
+    function initialize(string memory _baseURI, string memory _name, string memory _symbol, address _protocol)
+        internal
+    {
+        LibDiamond.enforceIsContractOwner();
         ERC721MetadataStorage.Layout storage layout = ERC721MetadataStorage.layout();
-        layout.name = name;
-        layout.symbol = symbol;
-        layout.baseURI = baseURI;
+        LibBase.layout().protocol = _protocol;
+        LibBase.layout().metadataBaseURI = _baseURI;
+        layout.name = _name;
+        layout.symbol = _symbol;
         _setSupportsInterface(type(IERC165).interfaceId, true);
         _setSupportsInterface(type(IERC721).interfaceId, true);
     }
@@ -27,9 +31,10 @@ abstract contract MercuryBase is SolidStateERC721 {
         _;
     }
 
-    // ====================
-    // Aviation level
-    // ====================
+    /*//////////////////////////////////////////////////////////////
+                            Game Function
+    //////////////////////////////////////////////////////////////*/
+
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external onlyGameAddresses {
         require(_exists(winnerTokenId), "MercuryBase: nonexistent token");
         require(_exists(loserTokenId), "MercuryBase: nonexistent token");
@@ -53,26 +58,6 @@ abstract contract MercuryBase is SolidStateERC721 {
         }
     }
 
-    function updateLevel(uint256 tokenId) private {
-        LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
-        for (uint256 i = 0; i <= LibBase.MAXLEVEL; i++) {
-            if (2 ** i > sbs.aviationPoints[tokenId]) {
-                sbs.aviationLevels[tokenId] = i;
-                emit LibBase.UpdateLevels(tokenId);
-                return;
-            }
-        }
-        sbs.aviationLevels[tokenId] = LibBase.MAXLEVEL;
-        emit LibBase.UpdateLevels(tokenId);
-    }
-
-    function burnAviation(uint256 tokenId) private {
-        _burn(tokenId);
-    }
-
-    // ====================
-    // MISC
-    // ====================
     function requestResourcesForGame(address from, address game, uint256[] memory ids, uint256[] memory amounts)
         external
         onlyGameAddresses
@@ -101,23 +86,47 @@ abstract contract MercuryBase is SolidStateERC721 {
         LibBase.layout().aviationTradeLock[tokenId] = false;
     }
 
-    function isAviationLocked(uint256 tokenId) external view virtual onlyGameAddresses returns (bool) {
-        require(_exists(tokenId), "MercuryBase: nonexistent token");
-        return LibBase.layout().aviationTradeLock[tokenId];
-    }
-
-    function _transfer(address from, address to, uint256 tokenId) internal virtual override {
-        require(!LibBase.layout().aviationTradeLock[tokenId], "MercuryBase: token is locked");
-        super._transfer(from, to, tokenId);
-    }
-
-    function isApprovedOrOwner(address spender, uint256 tokenId) external view returns (bool) {
-        return super._isApprovedOrOwner(spender, tokenId);
-    }
+    /*//////////////////////////////////////////////////////////////
+                            Admin Function
+    //////////////////////////////////////////////////////////////*/
 
     function registerMetadataURI(string memory metadataURI) external {
         LibDiamond.enforceIsContractOwner();
         LibBase.layout().metadataBaseURI = metadataURI;
+    }
+
+    function registerProtocol(address _protocol) external {
+        LibDiamond.enforceIsContractOwner();
+        LibBase.layout().protocol = _protocol;
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                            View Function
+    //////////////////////////////////////////////////////////////*/
+
+    function aviationLevels(uint256 _tokenId) public view returns (uint256) {
+        return LibBase.layout().aviationLevels[_tokenId];
+    }
+
+    function aviationPoints(uint256 _tokenId) public view returns (uint256) {
+        return LibBase.layout().aviationPoints[_tokenId];
+    }
+
+    function isAviationLocked(uint256 tokenId) public view virtual returns (bool) {
+        require(_exists(tokenId), "MercuryBase: nonexistent token");
+        return LibBase.layout().aviationTradeLock[tokenId];
+    }
+
+    function isApprovedOrOwner(address spender, uint256 tokenId) public view returns (bool) {
+        return super._isApprovedOrOwner(spender, tokenId);
+    }
+
+    function protocol() public view returns (address) {
+        return LibBase.layout().protocol;
+    }
+
+    function metadataBaseURI() public view returns (string memory) {
+        return LibBase.layout().metadataBaseURI;
     }
 
     function tokenURI(uint256 tokenId)
@@ -134,13 +143,29 @@ abstract contract MercuryBase is SolidStateERC721 {
         );
     }
 
-    //=============================VIEW FUNCTION============================
+    /*//////////////////////////////////////////////////////////////
+                            Private Function
+    //////////////////////////////////////////////////////////////*/
 
-    function aviationLevels(uint256 _tokenId) public view returns (uint256) {
-        return LibBase.layout().aviationLevels[_tokenId];
+    function _transfer(address from, address to, uint256 tokenId) internal virtual override {
+        require(!LibBase.layout().aviationTradeLock[tokenId], "MercuryBase: token is locked");
+        super._transfer(from, to, tokenId);
     }
 
-    function aviationPoints(uint256 _tokenId) public view returns (uint256) {
-        return LibBase.layout().aviationPoints[_tokenId];
+    function updateLevel(uint256 tokenId) private {
+        LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
+        for (uint256 i = 0; i <= LibBase.MAXLEVEL; i++) {
+            if (2 ** i > sbs.aviationPoints[tokenId]) {
+                sbs.aviationLevels[tokenId] = i;
+                emit LibBase.UpdateLevels(tokenId);
+                return;
+            }
+        }
+        sbs.aviationLevels[tokenId] = LibBase.MAXLEVEL;
+        emit LibBase.UpdateLevels(tokenId);
+    }
+
+    function burnAviation(uint256 tokenId) private {
+        _burn(tokenId);
     }
 }

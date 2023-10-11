@@ -7,7 +7,7 @@ library LibVault {
     bytes32 constant VAULT_STORAGE_POSITION = keccak256("diamond.standard.vault.storage");
 
     struct VaultStorage {
-        MercuryBase mercuryBaseNFT;
+        MercuryBase aviation;
     }
 
     function layout() internal pure returns (VaultStorage storage vs) {
@@ -17,7 +17,7 @@ library LibVault {
         }
     }
 
-    function mercuryBaseNFT() internal view returns (MercuryBase) {
-        return layout().mercuryBaseNFT;
+    function aviation() internal view returns (MercuryBase) {
+        return layout().aviation;
     }
 }

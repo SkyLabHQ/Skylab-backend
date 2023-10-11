@@ -5,6 +5,10 @@ import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibComponent} from "./storage/LibComponent.sol";
 
 contract ComponentIndex {
+    /*//////////////////////////////////////////////////////////////
+                            Admin Function
+    //////////////////////////////////////////////////////////////*/
+
     function setValidAviation(address _collection, bool _isValid) public {
         LibDiamond.enforceIsContractOwner();
         LibComponent.layout().isValidAviation[_collection] = _isValid;
@@ -23,15 +27,19 @@ contract ComponentIndex {
         emit LibComponent.ValidPilot(_pilot, _isValid);
     }
 
-    function isValidAviation(address _collection) external view returns (bool) {
+    /*//////////////////////////////////////////////////////////////
+                            View Function
+    //////////////////////////////////////////////////////////////*/
+
+    function isValidAviation(address _collection) public view returns (bool) {
         return LibComponent.isValidAviation(_collection);
     }
 
-    function isValidGame(address _game) external view returns (bool) {
+    function isValidGame(address _game) public view returns (bool) {
         return LibComponent.isValidGame(_game);
     }
 
-    function isValidPilot(address _pilot) external view returns (bool) {
+    function isValidPilot(address _pilot) public view returns (bool) {
         return LibComponent.isValidPilot(_pilot);
     }
 }

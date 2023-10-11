@@ -22,14 +22,20 @@ contract TrailblazerTournament is MercuryBase {
         uint256 level;
     }
 
-    constructor(string memory baseURI) MercuryBase(baseURI, "TrailblazerTournament", "TRAILBLAZER_TOURNAMENT") {
+    function initialize(string memory baseURI, address protocol) public {
+        super.initialize(baseURI, "MercuryTestFlight", "SKYLAB_TEST_FLIGHT", protocol);
         lastIndexPerRound[0] = 0;
     }
+
+    /*//////////////////////////////////////////////////////////////
+                            Mint Function
+    //////////////////////////////////////////////////////////////*/
 
     function tournamentMint(address[] memory to) external {
         LibDiamond.enforceIsContractOwner();
         for (uint256 i = 0; i < to.length; i++) {
-            uint256 tokenId = super.totalSupply() + 1;
+            uint256 tokenId = LibBase.layout().nextTokenId + 1;
+            LibBase.layout().nextTokenId++;
             _safeMint(to[i], tokenId);
             LibBase.layout().aviationLevels[tokenId] = 1;
             LibBase.layout().aviationPoints[tokenId] = 1;
@@ -37,14 +43,23 @@ contract TrailblazerTournament is MercuryBase {
         }
     }
 
+    /*//////////////////////////////////////////////////////////////
+                            Admin Function
+    //////////////////////////////////////////////////////////////*/
+
     function tournamentRoundOver() external {
         LibDiamond.enforceIsContractOwner();
-        uint256 tokenId = super.totalSupply() + 1;
+        uint256 tokenId = LibBase.layout().nextTokenId + 1;
+        LibBase.layout().nextTokenId++;
         lastIndexPerRound[_currentRound] = tokenId - 1;
         _currentRound++;
     }
 
-    function leaderboardInfo(uint256 round) external view returns (LeaderboardInfo[] memory) {
+    /*//////////////////////////////////////////////////////////////
+                            View Function
+    //////////////////////////////////////////////////////////////*/
+
+    function leaderboardInfo(uint256 round) public view returns (LeaderboardInfo[] memory) {
         uint256 startIndex = lastIndexPerRound[round - 1] + 1;
         uint256 endIndex = lastIndexPerRound[round];
         LeaderboardInfo[] memory leaderboardInfos = new LeaderboardInfo[](endIndex - startIndex + 1);
@@ -57,7 +72,7 @@ contract TrailblazerTournament is MercuryBase {
         return leaderboardInfos;
     }
 
-    function isAviationLocked(uint256 tokenId) external view override onlyGameAddresses returns (bool) {
+    function isAviationLocked(uint256 tokenId) public view override returns (bool) {
         require(_exists(tokenId), "MercuryTournament: nonexistent token");
         return aviationRounds[tokenId] != _currentRound || LibBase.layout().aviationTradeLock[tokenId];
     }

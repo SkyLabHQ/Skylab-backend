@@ -12,21 +12,36 @@ import {LibBase} from "./base/storage/LibBase.sol";
 contract MercuryTestFlight is MercuryBase {
     using Strings for uint256;
 
-    constructor(string memory baseURI) MercuryBase(baseURI, "MercuryTestFlight", "SKYLAB_TEST_FLIGHT") {}
+    function initialize(string memory baseURI, address protocol) public {
+        super.initialize(baseURI, "MercuryTestFlight", "SKYLAB_TEST_FLIGHT", protocol);
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                            Mint Function
+    //////////////////////////////////////////////////////////////*/
 
     function playTestMint() external {
-        uint256 tokenId = super.totalSupply() + 1;
+        uint256 tokenId = LibBase.layout().nextTokenId + 1;
+        LibBase.layout().nextTokenId++;
         _safeMint(msg.sender, tokenId);
         LibBase.layout().aviationTradeLock[tokenId] = true;
         LibBase.layout().aviationLevels[tokenId] = 1;
         LibBase.layout().aviationPoints[tokenId] = 1;
     }
 
+    /*//////////////////////////////////////////////////////////////
+                            Game Functions
+    //////////////////////////////////////////////////////////////*/
+
     function aviationLock(uint256 tokenId) external override onlyGameAddresses {}
 
     function aviationUnlock(uint256 tokenId) external override onlyGameAddresses {}
 
-    function isAviationLocked(uint256) external view override onlyGameAddresses returns (bool) {
+    /*//////////////////////////////////////////////////////////////
+                            View Function
+    //////////////////////////////////////////////////////////////*/
+
+    function isAviationLocked(uint256) public pure override returns (bool) {
         return false;
     }
 

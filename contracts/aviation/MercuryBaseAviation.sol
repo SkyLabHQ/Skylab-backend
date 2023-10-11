@@ -9,9 +9,15 @@ contract MercuryBaseAviation is MercuryBase {
     bool public mintable;
     uint256 public price;
 
-    constructor(bool _mintable, uint256 _price, string memory baseURI, string memory name, string memory symbol)
-        MercuryBase(baseURI, name, symbol)
-    {
+    function initialize(
+        bool _mintable,
+        uint256 _price,
+        string memory _baseURI,
+        string memory _name,
+        string memory _symbol,
+        address _protocol
+    ) public {
+        super.initialize(_baseURI, _name, _symbol, _protocol);
         mintable = _mintable;
         price = _price;
     }
@@ -21,19 +27,22 @@ contract MercuryBaseAviation is MercuryBase {
         _;
     }
 
-    // ====================
-    // Mint
-    // ====================
+    /*//////////////////////////////////////////////////////////////
+                            Mint Function
+    //////////////////////////////////////////////////////////////*/
+
     function mintAviation(address to) external payable virtual onlyMintable {
         require(msg.value == price, "MercuryBase: Incorrect price");
-        uint256 tokenID = super.totalSupply() + 1;
+        uint256 tokenID = LibBase.layout().nextTokenId + 1;
+        LibBase.layout().nextTokenId++;
         _safeMint(to, tokenID);
         LibBase.layout().aviationLevels[tokenID] = 1;
     }
 
-    // =======================
-    // Admin Utility
-    // =======================
+    /*//////////////////////////////////////////////////////////////
+                            Admin Function
+    //////////////////////////////////////////////////////////////*/
+
     function setMintable(bool _mintable) external {
         LibDiamond.enforceIsContractOwner();
         mintable = _mintable;

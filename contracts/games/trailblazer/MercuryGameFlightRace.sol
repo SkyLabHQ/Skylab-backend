@@ -77,18 +77,20 @@ contract MercuryGameFlightRace is MercuryGameBase {
     *   State 7: escape state
     */
 
-    constructor(
-        address mercuryBaseAddress,
-        address gameboardTraverseVerifierAddress,
-        address computeHashPathDataVerifierAddress,
-        address mapHashesAddress
-    ) MercuryGameBase(mercuryBaseAddress) {
-        _gameboardTraverseVerifier = GameboardTraverseVerifier(gameboardTraverseVerifierAddress);
-        _computeHashPathDataVerifier = ComputeHashPathDataVerifier(computeHashPathDataVerifierAddress);
-        _mapHashes = MapHashes(mapHashesAddress);
-    }
+    // constructor(
+    //     address mercuryBaseAddress,
+    //     address gameboardTraverseVerifierAddress,
+    //     address computeHashPathDataVerifierAddress,
+    //     address mapHashesAddress
+    // ) MercuryGameBase(mercuryBaseAddress) {
+    //     _gameboardTraverseVerifier = GameboardTraverseVerifier(gameboardTraverseVerifierAddress);
+    //     _computeHashPathDataVerifier = ComputeHashPathDataVerifier(computeHashPathDataVerifierAddress);
+    //     _mapHashes = MapHashes(mapHashesAddress);
+    // }
 
-    function loadFuelBatteryToGameTank(uint256 tokenId, uint256 fuel, uint256 battery, MercuryBase collection) external {
+    function loadFuelBatteryToGameTank(uint256 tokenId, uint256 fuel, uint256 battery, MercuryBase collection)
+        external
+    {
         require(isApprovedForGame(tokenId, collection), "MercuryGameFlightRace: caller is not token owner or approved");
         require(gameState[tokenId] == 0, "MercuryGameFlightRace: incorrect gameState");
 
@@ -102,9 +104,7 @@ contract MercuryGameFlightRace is MercuryGameBase {
         uint256[] memory resourceAmounts = new uint[](2);
         resourceAmounts[0] = fuel;
         resourceAmounts[1] = battery;
-        collection.requestResourcesForGame(
-            collection.ownerOf(tokenId), address(this), ids, resourceAmounts
-        );
+        collection.requestResourcesForGame(collection.ownerOf(tokenId), address(this), ids, resourceAmounts);
         gameTank[tokenId].fuel += fuel;
         gameTank[tokenId].battery += battery;
     }
@@ -126,8 +126,7 @@ contract MercuryGameFlightRace is MercuryGameBase {
             matchingQueues[collection.aviationLevels(tokenId)] = tokenId;
         } else {
             require(
-                collection.ownerOf(tokenId) != collection.ownerOf(currentQueue),
-                "MercuryGameFlightRace: no in-fight"
+                collection.ownerOf(tokenId) != collection.ownerOf(currentQueue), "MercuryGameFlightRace: no in-fight"
             );
             matchedAviationIDs[tokenId] = currentQueue;
             matchedAviationIDs[currentQueue] = tokenId;
@@ -191,12 +190,10 @@ contract MercuryGameFlightRace is MercuryGameBase {
         require(gameTank[tokenId].fuel == input[2], "MercuryGameFlightRace: incorrect starting fuel");
         require(gameTank[tokenId].battery == input[3], "MercuryGameFlightRace: incorrect starting battery");
         require(
-            2 ** (collection.aviationLevels(tokenId) - 1) == input[7],
-            "MercuryGameFlightRace: incorrect level scaler"
+            2 ** (collection.aviationLevels(tokenId) - 1) == input[7], "MercuryGameFlightRace: incorrect level scaler"
         );
         require(
-            _mapHashes.verifyMapC1(collection.aviationLevels(tokenId), input[8]),
-            "MercuryGameFlightRace: incorrect c1"
+            _mapHashes.verifyMapC1(collection.aviationLevels(tokenId), input[8]), "MercuryGameFlightRace: incorrect c1"
         );
 
         // verify
@@ -325,9 +322,7 @@ contract MercuryGameFlightRace is MercuryGameBase {
             uint256[] memory resourceAmounts = new uint[](2);
             resourceAmounts[0] = gameTank[tokenId].fuel;
             resourceAmounts[1] = gameTank[tokenId].battery;
-            collection.refundResourcesFromGame(
-                address(this), collection.ownerOf(tokenId), ids, resourceAmounts
-            );
+            collection.refundResourcesFromGame(address(this), collection.ownerOf(tokenId), ids, resourceAmounts);
         }
         delete gameTank[tokenId];
 

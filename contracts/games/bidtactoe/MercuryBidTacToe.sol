@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "../../aviation/base/MercuryBase.sol";
 import {MercuryGameBase} from "../base/MercuryGameBase.sol";
 import {LibBidTacToe} from "./lib/LibBidTacToe.sol";
+import {MercuryPilots} from "../../protocol/MercuryPilots.sol";
 
 contract MercuryBidTacToe is MercuryGameBase {
     struct GameParams {
@@ -20,7 +21,9 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 token2Points;
     }
 
-    constructor(address _protocol) MercuryGameBase(_protocol) {}
+    function initialize(address _protocol) public override {
+        super.initialize(_protocol);
+    }
 
     // Dynamic game data
     mapping(address => bool) private gameExists;
@@ -38,86 +41,91 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 gridHeight,
         uint64 lengthToWin,
         uint64 initialBalance,
-        address collection
+        address aviation
     ) external {
-        MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
+        MercuryBase(aviation).aviationLock(burnerAddressToTokenId(msg.sender));
         GameParams memory gameParams = GameParams(gridWidth, gridHeight, lengthToWin, initialBalance);
-        address newGame = createGame(gameParams, collection);
-        super.baseCreateLobby(newGame, collection);
+        address newGame = createGame(gameParams, aviation);
+        super.baseCreateLobby(newGame, aviation);
     }
 
-    function createGame(GameParams memory gameParams, address collection) internal returns (address) {
+    function createGame(GameParams memory gameParams, address aviation) internal returns (address) {
         require(gamePerPlayer[msg.sender] == address(0), "MercuryBidTacToe: a game has already been created by caller");
-        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this), collection);
+        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this), aviation);
 
         paramsPerGame[newGame] = gameParams;
         planeMetadataPerGame[newGame] =
-            PlaneMetadata(getAviationLevel(msg.sender, collection), getAviationPoints(msg.sender, collection), 0, 0);
+            PlaneMetadata(getAviationLevel(msg.sender, aviation), getAviationPoints(msg.sender, aviation), 0, 0);
         gameExists[newGame] = true;
         gamePerPlayer[msg.sender] = newGame;
         return newGame;
     }
 
-    function joinLobby(address lobby, address collection) external {
-        require(isIdenticalCollection(lobby, collection), "MercuryBidTacToe: collection does not match");
+    function joinLobby(address lobby, address aviation) external {
+        require(isIdenticalAviation(lobby, aviation), "MercuryBidTacToe: aviation does not match");
         require(gameExists[lobby], "MercuryBidTacToe: lobby does not exist");
-        MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
-        joinGame(lobby, msg.sender, collection);
-        super.baseJoinLobby(lobby, collection);
+        MercuryBase(aviation).aviationLock(burnerAddressToTokenId(msg.sender));
+        joinGame(lobby, msg.sender, aviation);
+        super.baseJoinLobby(lobby, aviation);
     }
 
-    function createOrJoinDefault(address collection) external {
-        MercuryBase(collection).aviationLock(burnerAddressToTokenId(msg.sender));
-        if (defaultGameQueue[collection] == address(0)) {
-            defaultGameQueue[collection] = msg.sender;
+    function createOrJoinDefault(address aviation) external {
+        MercuryBase(aviation).aviationLock(burnerAddressToTokenId(msg.sender));
+        if (defaultGameQueue[aviation] == address(0)) {
+            defaultGameQueue[aviation] = msg.sender;
         } else {
-            address gameAddress = createGame(LibBidTacToe.defaultParams(), collection);
-            joinGame(gameAddress, defaultGameQueue[collection], collection);
-            gamePerPlayer[defaultGameQueue[collection]] = gameAddress;
-            delete defaultGameQueue[collection];
+            address gameAddress = createGame(LibBidTacToe.defaultParams(), aviation);
+            super.baseCreateLobby(gameAddress, aviation);
+            joinGame(gameAddress, defaultGameQueue[aviation], aviation);
+            super.baseJoinLobby(gameAddress, aviation);
+            gamePerPlayer[defaultGameQueue[aviation]] = gameAddress;
+            delete defaultGameQueue[aviation];
         }
     }
 
-    function joinGame(address gameAddress, address player2, address collection) internal {
+    function joinGame(address gameAddress, address player2, address aviation) internal {
         LibBidTacToe.joinGame(gameAddress, player2);
         gamePerPlayer[player2] = gameAddress;
-        planeMetadataPerGame[gameAddress].token2Level = getAviationLevel(player2, collection);
-        planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, collection);
+        planeMetadataPerGame[gameAddress].token2Level = getAviationLevel(player2, aviation);
+        planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, aviation);
     }
 
-    function withdrawFromQueue(address collection) external {
-        require(msg.sender == defaultGameQueue[collection], "MercuryBidTacToe: msg.sender is not in default queue");
-        delete defaultGameQueue[collection];
-        MercuryBase(collection).aviationUnlock(burnerAddressToTokenId(msg.sender));
+    function withdrawFromQueue(address aviation) external {
+        require(msg.sender == defaultGameQueue[aviation], "MercuryBidTacToe: msg.sender is not in default queue");
+        delete defaultGameQueue[aviation];
+        MercuryBase(aviation).aviationUnlock(burnerAddressToTokenId(msg.sender));
     }
 
-    function handleWinLoss(address winnerBurner, address loserBurner, MercuryBase collection) external {
+    function handleWinLoss(address winnerBurner, address loserBurner, MercuryBase aviation) external {
         require(gameExists[msg.sender], "MercuryBidTacToe: msg.sender is not a game");
         require(
             gamePerPlayer[winnerBurner] == msg.sender && gamePerPlayer[loserBurner] == msg.sender,
             "MercuryBidTacToe: burner addresses does not belong to this game"
         );
-        uint256 winnerTokenId = cleanUp(winnerBurner, collection);
-        uint256 loserTokenId = cleanUp(loserBurner, collection);
-        emit WinGame(winnerTokenId, collection.ownerOf(winnerTokenId));
-        emit LoseGame(loserTokenId, collection.ownerOf(loserTokenId));
-        collection.aviationMovePoints(winnerTokenId, loserTokenId);
+        uint256 winnerTokenId = cleanUp(winnerBurner, aviation);
+        uint256 loserTokenId = cleanUp(loserBurner, aviation);
+        super.baseQuitLobby(msg.sender, address(aviation));
+        emit WinGame(winnerTokenId, aviation.ownerOf(winnerTokenId));
+        emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
+        aviation.aviationMovePoints(winnerTokenId, loserTokenId);
         delete gameExists[msg.sender];
         delete paramsPerGame[msg.sender];
     }
 
-    function cleanUp(address burner, MercuryBase collection) private returns (uint256) {
+    function cleanUp(address burner, MercuryBase aviation) private returns (uint256) {
         uint256 tokenId = burnerAddressToTokenId(burner);
-        collection.aviationUnlock(tokenId);
+        address user = aviation.ownerOf(tokenId);
+        pilot().increasePilotSessions(user);
+        aviation.aviationUnlock(tokenId);
         delete gamePerPlayer[burner];
         return tokenId;
     }
 
-    function getAviationLevel(address burner, address collection) internal view returns (uint64) {
-        return uint64(MercuryBase(collection).aviationLevels(burnerAddressToTokenId(burner)));
+    function getAviationLevel(address burner, address aviation) internal view returns (uint64) {
+        return uint64(MercuryBase(aviation).aviationLevels(burnerAddressToTokenId(burner)));
     }
 
-    function getAviationPoints(address burner, address collection) internal view returns (uint64) {
-        return uint64(MercuryBase(collection).aviationPoints(burnerAddressToTokenId(burner)));
+    function getAviationPoints(address burner, address aviation) internal view returns (uint64) {
+        return uint64(MercuryBase(aviation).aviationPoints(burnerAddressToTokenId(burner)));
     }
 }

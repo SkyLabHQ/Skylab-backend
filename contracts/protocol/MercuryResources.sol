@@ -14,42 +14,54 @@ import {LibComponent} from "./storage/LibComponent.sol";
 contract MercuryResources is SolidStateERC1155 {
     using Strings for uint256;
 
-    modifier onlySky() {
-        require(LibComponent.isValidAviation(msg.sender), "MercuryResources: msg.sender is not Sky");
+    modifier onlyAviation() {
+        require(LibComponent.isValidAviation(msg.sender), "MercuryResources: msg.sender is not aviation");
         _;
     }
 
-    constructor(string memory metadataBaseURI) {
+    function initMercuryResources(string memory metadataBaseURI) public {
+        LibDiamond.enforceIsContractOwner();
         ERC1155MetadataInternal._setBaseURI(metadataBaseURI);
         _setSupportsInterface(type(IERC165).interfaceId, true);
         _setSupportsInterface(type(IERC1155).interfaceId, true);
     }
 
-    // Can only be minted by MercuryBase contract
-    function mint(address account, uint256 id, uint256 amount, bytes memory data) external onlySky {
+    /*//////////////////////////////////////////////////////////////
+                            Aviation Function
+    //////////////////////////////////////////////////////////////*/
+
+    function mint(address account, uint256 id, uint256 amount, bytes memory data) external onlyAviation {
         _mint(account, id, amount, data);
     }
 
     function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
         external
-        onlySky
+        onlyAviation
     {
         _mintBatch(to, ids, amounts, data);
     }
 
-    function playTestNuke(address player, uint256[] memory ids) external onlySky {
+    function playTestNuke(address player, uint256[] memory ids) external onlyAviation {
         for (uint256 i = 0; i < ids.length; i++) {
             ERC1155BaseInternal._burn(player, ids[i], balanceOf(player, ids[i]));
         }
     }
 
-    function burn(address from, uint256[] memory ids, uint256[] memory amounts) external onlySky {
+    function burn(address from, uint256[] memory ids, uint256[] memory amounts) external onlyAviation {
         ERC1155BaseInternal._burnBatch(from, ids, amounts);
     }
+
+    /*//////////////////////////////////////////////////////////////
+                            View Function
+    //////////////////////////////////////////////////////////////*/
 
     function uri(uint256 id) public view virtual override(ERC1155Metadata, IERC1155Metadata) returns (string memory) {
         return string(abi.encodePacked(ERC1155Metadata.uri(id), ".json"));
     }
+
+    /*//////////////////////////////////////////////////////////////
+                            Admin Function
+    //////////////////////////////////////////////////////////////*/
 
     function registerMetadataURI(string memory metadataURI) external {
         LibDiamond.enforceIsContractOwner();

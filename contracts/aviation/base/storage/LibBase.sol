@@ -13,8 +13,9 @@ library LibBase {
     bytes32 constant MERCURYBASE_STORAGE_POSITION = keccak256("diamond.standard.mercurybase.storage");
 
     struct MercuryBaseStorage {
-        string metadataBaseURI;
         address protocol;
+        string metadataBaseURI;
+        uint256 nextTokenId;
         mapping(uint256 => uint256) aviationLevels;
         mapping(uint256 => uint256) aviationPoints;
         mapping(uint256 => bool) aviationTradeLock;

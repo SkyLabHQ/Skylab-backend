@@ -11,8 +11,10 @@ library LibPilots {
 
     struct PilotStorage {
         mapping(address => Pilot) activePilot;
-        mapping(address => mapping(uint256 => uint256)) pilotXP;
-        mapping(uint256 => Pilot[]) pilotXPGroups;
+        mapping(address => Pilot[]) recentlyUsedPilots;
+        mapping(address => mapping(uint256 => uint256)) pilotMileage;
+        mapping(address => mapping(uint256 => uint256)) pilotSessions;
+        mapping(uint256 => Pilot[]) pilotMileageGroups;
         mapping(address => mapping(uint256 => uint256)) pilotGroupIndex;
         uint256 highestGroupIndex;
     }
