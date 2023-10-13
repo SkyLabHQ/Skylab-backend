@@ -1,6 +1,7 @@
 from ape import accounts, project
 import json
 import os
+import constant
 
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 
@@ -59,8 +60,10 @@ def main():
     diamond = project.Diamond.at(diamond_address)
     diamond.diamondCut(cut, '0x'+'0'*40, '0x', sender=account)
     test_fight = project.MercuryTestFlight.at(diamond_address)
-    test_fight.initialize('https://gateway.pinata.cloud/ipfs/QmdAVTVehGVNRwTxKj9Tz4utEqh4CKf2YTaA9godJAGAFu/','0x3a2e43c675F4da9aF823366261697d9efEFF2447',sender=account)
-    protocol = project.Vault.at('0x3a2e43c675F4da9aF823366261697d9efEFF2447')
+    test_fight.initialize(constant.TEST_URI,constant.PROTOCOL_ADDRESS,sender=account)
+    protocol = project.Vault.at(constant.PROTOCOL_ADDRESS)
     protocol.initVault(diamond_address,sender=account)
-    # game = project.MercuryBidTacToe.at('0xe32F3e4EF36019639312B5899F8024ba3d24d213')
-    # game.setProtocol('0x3a2e43c675F4da9aF823366261697d9efEFF2447', sender=account)
+    game = project.MercuryBidTacToe.at(constant.MERCURY_BIDTACTOE_ADDRESS)
+    game.setProtocol(constant.PROTOCOL_ADDRESS, sender=account)
+    component_index = project.ComponentIndex.at(constant.PROTOCOL_ADDRESS)
+    component_index.setValidPilot('0x14875C22fE0780985Bc5e4841d12e2a00Df835C7',True, sender=account)

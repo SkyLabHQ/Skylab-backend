@@ -1,6 +1,7 @@
 from ape import accounts, project
 import json
 import os
+import constant
 
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 
@@ -10,7 +11,8 @@ diamond_address = ''
 
 account = accounts.load('deployer')
 #account.set_autosign(True, passphrase="y")
-protocol_address = '0x3a2e43c675F4da9aF823366261697d9efEFF2447'
+protocol_address = constant.PROTOCOL_ADDRESS
+
 contract_params = {
     'Diamond': {},
     'MercuryBidTacToe': {},
@@ -25,6 +27,7 @@ def get_selector(contract):
         return selectors
 
 def main():
+    #project.BidTacToe.deploy(sender=account)
     for contract_name, constructor_args in contract_params.items():
         ContractClass = getattr(project, contract_name)
         selector = get_selector(contract_name)

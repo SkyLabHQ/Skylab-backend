@@ -63,6 +63,10 @@ contract MercuryPilots {
         return LibPilots.layout().pilotMileageGroups[index];
     }
 
+    function getPilotMileage(address collection, uint256 tokenId) public view returns(uint256) {
+        return LibPilots.layout().pilotMileage[collection][tokenId];
+    }
+
     function getRecentlyActivePilots(address player) public view returns (LibPilots.Pilot[] memory) {
         return LibPilots.layout().recentlyUsedPilots[player];
     }

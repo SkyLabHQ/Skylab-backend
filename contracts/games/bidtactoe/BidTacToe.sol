@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 import {MercuryBidTacToe} from "./MercuryBidTacToe.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
-import {MercuryBase} from "../../aviation/base/MercuryBase.sol";
 
 contract BidTacToe is Initializable {
     /*//////////////////////////////////////////////////////////////
@@ -31,7 +30,6 @@ contract BidTacToe is Initializable {
     mapping(address => uint256) public playerMessage;
     mapping(address => uint256) public playerEmote;
 
-    MercuryBase public aviation;
     address public nextDrawWinner;
 
     // Static values
@@ -64,12 +62,10 @@ contract BidTacToe is Initializable {
         _;
     }
 
-    function initialize(
-        MercuryBidTacToe.GameParams memory gameParams,
-        address player,
-        address callback,
-        address aviation_
-    ) public initializer {
+    function initialize(MercuryBidTacToe.GameParams memory gameParams, address player, address callback)
+        public
+        initializer
+    {
         player1 = player;
         gridWidth = gameParams.gridWidth;
         gridHeight = gameParams.gridHeight;
@@ -80,7 +76,6 @@ contract BidTacToe is Initializable {
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
         mercuryBidTacToe = MercuryBidTacToe(callback);
-        aviation = MercuryBase(aviation_);
     }
 
     function getGrid() external view returns (address[] memory) {
@@ -255,6 +250,6 @@ contract BidTacToe is Initializable {
         gameStates[otherPlayer] = state + 1;
         emit LoseGame(otherPlayer, state + 1);
 
-        mercuryBidTacToe.handleWinLoss(player, otherPlayer, aviation);
+        mercuryBidTacToe.handleWinLoss(player, otherPlayer);
     }
 }
