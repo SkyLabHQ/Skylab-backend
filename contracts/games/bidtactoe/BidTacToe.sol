@@ -26,7 +26,7 @@ contract BidTacToe is Initializable {
     mapping(address => uint256) public balances;
     mapping(address => uint256) private commitedHashes;
     mapping(address => uint256[]) private revealedBids;
-    mapping(address => uint256) private occupiedGridCounts;
+    mapping(address => uint256) public occupiedGridCounts;
     mapping(address => uint256) public playerMessage;
     mapping(address => uint256) public playerEmote;
 
@@ -106,9 +106,10 @@ contract BidTacToe is Initializable {
     }
 
     // ethers.solidityPackedKeccak256(["uint256", "uint256"], [bid, salt]);
-    function commitBid(uint256 hash) external onlyPlayers {
+    function commitBid(uint256 hash) public virtual onlyPlayers {
         require(player2 != address(0), "BidTacToe: bid cannot start unless there are 2 players");
         require(gameStates[msg.sender] == 1, "BidTacToe: player gameState is not 1");
+        require(timeouts[msg.sender] == 0 || block.timestamp <= timeouts[msg.sender], "BidTacToe: timeout has passed");
 
         commitedHashes[msg.sender] = hash;
 
@@ -129,6 +130,8 @@ contract BidTacToe is Initializable {
             "BidTacToe: verification failed"
         );
         require(balances[msg.sender] >= bid, "BidTacToe: not enough balance");
+        require(timeouts[msg.sender] == 0 || block.timestamp <= timeouts[msg.sender], "BidTacToe: timeout has passed");
+
 
         revealedBids[msg.sender][currentSelectedGrid] = bid;
 
@@ -217,7 +220,7 @@ contract BidTacToe is Initializable {
         return msg.sender == player2 ? player1 : player2;
     }
 
-    function getOtherPlayer(address player) private view returns (address) {
+    function getOtherPlayer(address player) internal view returns (address) {
         return player == player2 ? player1 : player2;
     }
 
@@ -243,7 +246,7 @@ contract BidTacToe is Initializable {
         return currentLength;
     }
 
-    function win(address player, uint256 state) private {
+    function win(address player, uint256 state) internal virtual {
         gameStates[player] = state;
         emit WinGame(player, state);
         address otherPlayer = getOtherPlayer(player);
