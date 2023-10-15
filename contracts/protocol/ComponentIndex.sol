@@ -21,10 +21,16 @@ contract ComponentIndex {
         emit LibComponent.ValidGame(_game, _isValid);
     }
 
-    function setValidPilot(address _pilot, bool _isValid) public {
+    function setValidPilotCollection(address _collection, bool _isValid) public {
         LibDiamond.enforceIsContractOwner();
-        LibComponent.layout().isValidPilot[_pilot] = _isValid;
-        emit LibComponent.ValidPilot(_pilot, _isValid);
+        LibComponent.layout().isValidPilotCollection[_collection] = _isValid;
+        emit LibComponent.ValidPilotCollection(_collection, _isValid);
+    }
+
+    function setPilotAddress(address _pilot) public {
+        LibDiamond.enforceIsContractOwner();
+        LibComponent.layout().pilotAddress = _pilot;
+        emit LibComponent.RegisterPilot(_pilot);
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -39,7 +45,11 @@ contract ComponentIndex {
         return LibComponent.isValidGame(_game);
     }
 
-    function isValidPilot(address _pilot) public view returns (bool) {
-        return LibComponent.isValidPilot(_pilot);
+    function isValidPilotCollection(address _pilot) public view returns (bool) {
+        return LibComponent.isValidPilotCollection(_pilot);
+    }
+
+    function getPilotAddress() public view returns (address) {
+        return LibComponent.getPilotAddress();
     }
 }
