@@ -66,7 +66,8 @@ contract MercuryBidTacToe is MercuryGameBase {
     function createBotGame(address bot) external {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
         address gameAddress = createGame(LibBidTacToe.defaultParams());
-        joinGame(gameAddress, bot);
+        LibBidTacToe.joinGame(gameAddress, bot);
+        super.baseJoinLobby(gameAddress, burnerAddressToAviation(msg.sender));
     }
 
     function createGame(GameParams memory gameParams) internal returns (address) {
@@ -134,6 +135,19 @@ contract MercuryBidTacToe is MercuryGameBase {
         emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
         aviation.aviationMovePoints(winnerTokenId, loserTokenId);
         delete gameExists[msg.sender];
+    }
+
+    function handleBotWinLoss(address playerBurner, bool playerWon) external {
+        require(gameExists[msg.sender], "MercuryBidTacToe: msg.sender is not a game");
+        require(
+            gamePerPlayer[playerBurner] == msg.sender,
+            "MercuryBidTacToe: burner address does not belong to this game"
+        );
+        MercuryBase aviation = MercuryBase(burnerAddressToAviation(playerBurner));
+        cleanUp(playerBurner, aviation);
+        super.baseQuitLobby(msg.sender, address(aviation));
+        delete gameExists[msg.sender];
+        delete paramsPerGame[msg.sender];
     }
 
     function cleanUp(address burner) private returns (uint256) {
