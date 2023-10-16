@@ -1,7 +1,7 @@
 from ape import accounts, project
 import json
 import os
-import constant
+from scripts import constant
 
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 
@@ -14,18 +14,18 @@ account.set_autosign(True, passphrase="y")
 
 # Note: contrat_name : constructor_args
 # replace it if needed
-# contract_params = {
-#     'Diamond': {},
-#     'ComponentIndex': {},
-#     'MercuryPilots': {},
-#     'MercuryResources': {},
-#     'Vault': {},
-# }
-
 contract_params = {
     'Diamond': {},
-    'MercuryTestFlight': {}
+    'ComponentIndex': {},
+    'MercuryPilots': {},
+    'MercuryResources': {},
+    'Vault': {},
 }
+
+# contract_params = {
+#     'Diamond': {},
+#     'MercuryTestFlight': {}
+# }
 
     
 def get_selector(contract):
@@ -59,11 +59,12 @@ def main():
             diamond_address = contract.address
     diamond = project.Diamond.at(diamond_address)
     diamond.diamondCut(cut, '0x'+'0'*40, '0x', sender=account)
-    test_fight = project.MercuryTestFlight.at(diamond_address)
-    test_fight.initialize(constant.TEST_URI,constant.PROTOCOL_ADDRESS,sender=account)
-    protocol = project.Vault.at(constant.PROTOCOL_ADDRESS)
-    protocol.initVault(diamond_address,sender=account)
-    game = project.MercuryBidTacToe.at(constant.MERCURY_BIDTACTOE_ADDRESS)
-    game.setProtocol(constant.PROTOCOL_ADDRESS, sender=account)
-    component_index = project.ComponentIndex.at(constant.PROTOCOL_ADDRESS)
-    component_index.setValidPilot('0x14875C22fE0780985Bc5e4841d12e2a00Df835C7',True, sender=account)
+    # test_fight = project.MercuryTestFlight.at(diamond_address)
+    # test_fight.initialize(constant.TEST_URI,constant.PROTOCOL_ADDRESS,sender=account)
+    # protocol = project.Vault.at(constant.PROTOCOL_ADDRESS)
+    # protocol.initVault(diamond_address,sender=account)
+    # game = project.MercuryBidTacToe.at(constant.MERCURY_BIDTACTOE_ADDRESS)
+    # game.setProtocol(constant.PROTOCOL_ADDRESS, sender=account)
+    # component_index = project.ComponentIndex.at(constant.PROTOCOL_ADDRESS)
+    # component_index.setValidPilot('0x41723AC847978665E4161a0c2fC6b437a72AdFdD',True, sender=account)
+    # project.BabyMercs.deploy(constant.TEST_URI, "", "", sender=account)

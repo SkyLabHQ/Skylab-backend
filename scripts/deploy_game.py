@@ -1,7 +1,7 @@
 from ape import accounts, project
 import json
 import os
-import constant
+from scripts import constant
 
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 

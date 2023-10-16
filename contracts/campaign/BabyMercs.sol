@@ -12,12 +12,12 @@ contract BabyMercs is ERC721Enumerable, Ownable {
 
     string internal _imageBaseURI;
 
-    constructor(string memory baseURI, string memory name, string memory symbol) ERC721(name, symbol) {
+    constructor(string memory baseURI, string memory name, string memory symbol) ERC721(name, symbol) Ownable() {
         _imageBaseURI = baseURI;
     }
 
     function publicMint(address to) public payable {
-        // require(msg.value >= 25 ether, "BabyMercs: 25 eth required");
+        require(msg.value >= 0.001 ether, "BabyMercs: 0.001 eth required");
         _safeMint(to, totalSupply() + 1);
     }
 

@@ -34,9 +34,9 @@ contract TrailblazerTournament is MercuryBase {
     function tournamentMint(address[] memory to) external {
         LibDiamond.enforceIsContractOwner();
         for (uint256 i = 0; i < to.length; i++) {
-            uint256 tokenId = LibBase.layout().nextTokenId + 1;
-            LibBase.layout().nextTokenId++;
+            uint256 tokenId = LibBase.layout().nextTokenId;
             _safeMint(to[i], tokenId);
+            LibBase.layout().nextTokenId++;
             LibBase.layout().aviationLevels[tokenId] = 1;
             LibBase.layout().aviationPoints[tokenId] = 1;
             aviationRounds[tokenId] = _currentRound;
@@ -49,9 +49,7 @@ contract TrailblazerTournament is MercuryBase {
 
     function tournamentRoundOver() external {
         LibDiamond.enforceIsContractOwner();
-        uint256 tokenId = LibBase.layout().nextTokenId + 1;
-        LibBase.layout().nextTokenId++;
-        lastIndexPerRound[_currentRound] = tokenId - 1;
+        lastIndexPerRound[_currentRound] = LibBase.layout().nextTokenId - 1;
         _currentRound++;
     }
 
@@ -61,7 +59,12 @@ contract TrailblazerTournament is MercuryBase {
 
     function leaderboardInfo(uint256 round) public view returns (LeaderboardInfo[] memory) {
         uint256 startIndex = lastIndexPerRound[round - 1] + 1;
-        uint256 endIndex = lastIndexPerRound[round];
+        uint256 endIndex;
+        if (_currentRound != round) {
+            endIndex = lastIndexPerRound[round];
+        } else {
+            endIndex = LibBase.layout().nextTokenId - 1;
+        }
         LeaderboardInfo[] memory leaderboardInfos = new LeaderboardInfo[](endIndex - startIndex + 1);
 
         uint256 index = 0;
