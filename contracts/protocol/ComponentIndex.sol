@@ -27,12 +27,6 @@ contract ComponentIndex {
         emit LibComponent.ValidPilotCollection(_collection, _isValid);
     }
 
-    function setPilotAddress(address _pilot) public {
-        LibDiamond.enforceIsContractOwner();
-        LibComponent.layout().pilotAddress = _pilot;
-        emit LibComponent.RegisterPilot(_pilot);
-    }
-
     /*//////////////////////////////////////////////////////////////
                             View Function
     //////////////////////////////////////////////////////////////*/
@@ -47,9 +41,5 @@ contract ComponentIndex {
 
     function isValidPilotCollection(address _pilot) public view returns (bool) {
         return LibComponent.isValidPilotCollection(_pilot);
-    }
-
-    function getPilotAddress() public view returns (address) {
-        return LibComponent.getPilotAddress();
     }
 }

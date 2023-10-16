@@ -40,7 +40,7 @@ library LibBase {
     }
 
     function pilot() internal view returns (MercuryPilots) {
-        return MercuryPilots(componentIndex().getPilotAddress());
+        return MercuryPilots(layout().protocol);
     }
 
     function generateTokenMetadata(uint256 tokenId, string memory imageUrlSuffix)

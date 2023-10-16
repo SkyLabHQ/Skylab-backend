@@ -8,13 +8,11 @@ library LibComponent {
         mapping(address => bool) isValidAviation;
         mapping(address => bool) isValidGame;
         mapping(address => bool) isValidPilotCollection;
-        address pilotAddress;
     }
 
     event ValidAviation(address, bool);
     event ValidGame(address, bool);
     event ValidPilotCollection(address, bool);
-    event RegisterPilot(address);
 
     function layout() internal pure returns (ComponentIndexStorage storage cid) {
         bytes32 position = SKYLABBASE_STORAGE_POSITION;
@@ -33,9 +31,5 @@ library LibComponent {
 
     function isValidPilotCollection(address _pilot) internal view returns (bool) {
         return layout().isValidPilotCollection[_pilot];
-    }
-
-    function getPilotAddress() internal view returns (address) {
-        return layout().pilotAddress;
     }
 }
