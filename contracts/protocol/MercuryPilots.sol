@@ -37,19 +37,23 @@ contract MercuryPilots {
     function pilotWin(address player, uint256 mileage, uint256 pointsMoved) external {
         require(LibComponent.isValidAviation(msg.sender), "MercuryPilots: msg.sender is not a valid aviation. ");
         LibPilots.Pilot memory pilot = getActivePilot(player);
-        pilotGainMileage(pilot, mileage);
-        increasePilotSessions(pilot);
-        updatePilotNetPoints(pilot, int256(pointsMoved));
-        updatePilotWinstreak(pilot, true);
+        if (pilot.collectionAddress != address(0)) {
+            pilotGainMileage(pilot, mileage);
+            increasePilotSessions(pilot);
+            updatePilotNetPoints(pilot, int256(pointsMoved));
+            updatePilotWinstreak(pilot, true);
+        }
     }
 
     function pilotLose(address player, uint256 mileage, uint256 pointsMoved) external {
         require(LibComponent.isValidAviation(msg.sender), "MercuryPilots: msg.sender is not a valid aviation. ");
         LibPilots.Pilot memory pilot = getActivePilot(player);
-        pilotGainMileage(pilot, mileage);
-        increasePilotSessions(pilot);
-        updatePilotNetPoints(pilot, -1 * int256(pointsMoved));
-        updatePilotWinstreak(pilot, false);
+        if (pilot.collectionAddress != address(0)) {
+            pilotGainMileage(pilot, mileage);
+            increasePilotSessions(pilot);
+            updatePilotNetPoints(pilot, -1 * int256(pointsMoved));
+            updatePilotWinstreak(pilot, false);
+        }
     }
 
     function pilotGainMileage(LibPilots.Pilot memory pilot, uint256 xp) private {
