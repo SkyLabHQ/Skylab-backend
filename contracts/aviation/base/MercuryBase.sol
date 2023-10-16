@@ -44,11 +44,10 @@ abstract contract MercuryBase is SolidStateERC721 {
             ? (uint256(sbs.aviationPoints[loserTokenId] + 1) / uint256(2))
             : sbs.aviationPoints[winnerTokenId];
         sbs.aviationPoints[winnerTokenId] += pointsToMove;
-        if (pointsToMove >= sbs.aviationPoints[loserTokenId]) {
-            sbs.aviationPoints[loserTokenId] = 0;
-        } else {
-            sbs.aviationPoints[loserTokenId] -= pointsToMove;
-        }
+        sbs.aviationPoints[loserTokenId] -= pointsToMove;
+        
+        LibBase.pilot().pilotWin(_ownerOf(winnerTokenId), sbs.aviationLevels[winnerTokenId] * pointsToMove, pointsToMove);
+        LibBase.pilot().pilotLose(_ownerOf(loserTokenId), sbs.aviationLevels[loserTokenId] * pointsToMove, pointsToMove);
 
         updateLevel(winnerTokenId);
         updateLevel(loserTokenId);

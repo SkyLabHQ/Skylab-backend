@@ -14,6 +14,7 @@ library LibGameBase {
         // token id => burner address
         mapping(uint256 => address) gameApprovals;
         mapping(address => uint256) burnerAddressToTokenId;
+        mapping(address => address) burnerAddressToAviation;
     }
 
     function layout() internal pure returns (MercuryGameBaseStorage storage mgbs) {
@@ -29,6 +30,10 @@ library LibGameBase {
 
     function burnerAddressToTokenId(address burner) internal view returns (uint256) {
         return layout().burnerAddressToTokenId[burner];
+    }
+
+    function burnerAddressToAviation(address burner) internal view returns (address) {
+        return layout().burnerAddressToAviation[burner];
     }
 
     function protocol() internal view returns (address) {

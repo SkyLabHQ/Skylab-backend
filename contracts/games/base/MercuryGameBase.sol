@@ -8,7 +8,6 @@ import {MercuryBase} from "../../aviation/base/MercuryBase.sol";
 import {LibGameBase} from "./storage/LibGameBase.sol";
 import {ComponentIndex} from "../../protocol/ComponentIndex.sol";
 import {IERC721} from "../../interfaces/IERC721.sol";
-import {MercuryPilots} from "../../protocol/MercuryPilots.sol";
 
 abstract contract MercuryGameBase is ERC1155Holder {
     using Strings for uint256;
@@ -51,13 +50,15 @@ abstract contract MercuryGameBase is ERC1155Holder {
         require(!aviation.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
         LibGameBase.layout().gameApprovals[tokenId] = burner;
         LibGameBase.layout().burnerAddressToTokenId[burner] = tokenId;
+        LibGameBase.layout().burnerAddressToAviation[burner] = address(aviation);
     }
 
     function unapproveForGame(uint256 tokenId, MercuryBase aviation) public virtual {
         require(isApprovedForGame(tokenId, aviation), "MercuryGameBase: caller is not token owner or approved");
         require(!aviation.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
-        delete  LibGameBase.layout().gameApprovals[tokenId];
+        delete LibGameBase.layout().gameApprovals[tokenId];
         delete LibGameBase.layout().burnerAddressToTokenId[msg.sender];
+        delete LibGameBase.layout().burnerAddressToAviation[msg.sender];
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -69,10 +70,6 @@ abstract contract MercuryGameBase is ERC1155Holder {
         LibGameBase.layout().protocol = _protocol;
     }
 
-    function pilot() internal view returns (MercuryPilots) {
-        return MercuryPilots(LibGameBase.protocol());
-    }
-
     function componentIndex() internal view returns (ComponentIndex) {
         return ComponentIndex(LibGameBase.protocol());
     }
@@ -81,8 +78,11 @@ abstract contract MercuryGameBase is ERC1155Holder {
         return LibGameBase.burnerAddressToTokenId(burner);
     }
 
-    function isIdenticalAviation(address lobby, address aviation) internal view returns (bool) {
-        uint256 gameIndex = LibGameBase.layout().lobbyGameIndex[lobby];
-        return LibGameBase.layout().lobbyGameQueue[aviation][gameIndex] == lobby;
+    function burnerAddressToAviation(address burner) public view returns (address) {
+        return LibGameBase.burnerAddressToAviation(burner);
+    }
+
+    function isIdenticalAviation(address player1, address player2) internal view returns (bool) {
+        return burnerAddressToAviation(player1) == burnerAddressToAviation(player2);
     }
 }

@@ -49,6 +49,11 @@ library LibBidTacToe {
         existingGame.joinGame(playerAddress);
     }
 
+    function getPlayer1(address gameAddress) internal returns (address) {
+        BidTacToe existingGame = BidTacToe(gameAddress);
+        return existingGame.player1();
+    }
+
     function max(uint256 a, uint256 b) internal pure returns (uint256) {
         return a >= b ? a : b;
     }

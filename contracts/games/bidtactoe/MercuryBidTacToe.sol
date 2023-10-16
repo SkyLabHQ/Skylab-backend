@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "../../aviation/base/MercuryBase.sol";
 import {MercuryGameBase} from "../base/MercuryGameBase.sol";
 import {LibBidTacToe} from "./lib/LibBidTacToe.sol";
-import {MercuryPilots} from "../../protocol/MercuryPilots.sol";
 
 contract MercuryBidTacToe is MercuryGameBase {
     struct GameParams {
@@ -33,7 +32,7 @@ contract MercuryBidTacToe is MercuryGameBase {
     // collecton to default game queue
     mapping(address => address) public defaultGameQueue;
 
-    mapping(address => address) _burnerAddressToAviation;
+    mapping(address => bool) public validBidTacToeBots;
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
@@ -42,64 +41,72 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 gridWidth,
         uint64 gridHeight,
         uint64 lengthToWin,
-        uint64 initialBalance,
-        address aviation
+        uint64 initialBalance
     ) external {
-        MercuryBase(aviation).aviationLock(burnerAddressToTokenId(msg.sender));
-        _burnerAddressToAviation[msg.sender] = aviation;
-        GameParams memory gameParams = GameParams(gridWidth, gridHeight, lengthToWin, initialBalance);
-        address newGame = createGame(gameParams, aviation);
-        super.baseCreateLobby(newGame, aviation);
+        lockAviation(msg.sender);
+        createGame(GameParams(gridWidth, gridHeight, lengthToWin, initialBalance));
     }
 
-    function createGame(GameParams memory gameParams, address aviation) internal returns (address) {
-        require(gamePerPlayer[msg.sender] == address(0), "MercuryBidTacToe: a game has already been created by caller");
-        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
+    function joinLobby(address lobby) external {
+        require(gameExists[lobby], "MercuryBidTacToe: lobby does not exist");
 
+        lockAviation(msg.sender);
+        joinGame(lobby, msg.sender);
+    }
+
+    function createOrJoinDefault() external {
+        lockAviation(msg.sender);
+        address aviation = burnerAddressToAviation(msg.sender);
+        if (defaultGameQueue[aviation] == address(0)) {
+            defaultGameQueue[aviation] = msg.sender;
+        } else {
+            address gameAddress = createGame(LibBidTacToe.defaultParams());
+            joinGame(gameAddress, defaultGameQueue[aviation]);
+            delete defaultGameQueue[aviation];
+        }
+    }
+
+    function createBotGame(address bot) external {
+        require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
+        lockAviation(msg.sender);
+
+        address gameAddress = createGame(LibBidTacToe.defaultParams());
+        joinGame(gameAddress, bot);
+    }
+
+    function createGame(GameParams memory gameParams) internal returns (address) {
+        require(gamePerPlayer[msg.sender] == address(0), "MercuryBidTacToe: a game has already been created by caller");
+        
+        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
+        address aviation = burnerAddressToAviation(msg.sender);
         paramsPerGame[newGame] = gameParams;
         planeMetadataPerGame[newGame] =
             PlaneMetadata(getAviationLevel(msg.sender, aviation), getAviationPoints(msg.sender, aviation), 0, 0);
         gameExists[newGame] = true;
         gamePerPlayer[msg.sender] = newGame;
+        super.baseCreateLobby(newGame, aviation);
         return newGame;
     }
 
-    function joinLobby(address lobby, address aviation) external {
-        require(isIdenticalAviation(lobby, aviation), "MercuryBidTacToe: aviation does not match");
-        require(gameExists[lobby], "MercuryBidTacToe: lobby does not exist");
-        MercuryBase(aviation).aviationLock(burnerAddressToTokenId(msg.sender));
-        _burnerAddressToAviation[msg.sender] = aviation;
-        joinGame(lobby, msg.sender, aviation);
-        super.baseJoinLobby(lobby, aviation);
-    }
+    function joinGame(address gameAddress, address player2) internal {
+        require(isIdenticalAviation(LibBidTacToe.getPlayer1(gameAddress), player2), "MercuryBidTacToe: aviation does not match");
 
-    function createOrJoinDefault(address aviation) external {
-        MercuryBase(aviation).aviationLock(burnerAddressToTokenId(msg.sender));
-        _burnerAddressToAviation[msg.sender] = aviation;
-        if (defaultGameQueue[aviation] == address(0)) {
-            defaultGameQueue[aviation] = msg.sender;
-        } else {
-            address gameAddress = createGame(LibBidTacToe.defaultParams(), aviation);
-            super.baseCreateLobby(gameAddress, aviation);
-            joinGame(gameAddress, defaultGameQueue[aviation], aviation);
-            super.baseJoinLobby(gameAddress, aviation);
-            gamePerPlayer[defaultGameQueue[aviation]] = gameAddress;
-            delete defaultGameQueue[aviation];
-        }
-    }
-
-    function joinGame(address gameAddress, address player2, address aviation) internal {
         LibBidTacToe.joinGame(gameAddress, player2);
+        address aviation = burnerAddressToAviation(msg.sender);
         gamePerPlayer[player2] = gameAddress;
         planeMetadataPerGame[gameAddress].token2Level = getAviationLevel(player2, aviation);
         planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, aviation);
+        super.baseJoinLobby(gameAddress, aviation);
+    }
+
+    function lockAviation(address burner) internal {
+        MercuryBase(burnerAddressToAviation(burner)).aviationLock(burnerAddressToTokenId(burner));
     }
 
     function withdrawFromQueue(address aviation) external {
         require(msg.sender == defaultGameQueue[aviation], "MercuryBidTacToe: msg.sender is not in default queue");
         delete defaultGameQueue[aviation];
-        delete _burnerAddressToAviation[msg.sender];
-        MercuryBase(aviation).aviationUnlock(burnerAddressToTokenId(msg.sender));
+        MercuryBase(burnerAddressToAviation(msg.sender)).aviationUnlock(burnerAddressToTokenId(msg.sender));
     }
 
     function handleWinLoss(address winnerBurner, address loserBurner) external {
@@ -108,7 +115,7 @@ contract MercuryBidTacToe is MercuryGameBase {
             gamePerPlayer[winnerBurner] == msg.sender && gamePerPlayer[loserBurner] == msg.sender,
             "MercuryBidTacToe: burner addresses does not belong to this game"
         );
-        MercuryBase aviation = MercuryBase(_burnerAddressToAviation[winnerBurner]);
+        MercuryBase aviation = MercuryBase(burnerAddressToAviation(winnerBurner));
         uint256 winnerTokenId = cleanUp(winnerBurner, aviation);
         uint256 loserTokenId = cleanUp(loserBurner, aviation);
         super.baseQuitLobby(msg.sender, address(aviation));
@@ -121,11 +128,8 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function cleanUp(address burner, MercuryBase aviation) private returns (uint256) {
         uint256 tokenId = burnerAddressToTokenId(burner);
-        address user = aviation.ownerOf(tokenId);
-        pilot().increasePilotSessions(user);
         aviation.aviationUnlock(tokenId);
         delete gamePerPlayer[burner];
-        delete _burnerAddressToAviation[burner];
         return tokenId;
     }
 
@@ -135,5 +139,9 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function getAviationPoints(address burner, address aviation) internal view returns (uint64) {
         return uint64(MercuryBase(aviation).aviationPoints(burnerAddressToTokenId(burner)));
+    }
+
+    function registerBot(address bot, bool register) external onlyOwner {
+        validBidTacToeBots[bot] = register;
     }
 }
