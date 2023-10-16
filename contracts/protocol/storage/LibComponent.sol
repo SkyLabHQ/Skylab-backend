@@ -7,12 +7,12 @@ library LibComponent {
     struct ComponentIndexStorage {
         mapping(address => bool) isValidAviation;
         mapping(address => bool) isValidGame;
-        mapping(address => bool) isValidPilot;
+        mapping(address => bool) isValidPilotCollection;
     }
 
     event ValidAviation(address, bool);
     event ValidGame(address, bool);
-    event ValidPilot(address, bool);
+    event ValidPilotCollection(address, bool);
 
     function layout() internal pure returns (ComponentIndexStorage storage cid) {
         bytes32 position = SKYLABBASE_STORAGE_POSITION;
@@ -29,7 +29,7 @@ library LibComponent {
         return layout().isValidGame[_game];
     }
 
-    function isValidPilot(address _pilot) internal view returns (bool) {
-        return layout().isValidPilot[_pilot];
+    function isValidPilotCollection(address _pilot) internal view returns (bool) {
+        return layout().isValidPilotCollection[_pilot];
     }
 }

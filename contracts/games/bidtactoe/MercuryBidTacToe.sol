@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "../../aviation/base/MercuryBase.sol";
 import {MercuryGameBase} from "../base/MercuryGameBase.sol";
 import {LibBidTacToe} from "./lib/LibBidTacToe.sol";
-import {MercuryPilots} from "../../protocol/MercuryPilots.sol";
 
 contract MercuryBidTacToe is MercuryGameBase {
     struct GameParams {
@@ -129,8 +128,6 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function cleanUp(address burner, MercuryBase aviation) private returns (uint256) {
         uint256 tokenId = burnerAddressToTokenId(burner);
-        address user = aviation.ownerOf(tokenId);
-        pilot().increasePilotSessions(user);
         aviation.aviationUnlock(tokenId);
         delete gamePerPlayer[burner];
         return tokenId;

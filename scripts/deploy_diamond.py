@@ -66,4 +66,4 @@ def main():
     game = project.MercuryBidTacToe.at(constant.MERCURY_BIDTACTOE_ADDRESS)
     game.setProtocol(constant.PROTOCOL_ADDRESS, sender=account)
     component_index = project.ComponentIndex.at(constant.PROTOCOL_ADDRESS)
-    component_index.setValidPilot('0x14875C22fE0780985Bc5e4841d12e2a00Df835C7',True, sender=account)
+    component_index.setValidPilotCollection('0x14875C22fE0780985Bc5e4841d12e2a00Df835C7',True, sender=account)

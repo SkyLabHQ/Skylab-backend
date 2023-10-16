@@ -8,7 +8,6 @@ import {MercuryBase} from "../../aviation/base/MercuryBase.sol";
 import {LibGameBase} from "./storage/LibGameBase.sol";
 import {ComponentIndex} from "../../protocol/ComponentIndex.sol";
 import {IERC721} from "../../interfaces/IERC721.sol";
-import {MercuryPilots} from "../../protocol/MercuryPilots.sol";
 
 abstract contract MercuryGameBase is ERC1155Holder {
     using Strings for uint256;
@@ -69,10 +68,6 @@ abstract contract MercuryGameBase is ERC1155Holder {
     function setProtocol(address _protocol) public {
         LibDiamond.enforceIsContractOwner();
         LibGameBase.layout().protocol = _protocol;
-    }
-
-    function pilot() internal view returns (MercuryPilots) {
-        return MercuryPilots(LibGameBase.protocol());
     }
 
     function componentIndex() internal view returns (ComponentIndex) {
