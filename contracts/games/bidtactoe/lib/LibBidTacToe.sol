@@ -49,7 +49,7 @@ library LibBidTacToe {
         existingGame.joinGame(playerAddress);
     }
 
-    function getPlayer1(address gameAddress) internal returns (address) {
+    function getPlayer1(address gameAddress) internal view returns (address) {
         BidTacToe existingGame = BidTacToe(gameAddress);
         return existingGame.player1();
     }

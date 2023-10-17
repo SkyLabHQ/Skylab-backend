@@ -38,6 +38,9 @@ contract MercuryPilots {
     }
 
     function viewActivePilot(address owner) public view returns (LibPilots.Pilot memory) {
+        if (!isPilotOwned(LibPilots.layout().activePilot[owner], owner)) {
+            return LibPilots.Pilot(address(0), 0);
+        }
         return LibPilots.layout().activePilot[owner];
     }
 
