@@ -16,9 +16,11 @@ contract BabyMercs is ERC721Enumerable, Ownable {
         _imageBaseURI = baseURI;
     }
 
-    function publicMint(address to) public payable {
-        require(msg.value >= 0.001 ether, "BabyMercs: 0.001 eth required");
-        _safeMint(to, totalSupply() + 1);
+    function publicMint(address to, uint256 amount) public payable {
+        require(msg.value == 0.001 ether * amount, "BabyMercs: 0.001 * amount eth required");
+        for (uint256 i = 0; i < amount; i++) {
+            _safeMint(to, totalSupply() + 1);
+        }
     }
 
     function airdrop(address to) public onlyOwner {
