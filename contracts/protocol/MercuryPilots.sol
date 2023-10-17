@@ -8,7 +8,10 @@ import {LibPilots} from "./storage/LibPilots.sol";
 contract MercuryPilots {
     // Note: a pilot will remain in the mapping even if the pilot is sold, however, there should be no function that works when that's the case.
     function setActivePilot(IERC721 collection, uint256 tokenId, address owner) external {
-        require(LibComponent.isValidPilotCollection(address(collection)), "MercuryPilots: collection is not a valid collection. ");
+        require(
+            LibComponent.isValidPilotCollection(address(collection)),
+            "MercuryPilots: collection is not a valid collection. "
+        );
         require(
             msg.sender == collection.ownerOf(tokenId) || collection.isApprovedForAll(owner, msg.sender)
                 || collection.getApproved(tokenId) == msg.sender,
@@ -30,6 +33,13 @@ contract MercuryPilots {
     function getActivePilot(address owner) public returns (LibPilots.Pilot memory) {
         if (!isPilotOwned(LibPilots.layout().activePilot[owner], owner)) {
             delete LibPilots.layout().activePilot[owner];
+        }
+        return LibPilots.layout().activePilot[owner];
+    }
+
+    function viewActivePilot(address owner) public view returns (LibPilots.Pilot memory) {
+        if (!isPilotOwned(LibPilots.layout().activePilot[owner], owner)) {
+            return LibPilots.Pilot(address(0), 0);
         }
         return LibPilots.layout().activePilot[owner];
     }
@@ -150,7 +160,7 @@ contract MercuryPilots {
         return LibPilots.layout().mileageGroups[index];
     }
 
-    function getPilotMileage(address collection, uint256 tokenId) public view returns(uint256) {
+    function getPilotMileage(address collection, uint256 tokenId) public view returns (uint256) {
         return LibPilots.layout().pilotMileage[collection][tokenId];
     }
 
@@ -158,7 +168,7 @@ contract MercuryPilots {
         return LibPilots.layout().netPointsGroups[index];
     }
 
-    function getPilotNetPoints(address collection, uint256 tokenId) public view returns(int256) {
+    function getPilotNetPoints(address collection, uint256 tokenId) public view returns (int256) {
         return LibPilots.layout().pilotNetPoints[collection][tokenId];
     }
 
@@ -166,7 +176,7 @@ contract MercuryPilots {
         return LibPilots.layout().winStreakGroups[index];
     }
 
-    function getPilotWinStreak(address collection, uint256 tokenId) public view returns(uint256) {
+    function getPilotWinStreak(address collection, uint256 tokenId) public view returns (uint256) {
         return LibPilots.layout().pilotWinStreak[collection][tokenId];
     }
 

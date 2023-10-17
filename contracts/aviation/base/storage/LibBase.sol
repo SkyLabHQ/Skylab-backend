@@ -16,7 +16,7 @@ library LibBase {
     struct MercuryBaseStorage {
         address protocol;
         string metadataBaseURI;
-        uint256 nextTokenId;
+        uint256 lastTokenID;
         mapping(uint256 => uint256) aviationLevels;
         mapping(uint256 => uint256) aviationPoints;
         mapping(uint256 => bool) aviationTradeLock;

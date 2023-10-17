@@ -1,7 +1,7 @@
 from ape import accounts, project
 import json
 import os
-import constant
+from scripts import constant
 
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 
@@ -14,18 +14,18 @@ account.set_autosign(True, passphrase="y")
 
 # Note: contrat_name : constructor_args
 # replace it if needed
-# contract_params = {
-#     'Diamond': {},
-#     'ComponentIndex': {},
-#     'MercuryPilots': {},
-#     'MercuryResources': {},
-#     'Vault': {},
-# }
-
 contract_params = {
     'Diamond': {},
-    'MercuryTestFlight': {}
+    'ComponentIndex': {},
+    'MercuryPilots': {},
+    'MercuryResources': {},
+    'Vault': {},
 }
+
+# contract_params = {
+#     'Diamond': {},
+#     'MercuryTestFlight': {}
+# }
 
     
 def get_selector(contract):
