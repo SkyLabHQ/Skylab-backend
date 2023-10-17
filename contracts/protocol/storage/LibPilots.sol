@@ -14,6 +14,7 @@ library LibPilots {
         mapping(address => Pilot[]) recentlyUsedPilots;
         mapping(address => mapping(uint256 => uint256)) pilotMileage;
         mapping(address => mapping(uint256 => int256)) pilotNetPoints;
+        mapping(address => mapping(uint256 => uint256)) pilotCurWinStreak;
         mapping(address => mapping(uint256 => uint256)) pilotWinStreak;
         mapping(address => mapping(uint256 => uint256)) pilotSessions;
 
