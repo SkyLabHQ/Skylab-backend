@@ -37,19 +37,23 @@ contract MercuryPilots {
     function pilotWin(address player, uint256 mileage, uint256 pointsMoved) external {
         require(LibComponent.isValidAviation(msg.sender), "MercuryPilots: msg.sender is not a valid aviation. ");
         LibPilots.Pilot memory pilot = getActivePilot(player);
-        pilotGainMileage(pilot, mileage);
-        increasePilotSessions(pilot);
-        updatePilotNetPoints(pilot, int256(pointsMoved));
-        updatePilotWinstreak(pilot, true);
+        if (pilot.collectionAddress != address(0)) {
+            pilotGainMileage(pilot, mileage);
+            increasePilotSessions(pilot);
+            updatePilotNetPoints(pilot, int256(pointsMoved));
+            updatePilotWinstreak(pilot, true);
+        }
     }
 
     function pilotLose(address player, uint256 mileage, uint256 pointsMoved) external {
         require(LibComponent.isValidAviation(msg.sender), "MercuryPilots: msg.sender is not a valid aviation. ");
         LibPilots.Pilot memory pilot = getActivePilot(player);
-        pilotGainMileage(pilot, mileage);
-        increasePilotSessions(pilot);
-        updatePilotNetPoints(pilot, -1 * int256(pointsMoved));
-        updatePilotWinstreak(pilot, false);
+        if (pilot.collectionAddress != address(0)) {
+            pilotGainMileage(pilot, mileage);
+            increasePilotSessions(pilot);
+            updatePilotNetPoints(pilot, -1 * int256(pointsMoved));
+            updatePilotWinstreak(pilot, false);
+        }
     }
 
     function pilotGainMileage(LibPilots.Pilot memory pilot, uint256 xp) private {
@@ -65,9 +69,12 @@ contract MercuryPilots {
             }
             if (newIndex > 0) {
                 ps.mileageGroups[newIndex].push(pilot);
+                ps.mileageIndex[pilot.collectionAddress][pilot.pilotId] = ps.mileageGroups[newIndex].length - 1;
+                ps.mileageGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
+            } else {
+                delete ps.mileageIndex[pilot.collectionAddress][pilot.pilotId];
+                delete ps.mileageGroupIndex[pilot.collectionAddress][pilot.pilotId];
             }
-            ps.mileageIndex[pilot.collectionAddress][pilot.pilotId] = ps.mileageGroups[newIndex].length - 1;
-            ps.mileageGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
 
             if (newIndex > ps.highestMileageGroupIndex) {
                 ps.highestMileageGroupIndex = newIndex;
@@ -96,9 +103,12 @@ contract MercuryPilots {
             }
             if (newIndex > 0) {
                 ps.netPointsGroups[newIndex].push(pilot);
+                ps.netPointsIndex[pilot.collectionAddress][pilot.pilotId] = ps.netPointsGroups[newIndex].length - 1;
+                ps.netPointsGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
+            } else {
+                delete ps.netPointsIndex[pilot.collectionAddress][pilot.pilotId];
+                delete ps.netPointsGroupIndex[pilot.collectionAddress][pilot.pilotId];
             }
-            ps.netPointsIndex[pilot.collectionAddress][pilot.pilotId] = ps.netPointsGroups[newIndex].length - 1;
-            ps.netPointsGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
 
             if (newIndex > ps.highestNetPointsGroupIndex) {
                 ps.highestNetPointsGroupIndex = newIndex;
@@ -123,9 +133,12 @@ contract MercuryPilots {
             }
             if (newIndex > 0) {
                 ps.winStreakGroups[newIndex].push(pilot);
+                ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId] = ps.winStreakGroups[newIndex].length - 1;
+                ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
+            } else {
+                delete ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId];
+                delete ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId];
             }
-            ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId] = ps.winStreakGroups[newIndex].length - 1;
-            ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
 
             if (newIndex > ps.highestWinStreakGroupIndex) {
                 ps.highestWinStreakGroupIndex = newIndex;
