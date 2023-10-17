@@ -129,29 +129,32 @@ contract MercuryPilots {
     function updatePilotWinstreak(LibPilots.Pilot memory pilot, bool won) private {
         LibPilots.PilotStorage storage ps = LibPilots.layout();
         if (won) {
-            ps.pilotWinStreak[pilot.collectionAddress][pilot.pilotId] += 1;
+            ps.pilotCurWinStreak[pilot.collectionAddress][pilot.pilotId] += 1;
         } else {
-            ps.pilotWinStreak[pilot.collectionAddress][pilot.pilotId] = 0;
+            ps.pilotCurWinStreak[pilot.collectionAddress][pilot.pilotId] = 0;
         }
 
-        uint256 newIndex = LibPilots.convertToGroupIndex(ps.pilotWinStreak[pilot.collectionAddress][pilot.pilotId]);
-        uint256 oldIndex = ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId];
-        if (newIndex != oldIndex) {
-            if (oldIndex > 0) {
-                // don't handle group 0
-                delete ps.winStreakGroups[oldIndex][ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId]];
-            }
-            if (newIndex > 0) {
-                ps.winStreakGroups[newIndex].push(pilot);
-                ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId] = ps.winStreakGroups[newIndex].length - 1;
-                ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
-            } else {
-                delete ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId];
-                delete ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId];
-            }
+        if (ps.pilotCurWinStreak[pilot.collectionAddress][pilot.pilotId] > ps.pilotWinStreak[pilot.collectionAddress][pilot.pilotId]) {
+            ps.pilotWinStreak[pilot.collectionAddress][pilot.pilotId] = ps.pilotCurWinStreak[pilot.collectionAddress][pilot.pilotId];
+            uint256 newIndex = LibPilots.convertToGroupIndex(ps.pilotWinStreak[pilot.collectionAddress][pilot.pilotId]);
+            uint256 oldIndex = ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId];
+            if (newIndex != oldIndex) {
+                if (oldIndex > 0) {
+                    // don't handle group 0
+                    delete ps.winStreakGroups[oldIndex][ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId]];
+                }
+                if (newIndex > 0) {
+                    ps.winStreakGroups[newIndex].push(pilot);
+                    ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId] = ps.winStreakGroups[newIndex].length - 1;
+                    ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
+                } else {
+                    delete ps.winStreakIndex[pilot.collectionAddress][pilot.pilotId];
+                    delete ps.winStreakGroupIndex[pilot.collectionAddress][pilot.pilotId];
+                }
 
-            if (newIndex > ps.highestWinStreakGroupIndex) {
-                ps.highestWinStreakGroupIndex = newIndex;
+                if (newIndex > ps.highestWinStreakGroupIndex) {
+                    ps.highestWinStreakGroupIndex = newIndex;
+                }
             }
         }
     }
