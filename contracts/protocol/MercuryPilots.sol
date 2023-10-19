@@ -12,16 +12,7 @@ contract MercuryPilots {
             LibComponent.isValidPilotCollection(address(collection)),
             "MercuryPilots: collection is not a valid collection. "
         );
-        require(
-            msg.sender == collection.ownerOf(tokenId) || collection.isApprovedForAll(owner, msg.sender)
-                || collection.getApproved(tokenId) == msg.sender,
-            "MercuryPilots: msg.sender is not approved or owner. "
-        );
         LibPilots.layout().activePilot[owner] = LibPilots.Pilot(address(collection), tokenId);
-        require(
-            isPilotOwned(LibPilots.layout().activePilot[owner], owner),
-            "MercuryPilots: owner parameter is not token owner. "
-        );
         LibPilots.layout().recentlyUsedPilots[owner].push(LibPilots.Pilot(address(collection), tokenId));
     }
 
@@ -30,17 +21,7 @@ contract MercuryPilots {
         delete LibPilots.layout().activePilot[msg.sender];
     }
 
-    function getActivePilot(address owner) public returns (LibPilots.Pilot memory) {
-        if (!isPilotOwned(LibPilots.layout().activePilot[owner], owner)) {
-            delete LibPilots.layout().activePilot[owner];
-        }
-        return LibPilots.layout().activePilot[owner];
-    }
-
-    function viewActivePilot(address owner) public view returns (LibPilots.Pilot memory) {
-        if (!isPilotOwned(LibPilots.layout().activePilot[owner], owner)) {
-            return LibPilots.Pilot(address(0), 0);
-        }
+    function getActivePilot(address owner) public view returns (LibPilots.Pilot memory) {
         return LibPilots.layout().activePilot[owner];
     }
 
@@ -190,12 +171,5 @@ contract MercuryPilots {
     function getPilotSessions(address player) public view returns (uint256) {
         LibPilots.Pilot memory pilot = LibPilots.layout().activePilot[player];
         return LibPilots.layout().pilotSessions[pilot.collectionAddress][pilot.pilotId];
-    }
-
-    function isPilotOwned(LibPilots.Pilot memory pilot, address owner) private view returns (bool) {
-        if (pilot.collectionAddress == address(0)) {
-            return false;
-        }
-        return IERC721(pilot.collectionAddress).ownerOf(pilot.pilotId) == owner;
     }
 }
