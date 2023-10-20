@@ -5,7 +5,8 @@ interface IMercuryBase {
     event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-    event UpdateLevels(uint256 tokenID);
+    event MovePoints(uint256 fromTokenID, uint256 toTokenID, uint256 points);
+    event UpdateLevels(uint256 tokenID, uint256 level);
 
     function approve(address to, uint256 tokenId) external;
     function aviationLevels(uint256 _tokenId) external view returns (uint256);

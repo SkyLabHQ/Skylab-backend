@@ -22,7 +22,8 @@ library LibBase {
         mapping(uint256 => bool) aviationTradeLock;
     }
 
-    event UpdateLevels(uint256 tokenID);
+    event MovePoints(uint256 fromTokenID, uint256 toTokenID, uint256 points);
+    event UpdateLevels(uint256 tokenID, uint256 level);
 
     function layout() internal pure returns (MercuryBaseStorage storage sbs) {
         bytes32 position = MERCURYBASE_STORAGE_POSITION;
