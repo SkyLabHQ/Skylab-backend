@@ -46,16 +46,18 @@ abstract contract MercuryGameBase is ERC1155Holder {
     }
 
     function approveForGame(address burner, uint256 tokenId, MercuryBase aviation) public virtual {
+        require(componentIndex().isValidAviation(address(aviation)), "MercuryGameBase: aviation is not valid");
         require(isApprovedForGame(tokenId, aviation), "MercuryGameBase: caller is not token owner or approved");
-        require(!aviation.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
+        aviation.aviationLock(tokenId);
         LibGameBase.layout().gameApprovals[tokenId] = burner;
         LibGameBase.layout().burnerAddressToTokenId[burner] = tokenId;
         LibGameBase.layout().burnerAddressToAviation[burner] = address(aviation);
     }
 
     function unapproveForGame(uint256 tokenId, MercuryBase aviation) public virtual {
+        require(componentIndex().isValidAviation(address(aviation)), "MercuryGameBase: aviation is not valid");
         require(isApprovedForGame(tokenId, aviation), "MercuryGameBase: caller is not token owner or approved");
-        require(!aviation.isAviationLocked(tokenId), "MercuryGameBase: token has been locked");
+        aviation.aviationUnlock(tokenId);
         delete LibGameBase.layout().gameApprovals[tokenId];
         delete LibGameBase.layout().burnerAddressToTokenId[msg.sender];
         delete LibGameBase.layout().burnerAddressToAviation[msg.sender];
