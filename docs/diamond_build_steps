@@ -9,7 +9,8 @@ pip install -U pip
 pip install eth-ape
 ape --version
 ape accounts import deployer
-ape plugins install polygon foundry infura solidity
+ape plugins install foundry infura solidity
+export WEB3_INFURA_API_KEY='e5422649831f4d5688cab68856d79020'
 
 ape run scripts/deploy_diamond.py --network polygon:mumbai:infura
 ape run scripts/deploy_game.py --network polygon:mumbai:infura

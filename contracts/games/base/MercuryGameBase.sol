@@ -34,7 +34,7 @@ abstract contract MercuryGameBase is ERC1155Holder {
         LibGameBase.baseQuitLobby(lobby, aviation);
     }
 
-    function getLobbyOnGoingGames(address aviation) internal view returns (address[] memory) {
+    function getLobbyOnGoingGames(address aviation) external view returns (address[] memory) {
         return LibGameBase.lobbyOnGoingGames(aviation);
     }
 

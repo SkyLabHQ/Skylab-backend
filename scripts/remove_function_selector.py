@@ -3,8 +3,6 @@ from scripts import constant
 
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 
-cut = []
-
 account = accounts.load('deployer')
 account.set_autosign(True, passphrase="y")
 protocol_address = constant.PROTOCOL_ADDRESS
@@ -18,6 +16,7 @@ def main():
     print(facet)
     hexbytes_array = ['0x' + bytes.hex(hexbyte) for hexbyte in facet[1]]
     print(hexbytes_array)
+    cut = []
     cut.append((
         zero_address,
         FacetCutAction['Remove'],
@@ -30,6 +29,7 @@ def main():
     print(facet)
     hexbytes_array = ['0x' + bytes.hex(hexbyte) for hexbyte in facet[1]]
     print(hexbytes_array)
+    cut = []
     cut.append((
         zero_address,
         FacetCutAction['Remove'],
@@ -42,6 +42,7 @@ def main():
     print(facet)
     hexbytes_array = ['0x' + bytes.hex(hexbyte) for facet in facet for hexbyte in facet.functionSelectors]
     print(hexbytes_array)
+    cut = []
     cut.append((
         zero_address,
         FacetCutAction['Remove'],
