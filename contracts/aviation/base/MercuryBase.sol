@@ -36,15 +36,11 @@ abstract contract MercuryBase is SolidStateERC721 {
     //////////////////////////////////////////////////////////////*/
 
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external onlyGameAddresses {
-        require(_exists(winnerTokenId), "MercuryBase: nonexistent token");
-        require(_exists(loserTokenId), "MercuryBase: nonexistent token");
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
-        uint256 pointsToMove = sbs.aviationPoints[winnerTokenId]
-            >= (uint256(sbs.aviationPoints[loserTokenId] + 1) / uint256(2))
-            ? (uint256(sbs.aviationPoints[loserTokenId] + 1) / uint256(2))
-            : sbs.aviationPoints[winnerTokenId];
+        uint256 pointsToMove = estimatePointsToMove(winnerTokenId, loserTokenId);
         sbs.aviationPoints[winnerTokenId] += pointsToMove;
         sbs.aviationPoints[loserTokenId] -= pointsToMove;
+        emit LibBase.MovePoints(loserTokenId, winnerTokenId, pointsToMove);
         
         LibBase.pilot().pilotWin(_ownerOf(winnerTokenId), sbs.aviationLevels[winnerTokenId] * pointsToMove, pointsToMove);
         LibBase.pilot().pilotLose(_ownerOf(loserTokenId), sbs.aviationLevels[loserTokenId] * pointsToMove, pointsToMove);
@@ -142,6 +138,25 @@ abstract contract MercuryBase is SolidStateERC721 {
         );
     }
 
+    function estimatePointsToMove(uint256 winnerTokenId, uint256 loserTokenId) public view returns (uint256) {
+        require(_exists(winnerTokenId), "MercuryBase: nonexistent token");
+        require(_exists(loserTokenId), "MercuryBase: nonexistent token");
+        LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
+        return sbs.aviationPoints[winnerTokenId]
+            >= (uint256(sbs.aviationPoints[loserTokenId] + 1) / uint256(2))
+            ? (uint256(sbs.aviationPoints[loserTokenId] + 1) / uint256(2))
+            : sbs.aviationPoints[winnerTokenId];
+    }
+
+    function convertPointsToLevel(uint256 points) public pure returns (uint256) {
+        for (uint256 i = 0; i <= LibBase.MAXLEVEL; i++) {
+            if (2 ** i > points) {
+                return i;
+            }
+        }
+        return LibBase.MAXLEVEL;
+    }
+
     /*//////////////////////////////////////////////////////////////
                             Private Function
     //////////////////////////////////////////////////////////////*/
@@ -153,15 +168,11 @@ abstract contract MercuryBase is SolidStateERC721 {
 
     function updateLevel(uint256 tokenId) private {
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
-        for (uint256 i = 0; i <= LibBase.MAXLEVEL; i++) {
-            if (2 ** i > sbs.aviationPoints[tokenId]) {
-                sbs.aviationLevels[tokenId] = i;
-                emit LibBase.UpdateLevels(tokenId);
-                return;
-            }
+        uint256 oldLevel = sbs.aviationLevels[tokenId];
+        sbs.aviationLevels[tokenId] = convertPointsToLevel(sbs.aviationPoints[tokenId]);
+        if (oldLevel != sbs.aviationLevels[tokenId]) {
+            emit LibBase.UpdateLevels(tokenId, sbs.aviationLevels[tokenId]);
         }
-        sbs.aviationLevels[tokenId] = LibBase.MAXLEVEL;
-        emit LibBase.UpdateLevels(tokenId);
     }
 
     function burnAviation(uint256 tokenId) private {
