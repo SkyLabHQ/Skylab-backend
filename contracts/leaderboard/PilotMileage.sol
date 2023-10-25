@@ -11,6 +11,8 @@ contract PilotMileage {
         protocol = _protocol;
     }
 
+    event PilotMileageGain(address indexed collection, uint256 indexed tokenId, uint256 xp);
+
     modifier onlyProtocol() {
         require(msg.sender == protocol, "Only protocol can call this function");
         _;
@@ -18,6 +20,7 @@ contract PilotMileage {
 
     function pilotGainMileage(LibPilots.Pilot memory pilot, uint256 xp) public onlyProtocol {
         LibPilotLeaderBoard.setPilotGainrankingData(pilot, xp);
+        emit PilotMileageGain(pilot.collectionAddress, pilot.pilotId, xp);
     }
 
     function getPilotMileageGroup(uint256 index) public view returns (LibPilots.Pilot[] memory) {

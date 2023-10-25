@@ -16,7 +16,7 @@ contract PilotWinStreak {
         require(msg.sender == protocol, "Only protocol can call this function");
         _;
     }
-
+    event PilotWinStreakGain(address indexed wallet, uint256 winStreak);
     function updatePilotWinstreak(address wallet, bool won) public onlyProtocol {
         if (won) {
             pilotCurWinStreak[wallet] += 1;
@@ -26,6 +26,7 @@ contract PilotWinStreak {
 
         if (pilotCurWinStreak[wallet] > LibWalletLeaderBoard.layout().pilotRankingData[wallet]) {
             LibWalletLeaderBoard.setPilotGainrankingData(wallet, pilotCurWinStreak[wallet]);
+            emit PilotWinStreakGain(wallet, pilotCurWinStreak[wallet]);
         }
     }
 

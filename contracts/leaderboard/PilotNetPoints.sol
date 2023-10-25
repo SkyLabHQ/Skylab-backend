@@ -17,6 +17,8 @@ contract PilotNetPoints {
         protocol = _protocol;
     }
 
+    event PilotNetPointsGain(address indexed wallet, uint256 point);
+
     modifier onlyProtocol() {
         require(msg.sender == protocol, "Only protocol can call this function");
         _;
@@ -34,6 +36,7 @@ contract PilotNetPoints {
             point = point + uint256(pointsMoved);
         }
         LibWalletLeaderBoard.setPilotGainrankingData(wallet, point);
+        emit PilotNetPointsGain(wallet, point);
     }
 
     function getPilotNetPointsGroup(uint256 index) public view returns (address[] memory) {
