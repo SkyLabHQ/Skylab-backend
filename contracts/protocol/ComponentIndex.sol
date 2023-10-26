@@ -27,6 +27,26 @@ contract ComponentIndex {
         emit LibComponent.ValidPilotCollection(_collection, _isValid);
     }
 
+    function setPilotMileage(address mileage) public {
+        LibDiamond.enforceIsContractOwner();
+        LibComponent.layout().mileage = mileage;
+    }
+
+    function setNetPoints(address netPoints) public {
+        LibDiamond.enforceIsContractOwner();
+        LibComponent.layout().netPoints = netPoints;
+    }
+
+    function setPilotSessions(address session) public {
+        LibDiamond.enforceIsContractOwner();
+        LibComponent.layout().sessions = session;
+    }
+
+    function setWinStreak(address winStreak) public {
+        LibDiamond.enforceIsContractOwner();
+        LibComponent.layout().winStreak = winStreak;
+    }
+
     /*//////////////////////////////////////////////////////////////
                             View Function
     //////////////////////////////////////////////////////////////*/
