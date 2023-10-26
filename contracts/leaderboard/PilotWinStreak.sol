@@ -25,7 +25,7 @@ contract PilotWinStreak {
         }
 
         if (pilotCurWinStreak[wallet] > LibWalletLeaderBoard.layout().pilotRankingData[wallet]) {
-            LibWalletLeaderBoard.setPilotGainrankingData(wallet, pilotCurWinStreak[wallet]);
+            LibWalletLeaderBoard.setPilotRankingData(wallet, pilotCurWinStreak[wallet]);
             emit PilotWinStreakGain(wallet, pilotCurWinStreak[wallet]);
         }
     }

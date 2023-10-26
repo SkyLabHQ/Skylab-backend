@@ -22,7 +22,7 @@ library LibWalletLeaderBoard {
         }
     }
 
-    function setPilotGainrankingData(address wallet, uint256 rankingData) internal {
+    function setPilotRankingData(address wallet, uint256 rankingData) internal {
         layout().pilotRankingData[wallet] = rankingData;
 
         uint256 newIndex = convertToGroupIndex(uint256(layout().pilotRankingData[wallet]));

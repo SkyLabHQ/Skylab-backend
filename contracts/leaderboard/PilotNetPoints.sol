@@ -35,7 +35,7 @@ contract PilotNetPoints {
         } else {
             point = point + uint256(pointsMoved);
         }
-        LibWalletLeaderBoard.setPilotGainrankingData(wallet, point);
+        LibWalletLeaderBoard.setPilotRankingData(wallet, point);
         emit PilotNetPointsGain(wallet, point);
     }
 

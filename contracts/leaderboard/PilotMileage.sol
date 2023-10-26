@@ -19,7 +19,7 @@ contract PilotMileage {
     }
 
     function pilotGainMileage(LibPilots.Pilot memory pilot, uint256 xp) public onlyProtocol {
-        LibPilotLeaderBoard.setPilotGainrankingData(pilot, xp);
+        LibPilotLeaderBoard.setPilotRankingData(pilot, xp);
         emit PilotMileageGain(pilot.collectionAddress, pilot.pilotId, xp);
     }
 

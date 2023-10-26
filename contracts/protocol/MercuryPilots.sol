@@ -6,6 +6,8 @@ import {LibComponent} from "./storage/LibComponent.sol";
 import {LibPilots} from "./storage/LibPilots.sol";
 
 contract MercuryPilots {
+    event pilotWon(address indexed player, uint256 mileage, uint256 pointsMoved);
+
     // Note: a pilot will remain in the mapping even if the pilot is sold, however, there should be no function that works when that's the case.
     function setActivePilot(IERC721 collection, uint256 tokenId, address owner) external {
         require(
@@ -33,6 +35,7 @@ contract MercuryPilots {
             LibComponent.getSessions().increasePilotSessions(pilot);
             LibComponent.getNetPoints().updatePilotNetPoints(player, int256(pointsMoved));
             LibComponent.getWinStreak().updatePilotWinstreak(player, true);
+            emit pilotWon(player, mileage, pointsMoved);
         }
     }
 

@@ -22,7 +22,7 @@ library LibPilotLeaderBoard {
         }
     }
 
-    function setPilotGainrankingData(LibPilots.Pilot memory pilot, uint256 rankingData) internal {
+    function setPilotRankingData(LibPilots.Pilot memory pilot, uint256 rankingData) internal {
         layout().pilotRankingData[pilot.collectionAddress][pilot.pilotId] = rankingData;
 
         uint256 newIndex = convertToGroupIndex(rankingData);
