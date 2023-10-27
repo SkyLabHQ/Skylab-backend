@@ -3,12 +3,13 @@ pragma solidity ^0.8.0;
 
 import "./lib/LibPilotLeaderBoard.sol";
 import "../protocol/storage/LibPilots.sol";
+import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
-contract PilotSessions {
+contract PilotSessions is Initializable {
     address protocol;
     mapping(address => mapping(uint256 => uint256)) pilotSessions;
 
-    constructor(address _protocol) {
+    function initialize(address _protocol) public initializer {
         protocol = _protocol;
     }
 

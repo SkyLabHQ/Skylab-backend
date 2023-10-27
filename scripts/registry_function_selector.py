@@ -32,8 +32,6 @@ game_params = [
 
 def get_selector(contract):
     file_path = f'{os.getcwd()}/out/{contract}.sol/{contract}.json'
-    if contract == 'MercuryPilots':
-        file_path = f'{os.getcwd()}/out/protocol/{contract}.sol/{contract}.json'
     with open(file_path, 'r') as f:
         data = json.load(f)
         method_identifiers = data['methodIdentifiers']
@@ -41,7 +39,7 @@ def get_selector(contract):
         return selectors
 
 def main():
-    for contract_name in game_params:
+    for contract_name in protocol_params:
         print(contract_name)
         ContractClass = getattr(project, contract_name)
         selector = get_selector(contract_name)
@@ -51,5 +49,5 @@ def main():
             contract.address,
             FacetCutAction['Add'],
             selector))
-        diamond = project.Diamond.at(game_address)
+        diamond = project.Diamond.at(protocol_address)
         diamond.diamondCut(cut, '0x'+'0'*40, '0x', sender=account)

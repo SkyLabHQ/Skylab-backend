@@ -3,11 +3,12 @@ pragma solidity ^0.8.0;
 
 import "./lib/LibPilotLeaderBoard.sol";
 import {LibPilots} from "../protocol/storage/LibPilots.sol";
+import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
-contract PilotMileage {
+contract PilotMileage is Initializable {
     address protocol;
 
-    constructor(address _protocol) {
+    function initialize(address _protocol) public initializer {
         protocol = _protocol;
     }
 
@@ -29,5 +30,9 @@ contract PilotMileage {
 
     function getPilotMileage(address collection, uint256 tokenId) public view returns (uint256) {
         return LibPilotLeaderBoard.layout().pilotRankingData[collection][tokenId];
+    }
+
+    function getGroupLength(uint256 index) public view returns (uint256) {
+        return LibPilotLeaderBoard.layout().groupLength[index];
     }
 }

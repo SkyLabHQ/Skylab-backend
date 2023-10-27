@@ -11,7 +11,7 @@ library LibWalletLeaderBoard {
         mapping(uint256 => address[]) rankingDataGroups;
         mapping(address => uint256) rankingDataIndex;
         mapping(address => uint256) rankingDataGroupIndex;
-        uint256[] groupLength;
+        mapping(uint256 => uint256) groupLength;
         uint256 highestrankingDataGroupIndex;
     }
 
@@ -30,7 +30,8 @@ library LibWalletLeaderBoard {
         uint256 oldIndex = layout().rankingDataGroupIndex[wallet];
         if (newIndex != oldIndex) {
             if (oldIndex > 0) {
-                uint256 length = layout().groupLength[oldIndex];
+                uint256 length = layout().rankingDataGroups[oldIndex].length;
+                require(length > 0, "wallet old index rankingDataGroups length is 0");
                 address swappedWallet = layout().rankingDataGroups[oldIndex][length - 1];
                 uint256 index = layout().rankingDataIndex[wallet];
                 layout().rankingDataGroups[oldIndex][index] = swappedWallet;
@@ -42,6 +43,9 @@ library LibWalletLeaderBoard {
             }
             if (newIndex > 0) {
                 layout().rankingDataGroups[newIndex].push(wallet);
+                require(
+                    layout().rankingDataGroups[newIndex].length > 0, "wallet old index rankingDataGroups length is 0"
+                );
                 layout().rankingDataIndex[wallet] = layout().rankingDataGroups[newIndex].length - 1;
                 layout().rankingDataGroupIndex[wallet] = newIndex;
                 layout().groupLength[newIndex] = layout().rankingDataGroups[newIndex].length;

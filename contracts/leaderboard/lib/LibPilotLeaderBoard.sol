@@ -11,7 +11,7 @@ library LibPilotLeaderBoard {
         mapping(uint256 => LibPilots.Pilot[]) rankingDataGroups;
         mapping(address => mapping(uint256 => uint256)) rankingDataIndex;
         mapping(address => mapping(uint256 => uint256)) rankingDataGroupIndex;
-        uint256[] groupsLength;
+        mapping(uint256 => uint256) groupLength;
         uint256 highestrankingDataGroupIndex;
     }
 
@@ -29,7 +29,7 @@ library LibPilotLeaderBoard {
         uint256 oldIndex = layout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId];
         if (newIndex != oldIndex) {
             if (oldIndex > 0) {
-                uint256 length = layout().groupsLength[oldIndex];
+                uint256 length = layout().rankingDataGroups[oldIndex].length;
                 LibPilots.Pilot memory swappedPilot = layout().rankingDataGroups[oldIndex][length - 1];
                 uint256 index = layout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId];
                 layout().rankingDataGroups[oldIndex][index] = swappedPilot;
@@ -37,14 +37,14 @@ library LibPilotLeaderBoard {
                 layout().rankingDataIndex[swappedPilot.collectionAddress][swappedPilot.pilotId] = index;
                 delete layout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId];
                 delete layout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId];
-                layout().groupsLength[oldIndex] = length - 1;
+                layout().groupLength[oldIndex] = length - 1;
             }
             if (newIndex > 0) {
                 layout().rankingDataGroups[newIndex].push(pilot);
                 layout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId] =
                     layout().rankingDataGroups[newIndex].length - 1;
                 layout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
-                layout().groupsLength[newIndex] = layout().rankingDataGroups[newIndex].length;
+                layout().groupLength[newIndex] = layout().rankingDataGroups[newIndex].length;
             }
 
             if (newIndex > layout().highestrankingDataGroupIndex) {

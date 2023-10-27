@@ -11,7 +11,6 @@ contract PilotTest is Test {
 
     function setUp() public {
         pilot = new MercuryPilots();
-        //base.setMintable(true);
     }
 
     function test_lose() public {

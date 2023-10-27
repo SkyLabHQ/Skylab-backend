@@ -3,8 +3,9 @@ pragma solidity ^0.8.0;
 
 import "./lib/LibWalletLeaderBoard.sol";
 import "../protocol/storage/LibPilots.sol";
+import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
-contract PilotNetPoints {
+contract PilotNetPoints is Initializable {
     address protocol;
     mapping(address => mapping(uint256 => int256)) pilotNetPoints;
 
@@ -13,7 +14,7 @@ contract PilotNetPoints {
     mapping(address => mapping(uint256 => uint256)) netPointsGroupIndex;
     uint256 highestNetPointsGroupIndex;
 
-    constructor(address _protocol) {
+    function initialize(address _protocol) public initializer {
         protocol = _protocol;
     }
 
@@ -45,5 +46,9 @@ contract PilotNetPoints {
 
     function getPilotNetPoints(address wallet) public view returns (uint256) {
         return LibWalletLeaderBoard.layout().pilotRankingData[wallet];
+    }
+
+    function getGroupLength(uint256 index) public view returns (uint256) {
+        return LibWalletLeaderBoard.layout().groupLength[index];
     }
 }
