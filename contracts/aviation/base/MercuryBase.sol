@@ -134,7 +134,7 @@ abstract contract MercuryBase is SolidStateERC721 {
         require(_exists(tokenId), "ERC721: URI query for nonexistent token");
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         return LibBase.generateTokenMetadata(
-            tokenId, string(abi.encodePacked(sbs.aviationLevels[tokenId].toString(), ".svg"))
+            tokenId, string(abi.encodePacked(sbs.aviationLevels[tokenId].toString(), ".png"))
         );
     }
 
@@ -155,6 +155,10 @@ abstract contract MercuryBase is SolidStateERC721 {
             }
         }
         return LibBase.MAXLEVEL;
+    }
+
+    function estimateMileageToGain(uint256 myTokenId, uint256 opponentTokenId) public view returns (uint256, uint256) {
+        return (estimatePointsToMove(myTokenId, opponentTokenId) * aviationLevels(myTokenId), estimatePointsToMove(opponentTokenId, myTokenId) * aviationLevels(myTokenId));
     }
 
     /*//////////////////////////////////////////////////////////////
