@@ -157,6 +157,10 @@ abstract contract MercuryBase is SolidStateERC721 {
         return LibBase.MAXLEVEL;
     }
 
+    function estimateMileageToGain(uint256 myTokenId, uint256 opponentTokenId) public view returns (uint256, uint256) {
+        return (estimatePointsToMove(myTokenId, opponentTokenId) * aviationLevels(myTokenId), estimatePointsToMove(opponentTokenId, myTokenId) * aviationLevels(myTokenId));
+    }
+
     /*//////////////////////////////////////////////////////////////
                             Private Function
     //////////////////////////////////////////////////////////////*/
