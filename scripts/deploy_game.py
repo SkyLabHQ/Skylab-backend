@@ -9,9 +9,9 @@ cut = []
 
 diamond_address = ''
 
-account = accounts.load('deployer')
-#account.set_autosign(True, passphrase="y")
-protocol_address = constant.PROTOCOL_ADDRESS
+account = accounts.load('skylab')
+account.set_autosign(True, passphrase="y")
+protocol_address = constant.MAINNET_PROTOCOL_ADDRESS
 
 contract_params = {
     'Diamond': {},
@@ -27,7 +27,7 @@ def get_selector(contract):
         return selectors
 
 def main():
-    #project.BidTacToe.deploy(sender=account)
+    # project.BidTacToe.deploy(sender=account)
     for contract_name, constructor_args in contract_params.items():
         ContractClass = getattr(project, contract_name)
         selector = get_selector(contract_name)

@@ -47,8 +47,7 @@ def main():
     for contract_name in mainnet_aviation_params:
         print(contract_name)
         ContractClass = getattr(project, contract_name)
-        selector = ['0x4aebc639']
-    #     #selector = get_selector(contract_name)
+        selector = get_selector(contract_name)
         contract = ContractClass.deploy(sender=account)
         cut = []
         cut.append((
