@@ -9,23 +9,23 @@ cut = []
 
 diamond_address = ''
 
-account = accounts.load('deployer')
+account = accounts.load('skylab')
 account.set_autosign(True, passphrase="y")
 
 # Note: contrat_name : constructor_args
 # replace it if needed
-# contract_params = {
-#     'Diamond': {},
-#     'ComponentIndex': {},
-#     'MercuryPilots': {},
-#     'MercuryResources': {},
-#     'Vault': {},
-# }
-
 contract_params = {
     'Diamond': {},
-    'TrailblazerTournament': {}
+    'ComponentIndex': {},
+    'MercuryPilots': {},
+    'MercuryResources': {},
+    'Vault': {},
 }
+
+# contract_params = {
+#     'Diamond': {},
+#     'BabyMercs': {}
+# }
 
     
 def get_selector(contract):
@@ -57,14 +57,14 @@ def main():
             diamond_address = contract.address
     diamond = project.Diamond.at(diamond_address)
     diamond.diamondCut(cut, '0x'+'0'*40, '0x', sender=account)
-    test_fight = project.TrailblazerTournament.at(diamond_address)
-    test_fight.initialize(constant.TEST_URI,constant.PROTOCOL_ADDRESS,sender=account)
+    # baby = project.BabyMercs.at(diamond_address)
+    # baby.initialize("BabyMercs", "BabyMercs", constant.BABY_URI, sender=account)
     # protocol = project.Vault.at(constant.PROTOCOL_ADDRESS)
     # protocol.initVault(diamond_address,sender=account)
     # game = project.MercuryBidTacToe.at(constant.MERCURY_BIDTACTOE_ADDRESS)
     # game.setProtocol(constant.PROTOCOL_ADDRESS, sender=account)
-    component_index = project.ComponentIndex.at(constant.PROTOCOL_ADDRESS)
-    component_index.setValidAviation(diamond_address, True,sender=account)
+    # component_index = project.ComponentIndex.at(constant.PROTOCOL_ADDRESS)
+    # component_index.setValidAviation(diamond_address, True,sender=account)
     # component_index.setPilotMileage('0xBAA0aD275a12e0b1b887497103884E5474286D2d', sender=account)
     # component_index.setNetPoints('0x3C41918442e54A4e8ece229BCE0e3320f8068b6b', sender=account)
     # component_index.setPilotSessions('0x95C12b17819B6C44953cdc92f08fa207e4EcaF58', sender=account)

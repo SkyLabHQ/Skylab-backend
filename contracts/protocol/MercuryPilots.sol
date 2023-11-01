@@ -33,10 +33,10 @@ contract MercuryPilots {
         if (pilot.collectionAddress != address(0)) {
             LibComponent.getMileage().pilotGainMileage(pilot, mileage);
             LibComponent.getSessions().increasePilotSessions(pilot);
-            LibComponent.getNetPoints().updatePilotNetPoints(player, int256(pointsMoved));
-            LibComponent.getWinStreak().updatePilotWinstreak(player, true);
-            emit pilotWon(player, mileage, pointsMoved);
         }
+        LibComponent.getNetPoints().updatePilotNetPoints(player, int256(pointsMoved));
+        LibComponent.getWinStreak().updatePilotWinstreak(player, true);
+        emit pilotWon(player, mileage, pointsMoved);
     }
 
     function pilotLose(address player, uint256 mileage, uint256 pointsMoved) external {
