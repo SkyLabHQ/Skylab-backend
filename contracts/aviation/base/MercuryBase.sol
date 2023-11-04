@@ -41,8 +41,10 @@ abstract contract MercuryBase is SolidStateERC721 {
         sbs.aviationPoints[winnerTokenId] += pointsToMove;
         sbs.aviationPoints[loserTokenId] -= pointsToMove;
         emit LibBase.MovePoints(loserTokenId, winnerTokenId, pointsToMove);
-        
-        LibBase.pilot().pilotWin(_ownerOf(winnerTokenId), sbs.aviationLevels[winnerTokenId] * pointsToMove, pointsToMove);
+
+        LibBase.pilot().pilotWin(
+            _ownerOf(winnerTokenId), sbs.aviationLevels[winnerTokenId] * pointsToMove, pointsToMove
+        );
         LibBase.pilot().pilotLose(_ownerOf(loserTokenId), sbs.aviationLevels[loserTokenId] * pointsToMove, pointsToMove);
 
         updateLevel(winnerTokenId);
@@ -142,8 +144,7 @@ abstract contract MercuryBase is SolidStateERC721 {
         require(_exists(winnerTokenId), "MercuryBase: nonexistent token");
         require(_exists(loserTokenId), "MercuryBase: nonexistent token");
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
-        return sbs.aviationPoints[winnerTokenId]
-            >= (uint256(sbs.aviationPoints[loserTokenId] + 1) / uint256(2))
+        return sbs.aviationPoints[winnerTokenId] >= (uint256(sbs.aviationPoints[loserTokenId] + 1) / uint256(2))
             ? (uint256(sbs.aviationPoints[loserTokenId] + 1) / uint256(2))
             : sbs.aviationPoints[winnerTokenId];
     }
@@ -158,7 +159,10 @@ abstract contract MercuryBase is SolidStateERC721 {
     }
 
     function estimateMileageToGain(uint256 myTokenId, uint256 opponentTokenId) public view returns (uint256, uint256) {
-        return (estimatePointsToMove(myTokenId, opponentTokenId) * aviationLevels(myTokenId), estimatePointsToMove(opponentTokenId, myTokenId) * aviationLevels(myTokenId));
+        return (
+            estimatePointsToMove(myTokenId, opponentTokenId) * aviationLevels(myTokenId),
+            estimatePointsToMove(opponentTokenId, myTokenId) * aviationLevels(myTokenId)
+        );
     }
 
     /*//////////////////////////////////////////////////////////////

@@ -11,4 +11,4 @@ def main():
             proxy = project.LeaderBoardProxy.deploy(contract.address, admin, "0x", sender=account)
             print(proxy.address)
             a = ContractClass.at(proxy.address)
-            a.initialize(constant.MAINNET_PROTOCOL_ADDRESS,sender=account)
+            a.initialize(constant.REAL_MAINNET_PROTOCOL,sender=account)

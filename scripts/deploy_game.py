@@ -11,7 +11,7 @@ diamond_address = ''
 
 account = accounts.load('skylab')
 account.set_autosign(True, passphrase="y")
-protocol_address = constant.MAINNET_PROTOCOL_ADDRESS
+protocol_address = constant.REAL_MAINNET_PROTOCOL
 
 contract_params = {
     'Diamond': {},

@@ -23,7 +23,7 @@ contract TrailblazerTournament is MercuryBase {
     }
 
     function initialize(string memory baseURI, address protocol) public {
-        super.initialize(baseURI, "MercuryTestFlight", "SKYLAB_TEST_FLIGHT", protocol);
+        super.initialize(baseURI, "TrailblazerTournament", "TrailblazerTournament", protocol);
         lastIndexPerRound[0] = 0;
     }
 

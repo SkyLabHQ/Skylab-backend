@@ -53,6 +53,7 @@ contract MercuryBidTacToe is MercuryGameBase {
     function createOrJoinDefault() external {
         address aviation = burnerAddressToAviation(msg.sender);
         if (defaultGameQueue[aviation] == address(0)) {
+            require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
             defaultGameQueue[aviation] = msg.sender;
         } else {
             address gameAddress = createGame(LibBidTacToe.defaultParams());
