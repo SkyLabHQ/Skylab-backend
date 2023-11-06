@@ -5,7 +5,7 @@ FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 
 account = accounts.load('skylab')
 account.set_autosign(True, passphrase="y")
-protocol_address = constant.PROTOCOL_ADDRESS
+protocol_address = constant.REAL_MAINNET_PROTOCOL
 game_address = constant.MAINNET_GAME_ADDRESS
 aviation_address = constant.AVIATION_ADDRESS
 mainnet_aviation_address = constant.MAINNET_AVIATION_ADDRESS
