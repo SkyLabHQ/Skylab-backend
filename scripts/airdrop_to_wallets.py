@@ -15,7 +15,7 @@ max_gas_scaler = 1.4
 network_url = 'https://polygon-rpc.com/'
 # network_url = 'https://rpc-mumbai.maticvigil.com'
 
-contract_address = "0xc439f052a92736F6d0a474654ab88F737b7bD308"
+contract_address = "0x862b29530Bbd2c205C625911AB04889B86F056bd"
 # Mercury Tournament owner info
 caller = "0xD0f899a62aC7ED1b4A145a111ae42D23f4cc2919"
 private_key = "68eea6ece306d9cf365390211901f6226558925aae1fa31ad61632dbdd7bc261"
@@ -35,8 +35,9 @@ def airdrop(filename):
 
     w3 = Web3(Web3.HTTPProvider(network_url))
 
-    with open("../abis/MercuryTournament.abi", "r") as f:
-        abi = json.load(f)
+    with open("../out/TrailblazerTournament.sol/TrailblazerTournament.json", "r") as f:
+        abi = json.load(f)["abi"]
+
     w3.middleware_onion.inject(middleware.geth_poa_middleware, layer=0)
     contract = w3.eth.contract(address=contract_address, abi=abi)
 
@@ -53,7 +54,7 @@ def airdrop(filename):
             send_txn = ""
             txn_receipt = {}
             try:
-                call_function = contract.functions.tournamentMint(wallet_group, fuel, battery).build_transaction({
+                call_function = contract.functions.tournamentMint(wallet_group).build_transaction({
                     "chainId": chain_id, "from": caller, "nonce": nonce, "maxFeePerGas": int(w3.eth.gas_price * max_gas_scaler), 
                     })
                 signed_txn = w3.eth.account.sign_transaction(call_function, private_key=private_key)
