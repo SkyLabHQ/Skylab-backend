@@ -45,9 +45,9 @@ contract MercuryPilots {
         if (pilot.collectionAddress != address(0)) {
             LibComponent.getMileage().pilotGainMileage(pilot, mileage);
             LibComponent.getSessions().increasePilotSessions(pilot);
-            LibComponent.getNetPoints().updatePilotNetPoints(player, -1 * int256(pointsMoved));
-            LibComponent.getWinStreak().updatePilotWinstreak(player, false);
         }
+        LibComponent.getNetPoints().updatePilotNetPoints(player, -1 * int256(pointsMoved));
+        LibComponent.getWinStreak().updatePilotWinstreak(player, false);
     }
 
     function getRecentlyActivePilots(address player) public view returns (LibPilots.Pilot[] memory) {

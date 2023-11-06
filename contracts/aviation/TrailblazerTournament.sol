@@ -49,6 +49,10 @@ contract TrailblazerTournament is MercuryBase {
 
     function tournamentRoundOver() external {
         LibDiamond.enforceIsContractOwner();
+        _tournamentRoundOver();
+    }
+
+    function _tournamentRoundOver() internal {
         lastIndexPerRound[_currentRound] = LibBase.layout().lastTokenID;
         _currentRound++;
     }

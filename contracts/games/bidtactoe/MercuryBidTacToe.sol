@@ -144,10 +144,16 @@ contract MercuryBidTacToe is MercuryGameBase {
             "MercuryBidTacToe: burner address does not belong to this game"
         );
         MercuryBase aviation = MercuryBase(burnerAddressToAviation(playerBurner));
-        cleanUp(playerBurner, aviation);
+        uint256 playerTokenId = cleanUp(playerBurner);
         super.baseQuitLobby(msg.sender, address(aviation));
+        if (playerWon) {
+            emit WinGame(playerTokenId, aviation.ownerOf(playerTokenId));
+            aviation.aviationMovePoints(playerTokenId, 0);
+        } else {
+            emit LoseGame(playerTokenId, aviation.ownerOf(playerTokenId));
+            aviation.aviationMovePoints(0, playerTokenId);
+        }
         delete gameExists[msg.sender];
-        delete paramsPerGame[msg.sender];
     }
 
     function cleanUp(address burner) private returns (uint256) {
