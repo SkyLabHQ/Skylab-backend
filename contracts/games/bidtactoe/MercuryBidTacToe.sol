@@ -51,15 +51,20 @@ contract MercuryBidTacToe is MercuryGameBase {
     }
 
     function createOrJoinDefault() external {
+        require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
         address aviation = burnerAddressToAviation(msg.sender);
+        require(aviation != address(0), "MercuryBidTacToe: not a valid burner address");
         if (defaultGameQueue[aviation] == address(0)) {
-            require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
             defaultGameQueue[aviation] = msg.sender;
         } else {
-            address gameAddress = createGame(LibBidTacToe.defaultParams());
             address player2 = defaultGameQueue[aviation];
-            delete defaultGameQueue[aviation];
-            joinGame(gameAddress, player2);
+            if (burnerAddressToAviation(player2) != aviation) {
+                defaultGameQueue[aviation] = msg.sender;
+            } else {
+                address gameAddress = createGame(LibBidTacToe.defaultParams());
+                delete defaultGameQueue[aviation];
+                joinGame(gameAddress, player2);
+            }
         }
     }
 
@@ -152,5 +157,9 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function registerBot(address bot, bool register) external onlyOwner {
         validBidTacToeBots[bot] = register;
+    }
+
+    function cleanupDefaultQueue(address aviation) external onlyOwner {
+        delete defaultGameQueue[aviation];
     }
 }
