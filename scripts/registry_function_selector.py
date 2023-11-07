@@ -7,7 +7,7 @@ FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 
 protocol_address = constant.REAL_MAINNET_PROTOCOL
 game_address = constant.REAL_MAINNET_GAME
-aviation_address = constant.REAL_MAINNET_TrailblazerTournament
+aviation_address = constant.REAL_MAINNET_TOURNAMENT
 zero_address = '0x'+'0'*40
 
 account = accounts.load('skylab')
@@ -43,7 +43,7 @@ def get_selector(contract):
         return selectors
 
 def main():
-    for contract_name in protocol_params:
+    for contract_name in game_params:
         print(contract_name)
         ContractClass = getattr(project, contract_name)
         selector = get_selector(contract_name)
@@ -53,5 +53,5 @@ def main():
             contract.address,
             FacetCutAction['Add'],
             selector))
-        diamond = project.Diamond.at(protocol_address)
+        diamond = project.Diamond.at(game_address)
         diamond.diamondCut(cut, '0x'+'0'*40, '0x',sender=account)

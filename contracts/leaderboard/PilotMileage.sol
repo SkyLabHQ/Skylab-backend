@@ -20,7 +20,8 @@ contract PilotMileage is Initializable {
     }
 
     function pilotGainMileage(LibPilots.Pilot memory pilot, uint256 xp) public onlyProtocol {
-        LibPilotLeaderBoard.setPilotRankingData(pilot, xp);
+        uint256 preXP = LibPilotLeaderBoard.getPilotRankingData(pilot);
+        LibPilotLeaderBoard.setPilotRankingData(pilot, preXP+xp);
         emit PilotMileageGain(pilot.collectionAddress, pilot.pilotId, xp);
     }
 

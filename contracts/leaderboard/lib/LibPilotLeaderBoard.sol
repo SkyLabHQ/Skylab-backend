@@ -62,4 +62,8 @@ library LibPilotLeaderBoard {
         }
         return type(uint256).max;
     }
+
+    function getPilotRankingData(LibPilots.Pilot memory pilot) internal view returns (uint256) {
+        return layout().pilotRankingData[pilot.collectionAddress][pilot.pilotId];
+    }
 }

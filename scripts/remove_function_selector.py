@@ -6,9 +6,9 @@ FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 account = accounts.load('skylab')
 account.set_autosign(True, passphrase="y")
 protocol_address = constant.REAL_MAINNET_PROTOCOL
-game_address = constant.MAINNET_GAME_ADDRESS
-aviation_address = constant.AVIATION_ADDRESS
-mainnet_aviation_address = constant.MAINNET_AVIATION_ADDRESS
+game_address = constant.REAL_MAINNET_GAME
+aviation_address = constant.REAL_MAINNET_TOURNAMENT
+baby_address = constant.REAL_MAINNET_BABY
 zero_address = '0x'+'0'*40
 
 def main():
@@ -24,7 +24,8 @@ def main():
         hexbytes_array
     ))
     project.Diamond.at(game_address).diamondCut(cut,zero_address, '0x', sender=account)
-
+    facet = project.Diamond.at(game_address).facets()
+    print(facet)
     # # Remove aviation functions
     facet = project.Diamond.at(aviation_address).facets()
     print(facet)
