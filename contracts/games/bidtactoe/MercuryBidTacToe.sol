@@ -158,4 +158,8 @@ contract MercuryBidTacToe is MercuryGameBase {
     function registerBot(address bot, bool register) external onlyOwner {
         validBidTacToeBots[bot] = register;
     }
+
+    function cleanupDefaultQueue(address aviation) external onlyOwner {
+        delete defaultGameQueue[aviation];
+    }
 }

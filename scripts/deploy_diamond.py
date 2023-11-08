@@ -1,80 +1,82 @@
-from ape import accounts, project
-import json
-import os
-from scripts import constant
+from ape import project,Contract
+from scripts import constant, utils, account
 
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
+protocol_names = ['Diamond','ComponentIndex','MercuryPilots','MercuryResources','Vault']
+aviation_names = ['Diamond','TrailblazerTournament']
+baby_names = ['Diamond','BabyMercs']
+game_names = ['Diamond','MercuryBidTacToe']
+leaderboard_names = ['PilotMileage','PilotNetPoints','PilotSessions','PilotWinStreak']
 
-cut = []
+def upgrade(proxy_address, contract_name):
+    ContractClass = getattr(project, contract_name)
+    logic = ContractClass.deploy(sender=account.deployer)
+    proxy = Contract(proxy_address,abi=constant.PROXY_ABI)
+    proxy.upgradeTo(logic.address, sender=account.admin)
+      
+def deploy_leaderboard(contract_name, protocol_address):
+    leaderboard_addresses = {}
+    for contract_name in leaderboard_names:
+        ContractClass = getattr(project, contract_name)
+        contract = ContractClass.deploy(sender=account.deployer)
+        proxy = project.LeaderBoardProxy.deploy(contract.address, constant.ADMIN, "0x", sender=account.deployer)
+        leaderboard_addresses[contract_name] = proxy.address
+        delegate = ContractClass.at(proxy.address)
+        delegate.initialize(protocol_address,sender=account.deployer)
+    return leaderboard_addresses
 
-diamond_address = ''
+def deploy_diamond(names):
+    cut = []
+    for contract_name in names:
+        ContractClass = getattr(project, contract_name)
+        selector = utils.get_selector(contract_name)
+        contract = ContractClass.deploy(sender=account.deployer)
+        if contract_name != 'Diamond':
+            cut.append((contract.address,FacetCutAction['Add'],selector))
+        if contract_name == 'Diamond':
+            diamond_address = contract.address
+    diamond = project.Diamond.at(diamond_address)
+    diamond.diamondCut(cut, '0x'+'0'*40, '0x', sender=account.deployer)
+    return diamond_address
 
-account = accounts.load('skylab')
-account.set_autosign(True, passphrase="y")
-
-# Note: contrat_name : constructor_args
-# replace it if needed
-# contract_params = {
-#     'Diamond': {},
-#     # 'ComponentIndex': {},
-#     # 'MercuryPilots': {},
-#     # 'MercuryResources': {},
-#     # 'Vault': {},
-#     'TrailblazerTournament': {}
-# }
-
-contract_params = {
-    'Diamond': {},
-    'BabyMercs': {}
-}
-
-    
-def get_selector(contract):
-    file_path = f'{os.getcwd()}/out/{contract}.sol/{contract}.json'
-    with open(file_path, 'r') as f:
-        data = json.load(f)
-        method_identifiers = data['methodIdentifiers']
-        selectors = ['0x' + selector for selector in method_identifiers.values()]
-        return selectors
-
+def deploy_bidtactoe():
+    bidtactoe = project.BidTacToe.deploy(sender=account.deployer)
+    return bidtactoe.address
 def main():
-    # for contract_name, constructor_args in contract_params.items():
-    #     ContractClass = getattr(project, contract_name)
-    #     selector = get_selector(contract_name)
-    #     if constructor_args:
-    #         contract = ContractClass.deploy(
-    #             *constructor_args,
-    #             sender=account
-    #         )
-    #     else:
-    #         contract = ContractClass.deploy(sender=account)
-    #     if contract_name != 'Diamond':
-    #         cut.append((
-    #             contract.address,
-    #             FacetCutAction['Add'],
-    #             selector
-    #         ))
-    #     if contract_name == 'Diamond':
-    #         diamond_address = contract.address
-    # diamond = project.Diamond.at(diamond_address)
-    # diamond.diamondCut(cut, '0x'+'0'*40, '0x', sender=account)
-    # aviation = project.TrailblazerTournament.at(diamond_address)
-    # aviation.initialize(constant.MAINNET_URI,constant.REAL_MAINNET_PROTOCOL, sender=account)
-    # baby = project.BabyMercs.at(diamond_address)
-    # baby.initialize("BabyMercs", "BabyMercs", constant.BABY_URI, sender=account)
-    # protocol = project.Vault.at(constant.REAL_MAINNET_PROTOCOL)
-    # protocol.initVault(constant.REAL_MAINNET_TrailblazerTournament,sender=account)
-    # game = project.MercuryBidTacToe.at(constant.MERCURY_BIDTACTOE_ADDRESS)
-    # game.setProtocol(constant.PROTOCOL_ADDRESS, sender=account)
-    component_index = project.ComponentIndex.at(constant.REAL_MAINNET_PROTOCOL)
-    # component_index.setValidPilotCollection(diamond_address, True,sender=account)
-    component_index.setValidPilotCollection('0x79FCDEF22feeD20eDDacbB2587640e45491b757f', True,sender=account)
-    component_index.setValidPilotCollection('0x9C8fF314C9Bc7F6e59A9d9225Fb22946427eDC03', True,sender=account)
-    component_index.setValidPilotCollection('0x1CB1A5e65610AEFF2551A50f76a87a7d3fB649C6', True,sender=account)
-    component_index.setValidPilotCollection('0x23581767a106ae21c074b2276D25e5C3e136a68b', True,sender=account)
-    component_index.setValidPilotCollection('0x70eFBA117011571c0dB83D86d1740304a8A3b79C', True,sender=account)
-    # component_index.setValidAviation(constant.REAL_MAINNET_TrailblazerTournament, True,sender=account)
-    component_index.setPilotMileage('0x743AC85caf73DcB362951658421116809A299b53', sender=account)
-    component_index.setNetPoints('0x44A4ee1bD559A55398f8533C8c8848032Ef44305', sender=account)
-    component_index.setPilotSessions('0x08Fe53530c7830173b66D89cbeb66C3260D87085', sender=account)
-    component_index.setWinStreak("0xdf2b732D9fafA6D306a905b3B5BDB385280bd6a3", sender=account)
+    ## deploy protocol and aviation
+    protocol_address = deploy_diamond(protocol_names)
+    aviation_address = deploy_diamond(aviation_names)
+    ## Init protocol vault
+    protocol = project.Vault.at(protocol_address)
+    protocol.initVault(aviation_address,sender=account.deployer)
+    ## Init aviation
+    aviation = project.TrailblazerTournament.at(aviation_address)
+    aviation.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
+    ## deploy babymercs
+    baby_address = deploy_diamond(baby_names)
+    ## Init babymercs
+    baby = project.BabyMercs.at(baby_address)
+    baby.initialize("BabyMercs", "BabyMercs", constant.BABY_URI, sender=account.deployer)
+    ##deploy game
+    game_address = deploy_diamond(game_names)
+    game = project.MercuryBidTacToe.at(game_address)
+    ## Init ganme
+    game.initialize(protocol_address, sender=account.deployer)
+    ## Deploy leaderboard
+    leaderboard_addresses = deploy_leaderboard(leaderboard_names, protocol_address)
+    ## Registry component index
+    component_index = project.ComponentIndex.at(protocol_address)
+    component_index.setValidPilotCollection(baby_address, True,sender=account.deployer)
+    component_index.setValidAviation(aviation_address, True,sender=account.deployer)
+    component_index.setValidGame(game_address, True,sender=account.deployer)
+    component_index.setPilotMileage(leaderboard_addresses['PilotMileage'],sender=account.deployer)
+    component_index.setNetPoints(leaderboard_addresses['PilotNetPoints'],sender=account.deployer)
+    component_index.setPilotSessions(leaderboard_addresses['PilotSessions'],sender=account.deployer)
+    component_index.setWinStreak(leaderboard_addresses['PilotWinStreak'],sender=account.deployer)
+    ## write address to file
+    with open('./address.temp','w') as f:
+        f.write("protocol_address:"+protocol_address+"\n")
+        f.write("aviation_address:"+aviation_address+"\n")
+        f.write("baby_address:"+baby_address+"\n")
+        f.write("game_address:"+game_address+"\n")
+        f.write("leaderboard_addresses:"+str(leaderboard_addresses)+"\n")
