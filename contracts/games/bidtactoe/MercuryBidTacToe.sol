@@ -43,7 +43,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 lengthToWin,
         uint64 initialBalance
     ) external {
-        createGame(GameParams(gridWidth, gridHeight, lengthToWin, initialBalance));
+        createGame(GameParams(gridWidth, gridHeight, lengthToWin, initialBalance), false);
     }
 
     function joinLobby(address lobby) external {
@@ -56,7 +56,7 @@ contract MercuryBidTacToe is MercuryGameBase {
             require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
             defaultGameQueue[aviation] = msg.sender;
         } else {
-            address gameAddress = createGame(LibBidTacToe.defaultParams());
+            address gameAddress = createGame(LibBidTacToe.defaultParams(), false);
             address player2 = defaultGameQueue[aviation];
             delete defaultGameQueue[aviation];
             joinGame(gameAddress, player2);
@@ -65,15 +65,15 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function createBotGame(address bot) external {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
-        address gameAddress = createGame(LibBidTacToe.defaultParams());
+        address gameAddress = createGame(LibBidTacToe.defaultParams(), true);
         LibBidTacToe.joinGame(gameAddress, bot);
         super.baseJoinLobby(gameAddress, burnerAddressToAviation(msg.sender));
     }
 
-    function createGame(GameParams memory gameParams) internal returns (address) {
+    function createGame(GameParams memory gameParams, bool isBot) internal returns (address) {
         require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
         
-        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
+        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this), isBot);
         address aviation = burnerAddressToAviation(msg.sender);
         paramsPerGame[newGame] = gameParams;
         planeMetadataPerGame[newGame] =
