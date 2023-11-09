@@ -35,7 +35,7 @@ abstract contract MercuryBase is SolidStateERC721 {
                             Game Function
     //////////////////////////////////////////////////////////////*/
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external onlyGameAddresses {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) virtual external onlyGameAddresses {
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         uint256 pointsToMove = estimatePointsToMove(winnerTokenId, loserTokenId);
         sbs.aviationPoints[winnerTokenId] += pointsToMove;
@@ -174,7 +174,7 @@ abstract contract MercuryBase is SolidStateERC721 {
         super._transfer(from, to, tokenId);
     }
 
-    function updateLevel(uint256 tokenId) private {
+    function updateLevel(uint256 tokenId) internal {
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         uint256 oldLevel = sbs.aviationLevels[tokenId];
         sbs.aviationLevels[tokenId] = convertPointsToLevel(sbs.aviationPoints[tokenId]);
@@ -183,7 +183,7 @@ abstract contract MercuryBase is SolidStateERC721 {
         }
     }
 
-    function burnAviation(uint256 tokenId) private {
+    function burnAviation(uint256 tokenId) internal {
         _burn(tokenId);
     }
 }

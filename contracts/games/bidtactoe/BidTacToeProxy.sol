@@ -3,10 +3,38 @@ pragma solidity ^0.8.0;
 
 contract BidTacToeProxy {
     /**
+     * @dev Storage slot with the address of the current implementation.
+     * This is the keccak-256 hash of "eip1967.proxy.implementation" subtracted by 1, and is
+     * validated in the constructor.
+     */
+    bytes32 internal constant IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+    address constant BidTacToePlayerVersusBot = address(0x0); //TODO
+    address constant BidTacToe = address(0x0);
+
+    struct Address {
+        address implementation;
+    }
+
+    function layout() private pure returns (Address storage impl) {
+        bytes32 position = IMPLEMENTATION_SLOT;
+        assembly {
+            impl.slot := position
+        }
+    }
+
+    constructor(bool isBot) {
+        if (isBot) {
+            layout().implementation = BidTacToePlayerVersusBot; // BidTacToePlayerVersusBot address
+        } else {
+            layout().implementation = BidTacToe; //BidTacToe address
+        }
+    }
+    /**
      * @dev Delegates the current call to `implementation`.
      *
      * This function does not return to its internal call site, it will return directly to the external caller.
      */
+
     function _delegate(address implementation) internal virtual {
         assembly {
             // Copy msg.data. We take full control of memory in this inline assembly
@@ -32,8 +60,8 @@ contract BidTacToeProxy {
      * @dev This is a virtual function that should be overridden so it returns the address to which the fallback function
      * and {_fallback} should delegate.
      */
-    function _implementation() internal pure returns (address) {
-        return address(0x7AD2182DF0D56821bB6f6AA2B9356c9a3adA5a69); //bidtactoe address
+    function _implementation() internal view returns (address) {
+        return layout().implementation;
     }
 
     /**

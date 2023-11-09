@@ -11,6 +11,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 gridHeight;
         uint64 lengthToWin;
         uint64 initialBalance;
+        bool isBot;
     }
 
     struct PlaneMetadata {
@@ -43,7 +44,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 lengthToWin,
         uint64 initialBalance
     ) external {
-        createGame(GameParams(gridWidth, gridHeight, lengthToWin, initialBalance));
+        createGame(GameParams(gridWidth, gridHeight, lengthToWin, initialBalance,false));
     }
 
     function joinLobby(address lobby) external {
@@ -70,8 +71,9 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function createBotGame(address bot) external {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
-        address gameAddress = createGame(LibBidTacToe.defaultParams());
-        joinGame(gameAddress, bot);
+        address gameAddress = createGame(LibBidTacToe.defaultBotParams());
+        LibBidTacToe.joinGame(gameAddress, bot);
+        super.baseJoinLobby(gameAddress, burnerAddressToAviation(msg.sender));
     }
 
     function createGame(GameParams memory gameParams) internal returns (address) {
@@ -138,6 +140,25 @@ contract MercuryBidTacToe is MercuryGameBase {
         emit WinGame(winnerTokenId, aviation.ownerOf(winnerTokenId));
         emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
         aviation.aviationMovePoints(winnerTokenId, loserTokenId);
+        delete gameExists[msg.sender];
+    }
+
+    function handleBotWinLoss(address playerBurner, bool playerWon) external {
+        require(gameExists[msg.sender], "MercuryBidTacToe: msg.sender is not a game");
+        require(
+            gamePerPlayer[playerBurner] == msg.sender,
+            "MercuryBidTacToe: burner address does not belong to this game"
+        );
+        MercuryBase aviation = MercuryBase(burnerAddressToAviation(playerBurner));
+        uint256 playerTokenId = cleanUp(playerBurner);
+        super.baseQuitLobby(msg.sender, address(aviation));
+        if (playerWon) {
+            emit WinGame(playerTokenId, aviation.ownerOf(playerTokenId));
+            aviation.aviationMovePoints(playerTokenId, 0);
+        } else {
+            emit LoseGame(playerTokenId, aviation.ownerOf(playerTokenId));
+            aviation.aviationMovePoints(0, playerTokenId);
+        }
         delete gameExists[msg.sender];
     }
 
