@@ -11,6 +11,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 gridHeight;
         uint64 lengthToWin;
         uint64 initialBalance;
+        bool isBot;
     }
 
     struct PlaneMetadata {
@@ -43,7 +44,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 lengthToWin,
         uint64 initialBalance
     ) external {
-        createGame(GameParams(gridWidth, gridHeight, lengthToWin, initialBalance), false);
+        createGame(GameParams(gridWidth, gridHeight, lengthToWin, initialBalance,false));
     }
 
     function joinLobby(address lobby) external {
@@ -56,7 +57,7 @@ contract MercuryBidTacToe is MercuryGameBase {
             require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
             defaultGameQueue[aviation] = msg.sender;
         } else {
-            address gameAddress = createGame(LibBidTacToe.defaultParams(), false);
+            address gameAddress = createGame(LibBidTacToe.defaultParams());
             address player2 = defaultGameQueue[aviation];
             delete defaultGameQueue[aviation];
             joinGame(gameAddress, player2);
@@ -65,15 +66,15 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function createBotGame(address bot) external {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
-        address gameAddress = createGame(LibBidTacToe.defaultParams(), true);
+        address gameAddress = createGame(LibBidTacToe.defaultBotParams());
         LibBidTacToe.joinGame(gameAddress, bot);
         super.baseJoinLobby(gameAddress, burnerAddressToAviation(msg.sender));
     }
 
-    function createGame(GameParams memory gameParams, bool isBot) internal returns (address) {
+    function createGame(GameParams memory gameParams) internal returns (address) {
         require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
         
-        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this), isBot);
+        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
         address aviation = burnerAddressToAviation(msg.sender);
         paramsPerGame[newGame] = gameParams;
         planeMetadataPerGame[newGame] =

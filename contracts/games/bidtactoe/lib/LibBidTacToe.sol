@@ -7,14 +7,15 @@ import {BidTacToeProxy} from "../BidTacToeProxy.sol";
 
 library LibBidTacToe {
     function defaultParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
-        return MercuryBidTacToe.GameParams(3, 3, 3, 100);
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, false);
     }
-
+    function defaultBotParams() internal pure returns(MercuryBidTacToe.GameParams memory) {
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, true);
+    }
     function createGame(
         MercuryBidTacToe.GameParams memory gameParams,
         address playerAddress,
-        address mercuryBidTacToeAddress,
-        bool isBot
+        address mercuryBidTacToeAddress
     ) internal returns (address) {
         // In general, we only allow odd widths or heights
         require(
@@ -32,10 +33,10 @@ library LibBidTacToe {
             gameParams.initialBalance >= 100 && gameParams.initialBalance <= 10000,
             "MercuryBidTacToeParamVerifier: initialBalance incorrect"
         );
-        BidTacToeProxy bidTacToeProxy = new BidTacToeProxy(isBot);
+        BidTacToeProxy bidTacToeProxy = new BidTacToeProxy(gameParams.isBot);
         (bool suceed,) = address(bidTacToeProxy).call(
             abi.encodeWithSignature(
-                "initialize((uint64,uint64,uint64,uint64),address,address)",
+                "initialize((uint64,uint64,uint64,uint64,bool),address,address)",
                 gameParams,
                 playerAddress,
                 mercuryBidTacToeAddress
