@@ -23,7 +23,7 @@ contract MercuryBidTacToeBot {
     function bidAndReveal(BidTacToe game)
         external
     {
-        require(game.player1() == tx.origin, "BidTacToeBot: tx.origin is not player1");
+        require(address(game) == msg.sender, "BidTacToeBot: tx.origin is not player1");
 
         uint bid = analyzeBid(game);
         game.commitBid(uint256(keccak256(abi.encodePacked(bid, uint(0)))));
@@ -31,25 +31,26 @@ contract MercuryBidTacToeBot {
     }
 
     function analyzeBid(BidTacToe game) internal view returns (uint) {
+        address human = game.player1();
         address[] memory grid = game.getGrid();
         uint currentSelectedGrid = game.currentSelectedGrid();
         uint myBalance = game.balances(address(this));
-        uint opponentBalance = game.balances(msg.sender);
+        uint opponentBalance = game.balances(human);
         uint myOccupiedGridCounts = game.occupiedGridCounts(address(this));
-        uint opponentOccupiedGridCounts = game.occupiedGridCounts(msg.sender);
+        uint opponentOccupiedGridCounts = game.occupiedGridCounts(human);
 
         grid[currentSelectedGrid] = address(this);
-        uint pp_win = calculatePositionalPower(grid, address(this), msg.sender);
+        uint pp_win = calculatePositionalPower(grid, address(this), human);
         // certain win
         if ((pp_win > 1000 || myOccupiedGridCounts + 1 >= 5) && myBalance > opponentBalance) {
             return opponentBalance + 1;
         }
 
-        grid[currentSelectedGrid] = msg.sender;
+        grid[currentSelectedGrid] = human;
         uint pp_lose = 0;
         if (opponentOccupiedGridCounts + 1 < 5) {
             // not certain loss
-            pp_lose = calculatePositionalPower(grid, address(this), msg.sender);
+            pp_lose = calculatePositionalPower(grid, address(this), human);
         }
 
         uint optimalBid = 0;
