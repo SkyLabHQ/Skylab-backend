@@ -1,16 +1,9 @@
-from ape import accounts, project
-from scripts import constant
-account = accounts.load('skylab')
-account.set_autosign(True, passphrase="y")
+from ape import project
+from scripts import constant, account
 def main():
-    skylab = '0xD0f899a62aC7ED1b4A145a111ae42D23f4cc2919'
-    game = project.Diamond.at(constant.GAME_ADDRESS)
-    protocol = project.Diamond.at(constant.PROTOCOL_ADDRESS)
-    tournament = project.Diamond.at(constant.TOURNAMENT_ADDRESS)
-    baby = project.Diamond.at(constant.BABY_ADDRESS)
-    test_flight = project.Diamond.at(constant.TESTFLIGHT_ADDRESS)
-    game.transferOwnership(skylab, sender=account)
-    protocol.transferOwnership(skylab, sender=account)
-    tournament.transferOwnership(skylab, sender=account)
-    baby.transferOwnership(skylab, sender=account)
-    test_flight.transferOwnership(skylab, sender=account)
+    game = project.MercuryBotTournament.at(constant.MUMBAI_BotTournament)
+    game.initialize(constant.MAINNET_URI, constant.MUMBAI_PROTOCOL, sender=account.deployer)
+    # game.tournamentRoundOver(sender=account.deployer)
+    # game.tournamentMint("0x425A0CB30cE4a914B3fED2683f992F8B7C9e9214", gas_limit = 1000000,sender=account.deployer)
+    # component_index = project.ComponentIndex.at(constant.MUMBAI_PROTOCOL)
+    # component_index.setValidAviation(constant.MUMBAI_BotTournament, True, sender=account.deployer)

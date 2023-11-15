@@ -8,8 +8,8 @@ contract BidTacToeProxy {
      * validated in the constructor.
      */
     bytes32 internal constant IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
-    address constant BidTacToePlayerVersusBot = address(0x0); //TODO
-    address constant BidTacToe = address(0x0);
+    address constant BidTacToePlayerVersusBot = address(0x7B390987D21F2b501f53aB6b08a17DC6C7f3FeD0);
+    address constant BidTacToe = address(0x6CdE2AD384a157D6eDE326886c70fb265F2CE9F9);
 
     struct Address {
         address implementation;

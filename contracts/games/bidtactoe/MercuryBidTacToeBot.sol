@@ -23,7 +23,7 @@ contract MercuryBidTacToeBot {
     function bidAndReveal(BidTacToe game)
         external
     {
-        require(game.player1() == msg.sender, "BidTacToeBot: msg.sender is not player1");
+        require(game.player1() == tx.origin, "BidTacToeBot: tx.origin is not player1");
 
         uint bid = analyzeBid(game);
         game.commitBid(uint256(keccak256(abi.encodePacked(bid, uint(0)))));

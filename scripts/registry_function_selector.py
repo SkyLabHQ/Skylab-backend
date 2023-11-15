@@ -4,7 +4,7 @@ from scripts import constant, utils, account
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 
 protocol_address = constant.REAL_MAINNET_PROTOCOL
-game_address = constant.REAL_MAINNET_GAME
+game_address = constant.MUMBAI_GAME
 aviation_address = constant.REAL_MAINNET_TOURNAMENT
 zero_address = '0x'+'0'*40
 

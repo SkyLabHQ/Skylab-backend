@@ -4,6 +4,7 @@ from scripts import constant, utils, account
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 protocol_names = ['Diamond','ComponentIndex','MercuryPilots','MercuryResources','Vault']
 aviation_names = ['Diamond','TrailblazerTournament']
+bot_names = ['Diamond', 'MercuryBotTournament']
 baby_names = ['Diamond','BabyMercs']
 game_names = ['Diamond','MercuryBidTacToe']
 leaderboard_names = ['PilotMileage','PilotNetPoints','PilotSessions','PilotWinStreak']
@@ -42,16 +43,26 @@ def deploy_diamond(names):
 def deploy_bidtactoe():
     bidtactoe = project.BidTacToe.deploy(sender=account.deployer)
     return bidtactoe.address
+
+def deploy_bot():
+    bot = project.MercuryBidTacToeBot.deploy(sender=account.deployer)
+    return bot.address
+def deploy_bidtactoe_player_versus_bot():
+    player_versus_bot = project.BidTacToePlayerVersusBot.deploy(sender=account.deployer)
+    return player_versus_bot.address
+
 def main():
     ## deploy protocol and aviation
     protocol_address = deploy_diamond(protocol_names)
     aviation_address = deploy_diamond(aviation_names)
+    bot_tournament_address = deploy_diamond(bot_names)
     ## Init protocol vault
     protocol = project.Vault.at(protocol_address)
     protocol.initVault(aviation_address,sender=account.deployer)
     ## Init aviation
     aviation = project.TrailblazerTournament.at(aviation_address)
     aviation.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
+    bot_tournament_address.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
     ## deploy babymercs
     baby_address = deploy_diamond(baby_names)
     ## Init babymercs
@@ -68,15 +79,24 @@ def main():
     component_index = project.ComponentIndex.at(protocol_address)
     component_index.setValidPilotCollection(baby_address, True,sender=account.deployer)
     component_index.setValidAviation(aviation_address, True,sender=account.deployer)
+    component_index.setValidAviation(bot_tournament_address, True, sender=account.deployer)
     component_index.setValidGame(game_address, True,sender=account.deployer)
     component_index.setPilotMileage(leaderboard_addresses['PilotMileage'],sender=account.deployer)
     component_index.setNetPoints(leaderboard_addresses['PilotNetPoints'],sender=account.deployer)
     component_index.setPilotSessions(leaderboard_addresses['PilotSessions'],sender=account.deployer)
     component_index.setWinStreak(leaderboard_addresses['PilotWinStreak'],sender=account.deployer)
-    ## write address to file
+    # Deploy bot
+    bot_address = deploy_bot()
+    bidtactoe_player_versus_bot_address = deploy_bidtactoe_player_versus_bot()
+    bid_tac_toe = deploy_bidtactoe()
+    # Write address to file
     with open('./address.temp','w') as f:
         f.write("protocol_address:"+protocol_address+"\n")
         f.write("aviation_address:"+aviation_address+"\n")
         f.write("baby_address:"+baby_address+"\n")
         f.write("game_address:"+game_address+"\n")
         f.write("leaderboard_addresses:"+str(leaderboard_addresses)+"\n")
+        f.write("bot_tournament_address:"+bot_tournament_address+"\n")
+        f.write("bot_address:"+bot_address+"\n")
+        f.write("bidtactoe_address:"+bidtactoe_player_versus_bot_address+"\n")
+        f.write("bid_tac_toe:"+bid_tac_toe+"\n")
