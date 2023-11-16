@@ -1,0 +1,20 @@
+from ape import accounts, project
+from scripts import constant
+account = accounts.load('skylab')
+account.set_autosign(True, passphrase="y")
+def main():
+    game = project.BidTacToe.at("0x727f52916f893de1dfd5cade61cf091cde60c7d2")
+    print("Human")
+    print(game.player1())
+    print("Bot")
+    print(game.player2())
+    print(game.getGrid())
+    print(game.currentSelectedGrid())
+    print("Human balance")
+    print(game.balances(game.player1()))
+    print("Bot balance")
+    print(game.balances(game.player2()))
+    print("Human occupied counts")
+    print(game.occupiedGridCounts(game.player1()))
+    print("Bot occupied counts")
+    print(game.occupiedGridCounts(game.player2()))
