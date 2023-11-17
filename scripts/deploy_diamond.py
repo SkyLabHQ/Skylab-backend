@@ -4,9 +4,10 @@ from scripts import constant, utils, account
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
 protocol_names = ['Diamond','ComponentIndex','MercuryPilots','MercuryResources','Vault']
 aviation_names = ['Diamond','TrailblazerTournament']
-bot_names = ['Diamond', 'MercuryBotTournament']
+bot_tournament_names = ['Diamond', 'MercuryBotTournament']
 baby_names = ['Diamond','BabyMercs']
 game_names = ['Diamond','MercuryBidTacToe']
+bot_names = ['Diamond', 'MercuryBidTacToeBot']
 leaderboard_names = ['PilotMileage','PilotNetPoints','PilotSessions','PilotWinStreak']
 
 def upgrade(proxy_address, contract_name):
@@ -55,14 +56,15 @@ def main():
     ## deploy protocol and aviation
     protocol_address = deploy_diamond(protocol_names)
     aviation_address = deploy_diamond(aviation_names)
-    bot_tournament_address = deploy_diamond(bot_names)
+    bot_tournament_address = deploy_diamond(bot_tournament_names)
     ## Init protocol vault
     protocol = project.Vault.at(protocol_address)
     protocol.initVault(aviation_address,sender=account.deployer)
     ## Init aviation
     aviation = project.TrailblazerTournament.at(aviation_address)
     aviation.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
-    bot_tournament_address.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
+    bot_tournament = project.MercuryBotTournament.at(bot_tournament_address)
+    bot_tournament.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
     ## deploy babymercs
     baby_address = deploy_diamond(baby_names)
     ## Init babymercs
@@ -86,7 +88,7 @@ def main():
     component_index.setPilotSessions(leaderboard_addresses['PilotSessions'],sender=account.deployer)
     component_index.setWinStreak(leaderboard_addresses['PilotWinStreak'],sender=account.deployer)
     # Deploy bot
-    bot_address = deploy_bot()
+    bot_address = deploy_diamond(bot_names)
     bidtactoe_player_versus_bot_address = deploy_bidtactoe_player_versus_bot()
     bid_tac_toe = deploy_bidtactoe()
     # Write address to file
