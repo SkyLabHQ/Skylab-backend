@@ -33,9 +33,9 @@ contract MercuryTestFlight is MercuryBase {
                             Game Functions
     //////////////////////////////////////////////////////////////*/
 
-    function aviationLock(uint256 tokenId) external override onlyGameAddresses {}
+    // function aviationLock(uint256 tokenId) external override onlyGameAddresses {}
 
-    function aviationUnlock(uint256 tokenId) external override onlyGameAddresses {}
+    // function aviationUnlock(uint256 tokenId) external override onlyGameAddresses {}
 
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) override external onlyGameAddresses {
         
@@ -44,10 +44,6 @@ contract MercuryTestFlight is MercuryBase {
     /*//////////////////////////////////////////////////////////////
                             View Function
     //////////////////////////////////////////////////////////////*/
-
-    function isAviationLocked(uint256) public pure override returns (bool) {
-        return false;
-    }
 
     function isApprovedForAll(address _owner, address _operator)
         public
