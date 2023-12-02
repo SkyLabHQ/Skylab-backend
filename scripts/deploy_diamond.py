@@ -93,10 +93,15 @@ def main():
     component_index.setNetPoints(leaderboard_addresses['PilotNetPoints'],sender=account.deployer)
     component_index.setPilotSessions(leaderboard_addresses['PilotSessions'],sender=account.deployer)
     component_index.setWinStreak(leaderboard_addresses['PilotWinStreak'],sender=account.deployer)
+    for pilot in constant.Pilot_WhiteList:
+        component_index.setValidPilotCollection(pilot, True,sender=account.deployer)
     # Deploy bot
-    game = project.MercuryBidTacToe.at(constant.MUMBAI_GAME)
+    game = project.MercuryBidTacToe.at(constant.Goerli_Game)
     bot_address = deploy_diamond(bot_names)
-    game.registerBot(bot_address, True, sender=account.deployer)
+    bot = project.MercuryBidTacToeBot.at(constant.Base_Bot)
+    bot.initialize(sender=account.deployer)
+    game = project.MercuryBidTacToe.at(constant.Base_Game)
+    game.registerBot(constant.Base_Bot, True, sender=account.deployer)
     bidtactoe_player_versus_bot_address = deploy_bidtactoe_player_versus_bot()
     bid_tac_toe = deploy_bidtactoe()
     # Write address to file
