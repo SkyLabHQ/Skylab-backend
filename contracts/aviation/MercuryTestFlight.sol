@@ -24,7 +24,6 @@ contract MercuryTestFlight is MercuryBase {
         uint256 tokenId = LibBase.layout().lastTokenID + 1;
         _safeMint(msg.sender, tokenId);
         LibBase.layout().lastTokenID++;
-        LibBase.layout().aviationTradeLock[tokenId] = true;
         LibBase.layout().aviationLevels[tokenId] = 1;
         LibBase.layout().aviationPoints[tokenId] = 1;
     }
@@ -33,21 +32,19 @@ contract MercuryTestFlight is MercuryBase {
                             Game Functions
     //////////////////////////////////////////////////////////////*/
 
-    function aviationLock(uint256 tokenId) external override onlyGameAddresses {}
+    // function aviationLock(uint256 tokenId) external override onlyGameAddresses {}
 
-    function aviationUnlock(uint256 tokenId) external override onlyGameAddresses {}
+    // function aviationUnlock(uint256 tokenId) external override onlyGameAddresses {}
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) override external onlyGameAddresses {
-        
-    }
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external override onlyGameAddresses {}
 
     /*//////////////////////////////////////////////////////////////
                             View Function
     //////////////////////////////////////////////////////////////*/
 
-    function isAviationLocked(uint256) public pure override returns (bool) {
-        return false;
-    }
+    // function isAviationLocked(uint256) public pure override returns (bool) {
+    //     return false;
+    // }
 
     function isApprovedForAll(address _owner, address _operator)
         public
