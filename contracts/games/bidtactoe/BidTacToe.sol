@@ -132,7 +132,6 @@ contract BidTacToe is Initializable {
         require(balances[msg.sender] >= bid, "BidTacToe: not enough balance");
         require(timeouts[msg.sender] == 0 || block.timestamp <= timeouts[msg.sender], "BidTacToe: timeout has passed");
 
-
         revealedBids[msg.sender][currentSelectedGrid] = bid;
 
         balances[msg.sender] -= bid;
@@ -174,7 +173,7 @@ contract BidTacToe is Initializable {
         }
     }
 
-    function claimTimeoutPenalty() external onlyPlayers {
+    function claimTimeoutPenalty() external virtual onlyPlayers {
         require(timeouts[getOtherPlayer()] > 0, "BidTacToe: timeout isn't defined");
         require(block.timestamp > timeouts[getOtherPlayer()], "BidTacToe: timeout didn't pass yet");
 
