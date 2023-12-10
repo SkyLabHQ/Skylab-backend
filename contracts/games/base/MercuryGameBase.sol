@@ -22,21 +22,21 @@ abstract contract MercuryGameBase is ERC1155Holder {
         _;
     }
 
-    function baseCreateLobby(address newGame, address aviation) internal {
-        LibGameBase.baseCreateLobby(newGame, aviation);
-    }
+    // function baseCreateLobby(address newGame, address aviation) internal {
+    //     LibGameBase.baseCreateLobby(newGame, aviation);
+    // }
 
-    function baseJoinLobby(address lobby, address aviation) internal {
-        LibGameBase.baseJoinLobby(lobby, aviation);
-    }
+    // function baseJoinLobby(address lobby, address aviation) internal {
+    //     LibGameBase.baseJoinLobby(lobby, aviation);
+    // }
 
-    function baseQuitLobby(address lobby, address aviation) internal {
-        LibGameBase.baseQuitLobby(lobby, aviation);
-    }
+    // function baseQuitLobby(address lobby, address aviation) internal {
+    //     LibGameBase.baseQuitLobby(lobby, aviation);
+    // }
 
-    function getLobbyOnGoingGames(address aviation) external view returns (address[] memory) {
-        return LibGameBase.lobbyOnGoingGames(aviation);
-    }
+    // function getLobbyOnGoingGames(address aviation) external view returns (address[] memory) {
+    //     return LibGameBase.lobbyOnGoingGames(aviation);
+    // }
 
     /*//////////////////////////////////////////////////////////////
                             Approval Function
