@@ -22,4 +22,6 @@ contract BidTacToePlayerVersusBot is BidTacToe {
 
         mercuryBidTacToe.handleBotWinLoss(player1, player == player1);
     }
+
+    function claimTimeoutPenalty() external override onlyPlayers {}
 }
