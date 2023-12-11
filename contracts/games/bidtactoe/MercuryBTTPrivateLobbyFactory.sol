@@ -1,40 +1,34 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {PrivateLobby} from "./PrivateLobby.sol";
+import {MercuryBTTPrivateLobby} from "./MercuryBTTPrivateLobby.sol";
 
-contract PrivateLobbyFactory {
+contract MercuryBTTPrivateLobbyFactory {
     mapping(address => string) public privateLobbyName;
     mapping(string => address) public nameToPravateLobby;
-    mapping(string => bool) public isNameExist;
+    mapping(address => bool) public hasJoined;
     string private constant characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    string[] public names;
 
     function createPrivateLobby(address _mercuryBidTacToe) public returns (address) {
         string memory name = generateRandomCharacters();
-        while(isNameExist[name]) {
+        while(nameToPravateLobby[name] != address(0)) {
             name = generateRandomCharacters();
         }
-        isNameExist[name] = true;
-        PrivateLobby privateLobby = new PrivateLobby(_mercuryBidTacToe, name);
+        MercuryBTTPrivateLobby privateLobby = new MercuryBTTPrivateLobby(_mercuryBidTacToe, name);
         privateLobbyName[address(privateLobby)] = name;
         nameToPravateLobby[name] = address(privateLobby);
-        names.push(name);
         return address(privateLobby);
+    }
+
+    function setHasJoined(string memory name, bool joined) public {
+        require(msg.sender == nameToPravateLobby[name], "PrivateLobbyFactory: not admin");
+        hasJoined[msg.sender] = joined;
     }
 
     function clean(string memory name) public {
         require(msg.sender == nameToPravateLobby[name], "PrivateLobbyFactory: not admin");
         delete nameToPravateLobby[name];
         delete privateLobbyName[msg.sender];
-        delete isNameExist[name];
-        for (uint i = 0; i < names.length; i++) {
-            if (keccak256(bytes(names[i])) == keccak256(bytes(name))) {
-                names[i] = names[names.length - 1];
-                names.pop();
-                break;
-            }
-        }
     }
 
     function generateRandomCharacters() public view returns (string memory) {
