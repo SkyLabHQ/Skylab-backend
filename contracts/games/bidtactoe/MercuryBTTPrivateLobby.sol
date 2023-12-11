@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 import "./MercuryBidTacToe.sol";
-import "../../aviation/base/MercuryBase.sol";
 import {LibBidTacToe} from "./lib/LibBidTacToe.sol";
 
 contract MercuryBTTPrivateLobby {
