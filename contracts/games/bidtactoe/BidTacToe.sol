@@ -13,7 +13,6 @@ contract BidTacToe is Initializable {
     uint256 public gridWidth;
     uint256 public gridHeight;
     uint256 public lengthToWin;
-    //MercuryBidTacToe public mercuryBidTacToe;
     address public mercuryBidTacToeAddress;
 
     /*//////////////////////////////////////////////////////////////
@@ -76,7 +75,6 @@ contract BidTacToe is Initializable {
         revealedBids[player1] = new uint256[](gridWidth * gridHeight);
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
-        //mercuryBidTacToe = MercuryBidTacToe(callback);
         mercuryBidTacToeAddress = _mercuryBidTacToeAddress;
     }
 

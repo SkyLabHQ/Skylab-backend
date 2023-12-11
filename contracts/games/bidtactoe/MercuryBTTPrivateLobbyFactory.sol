@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 import {MercuryBTTPrivateLobby} from "./MercuryBTTPrivateLobby.sol";
 
 contract MercuryBTTPrivateLobbyFactory {
-    mapping(address => string) public privateLobbyName;
     mapping(string => address) public nameToPravateLobby;
     mapping(address => bool) public hasJoined;
     string private constant characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -15,7 +14,6 @@ contract MercuryBTTPrivateLobbyFactory {
             name = generateRandomCharacters();
         }
         MercuryBTTPrivateLobby privateLobby = new MercuryBTTPrivateLobby(_mercuryBidTacToe, name);
-        privateLobbyName[address(privateLobby)] = name;
         nameToPravateLobby[name] = address(privateLobby);
         return address(privateLobby);
     }
@@ -28,7 +26,6 @@ contract MercuryBTTPrivateLobbyFactory {
     function clean(string memory name) public {
         require(msg.sender == nameToPravateLobby[name], "PrivateLobbyFactory: not admin");
         delete nameToPravateLobby[name];
-        delete privateLobbyName[msg.sender];
     }
 
     function generateRandomCharacters() public view returns (string memory) {

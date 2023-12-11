@@ -105,11 +105,11 @@ contract MercuryBTTPrivateLobby is MercuryGameBase {
     }
 
     function baseJoinRoom(address lobby, address aviation) private {
-        address swappedLobby = lobbyGameQueue[aviation][lobbyGameQueue[aviation].length - 1];
+        address swappedRoom = lobbyGameQueue[aviation][lobbyGameQueue[aviation].length - 1];
         uint256 index = lobbyGameIndex[lobby];
-        lobbyGameQueue[aviation][index] = swappedLobby;
+        lobbyGameQueue[aviation][index] = swappedRoom;
         lobbyGameQueue[aviation].pop();
-        lobbyGameIndex[swappedLobby] = index;
+        lobbyGameIndex[swappedRoom] = index;
         delete lobbyGameIndex[lobby];
         lobbyOnGoingGamesIndex[lobby] = lobbyOnGoingGames[aviation].length;
         lobbyOnGoingGames[aviation].push(lobby);
