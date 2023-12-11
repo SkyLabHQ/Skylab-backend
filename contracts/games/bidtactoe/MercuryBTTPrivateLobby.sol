@@ -41,6 +41,12 @@ contract MercuryBTTPrivateLobby is MercuryGameBase {
     GameHistory[] public gameHistory;
     address mercuryBidTacToe;
     string lobbyName;
+    mapping(address => bool) public isPlayer;
+
+    modifier onlyPlayer {
+        require(isPlayer[msg.sender], "PrivateLobby: not a player");
+        _;
+    }
 
     constructor(address _mercuryBidTacToe, string memory _lobbyName) {
         factory = msg.sender;
@@ -49,13 +55,13 @@ contract MercuryBTTPrivateLobby is MercuryGameBase {
 
     }
 
-    function setUserInfo(uint256 avatar, string memory userName) public {
+    function setUserInfo(uint256 avatar, string memory userName) public onlyPlayer {
         require(avatar >= 1 && avatar <= 16, "Private Lobby: avatar out of range");
         require(bytes(userName).length <= 10, "Private Lobby: name too long");
         userInfo[msg.sender] = UserInfo(avatar, userName);
     }
 
-    function createLobby(MercuryBidTacToe.GameParams memory gameParams) external returns (address) {
+    function createLobby(MercuryBidTacToe.GameParams memory gameParams) external onlyPlayer returns (address) {
         address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
         address aviation = burnerAddressToAviation(msg.sender);
         paramsPerGame[newGame] = gameParams;
@@ -67,7 +73,7 @@ contract MercuryBTTPrivateLobby is MercuryGameBase {
         return newGame;
     }
 
-    function joinLobby(address gameAddress, address player2) external {
+    function joinLobby(address gameAddress, address player2) external onlyPlayer {
         require(gameExists[gameAddress], "PrivateLobby: lobby does not exist");
         require(gamePerPlayer[player2] == address(0), "PrivateLobby: player already created or queued for a game");
         require(
@@ -83,7 +89,7 @@ contract MercuryBTTPrivateLobby is MercuryGameBase {
         baseJoinRoom(gameAddress, aviation);
     }
 
-    function deleteLobby(address lobby) external {
+    function deleteLobby(address lobby) external onlyPlayer {
         require(gameExists[lobby], "PrivateLobby: lobby does not exist");
         require(
             planeMetadataPerGame[lobby].token2Level == 0 && planeMetadataPerGame[lobby].token2Points == 0,
@@ -127,6 +133,7 @@ contract MercuryBTTPrivateLobby is MercuryGameBase {
     function joinPrivateLobby() external {
         require(!IPrivateLobbyFactory(factory).hasJoined(msg.sender), "PrivateLobby: player already joined");
         players.push(msg.sender);
+        isPlayer[msg.sender] = true;
         IPrivateLobbyFactory(factory).setHasJoined(lobbyName, true);
     }
 
@@ -135,6 +142,7 @@ contract MercuryBTTPrivateLobby is MercuryGameBase {
             if (players[i] == msg.sender) {
                 players[i] = players[players.length - 1];
                 players.pop();
+                isPlayer[msg.sender] = false;
             }
         }
         if (players.length == 0) {
