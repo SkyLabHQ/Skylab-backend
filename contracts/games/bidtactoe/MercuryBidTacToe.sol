@@ -38,19 +38,6 @@ contract MercuryBidTacToe is MercuryGameBase {
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
 
-    // function createLobby(
-    //     uint64 gridWidth,
-    //     uint64 gridHeight,
-    //     uint64 lengthToWin,
-    //     uint64 initialBalance
-    // ) external {
-    //     createGame(GameParams(gridWidth, gridHeight, lengthToWin, initialBalance,false));
-    // }
-
-    // function joinLobby(address lobby) external {
-    //     joinGame(lobby, msg.sender);
-    // }
-
     function createOrJoinDefault() external {
         require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
         address aviation = burnerAddressToAviation(msg.sender);
@@ -73,7 +60,6 @@ contract MercuryBidTacToe is MercuryGameBase {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
         address gameAddress = createGame(LibBidTacToe.defaultBotParams());
         LibBidTacToe.joinGame(gameAddress, bot);
-        //super.baseJoinLobby(gameAddress, burnerAddressToAviation(msg.sender));
     }
 
     function createGame(GameParams memory gameParams) internal returns (address) {
@@ -86,7 +72,6 @@ contract MercuryBidTacToe is MercuryGameBase {
             PlaneMetadata(getAviationLevel(msg.sender, aviation), getAviationPoints(msg.sender, aviation), 0, 0);
         gameExists[newGame] = true;
         gamePerPlayer[msg.sender] = newGame;
-        // super.baseCreateLobby(newGame, aviation);
         return newGame;
     }
 
@@ -100,21 +85,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         gamePerPlayer[player2] = gameAddress;
         planeMetadataPerGame[gameAddress].token2Level = getAviationLevel(player2, aviation);
         planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, aviation);
-        // super.baseJoinLobby(gameAddress, aviation);
     }
-
-    // function deleteLobby(address lobby) external {
-    //     require(gameExists[lobby], "MercuryBidTacToe: lobby does not exist");
-    //     require(planeMetadataPerGame[lobby].token2Level == 0 && planeMetadataPerGame[lobby].token2Points == 0, "MercuryBidTacToe: the game is ongoing");
-
-    //     address aviation = burnerAddressToAviation(msg.sender);
-    //     super.baseJoinLobby(lobby, aviation);
-    //     super.baseQuitLobby(lobby, aviation);
-    //     delete gameExists[lobby];
-    //     delete paramsPerGame[lobby];
-    //     delete planeMetadataPerGame[lobby];
-    //     delete gamePerPlayer[msg.sender];
-    // }
 
     function withdrawFromQueue() external {
         address aviation = burnerAddressToAviation(msg.sender);
@@ -136,7 +107,6 @@ contract MercuryBidTacToe is MercuryGameBase {
         MercuryBase aviation = MercuryBase(burnerAddressToAviation(winnerBurner));
         uint256 winnerTokenId = cleanUp(winnerBurner, aviation);
         uint256 loserTokenId = cleanUp(loserBurner, aviation);
-        //super.baseQuitLobby(msg.sender, address(aviation));
         emit WinGame(winnerTokenId, aviation.ownerOf(winnerTokenId));
         emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
         aviation.aviationMovePoints(winnerTokenId, loserTokenId);
@@ -151,7 +121,6 @@ contract MercuryBidTacToe is MercuryGameBase {
         );
         MercuryBase aviation = MercuryBase(burnerAddressToAviation(playerBurner));
         uint256 playerTokenId = cleanUp(playerBurner, aviation);
-        //super.baseQuitLobby(msg.sender, address(aviation));
         if (playerWon) {
             emit WinGame(playerTokenId, aviation.ownerOf(playerTokenId));
             aviation.aviationMovePoints(playerTokenId, 0);

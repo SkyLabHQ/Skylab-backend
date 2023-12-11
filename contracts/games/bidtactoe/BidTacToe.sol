@@ -256,6 +256,5 @@ contract BidTacToe is Initializable {
         emit LoseGame(otherPlayer, state + 1);
         (bool suceed,) = mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
         require(suceed, "BidTacToe: handleWinLoss failed");
-        //mercuryBidTacToe.handleWinLoss(player, otherPlayer);
     }
 }
