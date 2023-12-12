@@ -112,6 +112,12 @@ contract MercuryBTTPrivateLobby {
     }
 
     function joinPrivateLobby() public {
+        for (uint256 i = 0; i < players.length; i++) {
+            if (players[i] == msg.sender) {
+                players[i] = players[players.length - 1];
+                players.pop();
+            }
+        }
         players.push(msg.sender);
         mercuryBidTacToe.setActiveLobby(msg.sender);
     }
@@ -135,5 +141,9 @@ contract MercuryBTTPrivateLobby {
         winCountPerPlayer[winnerBurner] += 1;
         loseCountPerPlayer[loserBurner] += 1;
         mercuryBidTacToe.handleWinLoss(winnerBurner, loserBurner);
+    }
+
+    function getPlayers() external view returns (address[] memory) {
+        return players;
     }
 }
