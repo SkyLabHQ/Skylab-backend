@@ -66,9 +66,9 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         } else {
             address gameAddress = createGame(LibBidTacToe.defaultParams());
             joinGame(gameAddress, opponent);
-            playerToOpponent[msg.sender] = address(0);
-            playerToOpponent[opponent] = address(0);
-            playerToTimeout[msg.sender] = 0;
+            delete playerToOpponent[msg.sender];
+            delete playerToOpponent[opponent];
+            delete playerToTimeout[msg.sender];
         }
     }
 
@@ -82,6 +82,10 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
             address aviation = burnerAddressToAviation(activePlayer);
             defaultGameQueue[aviation] = activePlayer;
         }
+        delete playerToOpponent[msg.sender];
+        delete playerToOpponent[opponent];
+        delete playerToTimeout[msg.sender];
+        delete playerToTimeout[opponent];
     }
 
     function createBotGame(address bot) external {
