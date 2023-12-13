@@ -7,10 +7,10 @@ import {BidTacToeProxy} from "../BidTacToeProxy.sol";
 
 library LibBidTacToe {
     function defaultParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
-        return MercuryBidTacToe.GameParams(3, 3, 3, 100, false);
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, false);
     }
     function defaultBotParams() internal pure returns(MercuryBidTacToe.GameParams memory) {
-        return MercuryBidTacToe.GameParams(3, 3, 3, 100, true);
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, true);
     }
     function createGame(
         MercuryBidTacToe.GameParams memory gameParams,
@@ -19,10 +19,10 @@ library LibBidTacToe {
     ) internal returns (address) {
         // In general, we only allow odd widths or heights
         require(
-            gameParams.gridWidth == 3 || gameParams.gridWidth == 5, "MercuryBidTacToeParamVerifier: gridWidth incorrect"
+            gameParams.gridWidth == 3, "MercuryBidTacToeParamVerifier: gridWidth incorrect"
         );
         require(
-            gameParams.gridHeight == 3 || gameParams.gridHeight == 5,
+            gameParams.gridHeight == 3,
             "MercuryBidTacToeParamVerifier: gridHeight incorrect"
         );
         require(
@@ -30,8 +30,16 @@ library LibBidTacToe {
             "MercuryBidTacToeParamVerifier: lengthToWin incorrect"
         );
         require(
-            gameParams.initialBalance >= 100 && gameParams.initialBalance <= 10000,
+            gameParams.initialBalance >= 100,
             "MercuryBidTacToeParamVerifier: initialBalance incorrect"
+        );
+        require(
+            gameParams.gridMaxSelectionCount >= 1 && gameParams.gridMaxSelectionCount <= 2,
+            "MercuryBidTacToeParamVerifier: gridMaxSelectionCount incorrect"
+        );
+        require(
+            gameParams.gridSelectionStrategy >= 0 && gameParams.gridSelectionStrategy <= 2,
+            "MercuryBidTacToeParamVerifier: gridSelectionStrategy incorrect"
         );
         BidTacToeProxy bidTacToeProxy = new BidTacToeProxy(gameParams.isBot);
         (bool suceed,) = address(bidTacToeProxy).call(

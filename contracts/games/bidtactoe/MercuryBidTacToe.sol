@@ -12,6 +12,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         uint64 gridHeight;
         uint64 lengthToWin;
         uint64 initialBalance;
+        uint128 gridMaxSelectionCount;
+        uint128 gridSelectionStrategy;
         bool isBot;
     }
 

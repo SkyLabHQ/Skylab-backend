@@ -13,12 +13,16 @@ contract BidTacToe is Initializable {
     uint256 public gridWidth;
     uint256 public gridHeight;
     uint256 public lengthToWin;
+    
+    uint256 public gridMaxSelectionCount;
+    uint256 public gridSelectionStrategy;
     address public mercuryBidTacToeAddress;
 
     /*//////////////////////////////////////////////////////////////
                             Dynamic gameplay data
     //////////////////////////////////////////////////////////////*/
     address[] private grid;
+    uint256[] private gridSelectionCount;
     uint256 public currentSelectedGrid;
     uint256[] public allSelectedGrids;
     mapping(address => uint256) public gameStates;
@@ -70,8 +74,11 @@ contract BidTacToe is Initializable {
         gridWidth = gameParams.gridWidth;
         gridHeight = gameParams.gridHeight;
         lengthToWin = gameParams.lengthToWin;
+        gridMaxSelectionCount = gameParams.gridMaxSelectionCount;
+        gridSelectionStrategy = gameParams.gridSelectionStrategy;
 
         grid = new address[](gridWidth * gridHeight);
+        gridSelectionCount = new uint256[](gridWidth * gridHeight);
         revealedBids[player1] = new uint256[](gridWidth * gridHeight);
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
@@ -80,6 +87,10 @@ contract BidTacToe is Initializable {
 
     function getGrid() external view returns (address[] memory) {
         return grid;
+    }
+
+    function getGridSelectionCount() external view returns (uint256[] memory) {
+        return gridSelectionCount;
     }
 
     function getRevealedBids(address player) external view returns (uint256[] memory) {
@@ -95,6 +106,7 @@ contract BidTacToe is Initializable {
         gameStates[player2] = 1;
         balances[player2] = balances[player1];
 
+        initializeFutureGrids();
         generateNextGrid();
         setTimeoutForBothPlayers();
         if (uint256(keccak256(abi.encodePacked(block.timestamp, player1, player2))) % 2 == 0) {
@@ -192,22 +204,56 @@ contract BidTacToe is Initializable {
         playerEmote[msg.sender] = index;
     }
 
+    function initializeFutureGrids() internal {
+        if (gridSelectionStrategy == 2) {
+            // If strategy = 2, generate all selections (maxSelection * width * height) now
+            for (uint i = 0; i < gridWidth * gridHeight * gridMaxSelectionCount; i++) {
+                uint256 selection = generateSingleGridSelection(i);
+                gridSelectionCount[selection] += 1;
+                allSelectedGrids.push(selection);
+            }
+
+            gridSelectionCount = new uint256[](gridWidth * gridHeight);
+        } else if (gridSelectionStrategy == 1) {
+            // If strategy = 1, generate 1 future selection now
+            allSelectedGrids.push(generateSingleGridSelection(1));
+        }
+    }
+
     function generateNextGrid() internal {
+        // If future grids has one, use that, else generate
+        uint256 nthSelection = occupiedGridCounts[player1] + occupiedGridCounts[player2];
+        if (allSelectedGrids.length > nthSelection) {
+            require(gridSelectionStrategy != 0, "BidTacToe DEBUG: reading future grids, strategy cannot be 0");
+            currentSelectedGrid = allSelectedGrids[nthSelection];
+        } else {
+            require(gridSelectionStrategy == 0, "BidTacToe DEBUG: generating fresh grid, strategy must be 0");
+            currentSelectedGrid = generateSingleGridSelection(1);
+            allSelectedGrids.push(currentSelectedGrid);
+        }
+        gridSelectionCount[currentSelectedGrid] += 1;
+
+        // If strateegy = 1, generate 1 future selection now
+        if (gridSelectionStrategy == 1) {
+            allSelectedGrids.push(generateSingleGridSelection(1));
+        }
+    }
+
+    function generateSingleGridSelection(uint256 nonce) view internal returns (uint256) {
         uint256 tempHash = uint256(
-            keccak256(abi.encodePacked(player1, player2, balances[player1], balances[player2], block.timestamp))
+            keccak256(abi.encodePacked(player1, player2, balances[player1], balances[player2], block.timestamp, nonce))
         );
         uint256 tempSelection = tempHash % (gridWidth * gridHeight);
 
         uint256 antiCollision = tempSelection;
-        while (grid[antiCollision] != address(0)) {
+        while (gridSelectionCount[antiCollision] >= gridMaxSelectionCount) {
             antiCollision += 1;
             if (antiCollision >= grid.length) {
                 antiCollision = 0;
             }
         }
 
-        currentSelectedGrid = antiCollision;
-        allSelectedGrids.push(currentSelectedGrid);
+        return antiCollision;
     }
 
     function setTimeoutForBothPlayers() internal {
