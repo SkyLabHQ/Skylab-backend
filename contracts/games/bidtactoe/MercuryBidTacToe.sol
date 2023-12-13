@@ -60,7 +60,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     }
 
     function setActiveQueue() public {
-        require(block.timestamp <= playerToTimeout[msg.sender], "MercuryBidTacToe: timeout reached")
+        require(block.timestamp <= playerToTimeout[msg.sender], "MercuryBidTacToe: timeout reached");
         address opponent = playerToOpponent[msg.sender];
         if(playerToTimeout[opponent] != 0) {
             playerToTimeout[msg.sender] = 0;
@@ -74,11 +74,10 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     }
 
     function activeQueueTimeout() public {
-        require(block.timestamp > playerToTimeout[msg.sender], "MercuryBidTacToe: timeout not reached");
         address opponent = playerToOpponent[msg.sender];
+        require(block.timestamp > playerToTimeout[opponent], "MercuryBidTacToe: timeout not reached");
         address activePlayer;
         if(playerToTimeout[msg.sender] == 0) activePlayer = msg.sender;
-        if(playerToTimeout[opponent] == 0) activePlayer = opponent;
         if(activePlayer != address(0)) {
             address aviation = burnerAddressToAviation(activePlayer);
             defaultGameQueue[aviation] = activePlayer;
