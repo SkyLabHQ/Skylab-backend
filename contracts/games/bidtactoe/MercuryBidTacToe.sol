@@ -24,22 +24,23 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         uint64 token2Points;
     }
 
-    function initialize(address _protocol) public override {
-        super.initialize(_protocol);
-    }
-
     // Dynamic game data
     mapping(address => bool) private gameExists;
     mapping(address => address) public gamePerPlayer;
+    mapping(address => address) playerToOpponent;
+    mapping(address => uint256) playerToTimeout;
     mapping(address => GameParams) public paramsPerGame;
     mapping(address => PlaneMetadata) public planeMetadataPerGame;
     // collecton to default game queue
     mapping(address => address) public defaultGameQueue;
-
     mapping(address => bool) public validBidTacToeBots;
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
+
+    function initialize(address _protocol) public override {
+        super.initialize(_protocol);
+    }
 
     function createOrJoinDefault() external {
         require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
@@ -47,15 +48,48 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         if (defaultGameQueue[aviation] == address(0)) {
             defaultGameQueue[aviation] = msg.sender;
         } else {
-            address player2 = defaultGameQueue[aviation];
-            if (burnerAddressToAviation(player2) != aviation) {
+            address defaultPlayer = defaultGameQueue[aviation];
+            if (burnerAddressToAviation(defaultPlayer) != aviation) {
                 defaultGameQueue[aviation] = msg.sender;
             } else {
-                address gameAddress = createGame(LibBidTacToe.defaultParams());
+                playerToOpponent[defaultPlayer] = msg.sender;
+                playerToOpponent[msg.sender] = defaultPlayer;
+                playerToTimeout[defaultPlayer] = block.timestamp + 30 seconds;
+                playerToTimeout[msg.sender] = block.timestamp + 30 seconds;
                 delete defaultGameQueue[aviation];
-                joinGame(gameAddress, player2);
             }
         }
+    }
+
+    function setActiveQueue() public {
+        require(block.timestamp <= playerToTimeout[msg.sender], "MercuryBidTacToe: timeout reached");
+        address opponent = playerToOpponent[msg.sender];
+        require(playerToOpponent[msg.sender] == opponent && playerToOpponent[opponent] == msg.sender, "MercuryBidTacToe: opponent not match");
+        if(playerToTimeout[opponent] != 0) {
+            playerToTimeout[msg.sender] = 0;
+        } else {
+            address gameAddress = createGame(LibBidTacToe.defaultParams());
+            joinGame(gameAddress, opponent);
+            delete playerToOpponent[msg.sender];
+            delete playerToOpponent[opponent];
+            delete playerToTimeout[msg.sender];
+        }
+    }
+
+    function activeQueueTimeout() public {
+        address opponent = playerToOpponent[msg.sender];
+        require(block.timestamp > playerToTimeout[opponent], "MercuryBidTacToe: timeout not reached");
+        require(playerToOpponent[msg.sender] == opponent && playerToOpponent[opponent] == msg.sender, "MercuryBidTacToe: opponent not match");
+        address activePlayer;
+        if(playerToTimeout[msg.sender] == 0) activePlayer = msg.sender;
+        if(activePlayer != address(0)) {
+            address aviation = burnerAddressToAviation(activePlayer);
+            defaultGameQueue[aviation] = activePlayer;
+        }
+        delete playerToOpponent[msg.sender];
+        delete playerToOpponent[opponent];
+        delete playerToTimeout[msg.sender];
+        delete playerToTimeout[opponent];
     }
 
     function createBotGame(address bot) external {
