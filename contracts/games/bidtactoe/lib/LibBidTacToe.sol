@@ -44,7 +44,7 @@ library LibBidTacToe {
         BidTacToeProxy bidTacToeProxy = new BidTacToeProxy(gameParams.isBot);
         (bool suceed,) = address(bidTacToeProxy).call(
             abi.encodeWithSignature(
-                "initialize((uint64,uint64,uint64,uint64,bool),address,address)",
+                "initialize((uint64,uint64,uint64,uint64,uint128,uint128,bool),address,address)",
                 gameParams,
                 playerAddress,
                 mercuryBidTacToeAddress

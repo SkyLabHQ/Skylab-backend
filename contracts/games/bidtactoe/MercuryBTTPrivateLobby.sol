@@ -66,7 +66,8 @@ contract MercuryBTTPrivateLobby {
         isActiveLobbyAndCorrectAviation
         returns (address)
     {
-        address newGame = mercuryBidTacToe.createGameInPrivateLobby(gameParams);
+        address player1 = msg.sender;
+        address newGame = mercuryBidTacToe.createGameInPrivateLobby(gameParams, player1);
         baseCreateRoom(newGame);
         return newGame;
     }

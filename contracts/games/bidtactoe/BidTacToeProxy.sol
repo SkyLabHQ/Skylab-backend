@@ -14,8 +14,8 @@ contract BidTacToeProxy {
     // address constant BidTacToe = address(0x6CdE2AD384a157D6eDE326886c70fb265F2CE9F9);
     
     //base goerli chain
-    address constant BidTacToePlayerVersusBot = address(0x6b58b7e6800CCa519bd11380a5CdABbc83B70C8B);
-    address constant BidTacToe = address(0xc6B4AF6B7C944a4C43755b83753D292Ac3447b19);
+    address constant BidTacToePlayerVersusBot = address(0xa6d4D07DfE8Fef7bcbfc7Bcf4C079C6e8719bf35);
+    address constant BidTacToe = address(0x58cC8BE220a12C59E2Ba4e60B3Bf246D5BB824F8);
     
     // base mainnet
     // address constant BidTacToePlayerVersusBot = address(0x95780958eb0135805559d0d25EC14C81197E15D4);

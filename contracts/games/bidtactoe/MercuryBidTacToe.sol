@@ -27,14 +27,14 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     // Dynamic game data
     mapping(address => bool) private gameExists;
     mapping(address => address) public gamePerPlayer;
-    mapping(address => address) playerToOpponent;
-    mapping(address => uint256) playerToTimeout;
     mapping(address => GameParams) public paramsPerGame;
     mapping(address => PlaneMetadata) public planeMetadataPerGame;
     // collecton to default game queue
     mapping(address => address) public defaultGameQueue;
     mapping(address => bool) public validBidTacToeBots;
-
+    mapping(address => address) playerToOpponent;
+    mapping(address => uint256) playerToTimeout;
+    
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
 
@@ -68,7 +68,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         if(playerToTimeout[opponent] != 0) {
             playerToTimeout[msg.sender] = 0;
         } else {
-            address gameAddress = createGame(LibBidTacToe.defaultParams());
+            address gameAddress = createGame(LibBidTacToe.defaultParams(), msg.sender);
             joinGame(gameAddress, opponent);
             delete playerToOpponent[msg.sender];
             delete playerToOpponent[opponent];
@@ -94,14 +94,14 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
 
     function createBotGame(address bot) external {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
-        address gameAddress = createGame(LibBidTacToe.defaultBotParams());
+        address gameAddress = createGame(LibBidTacToe.defaultBotParams(), msg.sender);
         LibBidTacToe.joinGame(gameAddress, bot);
     }
 
-    function createGame(GameParams memory gameParams) internal returns (address) {
+    function createGame(GameParams memory gameParams, address player1) internal returns (address) {
         require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
 
-        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
+        address newGame = LibBidTacToe.createGame(gameParams, player1, address(this));
         address aviation = burnerAddressToAviation(msg.sender);
         paramsPerGame[newGame] = gameParams;
         planeMetadataPerGame[newGame] =
@@ -126,9 +126,9 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, aviation);
     }
 
-    function createGameInPrivateLobby(GameParams memory gameParams) external returns (address) {
+    function createGameInPrivateLobby(GameParams memory gameParams, address player1) external returns (address) {
         require(lobbyExists[msg.sender], "MercuryBidTacToe: sender is a private lobby");
-        return createGame(gameParams);
+        return createGame(gameParams, player1);
     }
 
     function joinGameInPrivateLobby(address gameAddress, address player2) external {
