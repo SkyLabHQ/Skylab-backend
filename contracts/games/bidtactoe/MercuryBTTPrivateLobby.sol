@@ -23,10 +23,10 @@ contract MercuryBTTPrivateLobby {
     mapping(address => uint256) public loseCountPerPlayer;
 
     // aviation to lobbies game queue
-    address[] lobbyGameQueue;
-    mapping(address => uint256) lobbyGameIndex;
-    address[] lobbyOnGoingGames;
-    mapping(address => uint256) lobbyOnGoingGamesIndex;
+    address[] public lobbyGameQueue;
+    mapping(address => uint256) public lobbyGameIndex;
+    address[] public lobbyOnGoingGames;
+    mapping(address => uint256) public lobbyOnGoingGamesIndex;
 
     // Static data
     MercuryBidTacToe mercuryBidTacToe;
@@ -52,7 +52,7 @@ contract MercuryBTTPrivateLobby {
         admin = _admin;
         lobbyAviation = mercuryBidTacToe.burnerAddressToAviation(admin);
 
-        joinPrivateLobby();
+        //joinPrivateLobby();
     }
 
     function setUserInfo(uint256 avatar, string memory userName) public isActiveLobbyAndCorrectAviation {
@@ -145,5 +145,17 @@ contract MercuryBTTPrivateLobby {
 
     function getPlayers() external view returns (address[] memory) {
         return players;
+    }
+
+    function getLobbyGameQueue() external view returns (address[] memory) {
+        return lobbyGameQueue;
+    }
+
+    function getLobbyOnGoingGames() external view returns(address[] memory) {
+        return lobbyOnGoingGames;
+    }
+
+    function getGameHistory() external view returns(GameHistory[] memory) {
+        return gameHistory;
     }
 }

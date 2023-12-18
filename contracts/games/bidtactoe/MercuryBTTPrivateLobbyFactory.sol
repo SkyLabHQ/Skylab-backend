@@ -9,18 +9,22 @@ contract MercuryBTTPrivateLobbyFactory {
     mapping(address => address) public activeLobbyPerPlayer;
     string private constant characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    function createPrivateLobby() external returns (address) {
+    event PrivateLobbyCreated(address privateLobbyAddress, string name, address admin);
+
+    function createPrivateLobby() external {
         string memory name = generateRandomCharacters();
         while (nameToPrivateLobby[name] != address(0)) {
             name = generateRandomCharacters();
         }
-
-        MercuryBTTPrivateLobby privateLobby = new MercuryBTTPrivateLobby(name, msg.sender);
-
-        nameToPrivateLobby[name] = address(privateLobby);
-        lobbyExists[address(privateLobby)] = true;
-
-        return address(privateLobby);
+        bytes memory bytecode =
+            abi.encodePacked(type(MercuryBTTPrivateLobby).creationCode, abi.encode(name, msg.sender));
+        bytes32 salt = keccak256(abi.encodePacked(name, msg.sender, block.timestamp));
+        bytes32 hash = keccak256(abi.encodePacked(bytes1(0xff), address(this), salt, keccak256(bytecode)));
+        address privateLobbyAddress = address(uint160(uint256(hash)));
+        nameToPrivateLobby[name] = privateLobbyAddress;
+        lobbyExists[privateLobbyAddress] = true;
+        new MercuryBTTPrivateLobby{salt: salt}(name, msg.sender);
+        emit PrivateLobbyCreated(privateLobbyAddress, name, msg.sender);
     }
 
     // Most likely private lobbies are never cleaned up, so code with that assumption
