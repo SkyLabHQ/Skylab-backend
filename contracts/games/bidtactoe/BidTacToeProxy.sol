@@ -10,12 +10,12 @@ contract BidTacToeProxy {
     bytes32 internal constant IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
     
     //mumbai chain
-    address constant BidTacToePlayerVersusBot = address(0x7B390987D21F2b501f53aB6b08a17DC6C7f3FeD0);
-    address constant BidTacToe = address(0x6CdE2AD384a157D6eDE326886c70fb265F2CE9F9);
+    // address constant BidTacToePlayerVersusBot = address(0x7B390987D21F2b501f53aB6b08a17DC6C7f3FeD0);
+    // address constant BidTacToe = address(0x6CdE2AD384a157D6eDE326886c70fb265F2CE9F9);
     
     //base goerli chain
-    // address constant BidTacToePlayerVersusBot = address(0x6b58b7e6800CCa519bd11380a5CdABbc83B70C8B);
-    // address constant BidTacToe = address(0xc6B4AF6B7C944a4C43755b83753D292Ac3447b19);
+    address constant BidTacToePlayerVersusBot = address(0x6b58b7e6800CCa519bd11380a5CdABbc83B70C8B);
+    address constant BidTacToe = address(0xc6B4AF6B7C944a4C43755b83753D292Ac3447b19);
     
     // base mainnet
     // address constant BidTacToePlayerVersusBot = address(0x95780958eb0135805559d0d25EC14C81197E15D4);
