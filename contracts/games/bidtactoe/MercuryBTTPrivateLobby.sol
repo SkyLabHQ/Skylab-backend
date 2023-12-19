@@ -72,7 +72,8 @@ contract MercuryBTTPrivateLobby {
         return newGame;
     }
 
-    function joinRoom(address gameAddress, address player2) external isActiveLobbyAndCorrectAviation {
+    function joinRoom(address gameAddress) external isActiveLobbyAndCorrectAviation {
+        address player2 = msg.sender;
         mercuryBidTacToe.joinGameInPrivateLobby(gameAddress, player2);
         baseJoinRoom(gameAddress);
     }
