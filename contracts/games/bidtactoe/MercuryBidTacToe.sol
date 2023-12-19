@@ -175,6 +175,9 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
             emit WinGame(winnerTokenId, aviation.ownerOf(winnerTokenId));
             emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
             aviation.aviationMovePoints(winnerTokenId, loserTokenId);
+        } else {
+            delete gamePerPlayer[winnerBurner];
+            delete gamePerPlayer[loserBurner];
         }
         if (gameExists[msg.sender]) {
             delete gameExists[msg.sender];
@@ -196,6 +199,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
                 emit LoseGame(playerTokenId, aviation.ownerOf(playerTokenId));
                 aviation.aviationMovePoints(0, playerTokenId);
             }
+        } else {
+            delete gamePerPlayer[playerBurner];
         }
         delete gameExists[msg.sender];
     }
