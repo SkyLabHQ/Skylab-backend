@@ -52,7 +52,7 @@ contract MercuryBTTPrivateLobby {
         admin = _admin;
         lobbyAviation = mercuryBidTacToe.burnerAddressToAviation(admin);
 
-        //joinPrivateLobby();
+        joinPrivateLobby();
     }
 
     function setUserInfo(uint256 avatar, string memory userName) public isActiveLobbyAndCorrectAviation {
