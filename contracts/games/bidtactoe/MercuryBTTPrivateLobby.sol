@@ -8,6 +8,7 @@ contract MercuryBTTPrivateLobby {
     struct GameHistory {
         address winnerBurner;
         address loserBurner;
+        address room;
     }
 
     struct UserInfo {
@@ -51,8 +52,6 @@ contract MercuryBTTPrivateLobby {
         mercuryBidTacToe = MercuryBidTacToe(msg.sender);
         admin = _admin;
         lobbyAviation = mercuryBidTacToe.burnerAddressToAviation(admin);
-
-        joinPrivateLobby();
     }
 
     function setUserInfo(uint256 avatar, string memory userName) public isActiveLobbyAndCorrectAviation {
@@ -139,12 +138,12 @@ contract MercuryBTTPrivateLobby {
 
     function handleWinLoss(address winnerBurner, address loserBurner) public {
         baseQuitRoom(msg.sender);
-        gameHistory.push(GameHistory(winnerBurner, loserBurner));
+        gameHistory.push(GameHistory(winnerBurner, loserBurner, msg.sender));
         winCountPerPlayer[winnerBurner] += 1;
         loseCountPerPlayer[loserBurner] += 1;
         mercuryBidTacToe.handleWinLoss(winnerBurner, loserBurner);
     }
-
+ 
     function getPlayers() external view returns (address[] memory) {
         return players;
     }
