@@ -141,7 +141,6 @@ contract MercuryBTTPrivateLobby {
         gameHistory.push(GameHistory(winnerBurner, loserBurner, msg.sender));
         winCountPerPlayer[winnerBurner] += 1;
         loseCountPerPlayer[loserBurner] += 1;
-        mercuryBidTacToe.handleWinLoss(winnerBurner, loserBurner);
     }
  
     function getPlayers() external view returns (address[] memory) {

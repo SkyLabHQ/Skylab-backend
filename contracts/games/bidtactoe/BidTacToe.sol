@@ -17,6 +17,7 @@ contract BidTacToe is Initializable {
     uint256 public gridMaxSelectionCount;
     uint256 public gridSelectionStrategy;
     address public mercuryBidTacToeAddress;
+    address public privateLobbyAddress;
 
     /*//////////////////////////////////////////////////////////////
                             Dynamic gameplay data
@@ -66,7 +67,7 @@ contract BidTacToe is Initializable {
         _;
     }
 
-    function initialize(MercuryBidTacToe.GameParams memory gameParams, address player, address _mercuryBidTacToeAddress)
+    function initialize(MercuryBidTacToe.GameParams memory gameParams, address player, address _mercuryBidTacToeAddress, address _privateLobbyAddress)
         public
         initializer
     {
@@ -83,6 +84,7 @@ contract BidTacToe is Initializable {
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
         mercuryBidTacToeAddress = _mercuryBidTacToeAddress;
+        privateLobbyAddress = _privateLobbyAddress;
     }
 
     function getGrid() external view returns (address[] memory) {
@@ -297,7 +299,11 @@ contract BidTacToe is Initializable {
         address otherPlayer = getOtherPlayer(player);
         gameStates[otherPlayer] = state + 1;
         emit LoseGame(otherPlayer, state + 1);
-        (bool suceed,) = mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
-        require(suceed, "BidTacToe: handleWinLoss failed");
+        (bool bttSuceed,) = mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
+        require(bttSuceed, "BidTacToe: handleWinLoss failed");
+        if(privateLobbyAddress != address(0)) {
+            (bool lobbySuceed,) = privateLobbyAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
+            require(lobbySuceed, "BidTacToe: handleWinLoss failed");
+        }
     }
 }
