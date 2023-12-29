@@ -32,8 +32,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     // collecton to default game queue
     mapping(address => address) public defaultGameQueue;
     mapping(address => bool) public validBidTacToeBots;
-    mapping(address => address) playerToOpponent;
-    mapping(address => uint256) playerToTimeout;
+    mapping(address => address) public playerToOpponent;
+    mapping(address => uint256) public playerToTimeout;
     
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
@@ -68,7 +68,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         if(playerToTimeout[opponent] != 0) {
             playerToTimeout[msg.sender] = 0;
         } else {
-            address gameAddress = createGame(LibBidTacToe.defaultParams(), msg.sender, address(this));
+            address gameAddress = createGame(LibBidTacToe.defaultParams(), msg.sender, address(0));
             joinGame(gameAddress, opponent);
             delete playerToOpponent[msg.sender];
             delete playerToOpponent[opponent];
@@ -94,14 +94,14 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
 
     function createBotGame(address bot) external {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
-        address gameAddress = createGame(LibBidTacToe.defaultBotParams(), msg.sender, address(this));
+        address gameAddress = createGame(LibBidTacToe.defaultBotParams(), msg.sender, address(0));
         LibBidTacToe.joinGame(gameAddress, bot);
     }
 
-    function createGame(GameParams memory gameParams, address player1, address mercuryOrPrivateLobby) internal returns (address) {
+    function createGame(GameParams memory gameParams, address player1, address privateLobby) internal returns (address) {
         require(!playerCreatedGameOrQueued(player1), "MercuryBidTacToe: player already created or queued for a game");
 
-        address newGame = LibBidTacToe.createGame(gameParams, player1, mercuryOrPrivateLobby);
+        address newGame = LibBidTacToe.createGame(gameParams, player1, address(this), privateLobby);
         address aviation = burnerAddressToAviation(player1);
         paramsPerGame[newGame] = gameParams;
         planeMetadataPerGame[newGame] =
@@ -162,12 +162,13 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     }
 
     function handleWinLoss(address winnerBurner, address loserBurner) external {
-        require(gameExists[msg.sender] || lobbyExists[msg.sender], "MercuryBidTacToe: msg.sender is not a game or lobby");
+        require(gameExists[msg.sender], "MercuryBidTacToe: msg.sender is not a game");
         require(
-            (gamePerPlayer[winnerBurner] == msg.sender && gamePerPlayer[loserBurner] == msg.sender) ||
-            (activeLobbyPerPlayer[winnerBurner] == msg.sender && activeLobbyPerPlayer[loserBurner] == msg.sender),
-            "MercuryBidTacToe: burner addresses does not belong to this game or lobby"
+            gamePerPlayer[winnerBurner] == msg.sender && gamePerPlayer[loserBurner] == msg.sender,
+            "MercuryBidTacToe: burner addresses does not belong to this game"
         );
+        delete gamePerPlayer[winnerBurner];
+        delete gamePerPlayer[loserBurner];
         if (burnerAddressToAviation(winnerBurner) != address(0)) {
             MercuryBase aviation = MercuryBase(burnerAddressToAviation(winnerBurner));
             uint256 winnerTokenId = cleanUp(winnerBurner, aviation);
@@ -175,9 +176,6 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
             emit WinGame(winnerTokenId, aviation.ownerOf(winnerTokenId));
             emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
             aviation.aviationMovePoints(winnerTokenId, loserTokenId);
-        } else {
-            delete gamePerPlayer[winnerBurner];
-            delete gamePerPlayer[loserBurner];
         }
         if (gameExists[msg.sender]) {
             delete gameExists[msg.sender];
@@ -189,6 +187,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         require(
             gamePerPlayer[playerBurner] == msg.sender, "MercuryBidTacToe: burner address does not belong to this game"
         );
+        delete gamePerPlayer[playerBurner];
+        delete gameExists[msg.sender];
         if (burnerAddressToAviation(playerBurner) != address(0)) {
             MercuryBase aviation = MercuryBase(burnerAddressToAviation(playerBurner));
             uint256 playerTokenId = cleanUp(playerBurner, aviation);
@@ -199,16 +199,12 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
                 emit LoseGame(playerTokenId, aviation.ownerOf(playerTokenId));
                 aviation.aviationMovePoints(0, playerTokenId);
             }
-        } else {
-            delete gamePerPlayer[playerBurner];
         }
-        delete gameExists[msg.sender];
     }
 
     function cleanUp(address burner, MercuryBase aviation) private returns (uint256) {
         uint256 tokenId = burnerAddressToTokenId(burner);
         unapproveForGame(tokenId, aviation);
-        delete gamePerPlayer[burner];
         return tokenId;
     }
 
