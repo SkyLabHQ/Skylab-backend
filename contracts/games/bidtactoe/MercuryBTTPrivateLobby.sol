@@ -8,6 +8,7 @@ contract MercuryBTTPrivateLobby {
     struct GameHistory {
         address winnerBurner;
         address loserBurner;
+        address room;
     }
 
     struct UserInfo {
@@ -23,10 +24,10 @@ contract MercuryBTTPrivateLobby {
     mapping(address => uint256) public loseCountPerPlayer;
 
     // aviation to lobbies game queue
-    address[] lobbyGameQueue;
-    mapping(address => uint256) lobbyGameIndex;
-    address[] lobbyOnGoingGames;
-    mapping(address => uint256) lobbyOnGoingGamesIndex;
+    address[] public lobbyGameQueue;
+    mapping(address => uint256) public lobbyGameIndex;
+    address[] public lobbyOnGoingGames;
+    mapping(address => uint256) public lobbyOnGoingGamesIndex;
 
     // Static data
     MercuryBidTacToe mercuryBidTacToe;
@@ -51,8 +52,6 @@ contract MercuryBTTPrivateLobby {
         mercuryBidTacToe = MercuryBidTacToe(msg.sender);
         admin = _admin;
         lobbyAviation = mercuryBidTacToe.burnerAddressToAviation(admin);
-
-        joinPrivateLobby();
     }
 
     function setUserInfo(uint256 avatar, string memory userName) public isActiveLobbyAndCorrectAviation {
@@ -66,12 +65,14 @@ contract MercuryBTTPrivateLobby {
         isActiveLobbyAndCorrectAviation
         returns (address)
     {
-        address newGame = mercuryBidTacToe.createGameInPrivateLobby(gameParams);
+        address player1 = msg.sender;
+        address newGame = mercuryBidTacToe.createGameInPrivateLobby(gameParams, player1);
         baseCreateRoom(newGame);
         return newGame;
     }
 
-    function joinRoom(address gameAddress, address player2) external isActiveLobbyAndCorrectAviation {
+    function joinRoom(address gameAddress) external isActiveLobbyAndCorrectAviation {
+        address player2 = msg.sender;
         mercuryBidTacToe.joinGameInPrivateLobby(gameAddress, player2);
         baseJoinRoom(gameAddress);
     }
@@ -137,13 +138,24 @@ contract MercuryBTTPrivateLobby {
 
     function handleWinLoss(address winnerBurner, address loserBurner) public {
         baseQuitRoom(msg.sender);
-        gameHistory.push(GameHistory(winnerBurner, loserBurner));
+        gameHistory.push(GameHistory(winnerBurner, loserBurner, msg.sender));
         winCountPerPlayer[winnerBurner] += 1;
         loseCountPerPlayer[loserBurner] += 1;
-        mercuryBidTacToe.handleWinLoss(winnerBurner, loserBurner);
     }
-
+ 
     function getPlayers() external view returns (address[] memory) {
         return players;
+    }
+
+    function getLobbyGameQueue() external view returns (address[] memory) {
+        return lobbyGameQueue;
+    }
+
+    function getLobbyOnGoingGames() external view returns(address[] memory) {
+        return lobbyOnGoingGames;
+    }
+
+    function getGameHistory() external view returns(GameHistory[] memory) {
+        return gameHistory;
     }
 }

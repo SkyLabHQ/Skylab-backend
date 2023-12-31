@@ -27,14 +27,14 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     // Dynamic game data
     mapping(address => bool) private gameExists;
     mapping(address => address) public gamePerPlayer;
-    mapping(address => address) playerToOpponent;
-    mapping(address => uint256) playerToTimeout;
     mapping(address => GameParams) public paramsPerGame;
     mapping(address => PlaneMetadata) public planeMetadataPerGame;
     // collecton to default game queue
     mapping(address => address) public defaultGameQueue;
     mapping(address => bool) public validBidTacToeBots;
-
+    mapping(address => address) public playerToOpponent;
+    mapping(address => uint256) public playerToTimeout;
+    
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
 
@@ -68,7 +68,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         if(playerToTimeout[opponent] != 0) {
             playerToTimeout[msg.sender] = 0;
         } else {
-            address gameAddress = createGame(LibBidTacToe.defaultParams());
+            address gameAddress = createGame(LibBidTacToe.defaultParams(), msg.sender, address(0));
             joinGame(gameAddress, opponent);
             delete playerToOpponent[msg.sender];
             delete playerToOpponent[opponent];
@@ -94,20 +94,20 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
 
     function createBotGame(address bot) external {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
-        address gameAddress = createGame(LibBidTacToe.defaultBotParams());
+        address gameAddress = createGame(LibBidTacToe.defaultBotParams(), msg.sender, address(0));
         LibBidTacToe.joinGame(gameAddress, bot);
     }
 
-    function createGame(GameParams memory gameParams) internal returns (address) {
-        require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
+    function createGame(GameParams memory gameParams, address player1, address privateLobby) internal returns (address) {
+        require(!playerCreatedGameOrQueued(player1), "MercuryBidTacToe: player already created or queued for a game");
 
-        address newGame = LibBidTacToe.createGame(gameParams, msg.sender, address(this));
-        address aviation = burnerAddressToAviation(msg.sender);
+        address newGame = LibBidTacToe.createGame(gameParams, player1, address(this), privateLobby);
+        address aviation = burnerAddressToAviation(player1);
         paramsPerGame[newGame] = gameParams;
         planeMetadataPerGame[newGame] =
-            PlaneMetadata(getAviationLevel(msg.sender, aviation), getAviationPoints(msg.sender, aviation), 0, 0);
+            PlaneMetadata(getAviationLevel(player1, aviation), getAviationPoints(player1, aviation), 0, 0);
         gameExists[newGame] = true;
-        gamePerPlayer[msg.sender] = newGame;
+        gamePerPlayer[player1] = newGame;
         return newGame;
     }
 
@@ -120,15 +120,15 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         );
 
         LibBidTacToe.joinGame(gameAddress, player2);
-        address aviation = burnerAddressToAviation(msg.sender);
+        address aviation = burnerAddressToAviation(player2);
         gamePerPlayer[player2] = gameAddress;
         planeMetadataPerGame[gameAddress].token2Level = getAviationLevel(player2, aviation);
         planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, aviation);
     }
 
-    function createGameInPrivateLobby(GameParams memory gameParams) external returns (address) {
+    function createGameInPrivateLobby(GameParams memory gameParams, address player1) external returns (address) {
         require(lobbyExists[msg.sender], "MercuryBidTacToe: sender is a private lobby");
-        return createGame(gameParams);
+        return createGame(gameParams, player1, msg.sender);
     }
 
     function joinGameInPrivateLobby(address gameAddress, address player2) external {
@@ -167,6 +167,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
             gamePerPlayer[winnerBurner] == msg.sender && gamePerPlayer[loserBurner] == msg.sender,
             "MercuryBidTacToe: burner addresses does not belong to this game"
         );
+        delete gamePerPlayer[winnerBurner];
+        delete gamePerPlayer[loserBurner];
         if (burnerAddressToAviation(winnerBurner) != address(0)) {
             MercuryBase aviation = MercuryBase(burnerAddressToAviation(winnerBurner));
             uint256 winnerTokenId = cleanUp(winnerBurner, aviation);
@@ -175,7 +177,9 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
             emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
             aviation.aviationMovePoints(winnerTokenId, loserTokenId);
         }
-        delete gameExists[msg.sender];
+        if (gameExists[msg.sender]) {
+            delete gameExists[msg.sender];
+        }
     }
 
     function handleBotWinLoss(address playerBurner, bool playerWon) external {
@@ -183,6 +187,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         require(
             gamePerPlayer[playerBurner] == msg.sender, "MercuryBidTacToe: burner address does not belong to this game"
         );
+        delete gamePerPlayer[playerBurner];
+        delete gameExists[msg.sender];
         if (burnerAddressToAviation(playerBurner) != address(0)) {
             MercuryBase aviation = MercuryBase(burnerAddressToAviation(playerBurner));
             uint256 playerTokenId = cleanUp(playerBurner, aviation);
@@ -194,13 +200,11 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
                 aviation.aviationMovePoints(0, playerTokenId);
             }
         }
-        delete gameExists[msg.sender];
     }
 
     function cleanUp(address burner, MercuryBase aviation) private returns (uint256) {
         uint256 tokenId = burnerAddressToTokenId(burner);
         unapproveForGame(tokenId, aviation);
-        delete gamePerPlayer[burner];
         return tokenId;
     }
 
