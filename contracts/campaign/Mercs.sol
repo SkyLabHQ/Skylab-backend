@@ -6,41 +6,69 @@ import "./BabyMercs.sol";
 import "@solidstate/token/ERC721/SolidStateERC721.sol";
 
 contract Mercs is SolidStateERC721 {
-    address public babyMercs;
+    BabyMercs public babyMercs;
+    PilotMileage public leaderBoard;
     mapping(uint256 => uint256) public babyMercsUP;
+    mapping(uint256 => uint256) public lastClaimTime;
     uint256 public nextTokenId;
-    address public leaderBoard;
 
     function claimUpgradeablePoints(uint256 tokenId) public {
+        require(block.timestamp - lastClaimTime[tokenId] >= 1 days, "Mercs: claim too frequently");
+        lastClaimTime[tokenId] = block.timestamp;
         (bool isFiftyPercentage, uint256 totalMileage) = isFiftyPercentageAndTotalMileage(tokenId);
-        require(isFiftyPercentage, "not fifty percentage");
-        require(BabyMercs(babyMercs).ownerOf(tokenId) == msg.sender, "not owner");
-        uint256 upgradePoints = PilotMileage(leaderBoard).getPilotMileage(babyMercs, tokenId) / totalMileage * 100;
+        require(isFiftyPercentage, "Mercs: not fifty percentage");
+        require(babyMercs.ownerOf(tokenId) == msg.sender, "Mercs: not owner");
+        uint256 upgradePoints = PilotMileage(leaderBoard).getPilotMileage(address(babyMercs), tokenId) / totalMileage * 100;
         babyMercsUP[tokenId] += upgradePoints;
     }
 
     function mint(uint256 tokenId) public {
-        require(babyMercsUP[tokenId] >= 100, "upgrade point does not meets requirement");
-        require(BabyMercs(babyMercs).ownerOf(tokenId) == msg.sender, "not owner");
+        require(babyMercsUP[tokenId] >= 100, "Mercs: upgrade point does not meets requirement");
+        require(babyMercs.ownerOf(tokenId) == msg.sender, "not owner");
         babyMercsUP[tokenId] -= 100;
-        BabyMercs(babyMercs).burn(tokenId);
+        babyMercs.burn(tokenId);
         _safeMint(msg.sender, nextTokenId + 1);
+        nextTokenId++;
     }
 
     function isFiftyPercentageAndTotalMileage(uint256 tokenId) private returns (bool, uint256) {
-        uint256 total = BabyMercs(babyMercs).nextTokenId() - 1;
-        uint256[] memory mileages;
-        for (uint256 i = 1; i <= total; i++) {
-            uint256 mileage = PilotMileage(leaderBoard).getPilotMileage(babyMercs, i);
-            mileages[i - 1] = mileage;
+        uint256 mileage = leaderBoard.getSnapshotPilotMileage(address(babyMercs), tokenId);
+        uint256 totalPilot;
+        uint256 highestIndex = leaderBoard.getSnapshotHighestIndex();
+        for (uint256 i = highestIndex; i > 0; i--) {
+            totalPilot += leaderBoard.getSnapshotGroupLength(i);
         }
-        quickSort(mileages, int256(0), int256(mileages.length - 1));
-        uint256 mid = mileages[mileages.length / 2];
-        uint256 totalMilead;
-        for (uint256 i = 0; i <= mid; i++) {
-            totalMilead += mileages[i];
+        uint256 midPilot = (totalPilot + 1) / 2;
+        uint256 groupMid;
+        uint256 midIndex;
+        uint256 accumulate = 0;
+        for (uint256 i = highestIndex; i > 0; i--) {
+            uint256 groupLength = leaderBoard.getGroupLength(i);
+            if(accumulate + groupLength >= midPilot) {
+                midIndex = i;
+                groupMid = midPilot - accumulate;
+                break;
+            }
+            accumulate += groupLength;
         }
-        return (PilotMileage(leaderBoard).getPilotMileage(babyMercs, tokenId) >= mid, totalMilead);
+        LibPilots.Pilot[] memory pilotGroup = leaderBoard.getSnapshotPilotMileageGroup(midIndex);
+        uint256[] memory group;
+        for(uint256 i = 0; i < pilotGroup.length; i++) {
+            group[i] = leaderBoard.getSnapshotPilotMileage(pilotGroup[i].collectionAddress, pilotGroup[i].pilotId);
+        }
+        quickSort(group,0,int256(group.length - 1));
+        uint256 midMileage = group[groupMid];
+        uint256 totalMileage;
+        for(uint256 i = 0; i < groupMid; i++) {
+            totalMileage += group[i];
+        }
+        for(uint256 i = midIndex; i <= highestIndex; i++) {
+            LibPilots.Pilot[] memory pilotGroups = leaderBoard.getSnapshotPilotMileageGroup(i);
+            for(uint256 j = 0; j < pilotGroups.length; j++) {
+                totalMileage += leaderBoard.getSnapshotPilotMileage(pilotGroups[j].collectionAddress, pilotGroups[j].pilotId);
+            }
+        }
+        return (mileage >= midMileage, totalMileage);
     }
 
     function quickSort(uint256[] memory _arr, int256 left, int256 right) internal {

@@ -5,6 +5,7 @@ import {LibPilots} from "../../protocol/storage/LibPilots.sol";
 
 library LibPilotLeaderBoard {
     bytes32 constant LEADERBOARD = keccak256("mercury.pilot.leaderboard");
+    bytes32 constant SNAPSHOT = keccak256("mercury.pilot.snapshot");
 
     struct LeaderBoard {
         mapping(address => mapping(uint256 => uint256)) pilotRankingData;
@@ -17,6 +18,13 @@ library LibPilotLeaderBoard {
 
     function layout() internal pure returns (LeaderBoard storage ds) {
         bytes32 position = LEADERBOARD;
+        assembly {
+            ds.slot := position
+        }
+    }
+
+    function snapshotLayout() internal pure returns (LeaderBoard storage ds) {
+        bytes32 position = SNAPSHOT;
         assembly {
             ds.slot := position
         }
@@ -53,6 +61,37 @@ library LibPilotLeaderBoard {
         }
     }
 
+    function setPilotRankingDataSnapshot(LibPilots.Pilot memory pilot, uint256 rankingData) internal {
+        snapshotLayout().pilotRankingData[pilot.collectionAddress][pilot.pilotId] = rankingData;
+
+        uint256 newIndex = convertToGroupIndex(rankingData);
+        uint256 oldIndex = snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId];
+        if (newIndex != oldIndex) {
+            if (oldIndex > 0) {
+                uint256 length = snapshotLayout().rankingDataGroups[oldIndex].length;
+                LibPilots.Pilot memory swappedPilot = snapshotLayout().rankingDataGroups[oldIndex][length - 1];
+                uint256 index = snapshotLayout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId];
+                snapshotLayout().rankingDataGroups[oldIndex][index] = swappedPilot;
+                snapshotLayout().rankingDataGroups[oldIndex].pop();
+                snapshotLayout().rankingDataIndex[swappedPilot.collectionAddress][swappedPilot.pilotId] = index;
+                delete snapshotLayout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId];
+                delete snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId];
+                snapshotLayout().groupLength[oldIndex] = length - 1;
+            }
+            if (newIndex > 0) {
+                snapshotLayout().rankingDataGroups[newIndex].push(pilot);
+                snapshotLayout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId] =
+                    snapshotLayout().rankingDataGroups[newIndex].length - 1;
+                snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
+                snapshotLayout().groupLength[newIndex] = snapshotLayout().rankingDataGroups[newIndex].length;
+            }
+
+            if (newIndex > snapshotLayout().highestrankingDataGroupIndex) {
+                snapshotLayout().highestrankingDataGroupIndex = newIndex;
+            }
+        }
+    }
+
     function convertToGroupIndex(uint256 xp) internal pure returns (uint256) {
         // if it's 0, it's in group 0; if it's 1, group 1; if it's 2 or 3, group 2...
         for (uint256 i = 0; i <= type(uint256).max; i++) {
@@ -65,5 +104,10 @@ library LibPilotLeaderBoard {
 
     function getPilotRankingData(LibPilots.Pilot memory pilot) internal view returns (uint256) {
         return layout().pilotRankingData[pilot.collectionAddress][pilot.pilotId];
+    }
+
+    function snapshot(LibPilots.Pilot memory pilot) internal {
+        uint256 rankingData = getPilotRankingData(pilot);
+        setPilotRankingDataSnapshot(pilot, rankingData);
     }
 }
