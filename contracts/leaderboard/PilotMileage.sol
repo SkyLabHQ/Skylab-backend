@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 
 contract PilotMileage is Initializable {
     address protocol;
-    uint256 public nextSnapshotTime;
+    uint256 public lastSnapshotTime;
     function initialize(address _protocol) public initializer {
         protocol = _protocol;
     }
@@ -19,10 +19,20 @@ contract PilotMileage is Initializable {
         _;
     }
 
+    function canSnapshot() public view returns (bool) {
+        if(lastSnapshotTime == 0) {
+            return true;
+        }
+        uint256 currentSecondsPST = (block.timestamp - 8 hours) % 24 hours;
+        bool isAfterResetTime = currentSecondsPST >= 1 hours;
+        bool is24HoursPast = block.timestamp - lastSnapshotTime >= 24 hours;
+        return isAfterResetTime && is24HoursPast;
+    }
+    
     function pilotGainMileage(LibPilots.Pilot memory pilot, uint256 xp) public onlyProtocol {
-        if(block.timestamp >= nextSnapshotTime) {
+        if(canSnapshot()) {
                 LibPilotLeaderBoard.snapshot(pilot);
-                nextSnapshotTime = block.timestamp + 1 days;
+                lastSnapshotTime = block.timestamp;
         }
         uint256 preXP = LibPilotLeaderBoard.getPilotRankingData(pilot);
         LibPilotLeaderBoard.setPilotRankingData(pilot, preXP+xp);

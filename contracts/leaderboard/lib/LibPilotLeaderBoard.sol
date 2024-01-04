@@ -61,35 +61,16 @@ library LibPilotLeaderBoard {
         }
     }
 
-    function setPilotRankingDataSnapshot(LibPilots.Pilot memory pilot, uint256 rankingData) internal {
+    function setPilotRankingDataSnapshot(LibPilots.Pilot memory pilot) internal {
+        uint256 rankingData = layout().pilotRankingData[pilot.collectionAddress][pilot.pilotId];
+        uint256 rankingDataIndex = layout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId];
+        uint256 rankingDataGroupIndex = layout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId];
         snapshotLayout().pilotRankingData[pilot.collectionAddress][pilot.pilotId] = rankingData;
-
-        uint256 newIndex = convertToGroupIndex(rankingData);
-        uint256 oldIndex = snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId];
-        if (newIndex != oldIndex) {
-            if (oldIndex > 0) {
-                uint256 length = snapshotLayout().rankingDataGroups[oldIndex].length;
-                LibPilots.Pilot memory swappedPilot = snapshotLayout().rankingDataGroups[oldIndex][length - 1];
-                uint256 index = snapshotLayout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId];
-                snapshotLayout().rankingDataGroups[oldIndex][index] = swappedPilot;
-                snapshotLayout().rankingDataGroups[oldIndex].pop();
-                snapshotLayout().rankingDataIndex[swappedPilot.collectionAddress][swappedPilot.pilotId] = index;
-                delete snapshotLayout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId];
-                delete snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId];
-                snapshotLayout().groupLength[oldIndex] = length - 1;
-            }
-            if (newIndex > 0) {
-                snapshotLayout().rankingDataGroups[newIndex].push(pilot);
-                snapshotLayout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId] =
-                    snapshotLayout().rankingDataGroups[newIndex].length - 1;
-                snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
-                snapshotLayout().groupLength[newIndex] = snapshotLayout().rankingDataGroups[newIndex].length;
-            }
-
-            if (newIndex > snapshotLayout().highestrankingDataGroupIndex) {
-                snapshotLayout().highestrankingDataGroupIndex = newIndex;
-            }
-        }
+        snapshotLayout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId] = rankingDataIndex;
+        snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId] = rankingDataGroupIndex;
+        snapshotLayout().rankingDataGroups[rankingDataIndex][rankingDataGroupIndex] = pilot;
+        snapshotLayout().groupLength[rankingDataIndex] = layout().groupLength[rankingDataIndex];
+        snapshotLayout().highestrankingDataGroupIndex = layout().highestrankingDataGroupIndex;
     }
 
     function convertToGroupIndex(uint256 xp) internal pure returns (uint256) {
@@ -107,7 +88,6 @@ library LibPilotLeaderBoard {
     }
 
     function snapshot(LibPilots.Pilot memory pilot) internal {
-        uint256 rankingData = getPilotRankingData(pilot);
-        setPilotRankingDataSnapshot(pilot, rankingData);
+        setPilotRankingDataSnapshot(pilot);
     }
 }

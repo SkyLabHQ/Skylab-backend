@@ -13,15 +13,25 @@ contract Mercs is SolidStateERC721 {
     uint256 public nextTokenId;
 
     function claimUpgradeablePoints(uint256 tokenId) public {
-        require(block.timestamp - lastClaimTime[tokenId] >= 1 days, "Mercs: claim too frequently");
-        lastClaimTime[tokenId] = block.timestamp;
+        require(canClaim(tokenId), "Mercs: Wait until next window");
         (bool isFiftyPercentage, uint256 totalMileage) = isFiftyPercentageAndTotalMileage(tokenId);
         require(isFiftyPercentage, "Mercs: not fifty percentage");
         require(babyMercs.ownerOf(tokenId) == msg.sender, "Mercs: not owner");
         uint256 upgradePoints = PilotMileage(leaderBoard).getPilotMileage(address(babyMercs), tokenId) / totalMileage * 100;
         babyMercsUP[tokenId] += upgradePoints;
+        lastClaimTime[tokenId] = block.timestamp;
     }
 
+    function canClaim(uint256 tokenId) public view returns (bool) {
+        if(lastClaimTime[tokenId] == 0) {
+            return true;
+        }
+        uint256 currentSecondsPST = (block.timestamp - 8 hours) % 24 hours;
+        bool isAfterResetTime = currentSecondsPST >= 1 hours;
+        bool is24HoursPast = block.timestamp - lastClaimTime[tokenId] >= 24 hours;
+        return isAfterResetTime && is24HoursPast;
+    }
+    
     function mint(uint256 tokenId) public {
         require(babyMercsUP[tokenId] >= 100, "Mercs: upgrade point does not meets requirement");
         require(babyMercs.ownerOf(tokenId) == msg.sender, "not owner");
@@ -59,10 +69,10 @@ contract Mercs is SolidStateERC721 {
         quickSort(group,0,int256(group.length - 1));
         uint256 midMileage = group[groupMid];
         uint256 totalMileage;
-        for(uint256 i = 0; i < groupMid; i++) {
+        for(uint256 i = groupMid; i < group.length; i++) {
             totalMileage += group[i];
         }
-        for(uint256 i = midIndex; i <= highestIndex; i++) {
+        for(uint256 i = midIndex + 1; i <= highestIndex; i++) {
             LibPilots.Pilot[] memory pilotGroups = leaderBoard.getSnapshotPilotMileageGroup(i);
             for(uint256 j = 0; j < pilotGroups.length; j++) {
                 totalMileage += leaderBoard.getSnapshotPilotMileage(pilotGroups[j].collectionAddress, pilotGroups[j].pilotId);
