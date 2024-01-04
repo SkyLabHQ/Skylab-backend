@@ -19,7 +19,7 @@ contract BidTacToePlayerVersusBot is BidTacToe {
         address otherPlayer = getOtherPlayer(player);
         gameStates[otherPlayer] = state + 1;
         emit LoseGame(otherPlayer, state + 1);
-        (bool suceed,) = mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleBotWinLoss(address, bool)", player1, player == player1));
+        (bool suceed,) = mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleBotWinLoss(address,bool)", player1, player == player1));
         require(suceed, "BidTacToePlayerVersusBot: handleBotWinLoss failed");
     }
 
