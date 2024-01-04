@@ -87,9 +87,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
             defaultGameQueue[aviation] = activePlayer;
         }
         delete playerToOpponent[msg.sender];
-        delete playerToOpponent[opponent];
         delete playerToTimeout[msg.sender];
-        delete playerToTimeout[opponent];
+        unapproveForGame(burnerAddressToTokenId(msg.sender), MercuryBase(burnerAddressToAviation(msg.sender)));
     }
 
     function createBotGame(address bot) external {
@@ -154,6 +153,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         address aviation = burnerAddressToAviation(msg.sender);
         require(msg.sender == defaultGameQueue[aviation], "MercuryBidTacToe: msg.sender is not in default queue");
         delete defaultGameQueue[aviation];
+        unapproveForGame(burnerAddressToTokenId(msg.sender), MercuryBase(aviation));
     }
 
     function playerCreatedGameOrQueued(address player) internal view returns (bool) {
