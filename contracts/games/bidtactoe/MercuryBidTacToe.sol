@@ -84,10 +84,11 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         if(activePlayer != address(0)) {
             address aviation = burnerAddressToAviation(activePlayer);
             defaultGameQueue[aviation] = activePlayer;
+        } else {
+            unapproveForGame(burnerAddressToTokenId(msg.sender), MercuryBase(burnerAddressToAviation(msg.sender)));
         }
         delete playerToOpponent[msg.sender];
         delete playerToTimeout[msg.sender];
-        unapproveForGame(burnerAddressToTokenId(msg.sender), MercuryBase(burnerAddressToAviation(msg.sender)));
     }
 
     function createBotGame(address bot) external {
