@@ -113,6 +113,7 @@ contract MercuryBTTPrivateLobby {
     }
 
     function joinPrivateLobby() public {
+        require(mercuryBidTacToe.gamePerPlayer(msg.sender) == address(0), "MercuryBTTPrivateLobby: already in game");
         for (uint256 i = 0; i < players.length; i++) {
             if (players[i] == msg.sender) {
                 players[i] = players[players.length - 1];
@@ -124,6 +125,7 @@ contract MercuryBTTPrivateLobby {
     }
 
     function quitPrivateLobby() external isActiveLobbyAndCorrectAviation {
+        require(mercuryBidTacToe.gamePerPlayer(msg.sender) == address(0), "MercuryBTTPrivateLobby: already in game");
         for (uint256 i = 0; i < players.length; i++) {
             if (players[i] == msg.sender) {
                 players[i] = players[players.length - 1];
