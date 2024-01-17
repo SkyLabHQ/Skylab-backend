@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "../leaderboard/PilotMileage.sol";
 import "./BabyMercs.sol";
 import "@solidstate/token/ERC721/SolidStateERC721.sol";
+import {LibDiamond} from "../libraries/LibDiamond.sol";
 
 contract Mercs is SolidStateERC721 {
     BabyMercs public babyMercs;
@@ -11,6 +12,12 @@ contract Mercs is SolidStateERC721 {
     mapping(uint256 => uint256) public babyMercsUP;
     mapping(uint256 => uint256) public lastClaimTime;
     uint256 public nextTokenId;
+
+    function initialize(address _leaderBoard, address _babyMercs) public {
+        LibDiamond.enforceIsContractOwner();
+        leaderBoard = PilotMileage(_leaderBoard);
+        babyMercs = BabyMercs(_babyMercs);
+    }
 
     function claimUpgradeablePoints(uint256 tokenId) public {
         require(canClaim(tokenId), "Mercs: Wait until next window");
@@ -28,8 +35,7 @@ contract Mercs is SolidStateERC721 {
         }
         uint256 currentSecondsPST = (block.timestamp - 8 hours) % 24 hours;
         bool isAfterResetTime = currentSecondsPST >= 1 hours;
-        bool is24HoursPast = block.timestamp - lastClaimTime[tokenId] >= 24 hours;
-        return isAfterResetTime && is24HoursPast;
+        return isAfterResetTime;
     }
     
     function mint(uint256 tokenId) public {
@@ -41,7 +47,7 @@ contract Mercs is SolidStateERC721 {
         nextTokenId++;
     }
 
-    function isFiftyPercentageAndTotalMileage(uint256 tokenId) private returns (bool, uint256) {
+    function isFiftyPercentageAndTotalMileage(uint256 tokenId) public returns (bool, uint256) {
         uint256 mileage = leaderBoard.getSnapshotPilotMileage(address(babyMercs), tokenId);
         uint256 totalPilot;
         uint256 highestIndex = leaderBoard.getSnapshotHighestIndex();
@@ -51,10 +57,11 @@ contract Mercs is SolidStateERC721 {
         uint256 midPilot = (totalPilot + 1) / 2;
         uint256 groupMid;
         uint256 midIndex;
-        uint256 accumulate = 0;
-        for (uint256 i = highestIndex; i > 0; i--) {
+        uint256 accumulate;
+        uint256 midMileage;
+        for (uint256 i = 0; i <= highestIndex; i++) {
             uint256 groupLength = leaderBoard.getGroupLength(i);
-            if(accumulate + groupLength >= midPilot) {
+            if(accumulate + groupLength > midPilot) {
                 midIndex = i;
                 groupMid = midPilot - accumulate;
                 break;
@@ -62,12 +69,14 @@ contract Mercs is SolidStateERC721 {
             accumulate += groupLength;
         }
         LibPilots.Pilot[] memory pilotGroup = leaderBoard.getSnapshotPilotMileageGroup(midIndex);
-        uint256[] memory group;
+        uint256[] memory group = new uint256[](pilotGroup.length);
         for(uint256 i = 0; i < pilotGroup.length; i++) {
             group[i] = leaderBoard.getSnapshotPilotMileage(pilotGroup[i].collectionAddress, pilotGroup[i].pilotId);
         }
-        quickSort(group,0,int256(group.length - 1));
-        uint256 midMileage = group[groupMid];
+        if(group.length != 0){
+            quickSort(group,0,int256(group.length - 1));
+            midMileage = group[groupMid];
+        }
         uint256 totalMileage;
         for(uint256 i = groupMid; i < group.length; i++) {
             totalMileage += group[i];

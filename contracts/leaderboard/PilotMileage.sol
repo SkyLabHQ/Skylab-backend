@@ -25,18 +25,17 @@ contract PilotMileage is Initializable {
         }
         uint256 currentSecondsPST = (block.timestamp - 8 hours) % 24 hours;
         bool isAfterResetTime = currentSecondsPST >= 1 hours;
-        bool is24HoursPast = block.timestamp - lastSnapshotTime >= 24 hours;
-        return isAfterResetTime && is24HoursPast;
+        return isAfterResetTime;
     }
     
     function pilotGainMileage(LibPilots.Pilot memory pilot, uint256 xp) public onlyProtocol {
+        uint256 preXP = LibPilotLeaderBoard.getPilotRankingData(pilot);
+        LibPilotLeaderBoard.setPilotRankingData(pilot, preXP+xp);
+        emit PilotMileageGain(pilot.collectionAddress, pilot.pilotId, xp);
         if(canSnapshot()) {
                 LibPilotLeaderBoard.snapshot(pilot);
                 lastSnapshotTime = block.timestamp;
         }
-        uint256 preXP = LibPilotLeaderBoard.getPilotRankingData(pilot);
-        LibPilotLeaderBoard.setPilotRankingData(pilot, preXP+xp);
-        emit PilotMileageGain(pilot.collectionAddress, pilot.pilotId, xp);
     }
 
     function getPilotMileageGroup(uint256 index) public view returns (LibPilots.Pilot[] memory) {
