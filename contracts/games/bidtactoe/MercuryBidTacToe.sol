@@ -81,8 +81,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         address opponent = playerToOpponent[msg.sender];
         require(block.timestamp > playerToTimeout[opponent], "MercuryBidTacToe: timeout not reached");
         address activePlayer;
-        if(playerToTimeout[msg.sender] == 0) activePlayer = msg.sender;
-        if(activePlayer != address(0)) {
+        if(playerToTimeout[msg.sender] == 0) {
+            activePlayer = msg.sender;
             address aviation = burnerAddressToAviation(activePlayer);
             defaultGameQueue[aviation] = activePlayer;
         } else {
