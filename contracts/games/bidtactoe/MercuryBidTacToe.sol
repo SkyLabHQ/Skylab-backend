@@ -77,19 +77,19 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     }
 
     function activeQueueTimeout() public {
+        require(gamePerPlayer[msg.sender] == address(0), "MercuryBidTacToe: player already in a game");
         address opponent = playerToOpponent[msg.sender];
         require(block.timestamp > playerToTimeout[opponent], "MercuryBidTacToe: timeout not reached");
-        require(playerToOpponent[msg.sender] == opponent && playerToOpponent[opponent] == msg.sender, "MercuryBidTacToe: opponent not match");
         address activePlayer;
-        if(playerToTimeout[msg.sender] == 0) activePlayer = msg.sender;
-        if(activePlayer != address(0)) {
+        if(playerToTimeout[msg.sender] == 0) {
+            activePlayer = msg.sender;
             address aviation = burnerAddressToAviation(activePlayer);
             defaultGameQueue[aviation] = activePlayer;
+        } else {
+            unapproveForGame(burnerAddressToTokenId(msg.sender), MercuryBase(burnerAddressToAviation(msg.sender)));
         }
         delete playerToOpponent[msg.sender];
-        delete playerToOpponent[opponent];
         delete playerToTimeout[msg.sender];
-        delete playerToTimeout[opponent];
     }
 
     function createBotGame(address bot) external {
@@ -154,6 +154,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         address aviation = burnerAddressToAviation(msg.sender);
         require(msg.sender == defaultGameQueue[aviation], "MercuryBidTacToe: msg.sender is not in default queue");
         delete defaultGameQueue[aviation];
+        unapproveForGame(burnerAddressToTokenId(msg.sender), MercuryBase(aviation));
     }
 
     function playerCreatedGameOrQueued(address player) internal view returns (bool) {
