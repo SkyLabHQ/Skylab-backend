@@ -34,8 +34,17 @@ contract Mercs is SolidStateERC721 {
             return true;
         }
         uint256 currentSecondsPST = (block.timestamp - 8 hours) % 24 hours;
-        bool isAfterResetTime = currentSecondsPST >= 1 hours;
-        return isAfterResetTime;
+        uint256 passOneAMPSTSeconds;
+        if (currentSecondsPST >= 1 hours) {
+            passOneAMPSTSeconds = currentSecondsPST - 1 hours;
+        } else {
+            passOneAMPSTSeconds = 23 hours + currentSecondsPST;
+        }
+        uint256 timestamp = block.timestamp - passOneAMPSTSeconds;
+        if(timestamp > lastClaimTime[tokenId]) {
+            return true;
+        }
+        return false;
     }
     
     function mint(uint256 tokenId) public {
@@ -51,7 +60,7 @@ contract Mercs is SolidStateERC721 {
         uint256 mileage = leaderBoard.getSnapshotPilotMileage(address(babyMercs), tokenId);
         uint256 totalPilot;
         uint256 highestIndex = leaderBoard.getSnapshotHighestIndex();
-        for (uint256 i = highestIndex; i > 0; i--) {
+        for (uint256 i = 0; i <= highestIndex; i++) {
             totalPilot += leaderBoard.getSnapshotGroupLength(i);
         }
         uint256 midPilot = (totalPilot + 1) / 2;
@@ -60,7 +69,7 @@ contract Mercs is SolidStateERC721 {
         uint256 accumulate;
         uint256 midMileage;
         for (uint256 i = 0; i <= highestIndex; i++) {
-            uint256 groupLength = leaderBoard.getGroupLength(i);
+            uint256 groupLength = leaderBoard.getSnapshotGroupLength(i);
             if(accumulate + groupLength > midPilot) {
                 midIndex = i;
                 groupMid = midPilot - accumulate;
@@ -86,6 +95,10 @@ contract Mercs is SolidStateERC721 {
             for(uint256 j = 0; j < pilotGroups.length; j++) {
                 totalMileage += leaderBoard.getSnapshotPilotMileage(pilotGroups[j].collectionAddress, pilotGroups[j].pilotId);
             }
+        }
+        if (midMileage == 0 && mileage == 0) {
+            uint256 playerIndex = leaderBoard.getSnapshotRankingDataIndex(address(babyMercs), tokenId);
+            return (playerIndex + 1 >= groupMid, totalMileage);
         }
         return (mileage >= midMileage, totalMileage);
     }

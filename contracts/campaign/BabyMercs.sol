@@ -14,11 +14,15 @@ contract BabyMercs is SolidStateERC721 {
     using Strings for uint256;
 
     uint256 public nextTokenId;
-
+    address public mercs;
     //helper function
     function updateNextTokenId() public {
         LibDiamond.enforceIsContractOwner();
         nextTokenId = totalSupply();
+    }
+    function setMercs(address _mercs) public {
+        LibDiamond.enforceIsContractOwner();
+        mercs = _mercs;
     }
 
     function initialize(string memory _name, string memory _symbol, string memory _baseTokenURI) public {
@@ -52,6 +56,10 @@ contract BabyMercs is SolidStateERC721 {
     }
 
     function burn(uint256 tokenId) public {
+        if(msg.sender == mercs) {
+            _burn(tokenId);
+            return;
+        }
         require(_isApprovedOrOwner(msg.sender, tokenId), "BabyMercs: burn caller is not owner nor approved");
         _burn(tokenId);
     }
