@@ -96,10 +96,6 @@ contract Mercs is SolidStateERC721 {
                 totalMileage += leaderBoard.getSnapshotPilotMileage(pilotGroups[j].collectionAddress, pilotGroups[j].pilotId);
             }
         }
-        if (midMileage == 0 && mileage == 0) {
-            uint256 playerIndex = leaderBoard.getSnapshotRankingDataIndex(address(babyMercs), tokenId);
-            return (playerIndex + 1 >= groupMid, totalMileage);
-        }
         return (mileage >= midMileage, totalMileage);
     }
 

@@ -66,13 +66,6 @@ library LibPilotLeaderBoard {
         snapshotLayout().pilotRankingData[pilot.collectionAddress][pilot.pilotId] = rankingData;
         uint256 newIndex = convertToGroupIndex(rankingData);
         uint256 oldIndex = snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId];
-        if (newIndex == 0) {
-            snapshotLayout().rankingDataGroups[newIndex].push(pilot);
-            snapshotLayout().rankingDataIndex[pilot.collectionAddress][pilot.pilotId] =
-                snapshotLayout().rankingDataGroups[newIndex].length - 1;
-            snapshotLayout().rankingDataGroupIndex[pilot.collectionAddress][pilot.pilotId] = newIndex;
-            snapshotLayout().groupLength[newIndex] = snapshotLayout().rankingDataGroups[newIndex].length;
-        }
         if (newIndex != oldIndex) {
             if (oldIndex > 0) {
                 uint256 length = snapshotLayout().rankingDataGroups[oldIndex].length;

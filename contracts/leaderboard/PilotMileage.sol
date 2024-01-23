@@ -75,8 +75,4 @@ contract PilotMileage is Initializable {
     function getSnapshotHighestIndex() public view returns (uint256) {
         return LibPilotLeaderBoard.snapshotLayout().highestrankingDataGroupIndex;
     }
-
-    function getSnapshotRankingDataIndex(address collection, uint256 tokenId) public view returns(uint256) {
-        return LibPilotLeaderBoard.snapshotLayout().rankingDataIndex[collection][tokenId];
-    }
 }

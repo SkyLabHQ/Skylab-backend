@@ -28,6 +28,7 @@ contract MercsTest is Test {
         LibPilots.Pilot memory p1 = LibPilots.Pilot(collectionAddress, 1);
         LibPilots.Pilot memory p2 = LibPilots.Pilot(collectionAddress, 2);
         LibPilots.Pilot memory p3 = LibPilots.Pilot(collectionAddress, 3);
+        LibPilots.Pilot memory p4 = LibPilots.Pilot(collectionAddress, 4);
         vm.warp(1705343540);
         pilotMileage.pilotGainMileage(p0 ,0);
         pilotMileage.pilotGainMileage(p01 ,0);
@@ -38,9 +39,10 @@ contract MercsTest is Test {
         pilotMileage.pilotGainMileage(p1 ,1);
         pilotMileage.pilotGainMileage(p2 ,2);
         pilotMileage.pilotGainMileage(p3 ,3);
+        pilotMileage.pilotGainMileage(p4, 4);
         (bool isFifty, uint256 totalMileage) = mercs.isFiftyPercentageAndTotalMileage(0);
         assertEq(isFifty, false);
-        assertEq(totalMileage, 6);
+        assertEq(totalMileage, 7);
         (bool isFifty1,) = mercs.isFiftyPercentageAndTotalMileage(10);
         assertEq(isFifty1, false);
         (bool isFifty2,) = mercs.isFiftyPercentageAndTotalMileage(100);
@@ -48,13 +50,17 @@ contract MercsTest is Test {
         (bool isFifty3,) = mercs.isFiftyPercentageAndTotalMileage(1000);
         assertEq(isFifty3, false);
         (bool isFifty4,) = mercs.isFiftyPercentageAndTotalMileage(10000);
-        assertEq(isFifty4, true);
+        assertEq(isFifty4, false);
         (bool isFifty5,) = mercs.isFiftyPercentageAndTotalMileage(100000);
-        assertEq(isFifty5, true);
+        assertEq(isFifty5, false);
         (bool isFifty6,) = mercs.isFiftyPercentageAndTotalMileage(1);
-        assertEq(isFifty6, true);
+        assertEq(isFifty6, false);
         (bool isFifty7,) = mercs.isFiftyPercentageAndTotalMileage(2);
-        assertEq(isFifty7, true);
+        assertEq(isFifty7, false);
+        (bool isFifty8,) = mercs.isFiftyPercentageAndTotalMileage(3);
+        assertEq(isFifty8, true);
+        (bool isFifty9,) = mercs.isFiftyPercentageAndTotalMileage(4);
+        assertEq(isFifty9, true);
     } 
 
     function test_gain() public {
