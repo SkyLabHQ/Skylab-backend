@@ -12,7 +12,7 @@ contract Mercs is SolidStateERC721 {
     mapping(uint256 => uint256) public babyMercsUP;
     mapping(uint256 => uint256) public lastClaimTime;
     uint256 public nextTokenId;
-
+    mapping(uint256 => bool) public nonBuyBack;
     function initialize(address _leaderBoard, address _babyMercs) public {
         LibDiamond.enforceIsContractOwner();
         leaderBoard = PilotMileage(_leaderBoard);
