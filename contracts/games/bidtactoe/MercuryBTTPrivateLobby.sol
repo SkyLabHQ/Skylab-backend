@@ -56,7 +56,7 @@ contract MercuryBTTPrivateLobby {
 
     function setUserInfo(uint256 avatar, string memory userName) public isActiveLobbyAndCorrectAviation {
         require(avatar >= 1 && avatar <= 16, "MercuryBTTPrivateLobby: avatar out of range");
-        require(bytes(userName).length <= 10, "MercuryBTTPrivateLobby: name too long");
+        require(bytes(userName).length <= 10 && bytes(userName).length > 0, "MercuryBTTPrivateLobby: name too long");
         userInfo[msg.sender] = UserInfo(avatar, userName);
     }
 
@@ -113,6 +113,7 @@ contract MercuryBTTPrivateLobby {
     }
 
     function joinPrivateLobby() public {
+        require(mercuryBidTacToe.gamePerPlayer(msg.sender) == address(0), "MercuryBTTPrivateLobby: already in game");
         for (uint256 i = 0; i < players.length; i++) {
             if (players[i] == msg.sender) {
                 players[i] = players[players.length - 1];
@@ -124,6 +125,7 @@ contract MercuryBTTPrivateLobby {
     }
 
     function quitPrivateLobby() external isActiveLobbyAndCorrectAviation {
+        require(mercuryBidTacToe.gamePerPlayer(msg.sender) == address(0), "MercuryBTTPrivateLobby: already in game");
         for (uint256 i = 0; i < players.length; i++) {
             if (players[i] == msg.sender) {
                 players[i] = players[players.length - 1];
