@@ -142,7 +142,7 @@ contract MercuryBTTPrivateLobby {
         winCountPerPlayer[winnerBurner] += 1;
         loseCountPerPlayer[loserBurner] += 1;
     }
- 
+
     function getPlayers() external view returns (address[] memory) {
         return players;
     }
@@ -151,11 +151,11 @@ contract MercuryBTTPrivateLobby {
         return lobbyGameQueue;
     }
 
-    function getLobbyOnGoingGames() external view returns(address[] memory) {
+    function getLobbyOnGoingGames() external view returns (address[] memory) {
         return lobbyOnGoingGames;
     }
 
-    function getGameHistory() external view returns(GameHistory[] memory) {
+    function getGameHistory() external view returns (GameHistory[] memory) {
         return gameHistory;
     }
 }

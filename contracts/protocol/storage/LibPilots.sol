@@ -12,8 +12,6 @@ library LibPilots {
     struct PilotStorage {
         mapping(address => Pilot) activePilot;
         mapping(address => Pilot[]) recentlyUsedPilots;
-
-
     }
 
     function layout() internal pure returns (PilotStorage storage ps) {

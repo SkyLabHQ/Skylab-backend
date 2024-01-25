@@ -16,10 +16,12 @@ contract BabyMercs is SolidStateERC721 {
     uint256 public nextTokenId;
     address public mercs;
     //helper function
+
     function updateNextTokenId() public {
         LibDiamond.enforceIsContractOwner();
         nextTokenId = totalSupply();
     }
+
     function setMercs(address _mercs) public {
         LibDiamond.enforceIsContractOwner();
         mercs = _mercs;
@@ -56,7 +58,7 @@ contract BabyMercs is SolidStateERC721 {
     }
 
     function burn(uint256 tokenId) public {
-        if(msg.sender == mercs) {
+        if (msg.sender == mercs) {
             _burn(tokenId);
             return;
         }

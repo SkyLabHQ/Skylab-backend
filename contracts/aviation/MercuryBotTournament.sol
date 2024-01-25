@@ -6,7 +6,6 @@ import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibBase} from "./base/storage/LibBase.sol";
 
 contract MercuryBotTournament is TrailblazerTournament {
-
     uint256 public _planeSupplyCountThisRound;
     uint256 public _botPointsThisRound;
     uint256 public _botPointsToEnd;
@@ -34,17 +33,20 @@ contract MercuryBotTournament is TrailblazerTournament {
             }
         }
         return false;
-    } 
+    }
 
-    function updateBotStatsThisRound(uint256 planeSupplyCountThisRound, uint256 botPointsThisRound, uint256 botPointsToEnd) external {
+    function updateBotStatsThisRound(
+        uint256 planeSupplyCountThisRound,
+        uint256 botPointsThisRound,
+        uint256 botPointsToEnd
+    ) external {
         LibDiamond.enforceIsContractOwner();
         _planeSupplyCountThisRound = planeSupplyCountThisRound;
         _botPointsThisRound = botPointsThisRound;
         _botPointsToEnd = botPointsToEnd;
     }
 
-
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) override external onlyGameAddresses {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external override onlyGameAddresses {
         bool playerWon = loserTokenId == 0;
         uint256 playerTokenId = winnerTokenId + loserTokenId;
 

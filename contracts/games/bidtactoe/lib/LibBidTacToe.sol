@@ -9,9 +9,11 @@ library LibBidTacToe {
     function defaultParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
         return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, false);
     }
-    function defaultBotParams() internal pure returns(MercuryBidTacToe.GameParams memory) {
+
+    function defaultBotParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
         return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, true);
     }
+
     function createGame(
         MercuryBidTacToe.GameParams memory gameParams,
         address playerAddress,
@@ -19,21 +21,13 @@ library LibBidTacToe {
         address privateLobbyAddress
     ) internal returns (address) {
         // In general, we only allow odd widths or heights
-        require(
-            gameParams.gridWidth == 3, "MercuryBidTacToeParamVerifier: gridWidth incorrect"
-        );
-        require(
-            gameParams.gridHeight == 3,
-            "MercuryBidTacToeParamVerifier: gridHeight incorrect"
-        );
+        require(gameParams.gridWidth == 3, "MercuryBidTacToeParamVerifier: gridWidth incorrect");
+        require(gameParams.gridHeight == 3, "MercuryBidTacToeParamVerifier: gridHeight incorrect");
         require(
             gameParams.lengthToWin >= 3 && gameParams.lengthToWin <= max(gameParams.gridWidth, gameParams.gridHeight),
             "MercuryBidTacToeParamVerifier: lengthToWin incorrect"
         );
-        require(
-            gameParams.initialBalance >= 100,
-            "MercuryBidTacToeParamVerifier: initialBalance incorrect"
-        );
+        require(gameParams.initialBalance >= 100, "MercuryBidTacToeParamVerifier: initialBalance incorrect");
         require(
             gameParams.gridMaxSelectionCount >= 1 && gameParams.gridMaxSelectionCount <= 2,
             "MercuryBidTacToeParamVerifier: gridMaxSelectionCount incorrect"
