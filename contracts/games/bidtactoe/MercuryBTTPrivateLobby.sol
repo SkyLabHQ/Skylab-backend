@@ -56,7 +56,7 @@ contract MercuryBTTPrivateLobby {
 
     function setUserInfo(uint256 avatar, string memory userName) public isActiveLobbyAndCorrectAviation {
         require(avatar >= 1 && avatar <= 16, "MercuryBTTPrivateLobby: avatar out of range");
-        require(bytes(userName).length <= 10, "MercuryBTTPrivateLobby: name too long");
+        require(bytes(userName).length <= 10 && bytes(userName).length > 0, "MercuryBTTPrivateLobby: name too long");
         userInfo[msg.sender] = UserInfo(avatar, userName);
     }
 
