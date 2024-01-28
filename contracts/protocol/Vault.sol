@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "../aviation/base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibVault} from "./storage/LibVault.sol";
+import {Mercs} from "../campaign/Mercs.sol";
 
 interface IERC721Receiver {
     function onERC721Received(address operator, address from, uint256 tokenId, bytes calldata data)
@@ -12,13 +13,17 @@ interface IERC721Receiver {
 }
 
 contract Vault is IERC721Receiver {
-    function initVault(MercuryBase _aviation) public {
+
+    Mercs public mercs;
+
+    function initVault(MercuryBase _aviation, Mercs _mercs) public {
         LibDiamond.enforceIsContractOwner();
         LibVault.layout().aviation = _aviation;
+        mercs = _mercs;
     }
 
-    function BuyBack(uint256 tokenId) external payable {
-        require(msg.sender == LibVault.aviation().ownerOf(tokenId), "Vault: msg.sender is not owner of token");
+    function BuyBack(uint256 tokenId, uint256 mercsTokenId) external payable {
+        require(msg.sender == LibVault.aviation().ownerOf(tokenId) && !mercs.nonBuyBack(mercsTokenId), "Vault: msg.sender is not owner of token");
         uint256 commissionPct = getCommmission(LibVault.aviation().aviationLevels(tokenId));
         uint256 commision = price(tokenId) * commissionPct / 1e4;
         require(address(this).balance >= price(tokenId) - commision, "insufficient balance");
@@ -46,7 +51,7 @@ contract Vault is IERC721Receiver {
 
     function price(uint256 tokenId) public view returns (uint256) {
         uint256 point = LibVault.aviation().aviationPoints(tokenId);
-        return point / 3 * 1e18;
+        return point * 1e16;
     }
 
     function getCommmission(uint256 level) public pure returns (uint256) {

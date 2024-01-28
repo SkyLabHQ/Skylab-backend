@@ -52,4 +52,17 @@ contract MercuryBaseAviation is MercuryBase {
         LibDiamond.enforceIsContractOwner();
         price = _price;
     }
+
+    function _transfer(address from, address to, uint256 tokenId) internal virtual override {
+        uint256 point = LibBase.layout().aviationPoints[tokenId];
+        uint256 level = LibBase.layout().aviationLevels[tokenId];
+        uint256 taxRate;
+        if(level <= 9 && level >= 1) {
+            taxRate = 4 + 2 * (level - 1);
+        } else {
+            taxRate = 20;
+        }
+        payable(address(this)).transfer(taxRate * point * 1e16);
+        super._transfer(from, to, tokenId);
+    }
 }
