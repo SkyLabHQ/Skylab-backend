@@ -24,29 +24,25 @@ contract Mercs is SolidStateERC721 {
         (bool isFiftyPercentage, uint256 totalMileage) = isFiftyPercentageAndTotalMileage(tokenId);
         require(isFiftyPercentage, "Mercs: not fifty percentage");
         require(babyMercs.ownerOf(tokenId) == msg.sender, "Mercs: not owner");
-        uint256 upgradePoints = PilotMileage(leaderBoard).getPilotMileage(address(babyMercs), tokenId) / totalMileage * 100;
+        uint256 upgradePoints =
+            PilotMileage(leaderBoard).getPilotMileage(address(babyMercs), tokenId) / totalMileage * 100;
         babyMercsUP[tokenId] += upgradePoints;
         lastClaimTime[tokenId] = block.timestamp;
     }
 
     function canClaim(uint256 tokenId) public view returns (bool) {
-        if(lastClaimTime[tokenId] == 0) {
+        if (lastClaimTime[tokenId] == 0) {
             return true;
         }
-        uint256 currentSecondsPST = (block.timestamp - 8 hours) % 24 hours;
-        uint256 passOneAMPSTSeconds;
-        if (currentSecondsPST >= 1 hours) {
-            passOneAMPSTSeconds = currentSecondsPST - 1 hours;
-        } else {
-            passOneAMPSTSeconds = 23 hours + currentSecondsPST;
-        }
+        uint256 passOneAMPSTSeconds = (block.timestamp - 9 hours) % 24 hours;
+
         uint256 timestamp = block.timestamp - passOneAMPSTSeconds;
-        if(timestamp > lastClaimTime[tokenId]) {
+        if (timestamp > lastClaimTime[tokenId]) {
             return true;
         }
         return false;
     }
-    
+
     function mint(uint256 tokenId) public {
         require(babyMercsUP[tokenId] >= 100, "Mercs: upgrade point does not meets requirement");
         require(babyMercs.ownerOf(tokenId) == msg.sender, "not owner");
@@ -70,7 +66,7 @@ contract Mercs is SolidStateERC721 {
         uint256 midMileage;
         for (uint256 i = 0; i <= highestIndex; i++) {
             uint256 groupLength = leaderBoard.getSnapshotGroupLength(i);
-            if(accumulate + groupLength > midPilot) {
+            if (accumulate + groupLength > midPilot) {
                 midIndex = i;
                 groupMid = midPilot - accumulate;
                 break;
@@ -79,21 +75,22 @@ contract Mercs is SolidStateERC721 {
         }
         LibPilots.Pilot[] memory pilotGroup = leaderBoard.getSnapshotPilotMileageGroup(midIndex);
         uint256[] memory group = new uint256[](pilotGroup.length);
-        for(uint256 i = 0; i < pilotGroup.length; i++) {
+        for (uint256 i = 0; i < pilotGroup.length; i++) {
             group[i] = leaderBoard.getSnapshotPilotMileage(pilotGroup[i].collectionAddress, pilotGroup[i].pilotId);
         }
-        if(group.length != 0){
-            quickSort(group,0,int256(group.length - 1));
+        if (group.length != 0) {
+            quickSort(group, 0, int256(group.length - 1));
             midMileage = group[groupMid];
         }
         uint256 totalMileage;
-        for(uint256 i = groupMid; i < group.length; i++) {
+        for (uint256 i = groupMid; i < group.length; i++) {
             totalMileage += group[i];
         }
-        for(uint256 i = midIndex + 1; i <= highestIndex; i++) {
+        for (uint256 i = midIndex + 1; i <= highestIndex; i++) {
             LibPilots.Pilot[] memory pilotGroups = leaderBoard.getSnapshotPilotMileageGroup(i);
-            for(uint256 j = 0; j < pilotGroups.length; j++) {
-                totalMileage += leaderBoard.getSnapshotPilotMileage(pilotGroups[j].collectionAddress, pilotGroups[j].pilotId);
+            for (uint256 j = 0; j < pilotGroups.length; j++) {
+                totalMileage +=
+                    leaderBoard.getSnapshotPilotMileage(pilotGroups[j].collectionAddress, pilotGroups[j].pilotId);
             }
         }
         return (mileage >= midMileage, totalMileage);

@@ -34,7 +34,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     mapping(address => bool) public validBidTacToeBots;
     mapping(address => address) public playerToOpponent;
     mapping(address => uint256) public playerToTimeout;
-    
+
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
 
@@ -64,8 +64,11 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     function setActiveQueue() public {
         require(block.timestamp <= playerToTimeout[msg.sender], "MercuryBidTacToe: timeout reached");
         address opponent = playerToOpponent[msg.sender];
-        require(playerToOpponent[msg.sender] == opponent && playerToOpponent[opponent] == msg.sender, "MercuryBidTacToe: opponent not match");
-        if(playerToTimeout[opponent] != 0) {
+        require(
+            playerToOpponent[msg.sender] == opponent && playerToOpponent[opponent] == msg.sender,
+            "MercuryBidTacToe: opponent not match"
+        );
+        if (playerToTimeout[opponent] != 0) {
             playerToTimeout[msg.sender] = 0;
         } else {
             address gameAddress = createGame(LibBidTacToe.defaultParams(), msg.sender, address(0));
@@ -98,7 +101,10 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         LibBidTacToe.joinGame(gameAddress, bot);
     }
 
-    function createGame(GameParams memory gameParams, address player1, address privateLobby) internal returns (address) {
+    function createGame(GameParams memory gameParams, address player1, address privateLobby)
+        internal
+        returns (address)
+    {
         require(!playerCreatedGameOrQueued(player1), "MercuryBidTacToe: player already created or queued for a game");
 
         address newGame = LibBidTacToe.createGame(gameParams, player1, address(this), privateLobby);

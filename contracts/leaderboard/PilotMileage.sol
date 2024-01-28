@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 contract PilotMileage is Initializable {
     address protocol;
     mapping(address => mapping(uint256 => uint256)) public lastSnapshotTime;
+
     function initialize(address _protocol) public initializer {
         protocol = _protocol;
     }
@@ -21,30 +22,24 @@ contract PilotMileage is Initializable {
 
     function canSnapshot(address collection, uint256 tokenId) public view returns (bool) {
         uint256 lastTime = lastSnapshotTime[collection][tokenId];
-        if(lastTime == 0) {
+        if (lastTime == 0) {
             return true;
         }
-        uint256 currentSecondsPST = (block.timestamp - 8 hours) % 24 hours;
-        uint256 passOneAMPSTSeconds;
-        if (currentSecondsPST >= 1 hours) {
-            passOneAMPSTSeconds = currentSecondsPST - 1 hours;
-        } else {
-            passOneAMPSTSeconds = 23 hours + currentSecondsPST;
-        }
+        uint256 passOneAMPSTSeconds = (block.timestamp - 9 hours) % 24 hours;
         uint256 timestamp = block.timestamp - passOneAMPSTSeconds;
-        if(timestamp > lastTime) {
+        if (timestamp > lastTime) {
             return true;
         }
         return false;
     }
-    
+
     function pilotGainMileage(LibPilots.Pilot memory pilot, uint256 xp) public onlyProtocol {
         uint256 preXP = LibPilotLeaderBoard.getPilotRankingData(pilot);
-        LibPilotLeaderBoard.setPilotRankingData(pilot, preXP+xp);
+        LibPilotLeaderBoard.setPilotRankingData(pilot, preXP + xp);
         emit PilotMileageGain(pilot.collectionAddress, pilot.pilotId, xp);
-        if(canSnapshot(pilot.collectionAddress, pilot.pilotId)) {
-                LibPilotLeaderBoard.snapshot(pilot);
-                lastSnapshotTime[pilot.collectionAddress][pilot.pilotId] = block.timestamp;
+        if (canSnapshot(pilot.collectionAddress, pilot.pilotId)) {
+            LibPilotLeaderBoard.snapshot(pilot);
+            lastSnapshotTime[pilot.collectionAddress][pilot.pilotId] = block.timestamp;
         }
     }
 

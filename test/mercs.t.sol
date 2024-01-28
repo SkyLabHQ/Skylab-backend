@@ -4,12 +4,12 @@ pragma solidity ^0.8.13;
 import {Test, console2} from "forge-std/Test.sol";
 import {MercuryPilots} from "../contracts/protocol/MercuryPilots.sol";
 import {IERC721} from "../contracts/interfaces/IERC721.sol";
-import { Mercs } from "../contracts/campaign/Mercs.sol";
-import { PilotMileage } from "../contracts/leaderboard/PilotMileage.sol";
-import { LibPilots } from "../contracts/protocol/storage/LibPilots.sol";
+import {Mercs} from "../contracts/campaign/Mercs.sol";
+import {PilotMileage} from "../contracts/leaderboard/PilotMileage.sol";
+import {LibPilots} from "../contracts/protocol/storage/LibPilots.sol";
 
 // to pass this test, have to comment out the modifier onlyProtocol pilotGainMileage function
-// and LibDiamond.enforceIsContractOwner() initialize function in PilotMileage.sol 
+// and LibDiamond.enforceIsContractOwner() initialize function in PilotMileage.sol
 contract MercsTest is Test {
     Mercs mercs;
     PilotMileage pilotMileage;
@@ -19,6 +19,12 @@ contract MercsTest is Test {
         pilotMileage = new PilotMileage();
         mercs = new Mercs();
         mercs.initialize(address(pilotMileage), collectionAddress);
+        vm.warp(1706151148);
+        assertEq(mercs.canClaim(1), true);
+        vm.warp(1706151271);
+        assertEq(mercs.canClaim(1), false);
+        vm.warp(1706260422);
+        assertEq(mercs.canClaim(1), true);
         LibPilots.Pilot memory p0 = LibPilots.Pilot(collectionAddress, 0);
         LibPilots.Pilot memory p01 = LibPilots.Pilot(collectionAddress, 10);
         LibPilots.Pilot memory p001 = LibPilots.Pilot(collectionAddress, 100);
@@ -30,15 +36,15 @@ contract MercsTest is Test {
         LibPilots.Pilot memory p3 = LibPilots.Pilot(collectionAddress, 3);
         LibPilots.Pilot memory p4 = LibPilots.Pilot(collectionAddress, 4);
         vm.warp(1705343540);
-        pilotMileage.pilotGainMileage(p0 ,0);
-        pilotMileage.pilotGainMileage(p01 ,0);
-        pilotMileage.pilotGainMileage(p001 ,0);
-        pilotMileage.pilotGainMileage(p0001 ,0);
-        pilotMileage.pilotGainMileage(p00001 ,0);
-        pilotMileage.pilotGainMileage(p000001 ,0);
-        pilotMileage.pilotGainMileage(p1 ,1);
-        pilotMileage.pilotGainMileage(p2 ,2);
-        pilotMileage.pilotGainMileage(p3 ,3);
+        pilotMileage.pilotGainMileage(p0, 0);
+        pilotMileage.pilotGainMileage(p01, 0);
+        pilotMileage.pilotGainMileage(p001, 0);
+        pilotMileage.pilotGainMileage(p0001, 0);
+        pilotMileage.pilotGainMileage(p00001, 0);
+        pilotMileage.pilotGainMileage(p000001, 0);
+        pilotMileage.pilotGainMileage(p1, 1);
+        pilotMileage.pilotGainMileage(p2, 2);
+        pilotMileage.pilotGainMileage(p3, 3);
         pilotMileage.pilotGainMileage(p4, 4);
         (bool isFifty, uint256 totalMileage) = mercs.isFiftyPercentageAndTotalMileage(0);
         assertEq(isFifty, false);
@@ -61,7 +67,7 @@ contract MercsTest is Test {
         assertEq(isFifty8, true);
         (bool isFifty9,) = mercs.isFiftyPercentageAndTotalMileage(4);
         assertEq(isFifty9, true);
-    } 
+    }
 
     function test_gain() public {
         setUp();

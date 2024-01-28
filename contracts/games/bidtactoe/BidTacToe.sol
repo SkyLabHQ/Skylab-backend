@@ -13,7 +13,7 @@ contract BidTacToe is Initializable {
     uint256 public gridWidth;
     uint256 public gridHeight;
     uint256 public lengthToWin;
-    
+
     uint256 public gridMaxSelectionCount;
     uint256 public gridSelectionStrategy;
     address public mercuryBidTacToeAddress;
@@ -67,10 +67,12 @@ contract BidTacToe is Initializable {
         _;
     }
 
-    function initialize(MercuryBidTacToe.GameParams memory gameParams, address player, address _mercuryBidTacToeAddress, address _privateLobbyAddress)
-        public
-        initializer
-    {
+    function initialize(
+        MercuryBidTacToe.GameParams memory gameParams,
+        address player,
+        address _mercuryBidTacToeAddress,
+        address _privateLobbyAddress
+    ) public initializer {
         player1 = player;
         gridWidth = gameParams.gridWidth;
         gridHeight = gameParams.gridHeight;
@@ -209,7 +211,7 @@ contract BidTacToe is Initializable {
     function initializeFutureGrids() internal {
         if (gridSelectionStrategy == 2) {
             // If strategy = 2, generate all selections (maxSelection * width * height) now
-            for (uint i = 0; i < gridWidth * gridHeight * gridMaxSelectionCount; i++) {
+            for (uint256 i = 0; i < gridWidth * gridHeight * gridMaxSelectionCount; i++) {
                 uint256 selection = generateSingleGridSelection(i);
                 gridSelectionCount[selection] += 1;
                 allSelectedGrids.push(selection);
@@ -241,7 +243,7 @@ contract BidTacToe is Initializable {
         }
     }
 
-    function generateSingleGridSelection(uint256 nonce) view internal returns (uint256) {
+    function generateSingleGridSelection(uint256 nonce) internal view returns (uint256) {
         uint256 tempHash = uint256(
             keccak256(abi.encodePacked(player1, player2, balances[player1], balances[player2], block.timestamp, nonce))
         );
@@ -299,10 +301,12 @@ contract BidTacToe is Initializable {
         address otherPlayer = getOtherPlayer(player);
         gameStates[otherPlayer] = state + 1;
         emit LoseGame(otherPlayer, state + 1);
-        (bool bttSuceed,) = mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
+        (bool bttSuceed,) =
+            mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
         require(bttSuceed, "BidTacToe: handleWinLoss failed");
-        if(privateLobbyAddress != address(0)) {
-            (bool lobbySuceed,) = privateLobbyAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
+        if (privateLobbyAddress != address(0)) {
+            (bool lobbySuceed,) =
+                privateLobbyAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
             require(lobbySuceed, "BidTacToe: handleWinLoss failed");
         }
     }
