@@ -35,7 +35,7 @@ abstract contract MercuryBase is SolidStateERC721 {
                             Game Function
     //////////////////////////////////////////////////////////////*/
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external virtual onlyGameAddresses {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public virtual onlyGameAddresses {
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         uint256 pointsToMove = estimatePointsToMove(winnerTokenId, loserTokenId);
         sbs.aviationPoints[winnerTokenId] += pointsToMove;
