@@ -36,7 +36,7 @@ contract MercuryTestFlight is MercuryBase {
 
     // function aviationUnlock(uint256 tokenId) external override onlyGameAddresses {}
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external override onlyGameAddresses {}
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses {}
 
     /*//////////////////////////////////////////////////////////////
                             View Function

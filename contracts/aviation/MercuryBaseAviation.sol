@@ -57,7 +57,7 @@ contract MercuryBaseAviation is MercuryBase {
         uint256 point = LibBase.layout().aviationPoints[tokenId];
         uint256 level = LibBase.layout().aviationLevels[tokenId];
         uint256 taxRate;
-        if(level <= 9 && level >= 1) {
+        if (level <= 9 && level >= 1) {
             taxRate = 4 + 2 * (level - 1);
         } else {
             taxRate = 20;
