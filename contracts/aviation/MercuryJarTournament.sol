@@ -7,7 +7,8 @@ contract MercuryJarTournament is MercuryBase {
     uint256 public pot;
     mapping(uint256 => uint256) public levelToClaimTime;
     mapping(uint256 => uint256) public levelToNewComerId;
-    mapping(uint256 => mapping(uint256 => string)) public userName;
+    mapping(address => string) public userName;
+    mapping(string => bool) public userNameUsed;
     uint256 public nextTokenId;
 
     function initialize(string memory baseURI, address protocol) public {
@@ -46,5 +47,16 @@ contract MercuryJarTournament is MercuryBase {
     function addNewComer(uint256 tokenId, uint256 level) private {
         levelToClaimTime[level] = block.timestamp + 15 minutes * 2 ^ (level - 1);
         levelToNewComerId[level] = tokenId;
+    }
+
+    function registryUserName(string memory _username) public {
+        require(bytes(_username).length > 0, "MercuryJarTournament: user name too short");
+        require(!userNameUsed[_username], "MercuryJarTournament: user name used");
+        require(bytes(userName[msg.sender]).length == 0, "MercuryJarTournament: user name already registered");
+        userName[msg.sender] = _username;
+    }
+
+    function planeToUserName(uint256 tokenId) public view returns(string memory) {
+        return userName[_ownerOf(tokenId)];
     }
 }
