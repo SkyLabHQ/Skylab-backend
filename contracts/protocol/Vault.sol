@@ -16,9 +16,13 @@ contract Vault is IERC721Receiver {
 
     Mercs public mercs;
 
-    function initVault(MercuryBase _aviation, Mercs _mercs) public {
+    function initVault(MercuryBase _aviation) public {
         LibDiamond.enforceIsContractOwner();
         LibVault.layout().aviation = _aviation;
+    }
+
+    function setMercs(Mercs _mercs) public {
+        LibDiamond.enforceIsContractOwner();
         mercs = _mercs;
     }
 
