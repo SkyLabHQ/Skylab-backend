@@ -16,7 +16,8 @@ contract MercuryJarTournament is MercuryBase {
     }
 
     function mint() public payable {
-        require(msg.value >= 0.01 ether, "");
+        // @TODO voucher
+        require(msg.value >= 0.01 ether, "MercuryJarTournament: not enough ether to mint");
         _safeMint(msg.sender, nextTokenId);
         addNewComer(nextTokenId, 1);
         nextTokenId++;
@@ -30,6 +31,10 @@ contract MercuryJarTournament is MercuryBase {
         if (levelBefore < levelAfter) {
             addNewComer(winnerTokenId, levelAfter);
         }
+    }
+
+    function estimatePointsToMove(uint256, uint256) public override view returns (uint256) {
+        return 1;
     }
 
     function claimPot(uint256 tokenId) public {

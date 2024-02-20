@@ -140,7 +140,7 @@ abstract contract MercuryBase is SolidStateERC721 {
         );
     }
 
-    function estimatePointsToMove(uint256 winnerTokenId, uint256 loserTokenId) public view returns (uint256) {
+    function estimatePointsToMove(uint256 winnerTokenId, uint256 loserTokenId) public virtual view returns (uint256) {
         require(_exists(winnerTokenId), "MercuryBase: nonexistent token");
         require(_exists(loserTokenId), "MercuryBase: nonexistent token");
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
