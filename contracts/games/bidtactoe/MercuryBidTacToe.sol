@@ -68,7 +68,8 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         require(componentIndex().isValidAviation(aviation), "MercuryBidTacToe: invalid aviation");
         require(defaultGameQueue[aviation] == msg.sender, "MercuryBidTacToe: msg.sender is not in default queue");
         require(
-            joinDefaultQueueTime[aviation][msg.sender] + 1 minutes <= block.timestamp, "MercuryBidTacToe: time not reached"
+            joinDefaultQueueTime[aviation][msg.sender] + 1 minutes <= block.timestamp,
+            "MercuryBidTacToe: time not reached"
         );
         uint256 tokenId = burnerAddressToTokenId(msg.sender);
         require(MercuryBase(aviation).isApprovedOrOwner(msg.sender, tokenId), "MercuryBidTacToe: not approved");

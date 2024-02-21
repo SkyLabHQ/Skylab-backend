@@ -44,7 +44,8 @@ contract MercuryJarTournament is MercuryBase {
             if (bytes(userName[msg.sender]).length > 0) {
                 for (uint256 i = 0; i < userNamePerLevel[levelBefore].length; i++) {
                     if (keccak256(bytes(userNamePerLevel[levelBefore][i])) == keccak256(bytes(userName[msg.sender]))) {
-                        userNamePerLevel[levelBefore][i] = userNamePerLevel[levelBefore][userNamePerLevel[levelBefore].length - 1];
+                        userNamePerLevel[levelBefore][i] =
+                            userNamePerLevel[levelBefore][userNamePerLevel[levelBefore].length - 1];
                         userNamePerLevel[levelBefore].pop();
                         break;
                     }
@@ -87,7 +88,6 @@ contract MercuryJarTournament is MercuryBase {
         require(!userNameUsed[_username], "MercuryJarTournament: user name used");
         require(bytes(userName[msg.sender]).length == 0, "MercuryJarTournament: user name already registered");
         userName[msg.sender] = _username;
-
     }
 
     function planeToUserName(uint256 tokenId) public view returns (string memory) {
