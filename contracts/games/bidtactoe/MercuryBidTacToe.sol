@@ -35,7 +35,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     mapping(address => bool) public validBidTacToeBots;
     mapping(address => address) public playerToOpponent;
     mapping(address => uint256) public playerToTimeout;
-    mapping(address => mapping(address => uint256)) public joinQueueTime;
+    mapping(address => mapping(address => uint256)) public joinDefaultQueueTime;
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
@@ -53,7 +53,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
             address defaultPlayer = defaultGameQueue[aviation];
             if (burnerAddressToAviation(defaultPlayer) != aviation) {
                 defaultGameQueue[aviation] = msg.sender;
-                joinQueueTime[aviation][msg.sender] = block.timestamp;
+                joinDefaultQueueTime[aviation][msg.sender] = block.timestamp;
             } else {
                 playerToOpponent[defaultPlayer] = msg.sender;
                 playerToOpponent[msg.sender] = defaultPlayer;
@@ -64,14 +64,16 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         }
     }
 
-    function playerWithBot(address aviation, address bot) public {
+    function playWithBotAfterDefaultQueueTimer(address aviation, address bot) public {
         require(componentIndex().isValidAviation(aviation), "MercuryBidTacToe: invalid aviation");
         require(defaultGameQueue[aviation] == msg.sender, "MercuryBidTacToe: msg.sender is not in default queue");
-        require(joinQueueTime[aviation][msg.sender] + 1 minutes <= block.timestamp, "MercuryBidTacToe: time not reached");
+        require(
+            joinDefaultQueueTime[aviation][msg.sender] + 1 minutes <= block.timestamp, "MercuryBidTacToe: time not reached"
+        );
         uint256 tokenId = burnerAddressToTokenId(msg.sender);
-        require(MercuryBase(aviation).isApprovedOrOwner(msg.sender,tokenId), "MercuryBidTacToe: not approved");
+        require(MercuryBase(aviation).isApprovedOrOwner(msg.sender, tokenId), "MercuryBidTacToe: not approved");
         createBotGame(bot);
-        delete joinQueueTime[aviation][msg.sender];
+        delete joinDefaultQueueTime[aviation][msg.sender];
         delete defaultGameQueue[aviation];
     }
 
@@ -98,7 +100,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         address opponent = playerToOpponent[msg.sender];
         require(block.timestamp > playerToTimeout[opponent], "MercuryBidTacToe: timeout not reached");
         address activePlayer;
-        if(playerToTimeout[msg.sender] == 0) {
+        if (playerToTimeout[msg.sender] == 0) {
             activePlayer = msg.sender;
             address aviation = burnerAddressToAviation(activePlayer);
             defaultGameQueue[aviation] = activePlayer;
