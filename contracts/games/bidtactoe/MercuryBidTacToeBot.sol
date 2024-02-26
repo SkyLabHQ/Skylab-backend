@@ -76,8 +76,9 @@ contract MercuryBidTacToeBot {
                     adjustedOpponentBid = opponentBalance;
                 }
             }
+            uint256 blc = opponentBalance >= adjustedOpponentBid ? opponentBalance - adjustedOpponentBid : 0;
             uint256 rp_lose =
-                calculateResourcePower(myBalance - bid, opponentBalance - adjustedOpponentBid, bAR_lose, hAR_lose);
+                calculateResourcePower(myBalance - bid, blc, bAR_lose, hAR_lose);
 
             uint256 ps = pp_win * rp_win * win_rate + pp_lose * rp_lose * (1000 - win_rate);
 

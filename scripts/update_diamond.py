@@ -68,8 +68,8 @@ def update_diamond(address, params):
         diamond.diamondCut(cut, '0x'+'0'*40, '0x',sender=account.deployer)
 
 def main():
-    network = input("please choose the network: 'Polygon', 'Mumbai', 'Goerli' ")
-    if network != 'Polygon' and network != 'Mumbai' and network != 'Goerli':
+    network = input("please choose the network: 'Polygon', 'Mumbai', 'Sepolia' ")
+    if network != 'Polygon' and network != 'Mumbai' and network != 'Sepolia':
         print("Wrong network, must be one of these: 'Polygon', 'Mumbai'")
         return
     diamond = input("please choose the diamond: 'Protocol', 'MercuryTestFlight', 'TrailblazerTournament', 'MercuryBidTacToe', 'MercuryBidTacToeBot', 'MercuryBotTournament' ")
@@ -84,13 +84,13 @@ def main():
         bot_address = constant.MUMBAI_Bot
         testflight_address = constant.MUMBAI_TESTFLIGHT
         bot_tournament = constant.MUMBAI_BotTournament
-    elif network == 'Goerli':
-        protocol_address = constant.Goerli_Protocol
-        game_address = constant.Goerli_Game
-        trailblazer_address = constant.Goerli_TrailblazerTournament
-        bot_address = constant.Goerli_Bot
-        testflight_address = constant.Goerli_TestFight
-        bot_tournament = constant.Goerli_Bot_Tournament
+    elif network == 'Sepolia':
+        protocol_address = constant.Sepolia_Protocol
+        game_address = constant.Sepolia_Game
+        trailblazer_address = constant.Sepolia_TrailblazerTournament
+        bot_address = constant.Sepolia_Bot
+        testflight_address = constant.Sepolia_TestFight
+        bot_tournament = constant.Sepolia_Bot_Tournament
     if diamond == 'Protocol':
         update_diamond(protocol_address, protocol_params)
     elif diamond == 'MercuryBidTacToeBot':

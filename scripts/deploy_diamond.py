@@ -101,8 +101,8 @@ def main():
     bot.initialize(sender=account.deployer)
     game = project.MercuryBidTacToe.at(game_address)
     game.registerBot(bot_address, True, sender=account.deployer)
-    # bidtactoe_player_versus_bot_address = deploy_bidtactoe_player_versus_bot()
-    # bid_tac_toe = deploy_bidtactoe()
+    bidtactoe_player_versus_bot_address = deploy_bidtactoe_player_versus_bot()
+    bid_tac_toe = deploy_bidtactoe()
     # Write address to file
     with open('./address.temp','w') as f:
         f.write("protocol_address:"+protocol_address+"\n")
@@ -112,7 +112,7 @@ def main():
         f.write("leaderboard_addresses:"+str(leaderboard_addresses)+"\n")
         f.write("bot_tournament_address:"+bot_tournament_address+"\n")
         f.write("bot_address:"+bot_address+"\n")
-        # f.write("bidtactoe_address:"+bidtactoe_player_versus_bot_address+"\n")
-        # f.write("bid_tac_toe:"+bid_tac_toe+"\n")
+        f.write("bidtactoe_address:"+bidtactoe_player_versus_bot_address+"\n")
+        f.write("bid_tac_toe:"+bid_tac_toe+"\n")
         f.write("test_flight_address:"+test_flight_address+"\n")
         f.write("delegate_erc721:"+delegate_erc721.address+"\n")
