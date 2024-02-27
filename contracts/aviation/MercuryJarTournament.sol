@@ -19,13 +19,14 @@ contract MercuryJarTournament is MercuryBase {
     }
 
     function mint() public payable {
-        require(hasVoucher[msg.sender] || msg.value == 0.01 ether, "MercuryJarTournament: no voucher or not enough ether to mint");
+        require(hasVoucher[msg.sender] || msg.value >= 0.01 ether, "MercuryJarTournament: no voucher or not enough ether to mint");
         _safeMint(msg.sender, nextTokenId);
         addNewComer(nextTokenId, 1);
         nextTokenId++;
-        if (msg.value == 0.01 ether) {
-            pot += 0.01 ether;
+        if (msg.value >= 0.01 ether) {
+            pot += msg.value;
         }
+        hasVoucher[msg.sender] = false;
     }
 
     function setVoucher(address[] memory users, bool[] memory vouchers) public {
