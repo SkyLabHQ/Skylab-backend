@@ -35,7 +35,7 @@ abstract contract MercuryBase is SolidStateERC721 {
                             Game Function
     //////////////////////////////////////////////////////////////*/
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external virtual onlyGameAddresses {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public virtual onlyGameAddresses {
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         uint256 pointsToMove = estimatePointsToMove(winnerTokenId, loserTokenId);
         sbs.aviationPoints[winnerTokenId] += pointsToMove;
@@ -140,7 +140,7 @@ abstract contract MercuryBase is SolidStateERC721 {
         );
     }
 
-    function estimatePointsToMove(uint256 winnerTokenId, uint256 loserTokenId) public view returns (uint256) {
+    function estimatePointsToMove(uint256 winnerTokenId, uint256 loserTokenId) public view virtual returns (uint256) {
         require(_exists(winnerTokenId), "MercuryBase: nonexistent token");
         require(_exists(loserTokenId), "MercuryBase: nonexistent token");
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();

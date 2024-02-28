@@ -13,7 +13,6 @@ interface IERC721Receiver {
 }
 
 contract Vault is IERC721Receiver {
-
     Mercs public mercs;
 
     function initVault(MercuryBase _aviation) public {
@@ -27,7 +26,10 @@ contract Vault is IERC721Receiver {
     }
 
     function BuyBack(uint256 tokenId, uint256 mercsTokenId) external payable {
-        require(msg.sender == LibVault.aviation().ownerOf(tokenId) && !mercs.nonBuyBack(mercsTokenId), "Vault: msg.sender is not owner of token");
+        require(
+            msg.sender == LibVault.aviation().ownerOf(tokenId) && !mercs.nonBuyBack(mercsTokenId),
+            "Vault: msg.sender is not owner of token"
+        );
         uint256 commissionPct = getCommmission(LibVault.aviation().aviationLevels(tokenId));
         uint256 commision = price(tokenId) * commissionPct / 1e4;
         require(address(this).balance >= price(tokenId) - commision, "insufficient balance");

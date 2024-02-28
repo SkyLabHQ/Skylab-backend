@@ -46,7 +46,7 @@ contract MercuryBotTournament is TrailblazerTournament {
         _botPointsToEnd = botPointsToEnd;
     }
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) external override onlyGameAddresses {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses {
         bool playerWon = loserTokenId == 0;
         uint256 playerTokenId = winnerTokenId + loserTokenId;
 
