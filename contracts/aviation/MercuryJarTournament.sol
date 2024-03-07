@@ -5,41 +5,53 @@ import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 
 contract MercuryJarTournament is MercuryBase {
-    uint256 public pot;
     mapping(uint256 => uint256) public levelToClaimTime;
     mapping(uint256 => uint256) public levelToNewComerId;
     mapping(address => string) public userName;
     mapping(uint256 => string[]) public userNamePerLevel;
     mapping(string => bool) public userNameUsed;
-    mapping(address => bool) public hasVoucher;
+    mapping(address => uint256) public paperBalance;
+    
+    uint256 public pot;
     uint256 public nextTokenId;
+    bool isTournamentBegin;
 
     function initialize(string memory baseURI, address protocol) public {
         super.initialize(baseURI, "MercuryJarTournament", "MercuryJarTournament", protocol);
     }
 
-    function mint() public payable {
-        require(msg.value >= 0.01 ether, "MercuryJarTournament:  not enough ether to mint");
-        _safeMint(msg.sender, nextTokenId);
-        addNewComer(nextTokenId, 1);
-        nextTokenId++;
+    function mintPaper(uint256 amount) public payable {
+        require(!isTournamentBegin, "MercuryJarTournament: tournament already begin");
+        require(msg.value >= 0.01 ether * amount, "MercuryJarTournament: not enough ether to mint");
+        paperBalance[msg.sender] += amount;
         pot += msg.value;
     }
 
-    function mintWithVoucher() public {
-        require(hasVoucher[msg.sender],"MercuryJarTournament: no voucher to mint");
-        _safeMint(msg.sender, nextTokenId);
-        addNewComer(nextTokenId, 1);
-        nextTokenId++;
-        hasVoucher[msg.sender] = false;
+    function mint(uint256 amount) public payable {
+        require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
+        require(msg.value >= 0.02 ether * amount, "MercuryJarTournament:  not enough ether to mint");
+        for (uint i = 0; i < amount; i++) {
+            _safeMint(msg.sender, nextTokenId);
+            addNewComer(nextTokenId, 1);
+            nextTokenId++;
+        }
+        pot += msg.value;
     }
 
-    function setVoucher(address[] memory users, bool[] memory vouchers) public {
-        LibDiamond.enforceIsContractOwner();
-        require(users.length == vouchers.length, "MercuryJarTournament: invalid input");
-        for (uint256 i = 0; i < users.length; i++) {
-            hasVoucher[users[i]] = vouchers[i];
+    function mintWithPaper(uint256 amount ) public {
+        require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
+        require(paperBalance[msg.sender] > amount,"MercuryJarTournament: no voucher to mint");
+        for (uint i = 0; i < amount; i++) {
+            _safeMint(msg.sender, nextTokenId);
+            addNewComer(nextTokenId, 1);
+            nextTokenId++;
+            paperBalance[msg.sender] -= 1;
         }
+    }
+
+    function setTournamentBegin(bool _isTournamentBegin) public {
+        LibDiamond.enforceIsContractOwner();
+        isTournamentBegin = _isTournamentBegin;
     }
 
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses {
