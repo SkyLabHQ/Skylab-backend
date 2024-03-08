@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
+import {LibBase} from "./base/storage/LibBase.sol";
 
 contract MercuryJarTournament is MercuryBase {
     mapping(uint256 => uint256) public levelToClaimTime;
@@ -13,7 +14,6 @@ contract MercuryJarTournament is MercuryBase {
     mapping(address => uint256) public paperBalance;
     
     uint256 public pot;
-    uint256 public nextTokenId;
     bool isTournamentBegin;
 
     function initialize(string memory baseURI, address protocol) public {
@@ -22,29 +22,35 @@ contract MercuryJarTournament is MercuryBase {
 
     function mintPaper(uint256 amount) public payable {
         require(!isTournamentBegin, "MercuryJarTournament: tournament already begin");
-        require(msg.value >= 0.01 ether * amount, "MercuryJarTournament: not enough ether to mint");
+        require(msg.value == 0.01 ether * amount, "MercuryJarTournament: not enough ether to mint");
         paperBalance[msg.sender] += amount;
         pot += msg.value;
     }
 
     function mint(uint256 amount) public payable {
         require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
-        require(msg.value >= 0.02 ether * amount, "MercuryJarTournament:  not enough ether to mint");
+        require(msg.value == 0.02 ether * amount, "MercuryJarTournament:  not enough ether to mint");
         for (uint i = 0; i < amount; i++) {
-            _safeMint(msg.sender, nextTokenId);
-            addNewComer(nextTokenId, 1);
-            nextTokenId++;
+            uint256 tokenId = LibBase.layout().lastTokenID + 1;
+            _safeMint(msg.sender, tokenId);
+            addNewComer(tokenId, 1);
+            LibBase.layout().lastTokenID++;
+            LibBase.layout().aviationLevels[tokenId] = 1;
+            LibBase.layout().aviationPoints[tokenId] = 1;
         }
         pot += msg.value;
     }
 
     function mintWithPaper(uint256 amount ) public {
         require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
-        require(paperBalance[msg.sender] > amount,"MercuryJarTournament: no voucher to mint");
+        require(paperBalance[msg.sender] >= amount,"MercuryJarTournament: no voucher to mint");
         for (uint i = 0; i < amount; i++) {
-            _safeMint(msg.sender, nextTokenId);
-            addNewComer(nextTokenId, 1);
-            nextTokenId++;
+            uint256 tokenId = LibBase.layout().lastTokenID + 1;
+            _safeMint(msg.sender, tokenId);
+            addNewComer(tokenId, 1);
+            LibBase.layout().lastTokenID++;
+            LibBase.layout().aviationLevels[tokenId] = 1;
+            LibBase.layout().aviationPoints[tokenId] = 1;
             paperBalance[msg.sender] -= 1;
         }
     }
