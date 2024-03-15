@@ -9,10 +9,10 @@ contract MercuryJarTournament is MercuryBase {
     mapping(uint256 => uint256) public levelToClaimTime;
     mapping(uint256 => uint256) public levelToNewComerId;
     mapping(address => string) public userName;
-    mapping(uint256 => string[]) public userNamePerLevel;
+    mapping(uint256 => uint256[]) public tokenIdPerLevel;
     mapping(string => bool) public userNameUsed;
     mapping(address => uint256) public paperBalance;
-    
+
     uint256 public pot;
     bool isTournamentBegin;
 
@@ -21,7 +21,7 @@ contract MercuryJarTournament is MercuryBase {
     }
 
     function mintPaper(uint256 amount) public payable {
-        require(!isTournamentBegin, "MercuryJarTournament: tournament already begin");
+        //require(!isTournamentBegin, "MercuryJarTournament: tournament already begin");
         require(msg.value == 0.01 ether * amount, "MercuryJarTournament: not enough ether to mint");
         paperBalance[msg.sender] += amount;
         pot += msg.value;
@@ -30,7 +30,7 @@ contract MercuryJarTournament is MercuryBase {
     function mint(uint256 amount) public payable {
         require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
         require(msg.value == 0.02 ether * amount, "MercuryJarTournament:  not enough ether to mint");
-        for (uint i = 0; i < amount; i++) {
+        for (uint256 i = 0; i < amount; i++) {
             uint256 tokenId = LibBase.layout().lastTokenID + 1;
             _safeMint(msg.sender, tokenId);
             addNewComer(tokenId, 1);
@@ -41,10 +41,10 @@ contract MercuryJarTournament is MercuryBase {
         pot += msg.value;
     }
 
-    function mintWithPaper(uint256 amount ) public {
+    function mintWithPaper(uint256 amount) public {
         require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
-        require(paperBalance[msg.sender] >= amount,"MercuryJarTournament: no voucher to mint");
-        for (uint i = 0; i < amount; i++) {
+        require(paperBalance[msg.sender] >= amount, "MercuryJarTournament: no voucher to mint");
+        for (uint256 i = 0; i < amount; i++) {
             uint256 tokenId = LibBase.layout().lastTokenID + 1;
             _safeMint(msg.sender, tokenId);
             addNewComer(tokenId, 1);
@@ -65,15 +65,17 @@ contract MercuryJarTournament is MercuryBase {
         super.aviationMovePoints(winnerTokenId, loserTokenId);
         uint256 levelAfter = aviationLevels(winnerTokenId);
         if (levelBefore < levelAfter) {
+            if (levelToNewComerId[levelBefore] == winnerTokenId) {
+                levelToNewComerId[levelBefore] = 0;
+                levelToClaimTime[levelBefore] = 0;
+            }
             addNewComer(winnerTokenId, levelAfter);
-            if (bytes(userName[msg.sender]).length > 0) {
-                for (uint256 i = 0; i < userNamePerLevel[levelBefore].length; i++) {
-                    if (keccak256(bytes(userNamePerLevel[levelBefore][i])) == keccak256(bytes(userName[msg.sender]))) {
-                        userNamePerLevel[levelBefore][i] =
-                            userNamePerLevel[levelBefore][userNamePerLevel[levelBefore].length - 1];
-                        userNamePerLevel[levelBefore].pop();
-                        break;
-                    }
+            for (uint256 i = 0; i < tokenIdPerLevel[levelBefore].length; i++) {
+                if (tokenIdPerLevel[levelBefore][i] == winnerTokenId) {
+                    tokenIdPerLevel[levelBefore][i] =
+                        tokenIdPerLevel[levelBefore][tokenIdPerLevel[levelBefore].length - 1];
+                    tokenIdPerLevel[levelBefore].pop();
+                    break;
                 }
             }
         }
@@ -102,10 +104,7 @@ contract MercuryJarTournament is MercuryBase {
     function addNewComer(uint256 tokenId, uint256 level) private {
         levelToClaimTime[level] = block.timestamp + 15 minutes * 2 ^ (level - 1);
         levelToNewComerId[level] = tokenId;
-        string memory username = userName[msg.sender];
-        if (bytes(username).length > 0) {
-            userNamePerLevel[level].push(username);
-        }
+        tokenIdPerLevel[level].push(tokenId);
     }
 
     function registerUserName(string memory _username) public {
@@ -119,7 +118,7 @@ contract MercuryJarTournament is MercuryBase {
         return userName[_ownerOf(tokenId)];
     }
 
-    function getUserNamePerLevel(uint256 level) public view returns (string[] memory) {
-        return userNamePerLevel[level];
+    function getTokenIdPerLevel(uint256 level) public view returns (uint256[] memory) {
+        return tokenIdPerLevel[level];
     }
 }
