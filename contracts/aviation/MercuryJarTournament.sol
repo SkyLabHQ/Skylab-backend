@@ -14,7 +14,8 @@ contract MercuryJarTournament is MercuryBase {
     mapping(address => uint256) public paperBalance;
 
     uint256 public pot;
-    bool isTournamentBegin;
+    bool public isTournamentBegin;
+    uint256 public paperTotalAmount;
 
     function initialize(string memory baseURI, address protocol) public {
         super.initialize(baseURI, "MercuryJarTournament", "MercuryJarTournament", protocol);
@@ -25,6 +26,7 @@ contract MercuryJarTournament is MercuryBase {
         require(msg.value == 0.01 ether * amount, "MercuryJarTournament: not enough ether to mint");
         paperBalance[msg.sender] += amount;
         pot += msg.value;
+        paperTotalAmount += amount;
     }
 
     function mint(uint256 amount) public payable {
@@ -53,6 +55,7 @@ contract MercuryJarTournament is MercuryBase {
             LibBase.layout().aviationPoints[tokenId] = 1;
             paperBalance[msg.sender] -= 1;
         }
+        paperTotalAmount -= amount;
     }
 
     function setTournamentBegin(bool _isTournamentBegin) public {
