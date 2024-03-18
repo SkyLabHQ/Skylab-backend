@@ -67,6 +67,17 @@ contract MercuryJarTournament is MercuryBase {
         uint256 levelBefore = aviationLevels(winnerTokenId);
         super.aviationMovePoints(winnerTokenId, loserTokenId);
         uint256 levelAfter = aviationLevels(winnerTokenId);
+        if(aviationPoints(loserTokenId) == 0) {
+            uint256 level = aviationLevels(loserTokenId);
+            for(uint256 i = 0; i < tokenIdPerLevel[level].length; i++) {
+                if(tokenIdPerLevel[level][i] == loserTokenId) {
+                    tokenIdPerLevel[level][i] = tokenIdPerLevel[level][tokenIdPerLevel[level].length - 1];
+                    tokenIdPerLevel[level].pop();
+                    break;
+                }
+            }
+        }
+
         if (levelBefore < levelAfter) {
             if (levelToNewComerId[levelBefore] == winnerTokenId) {
                 levelToNewComerId[levelBefore] = 0;
