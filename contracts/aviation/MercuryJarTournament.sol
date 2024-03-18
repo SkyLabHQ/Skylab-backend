@@ -4,6 +4,8 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibBase} from "./base/storage/LibBase.sol";
+import {LibPilots} from "../protocol/storage/LibPilots.sol";
+import {MercuryPilots} from "../protocol/MercuryPilots.sol";
 
 contract MercuryJarTournament is MercuryBase {
     mapping(uint256 => uint256) public levelToClaimTime;
@@ -16,6 +18,19 @@ contract MercuryJarTournament is MercuryBase {
     uint256 public pot;
     bool public isTournamentBegin;
     uint256 public paperTotalAmount;
+
+    function getNewCommerInfo(uint256 level)
+        public
+        view
+        returns (uint256 claimTime, uint256 newComerId, string memory userName_, address owner, uint256 point, LibPilots.Pilot memory pilot)
+    {
+        claimTime = levelToClaimTime[level];
+        newComerId = levelToNewComerId[level];
+        owner = _ownerOf(newComerId);
+        userName_ = userName[owner];
+        point = aviationPoints(newComerId);
+        pilot = MercuryPilots(protocol()).getActivePilot(owner);
+    }
 
     function initialize(string memory baseURI, address protocol) public {
         super.initialize(baseURI, "MercuryJarTournament", "MercuryJarTournament", protocol);
@@ -67,10 +82,10 @@ contract MercuryJarTournament is MercuryBase {
         uint256 levelBefore = aviationLevels(winnerTokenId);
         super.aviationMovePoints(winnerTokenId, loserTokenId);
         uint256 levelAfter = aviationLevels(winnerTokenId);
-        if(aviationPoints(loserTokenId) == 0) {
+        if (aviationPoints(loserTokenId) == 0) {
             uint256 level = aviationLevels(loserTokenId);
-            for(uint256 i = 0; i < tokenIdPerLevel[level].length; i++) {
-                if(tokenIdPerLevel[level][i] == loserTokenId) {
+            for (uint256 i = 0; i < tokenIdPerLevel[level].length; i++) {
+                if (tokenIdPerLevel[level][i] == loserTokenId) {
                     tokenIdPerLevel[level][i] = tokenIdPerLevel[level][tokenIdPerLevel[level].length - 1];
                     tokenIdPerLevel[level].pop();
                     break;
