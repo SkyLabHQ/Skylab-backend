@@ -10,3 +10,4 @@ def main():
     component.setValidAviation(constant.Sepolia_Jar_Tournament, True, sender=account.deployer)
     # jar_tournament.mintPaper(1, sender=account.deployer, value=10000000000000000)
     # jar_tournament.mintWithPaper(1, sender=account.deployer)
+    # print(jar_tournament.aviationPoints(1, sender=account.deployer))
