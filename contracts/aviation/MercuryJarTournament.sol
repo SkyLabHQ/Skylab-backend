@@ -33,7 +33,11 @@ contract MercuryJarTournament is MercuryBase {
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
-        owner = _ownerOf(newComerId);
+        if(_exists(newComerId)){
+            owner = _ownerOf(newComerId);
+        } else {
+            owner = address(0);
+        }
         userName_ = userName[owner];
         point = aviationPoints(newComerId);
         pilot = MercuryPilots(protocol()).getActivePilot(owner);
@@ -87,44 +91,34 @@ contract MercuryJarTournament is MercuryBase {
 
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
-        uint256 loerLevelBefore = aviationLevels(loserTokenId);
+        uint256 loserLevelBefore = aviationLevels(loserTokenId);
         super.aviationMovePoints(winnerTokenId, loserTokenId);
         uint256 winnerLevelAfter = aviationLevels(winnerTokenId);
         uint256 loserLevelAfter = aviationLevels(loserTokenId);
-        if (!_exists(loserTokenId)) {
-            for (uint256 i = 0; i < tokenIdPerLevel[loerLevelBefore].length; i++) {
-                if (tokenIdPerLevel[loerLevelBefore][i] == loserTokenId) {
-                    tokenIdPerLevel[loerLevelBefore][i] =
-                        tokenIdPerLevel[loerLevelBefore][tokenIdPerLevel[loerLevelBefore].length - 1];
-                    tokenIdPerLevel[loerLevelBefore].pop();
-                    break;
-                }
-            }
-        }
-        if (loerLevelBefore > loserLevelAfter) {
-            handleLevelMove(loserTokenId, loerLevelBefore, loserLevelAfter);
+        if (loserLevelBefore > loserLevelAfter) {
+            tokenIdPerLevelMove(loserTokenId, loserLevelBefore);
         }
 
         if (winnerLevelBefore < winnerLevelAfter) {
-            handleLevelMove(winnerTokenId, winnerLevelBefore, winnerLevelAfter);
+            addNewComer(winnerTokenId, winnerLevelAfter);
+            tokenIdPerLevelMove(winnerTokenId, winnerLevelBefore);
         }
     }
 
-    function handleLevelMove(uint256 tokenId, uint256 levelBefore, uint256 levelAfter) internal {
-            if (levelToNewComerId[levelBefore] == tokenId) {
-                levelToNewComerId[levelBefore] = 0;
-                levelToClaimTime[levelBefore] = 0;
+    function tokenIdPerLevelMove(uint256 tokenId, uint256 levelBefore) internal {
+        if (levelToNewComerId[levelBefore] == tokenId) {
+            levelToNewComerId[levelBefore] = 0;
+            levelToClaimTime[levelBefore] = 0;
+        }
+        for (uint256 i = 0; i < tokenIdPerLevel[levelBefore].length; i++) {
+            if (tokenIdPerLevel[levelBefore][i] == tokenId) {
+                tokenIdPerLevel[levelBefore][i] = tokenIdPerLevel[levelBefore][tokenIdPerLevel[levelBefore].length - 1];
+                tokenIdPerLevel[levelBefore].pop();
+                break;
             }
-            addNewComer(tokenId, levelAfter);
-            for (uint256 i = 0; i < tokenIdPerLevel[levelBefore].length; i++) {
-                if (tokenIdPerLevel[levelBefore][i] == tokenId) {
-                    tokenIdPerLevel[levelBefore][i] = tokenIdPerLevel[levelBefore][tokenIdPerLevel[levelBefore].length - 1];
-                    tokenIdPerLevel[levelBefore].pop();
-                    break;
-                }
-            }
+        }
     }
-    
+
     function estimatePointsToMove(uint256 winnerTokenId, uint256 loserTokenId) public view override returns (uint256) {
         if (winnerTokenId == 0 || loserTokenId == 0) {
             return 1;
