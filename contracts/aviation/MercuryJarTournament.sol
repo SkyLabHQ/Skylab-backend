@@ -33,7 +33,7 @@ contract MercuryJarTournament is MercuryBase {
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
-        if(_exists(newComerId)){
+        if (_exists(newComerId)) {
             owner = _ownerOf(newComerId);
         } else {
             owner = address(0);
@@ -127,19 +127,15 @@ contract MercuryJarTournament is MercuryBase {
         }
     }
 
-    function claimPot(uint256 tokenId) public {
-        require(_ownerOf(tokenId) == msg.sender, "");
-        uint256 level = aviationLevels(tokenId);
-        require(levelToNewComerId[level] == tokenId, "");
-        require(block.timestamp >= levelToClaimTime[level], "");
-        // Reset the timer
-        addNewComer(tokenId, level);
-
-        payable(msg.sender).transfer(pot);
-        pot = 0;
-    }
-
     function addNewComer(uint256 tokenId, uint256 level) private {
+        if (block.timestamp >= levelToClaimTime[level]) {
+            uint256 preTokenId = levelToNewComerId[level];
+            if (_exists(preTokenId)) {
+                address owner = _ownerOf(preTokenId);
+                payable(owner).transfer(pot);
+                pot = 0;
+            }
+        }
         levelToClaimTime[level] = block.timestamp + 15 minutes * 2 ^ (level - 1);
         levelToNewComerId[level] = tokenId;
         tokenIdPerLevel[level].push(tokenId);
