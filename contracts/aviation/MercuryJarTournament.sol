@@ -127,6 +127,18 @@ contract MercuryJarTournament is MercuryBase {
         }
     }
 
+    function claimPot(uint256 tokenId) public {
+        require(_ownerOf(tokenId) == msg.sender, "");
+        uint256 level = aviationLevels(tokenId);
+        require(levelToNewComerId[level] == tokenId, "");
+        require(block.timestamp >= levelToClaimTime[level], "");
+        // Reset the timer
+        addNewComer(tokenId, level);
+
+        payable(msg.sender).transfer(pot);
+        pot = 0;
+    }
+
     function addNewComer(uint256 tokenId, uint256 level) private {
         if (block.timestamp >= levelToClaimTime[level]) {
             uint256 preTokenId = levelToNewComerId[level];
