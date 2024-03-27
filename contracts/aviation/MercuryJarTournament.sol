@@ -59,12 +59,8 @@ contract MercuryJarTournament is MercuryBase {
         require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
         require(msg.value == 0.02 ether * amount, "MercuryJarTournament:  not enough ether to mint");
         for (uint256 i = 0; i < amount; i++) {
-            uint256 tokenId = LibBase.layout().lastTokenID + 1;
-            _safeMint(msg.sender, tokenId);
+            uint256 tokenId = baseMint(msg.sender);
             addNewComer(tokenId, 1);
-            LibBase.layout().lastTokenID++;
-            LibBase.layout().aviationLevels[tokenId] = 1;
-            LibBase.layout().aviationPoints[tokenId] = 1;
         }
         pot += msg.value;
     }
@@ -73,12 +69,8 @@ contract MercuryJarTournament is MercuryBase {
         require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
         require(paperBalance[msg.sender] >= amount, "MercuryJarTournament: no voucher to mint");
         for (uint256 i = 0; i < amount; i++) {
-            uint256 tokenId = LibBase.layout().lastTokenID + 1;
-            _safeMint(msg.sender, tokenId);
+            uint256 tokenId = baseMint(msg.sender);
             addNewComer(tokenId, 1);
-            LibBase.layout().lastTokenID++;
-            LibBase.layout().aviationLevels[tokenId] = 1;
-            LibBase.layout().aviationPoints[tokenId] = 1;
             paperBalance[msg.sender] -= 1;
         }
         paperTotalAmount -= amount;

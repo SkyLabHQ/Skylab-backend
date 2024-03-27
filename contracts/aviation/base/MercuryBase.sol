@@ -26,6 +26,15 @@ abstract contract MercuryBase is SolidStateERC721 {
         _setSupportsInterface(type(IERC721).interfaceId, true);
     }
 
+    function baseMint(address to) internal returns(uint256) {
+        uint256 tokenId = LibBase.layout().lastTokenID + 1;
+        _safeMint(to, tokenId);
+        LibBase.layout().lastTokenID++;
+        LibBase.layout().aviationLevels[tokenId] = 1;
+        LibBase.layout().aviationPoints[tokenId] = 1;
+        return tokenId;
+    }
+
     modifier onlyGameAddresses() {
         require(LibBase.componentIndex().isValidGame(msg.sender), "MercuryBase: msg.sender is not a valid game address");
         _;

@@ -17,11 +17,7 @@ contract MercuryBotTournament is TrailblazerTournament {
     function tournamentMint(address to) external {
         require(_planeSupplyCountThisRound > 0, "MercuryBotTournament: all planes have been minted this round.");
         require(!checkExistingOwnersThisRound(to), "MercuryBotTournament: already minted this round.");
-        uint256 tokenId = LibBase.layout().lastTokenID + 1;
-        _safeMint(to, tokenId);
-        LibBase.layout().lastTokenID++;
-        LibBase.layout().aviationLevels[tokenId] = 1;
-        LibBase.layout().aviationPoints[tokenId] = 1;
+        uint256 tokenId = baseMint(to);
         aviationRounds[tokenId] = _currentRound;
         _planeSupplyCountThisRound -= 1;
     }
