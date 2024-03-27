@@ -21,11 +21,7 @@ contract MercuryTestFlight is MercuryBase {
     //////////////////////////////////////////////////////////////*/
 
     function playTestMint() external {
-        uint256 tokenId = LibBase.layout().lastTokenID + 1;
-        _safeMint(msg.sender, tokenId);
-        LibBase.layout().lastTokenID++;
-        LibBase.layout().aviationLevels[tokenId] = 1;
-        LibBase.layout().aviationPoints[tokenId] = 1;
+        baseMint(msg.sender);
     }
 
     /*//////////////////////////////////////////////////////////////

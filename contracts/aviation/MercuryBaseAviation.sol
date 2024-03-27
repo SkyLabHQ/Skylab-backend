@@ -33,10 +33,7 @@ contract MercuryBaseAviation is MercuryBase {
 
     function mintAviation(address to) external payable virtual onlyMintable {
         require(msg.value == price, "MercuryBase: Incorrect price");
-        uint256 tokenID = LibBase.layout().lastTokenID + 1;
-        _safeMint(to, tokenID);
-        LibBase.layout().lastTokenID++;
-        LibBase.layout().aviationLevels[tokenID] = 1;
+        baseMint(to);
     }
 
     /*//////////////////////////////////////////////////////////////

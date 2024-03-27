@@ -34,11 +34,7 @@ contract TrailblazerTournament is MercuryBase {
     function tournamentMint(address[] memory to) external {
         LibDiamond.enforceIsContractOwner();
         for (uint256 i = 0; i < to.length; i++) {
-            uint256 tokenId = LibBase.layout().lastTokenID + 1;
-            _safeMint(to[i], tokenId);
-            LibBase.layout().lastTokenID++;
-            LibBase.layout().aviationLevels[tokenId] = 1;
-            LibBase.layout().aviationPoints[tokenId] = 1;
+            uint256 tokenId = baseMint(to[i]);
             aviationRounds[tokenId] = _currentRound;
         }
     }

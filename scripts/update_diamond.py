@@ -24,6 +24,10 @@ bot_tournament_params = [
     'MercuryBotTournament'
 ]
 
+jar_tournament_params = [
+    'MercuryJarTournament'
+]
+
 game_params = [
     'MercuryBidTacToe'
 ]
@@ -72,7 +76,7 @@ def main():
     if network != 'Polygon' and network != 'Mumbai' and network != 'Sepolia':
         print("Wrong network, must be one of these: 'Polygon', 'Mumbai'")
         return
-    diamond = input("please choose the diamond: 'Protocol', 'MercuryTestFlight', 'TrailblazerTournament', 'MercuryBidTacToe', 'MercuryBidTacToeBot', 'MercuryBotTournament' ")
+    diamond = input("please choose the diamond: 'Protocol', 'MercuryTestFlight', 'TrailblazerTournament', 'MercuryBidTacToe', 'MercuryBidTacToeBot', 'MercuryBotTournament', 'MercuryJarTournament")
     if network == 'Polygon':
         protocol_address = constant.REAL_MAINNET_PROTOCOL
         trailblazer_address = constant.REAL_MAINNET_TOURNAMENT
@@ -91,6 +95,7 @@ def main():
         bot_address = constant.Sepolia_Bot
         testflight_address = constant.Sepolia_TestFight
         bot_tournament = constant.Sepolia_Bot_Tournament
+        jar_tournament = constant.Sepolia_Jar_Tournament
     if diamond == 'Protocol':
         update_diamond(protocol_address, protocol_params)
     elif diamond == 'MercuryBidTacToeBot':
@@ -101,5 +106,7 @@ def main():
         update_diamond(game_address, game_params)
     elif diamond == 'MercuryBotTournament':
         update_diamond(bot_tournament, bot_tournament_params)
+    elif diamond == 'MercuryJarTournament':
+        update_diamond(jar_tournament, jar_tournament_params)
     elif diamond == 'TrailblazerTournament':
         update_diamond(trailblazer_address, trailblazer_params)
