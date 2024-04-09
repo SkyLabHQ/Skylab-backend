@@ -106,7 +106,7 @@ contract MercuryJarTournament is MercuryBase {
         uint256 playerTokenId = winnerTokenId + loserTokenId;
 
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
-        uint256 pointsToMove = estimatePointsToMove(playerTokenId, playerTokenId);
+        uint256 pointsToMove = 1;
         if (playerWon) {
             sbs.aviationPoints[playerTokenId] += pointsToMove;
             emit LibBase.MovePoints(0, playerTokenId, pointsToMove);
