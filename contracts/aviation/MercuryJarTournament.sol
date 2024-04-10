@@ -84,7 +84,11 @@ contract MercuryJarTournament is MercuryBase {
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
-        super.aviationMovePoints(winnerTokenId, loserTokenId);
+        if(winnerTokenId != 0 && loserTokenId != 0) {
+            super.aviationMovePoints(winnerTokenId, loserTokenId);
+        } else {
+            aviationBotMovePoints(winnerTokenId, loserTokenId);
+        }
         uint256 winnerLevelAfter = aviationLevels(winnerTokenId);
         uint256 loserLevelAfter = aviationLevels(loserTokenId);
         if (loserLevelBefore > loserLevelAfter) {
@@ -94,6 +98,33 @@ contract MercuryJarTournament is MercuryBase {
         if (winnerLevelBefore < winnerLevelAfter) {
             addNewComer(winnerTokenId, winnerLevelAfter);
             tokenIdPerLevelMove(winnerTokenId, winnerLevelBefore);
+        }
+    }
+
+    function aviationBotMovePoints(uint256 winnerTokenId, uint256 loserTokenId) private {
+        bool playerWon = loserTokenId == 0;
+        uint256 playerTokenId = winnerTokenId + loserTokenId;
+
+        LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
+        uint256 pointsToMove = 1;
+        if (playerWon) {
+            sbs.aviationPoints[playerTokenId] += pointsToMove;
+            emit LibBase.MovePoints(0, playerTokenId, pointsToMove);
+            LibBase.pilot().pilotWin(
+                _ownerOf(playerTokenId), sbs.aviationLevels[playerTokenId] * pointsToMove, pointsToMove
+            );
+        } else {
+            sbs.aviationPoints[playerTokenId] -= pointsToMove;
+            emit LibBase.MovePoints(playerTokenId, 0, pointsToMove);
+            LibBase.pilot().pilotLose(
+                _ownerOf(playerTokenId), sbs.aviationLevels[playerTokenId] * pointsToMove, pointsToMove
+            );
+        }
+
+        updateLevel(playerTokenId);
+
+        if (sbs.aviationPoints[playerTokenId] == 0) {
+            burnAviation(playerTokenId);
         }
     }
 
