@@ -39,6 +39,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
+    event StartGame(address player1, address player2, address gameAddress);
 
     function initialize(address _protocol) public override {
         super.initialize(_protocol);
@@ -90,6 +91,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         } else {
             address gameAddress = createGame(LibBidTacToe.defaultParams(), msg.sender, address(0));
             joinGame(gameAddress, opponent);
+            emit StartGame(msg.sender, opponent, gameAddress);
             delete playerToOpponent[msg.sender];
             delete playerToOpponent[opponent];
             delete playerToTimeout[msg.sender];
