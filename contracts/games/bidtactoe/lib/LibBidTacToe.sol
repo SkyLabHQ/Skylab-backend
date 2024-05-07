@@ -7,11 +7,11 @@ import {BidTacToeProxy} from "../BidTacToeProxy.sol";
 
 library LibBidTacToe {
     function defaultParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
-        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, false);
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, false, 90);
     }
 
     function defaultBotParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
-        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, true);
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, true, 90);
     }
 
     function createGame(
@@ -39,7 +39,7 @@ library LibBidTacToe {
         BidTacToeProxy bidTacToeProxy = new BidTacToeProxy(gameParams.isBot);
         (bool suceed,) = address(bidTacToeProxy).call(
             abi.encodeWithSignature(
-                "initialize((uint64,uint64,uint64,uint64,uint128,uint128,bool),address,address,address)",
+                "initialize((uint64,uint64,uint64,uint64,uint128,uint128,bool,uint256),address,address,address)",
                 gameParams,
                 playerAddress,
                 mercuryBidTacToeAddress,
