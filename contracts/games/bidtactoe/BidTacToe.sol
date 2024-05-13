@@ -38,7 +38,7 @@ contract BidTacToe is Initializable {
     address public nextDrawWinner;
 
     // Static values
-    uint256 constant universalTimeout = 90;
+    uint256 universalTimeout;
 
     /*
     *   State 1: next grid has been selected, both players are ready to bid for it
@@ -57,7 +57,8 @@ contract BidTacToe is Initializable {
     event ReadyPlayerTwo(address indexed player1, address indexed player2);
     event CommitBid(address indexed player, uint256 hash);
     event RevealBid(address indexed player, uint256 amount, uint256 salt);
-    event WinGrid(address indexed player, uint256 grid);
+    event BothCommittedBid(address player1, address player2);
+    event BothRevealedBid(uint256 currentSelectedGrid, address[] grid, uint256 player1Balance, uint256 player2Balance, uint256 player1RevealedBids, uint256 player2RevealedBids);
 
     event WinGame(address indexed user, uint256 state);
     event LoseGame(address indexed user, uint256 state);
@@ -73,6 +74,11 @@ contract BidTacToe is Initializable {
         address _mercuryBidTacToeAddress,
         address _privateLobbyAddress
     ) public initializer {
+        if (gameParams.universalTimeout == 0) {
+            universalTimeout = 90;
+        } else {
+            universalTimeout = gameParams.universalTimeout;
+        }
         player1 = player;
         gridWidth = gameParams.gridWidth;
         gridHeight = gameParams.gridHeight;
@@ -134,6 +140,7 @@ contract BidTacToe is Initializable {
 
         if (gameStates[getOtherPlayer()] == 2) {
             setTimeoutForBothPlayers();
+            emit BothCommittedBid(player1, player2);
         }
         emit CommitBid(msg.sender, hash);
     }
@@ -174,7 +181,7 @@ contract BidTacToe is Initializable {
             grid[currentSelectedGrid] = bidWinner;
             occupiedGridCounts[bidWinner] += 1;
             nextDrawWinner = bidLoser;
-            emit WinGrid(bidWinner, currentSelectedGrid);
+            emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid]);
 
             if (existsOverallWinner()) {
                 win(bidWinner, 4);
