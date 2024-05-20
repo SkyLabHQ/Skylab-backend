@@ -60,7 +60,7 @@ def main():
     # protocol_address = deploy_diamond(protocol_names)
     # aviation_address = deploy_diamond(aviation_names)
     # bot_tournament_address = deploy_diamond(bot_tournament_names)
-    jar_tournament_address = deploy_diamond(jar_tournament_names)
+    # jar_tournament_address = deploy_diamond(jar_tournament_names)
     # test_flight_address = deploy_diamond(testflight_names)
     # ## Init protocol vault
     # protocol = project.Vault.at(protocol_address)
@@ -70,8 +70,8 @@ def main():
     # aviation.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
     # bot_tournament = project.MercuryBotTournament.at(bot_tournament_address)
     # bot_tournament.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
-    jar_tournament = project.MercuryJarTournament.at(jar_tournament_address)
-    jar_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, sender=account.deployer)
+    # jar_tournament = project.MercuryJarTournament.at(jar_tournament_address)
+    # jar_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, sender=account.deployer)
     # testflight = project.MercuryTestFlight.at(test_flight_address)
     # testflight.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
     # ## deploy babymercs
@@ -105,10 +105,10 @@ def main():
     # bot.initialize(sender=account.deployer)
     # game = project.MercuryBidTacToe.at(game_address)
     # game.registerBot(bot_address, True, sender=account.deployer)
-    # bidtactoe_player_versus_bot_address = deploy_bidtactoe_player_versus_bot()
+    bidtactoe_player_versus_bot_address = deploy_bidtactoe_player_versus_bot()
     # bid_tac_toe = deploy_bidtactoe()
     # # Write address to file
-    # with open('./address.temp','w') as f:
+    with open('./address2.temp','w') as f:
     #     f.write("protocol_address:"+protocol_address+"\n")
     #     f.write("trailblazer_tournament_address:"+aviation_address+"\n")
     #     f.write("baby_address:"+baby_address+"\n")
@@ -116,7 +116,7 @@ def main():
     #     f.write("leaderboard_addresses:"+str(leaderboard_addresses)+"\n")
     #     f.write("bot_tournament_address:"+bot_tournament_address+"\n")
     #     f.write("bot_address:"+bot_address+"\n")
-    #     f.write("bidtactoe_address:"+bidtactoe_player_versus_bot_address+"\n")
+          f.write("bidtactoe_address:"+bidtactoe_player_versus_bot_address+"\n")
     #     f.write("bid_tac_toe:"+bid_tac_toe+"\n")
     #     f.write("test_flight_address:"+test_flight_address+"\n")
     #     f.write("delegate_erc721:"+delegate_erc721.address+"\n")
