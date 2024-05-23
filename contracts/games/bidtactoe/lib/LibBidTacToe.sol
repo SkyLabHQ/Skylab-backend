@@ -11,7 +11,7 @@ library LibBidTacToe {
     }
 
     function defaultBotParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
-        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, true, 90);
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, true, 3630);
     }
 
     function createGame(

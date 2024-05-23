@@ -58,7 +58,7 @@ contract BidTacToe is Initializable {
     event CommitBid(address indexed player, uint256 hash);
     event RevealBid(address indexed player, uint256 amount, uint256 salt);
     event BothCommittedBid(address player1, address player2);
-    event BothRevealedBid(uint256 currentSelectedGrid, address[] grid, uint256 player1Balance, uint256 player2Balance, uint256 player1RevealedBids, uint256 player2RevealedBids);
+    event BothRevealedBid(uint256 currentSelectedGrid, address[] grid, uint256 player1Balance, uint256 player2Balance, uint256 player1RevealedBids, uint256 player2RevealedBids, address winner);
 
     event WinGame(address indexed user, uint256 state);
     event LoseGame(address indexed user, uint256 state);
@@ -181,17 +181,19 @@ contract BidTacToe is Initializable {
             grid[currentSelectedGrid] = bidWinner;
             occupiedGridCounts[bidWinner] += 1;
             nextDrawWinner = bidLoser;
-            emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid]);
 
             if (existsOverallWinner()) {
                 win(bidWinner, 4);
+                emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], bidWinner);
             } else if (occupiedGridCounts[bidWinner] * 2 > gridWidth * gridHeight) {
                 win(bidWinner, 10);
+                emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], bidWinner);
             } else {
                 generateNextGrid();
                 gameStates[player1] = 1;
                 gameStates[player2] = 1;
                 setTimeoutForBothPlayers();
+                emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], address(0));
             }
         }
     }
