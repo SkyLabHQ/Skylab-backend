@@ -7,11 +7,11 @@ import {BidTacToeProxy} from "../BidTacToeProxy.sol";
 
 library LibBidTacToe {
     function defaultParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
-        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, false, 90);
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, false, 45000);
     }
 
     function defaultBotParams() internal pure returns (MercuryBidTacToe.GameParams memory) {
-        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, true, 3630);
+        return MercuryBidTacToe.GameParams(3, 3, 3, 100, 1, 0, true, 45000);
     }
 
     function createGame(
