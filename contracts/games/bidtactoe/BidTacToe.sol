@@ -184,17 +184,19 @@ contract BidTacToe is Initializable {
 
             if (existsOverallWinner()) {
                 win(bidWinner, 4);
-                emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], bidWinner);
             } else if (occupiedGridCounts[bidWinner] * 2 > gridWidth * gridHeight) {
                 win(bidWinner, 10);
-                emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], bidWinner);
             } else {
                 generateNextGrid();
                 gameStates[player1] = 1;
                 gameStates[player2] = 1;
                 setTimeoutForBothPlayers();
-                emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], address(0));
             }
+            address winner = bidWinner;
+            if (gameStates[player1] == 1 && gameStates[player2] == 1) {
+                winner = address(0);
+            }
+            emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], bidWinner);
         }
     }
 

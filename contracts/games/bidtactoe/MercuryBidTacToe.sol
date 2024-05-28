@@ -26,10 +26,10 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         uint64 token2Points;
     }
 
-    struct AviationConfig {
-        GameParams gameParams;
-        bool needComfirmation;
-    }
+    // struct AviationConfig {
+    //     GameParams gameParams;
+    //     bool needComfirmation;
+    // }
 
     // Dynamic game data
     mapping(address => bool) private gameExists;
@@ -42,7 +42,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     mapping(address => address) public playerToOpponent;
     mapping(address => uint256) public playerToTimeout;
     mapping(address => mapping(address => uint256)) public joinDefaultQueueTime;
-    mapping(address => AviationConfig) public aviationConfig;
+    // mapping(address => AviationConfig) public aviationConfig;
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
@@ -55,7 +55,7 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
     function createOrJoinDefault() external {
         require(!playerCreatedGameOrQueued(msg.sender), "MercuryBidTacToe: player already created or queued for a game");
         address aviation = burnerAddressToAviation(msg.sender);
-        AviationConfig memory config = getAviationConfig(aviation);
+        //AviationConfig memory config = getAviationConfig(aviation);
         if (defaultGameQueue[aviation] == address(0)) {
             defaultGameQueue[aviation] = msg.sender;
             joinDefaultQueueTime[aviation][msg.sender] = block.timestamp;
@@ -65,19 +65,19 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
                 defaultGameQueue[aviation] = msg.sender;
                 joinDefaultQueueTime[aviation][msg.sender] = block.timestamp;
             } else {
-                if (config.needComfirmation) {
-                    playerToOpponent[defaultPlayer] = msg.sender;
-                    playerToOpponent[msg.sender] = defaultPlayer;
-                    playerToTimeout[defaultPlayer] = block.timestamp + 30 seconds;
-                    playerToTimeout[msg.sender] = block.timestamp + 30 seconds;
+                // if (config.needComfirmation) {
+                //     playerToOpponent[defaultPlayer] = msg.sender;
+                //     playerToOpponent[msg.sender] = defaultPlayer;
+                //     playerToTimeout[defaultPlayer] = block.timestamp + 30 seconds;
+                //     playerToTimeout[msg.sender] = block.timestamp + 30 seconds;
+                //     delete defaultGameQueue[aviation];
+                // } else {
                     delete defaultGameQueue[aviation];
-                } else {
-                    delete defaultGameQueue[aviation];
-                    address gameAddress = createGame(config.gameParams, defaultPlayer, address(0));
+                    address gameAddress = createGame(LibBidTacToe.defaultParams(), defaultPlayer, address(0));
                     joinGame(gameAddress, msg.sender);
                     emit StartGame(defaultPlayer, msg.sender, gameAddress);
                     delete joinDefaultQueueTime[aviation][defaultPlayer];
-                }
+                // }
             }
         }
     }
@@ -273,15 +273,15 @@ contract MercuryBidTacToe is MercuryGameBase, MercuryBTTPrivateLobbyFactory {
         delete defaultGameQueue[aviation];
     }
 
-    function setAviationConfig(address aviation ,AviationConfig memory config) external onlyOwner {
-        aviationConfig[aviation] = config;
-    }
+    // function setAviationConfig(address aviation ,AviationConfig memory config) external onlyOwner {
+    //     aviationConfig[aviation] = config;
+    // }
 
-    function getAviationConfig(address aviation) public view returns (AviationConfig memory) {
-        AviationConfig memory config = aviationConfig[aviation];
-        if (config.gameParams.gridWidth == 0) {
-            return AviationConfig(LibBidTacToe.defaultParams(), true);
-        }
-        return config;
-    }
+    // function getAviationConfig(address aviation) public view returns (AviationConfig memory) {
+    //     AviationConfig memory config = aviationConfig[aviation];
+    //     if (config.gameParams.gridWidth == 0) {
+    //         return AviationConfig(LibBidTacToe.defaultParams(), true);
+    //     }
+    //     return config;
+    // }
 }
