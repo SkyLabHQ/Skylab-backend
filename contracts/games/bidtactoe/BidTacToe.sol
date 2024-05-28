@@ -196,7 +196,7 @@ contract BidTacToe is Initializable {
             if (gameStates[player1] == 1 && gameStates[player2] == 1) {
                 winner = address(0);
             }
-            emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], bidWinner);
+            emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], winner);
         }
     }
 
