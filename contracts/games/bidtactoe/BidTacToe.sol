@@ -17,7 +17,6 @@ contract BidTacToe is Initializable {
     uint256 public gridMaxSelectionCount;
     uint256 public gridSelectionStrategy;
     address public mercuryBidTacToeAddress;
-    address public privateLobbyAddress;
 
     /*//////////////////////////////////////////////////////////////
                             Dynamic gameplay data
@@ -71,8 +70,7 @@ contract BidTacToe is Initializable {
     function initialize(
         MercuryBidTacToe.GameParams memory gameParams,
         address player,
-        address _mercuryBidTacToeAddress,
-        address _privateLobbyAddress
+        address _mercuryBidTacToeAddress
     ) public initializer {
         if (gameParams.universalTimeout == 0) {
             universalTimeout = 90;
@@ -92,7 +90,6 @@ contract BidTacToe is Initializable {
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
         mercuryBidTacToeAddress = _mercuryBidTacToeAddress;
-        privateLobbyAddress = _privateLobbyAddress;
     }
 
     function getGrid() external view returns (address[] memory) {
@@ -315,10 +312,5 @@ contract BidTacToe is Initializable {
         (bool bttSuceed,) =
             mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
         require(bttSuceed, "BidTacToe: handleWinLoss failed");
-        if (privateLobbyAddress != address(0)) {
-            (bool lobbySuceed,) =
-                privateLobbyAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
-            require(lobbySuceed, "BidTacToe: handleWinLoss failed");
-        }
     }
 }

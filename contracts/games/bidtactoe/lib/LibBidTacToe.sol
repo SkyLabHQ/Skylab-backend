@@ -17,8 +17,7 @@ library LibBidTacToe {
     function createGame(
         MercuryBidTacToe.GameParams memory gameParams,
         address playerAddress,
-        address mercuryBidTacToeAddress,
-        address privateLobbyAddress
+        address mercuryBidTacToeAddress
     ) internal returns (address) {
         // In general, we only allow odd widths or heights
         require(gameParams.gridWidth == 3, "MercuryBidTacToeParamVerifier: gridWidth incorrect");
@@ -39,12 +38,10 @@ library LibBidTacToe {
         BidTacToeProxy bidTacToeProxy = new BidTacToeProxy(gameParams.isBot);
         (bool suceed,) = address(bidTacToeProxy).call(
             abi.encodeWithSignature(
-                "initialize((uint64,uint64,uint64,uint64,uint128,uint128,bool,uint256),address,address,address)",
+                "initialize((uint64,uint64,uint64,uint64,uint128,uint128,bool,uint256),address,address)",
                 gameParams,
                 playerAddress,
-                mercuryBidTacToeAddress,
-                privateLobbyAddress
-            )
+                mercuryBidTacToeAddress)
         );
         require(suceed, "create game faild");
         return address(bidTacToeProxy);
