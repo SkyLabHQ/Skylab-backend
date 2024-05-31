@@ -25,14 +25,14 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 token2Points;
     }
 
+    // Dynamic game data
     mapping(address => bool) private gameExists;
     mapping(address => address) public gamePerPlayer;
     mapping(address => GameParams) public paramsPerGame;
     mapping(address => PlaneMetadata) public planeMetadataPerGame;
+    // collecton to default game queue
     mapping(address => address) public defaultGameQueue;
     mapping(address => bool) public validBidTacToeBots;
-    mapping(address => address) public depreciatePlayerToOpponent; //depreciate
-    mapping(address => uint256) public depreciatePlayerToTimeout; //depreciate
     mapping(address => mapping(address => uint256)) public joinDefaultQueueTime;
     mapping(address => address) public pvpRoom;
 
