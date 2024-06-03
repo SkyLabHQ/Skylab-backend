@@ -113,10 +113,10 @@ contract MercuryBidTacToe is MercuryGameBase {
         planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, aviation);
     }
 
-    function createPvPRoom() external {
+    function createPvPRoom(GameParams memory gameParams) external {
         address aviation = burnerAddressToAviation(msg.sender);
-        require(aviation != address(0), "MercuryBidTacToe: aviation is not valid");
         pvpRoom[msg.sender] = aviation;
+        createGame(gameParams, msg.sender);
     }
 
     // to discuss: usr address instead of referral code to join room
@@ -126,7 +126,7 @@ contract MercuryBidTacToe is MercuryGameBase {
     function joinPvPRoom(address player1) external {
         address aviation = burnerAddressToAviation(msg.sender);
         require(aviation == pvpRoom[player1] && msg.sender != player1, "MercuryBidTacToe: aviation does not match");
-        address gameAddress = createGame(LibBidTacToe.defaultParams(), player1);
+        address gameAddress = gamePerPlayer[player1];
         joinGame(gameAddress, msg.sender);
         emit StartGame(player1, msg.sender, gameAddress);
         delete pvpRoom[player1];
