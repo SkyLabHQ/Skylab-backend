@@ -119,11 +119,10 @@ contract MercuryBidTacToe is MercuryGameBase {
         createGame(gameParams, msg.sender);
     }
 
-    // to discuss: usr address instead of referral code to join room
-    // pvp room only apply on 1v1 game, so using host address as key to track room info
-    // if we want referral code to enable private room feature(passward as key), i think we can use ECDSA algorithm to generate a code in the frond end.
-    // and add decoding referral code in the contract to check if this message is signed by room hoster.
-    function joinPvPRoom(address player1) external {
+    function joinPvPRoom(address player1, uint256 passward, bytes calldata signature) external {
+        require(
+            _validate(keccak256(abi.encodePacked(passward)), signature, player1), "MercuryBidTacToe: invalid signature"
+        );
         address aviation = burnerAddressToAviation(msg.sender);
         require(aviation == pvpRoom[player1] && msg.sender != player1, "MercuryBidTacToe: aviation does not match");
         address gameAddress = gamePerPlayer[player1];
@@ -207,5 +206,22 @@ contract MercuryBidTacToe is MercuryGameBase {
 
     function registerBot(address bot, bool register) external onlyOwner {
         validBidTacToeBots[bot] = register;
+    }
+
+    function cleanupDefaultQueue(address aviation) external onlyOwner {
+        delete defaultGameQueue[aviation];
+    }
+
+    function _validate(bytes32 hash, bytes memory signature, address signer) internal pure returns (bool) {
+        require(signer != address(0) && signature.length == 65);
+
+        bytes32 r;
+        bytes32 s;
+        uint8 v = uint8(signature[64]) + 27;
+        assembly {
+            r := mload(add(signature, 0x20))
+            s := mload(add(signature, 0x40))
+        }
+        return ecrecover(hash, v, r, s) == signer;
     }
 }
