@@ -17,7 +17,6 @@ contract BidTacToe is Initializable {
     uint256 public gridMaxSelectionCount;
     uint256 public gridSelectionStrategy;
     address public mercuryBidTacToeAddress;
-    address public privateLobbyAddress;
 
     /*//////////////////////////////////////////////////////////////
                             Dynamic gameplay data
@@ -58,7 +57,7 @@ contract BidTacToe is Initializable {
     event CommitBid(address indexed player, uint256 hash);
     event RevealBid(address indexed player, uint256 amount, uint256 salt);
     event BothCommittedBid(address player1, address player2);
-    event BothRevealedBid(uint256 currentSelectedGrid, address[] grid, uint256 player1Balance, uint256 player2Balance, uint256 player1RevealedBids, uint256 player2RevealedBids);
+    event BothRevealedBid(uint256 currentSelectedGrid, address[] grid, uint256 player1Balance, uint256 player2Balance, uint256 player1RevealedBids, uint256 player2RevealedBids, address winner);
 
     event WinGame(address indexed user, uint256 state);
     event LoseGame(address indexed user, uint256 state);
@@ -71,8 +70,7 @@ contract BidTacToe is Initializable {
     function initialize(
         MercuryBidTacToe.GameParams memory gameParams,
         address player,
-        address _mercuryBidTacToeAddress,
-        address _privateLobbyAddress
+        address _mercuryBidTacToeAddress
     ) public initializer {
         if (gameParams.universalTimeout == 0) {
             universalTimeout = 90;
@@ -92,7 +90,6 @@ contract BidTacToe is Initializable {
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
         mercuryBidTacToeAddress = _mercuryBidTacToeAddress;
-        privateLobbyAddress = _privateLobbyAddress;
     }
 
     function getGrid() external view returns (address[] memory) {
@@ -181,7 +178,6 @@ contract BidTacToe is Initializable {
             grid[currentSelectedGrid] = bidWinner;
             occupiedGridCounts[bidWinner] += 1;
             nextDrawWinner = bidLoser;
-            emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid]);
 
             if (existsOverallWinner()) {
                 win(bidWinner, 4);
@@ -193,6 +189,11 @@ contract BidTacToe is Initializable {
                 gameStates[player2] = 1;
                 setTimeoutForBothPlayers();
             }
+            address winner = bidWinner;
+            if (gameStates[player1] == 1 && gameStates[player2] == 1) {
+                winner = address(0);
+            }
+            emit BothRevealedBid(currentSelectedGrid, grid, balances[player1], balances[player2], revealedBids[player1][currentSelectedGrid], revealedBids[player2][currentSelectedGrid], winner);
         }
     }
 
@@ -311,10 +312,5 @@ contract BidTacToe is Initializable {
         (bool bttSuceed,) =
             mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
         require(bttSuceed, "BidTacToe: handleWinLoss failed");
-        if (privateLobbyAddress != address(0)) {
-            (bool lobbySuceed,) =
-                privateLobbyAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
-            require(lobbySuceed, "BidTacToe: handleWinLoss failed");
-        }
     }
 }
