@@ -14,8 +14,8 @@ contract BidTacToeProxy {
     // address constant BidTacToe = address(0x6CdE2AD384a157D6eDE326886c70fb265F2CE9F9);
 
     //base sepolia chain
-    address constant BidTacToePlayerVersusBot = address(0xb87aE184570Dd229806786eFdb065fA6cf5cec7F);
-    address constant BidTacToe = address(0x30F3afD0640b780118f5E3a7a42F758E815EC15A);
+    address constant BidTacToePlayerVersusBot = address(0x16331584C3c815F8f23eed09A4e81fAf565c4f0E);
+    address constant BidTacToe = address(0xB798845fDe0C492adBB61E4e16B138b016F58B8F);
 
     // base mainnet
     // address constant BidTacToePlayerVersusBot = address(0x95780958eb0135805559d0d25EC14C81197E15D4);

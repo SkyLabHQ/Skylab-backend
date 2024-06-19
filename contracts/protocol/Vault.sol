@@ -14,6 +14,7 @@ interface IERC721Receiver {
 
 contract Vault is IERC721Receiver {
     Mercs public mercs;
+    address public commissionReceiver;
 
     function initVault(MercuryBase _aviation) public {
         LibDiamond.enforceIsContractOwner();
@@ -25,15 +26,21 @@ contract Vault is IERC721Receiver {
         mercs = _mercs;
     }
 
+    function setCommissionReceiver(address _commissionReceiver) public {
+        LibDiamond.enforceIsContractOwner();
+        commissionReceiver = _commissionReceiver;
+    }
+
     function BuyBack(uint256 tokenId, uint256 mercsTokenId) external payable {
         require(
             msg.sender == LibVault.aviation().ownerOf(tokenId) && !mercs.nonBuyBack(mercsTokenId),
             "Vault: msg.sender is not owner of token"
         );
-        uint256 commissionPct = getCommmission(LibVault.aviation().aviationLevels(tokenId));
-        uint256 commision = price(tokenId) * commissionPct / 1e4;
-        require(address(this).balance >= price(tokenId) - commision, "insufficient balance");
-        payable(msg.sender).transfer(price(tokenId) - commision);
+        uint256 commissionPct = getCommmissionPct(LibVault.aviation().aviationLevels(tokenId));
+        uint256 commission = price(tokenId) * commissionPct / 1e4;
+        require(address(this).balance >= price(tokenId) - commission, "insufficient balance");
+        payable(msg.sender).transfer(price(tokenId) - commission);
+        payable(commissionReceiver).transfer(commission);
         LibVault.aviation().transferFrom(msg.sender, address(this), tokenId);
     }
 
@@ -60,14 +67,9 @@ contract Vault is IERC721Receiver {
         return point * 1e16;
     }
 
-    function getCommmission(uint256 level) public pure returns (uint256) {
-        require(level > 0 && level <= 10, "invalid level");
-        for (uint256 i = 1; i <= 10; i++) {
-            if (level == i) {
-                return (i - level) * 200 + 400 >= 2000 ? 2000 : (i - level) * 200 + 400;
-            }
-        }
-        return 0;
+    function getCommmissionPct(uint256 level) public pure returns (uint256) {
+        require(level > 0, "Vault: level must be greater than 0");
+        return (level - 1) * 100 + 400 >= 1000 ? 1000 : (level - 1) * 100 + 400;
     }
 
     receive() external payable {}
