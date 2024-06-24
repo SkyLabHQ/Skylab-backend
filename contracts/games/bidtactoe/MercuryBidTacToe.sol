@@ -45,6 +45,7 @@ contract MercuryBidTacToe is MercuryGameBase {
     event LoseGame(uint256 indexed tokenId, address indexed user);
     event StartGame(address player1, address player2, address gameAddress);
     event StartPvpGame(address player1, address player2, address gameAddress);
+    event StartBotGame(address player, address gameAdderss);
 
     function initialize(address _protocol) public override {
         super.initialize(_protocol);
@@ -89,6 +90,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         require(validBidTacToeBots[bot], "MercuryBidTacToe: bot is a valid bot");
         address gameAddress = createGame(LibBidTacToe.defaultBotParams(), msg.sender);
         LibBidTacToe.joinGame(gameAddress, bot);
+        emit StartBotGame(msg.sender, gameAddress);
     }
 
     function createGame(GameParams memory gameParams, address player1) internal returns (address) {
