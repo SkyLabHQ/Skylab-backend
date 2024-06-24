@@ -25,6 +25,11 @@ contract MercuryBidTacToe is MercuryGameBase {
         uint64 token2Points;
     }
 
+    struct RoomInfo {
+        address aviation;
+        bytes32 roomPassword;
+    }
+
     // Dynamic game data
     mapping(address => bool) private gameExists;
     mapping(address => address) public gamePerPlayer;
@@ -34,11 +39,12 @@ contract MercuryBidTacToe is MercuryGameBase {
     mapping(address => address) public defaultGameQueue;
     mapping(address => bool) public validBidTacToeBots;
     mapping(address => mapping(address => uint256)) public joinDefaultQueueTime;
-    mapping(address => address) public pvpRoom;
+    mapping(address => RoomInfo) public pvpRoom;
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
     event StartGame(address player1, address player2, address gameAddress);
+    event StartPvpGame(address player1, address player2, address gameAddress);
 
     function initialize(address _protocol) public override {
         super.initialize(_protocol);
@@ -113,22 +119,30 @@ contract MercuryBidTacToe is MercuryGameBase {
         planeMetadataPerGame[gameAddress].token2Points = getAviationPoints(player2, aviation);
     }
 
-    function createPvPRoom(GameParams memory gameParams) external {
+    function createPvPRoom(GameParams memory gameParams, bytes32 hash) external {
         address aviation = burnerAddressToAviation(msg.sender);
-        pvpRoom[msg.sender] = aviation;
+        pvpRoom[msg.sender] = RoomInfo(aviation, hash);
         createGame(gameParams, msg.sender);
     }
 
-    function joinPvPRoom(address player1, uint256 passward, bytes calldata signature) external {
+    function joinPvPRoom(address player1, uint256 passward) external {
         require(
-            _validate(keccak256(abi.encodePacked(passward)), signature, player1), "MercuryBidTacToe: invalid signature"
+            pvpRoom[player1].roomPassword == keccak256(abi.encodePacked(passward)),
+            "MercuryBidTacToe: passward does not match"
         );
         address aviation = burnerAddressToAviation(msg.sender);
-        require(aviation == pvpRoom[player1] && msg.sender != player1, "MercuryBidTacToe: aviation does not match");
+        require(aviation == pvpRoom[player1].aviation && msg.sender != player1, "MercuryBidTacToe: aviation does not match");
         address gameAddress = gamePerPlayer[player1];
         joinGame(gameAddress, msg.sender);
-        emit StartGame(player1, msg.sender, gameAddress);
+        emit StartPvpGame(player1, msg.sender, gameAddress);
         delete pvpRoom[player1];
+    }
+
+    function quitPvpRoom() external {
+        delete pvpRoom[msg.sender];
+        address gameAddress = gamePerPlayer[msg.sender];
+        delete gamePerPlayer[msg.sender];
+        delete gameExists[gameAddress];
     }
 
     function withdrawFromQueue() external {
@@ -204,24 +218,15 @@ contract MercuryBidTacToe is MercuryGameBase {
         return uint64(MercuryBase(aviation).aviationPoints(burnerAddressToTokenId(burner)));
     }
 
+    function getPvpRoom(address host) public view returns (RoomInfo memory) {
+        return pvpRoom[host];
+    }
+    
     function registerBot(address bot, bool register) external onlyOwner {
         validBidTacToeBots[bot] = register;
     }
 
     function cleanupDefaultQueue(address aviation) external onlyOwner {
         delete defaultGameQueue[aviation];
-    }
-
-    function _validate(bytes32 hash, bytes memory signature, address signer) internal pure returns (bool) {
-        require(signer != address(0) && signature.length == 65);
-
-        bytes32 r;
-        bytes32 s;
-        uint8 v = uint8(signature[64]) + 27;
-        assembly {
-            r := mload(add(signature, 0x20))
-            s := mload(add(signature, 0x40))
-        }
-        return ecrecover(hash, v, r, s) == signer;
     }
 }
