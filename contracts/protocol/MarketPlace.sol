@@ -4,9 +4,9 @@ pragma solidity ^0.8.0;
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import "@openzeppelin/contracts/utils/Arrays.sol";
 import {MercuryBase} from "../aviation/base/MercuryBase.sol";
-import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-contract MarketPlace is ReentrancyGuard {
+contract MarketPlace {
+
     struct Bid {
         address bidder;
         uint256 price;
@@ -29,22 +29,35 @@ contract MarketPlace is ReentrancyGuard {
         });
 
         Bid[] storage bidList = levelInfos[level].bids;
-        bidList.push(newBid);
-        _heapifyUp(bidList, bidList.length - 1);
+        uint256 i = 0;
+        while (i < bidList.length && bidList[i].price > newBid.price) {
+            i++;
+        }
+        
+        bidList.push(newBid); // Add a dummy element to increase the length of the array
+        
+        for (uint256 j = bidList.length - 1; j > i; j--) {
+            bidList[j] = bidList[j - 1];
+        }
+        
+        bidList[i] = newBid;
     }
 
-    function cancelBid(uint256 level) public nonReentrant {
+    function cancelBid(uint256 level) public {
         Bid[] storage bidList = levelInfos[level].bids;
         for (uint256 i = 0; i < bidList.length; i++) {
             if (bidList[i].bidder == msg.sender) {
                 payable(msg.sender).transfer(bidList[i].price);
-                _remove(bidList, i);
+                for (uint256 j = i; j < bidList.length - 1; j++) {
+                    bidList[j] = bidList[j + 1];
+                }
+                bidList.pop();
                 break;
             }
         }
     }
 
-    function sell(MercuryBase aviation, uint256 tokenId) public nonReentrant {
+    function sell(MercuryBase aviation, uint256 tokenId) public {
         require(aviation.isApprovedOrOwner(msg.sender, tokenId), 'MarketPlace: not owner or approver');
         uint256 level = aviation.aviationLevels(tokenId);
 
@@ -63,7 +76,10 @@ contract MarketPlace is ReentrancyGuard {
         levelInfos[level].lastTransactedPrice = highestBid.price;
 
         // Remove the highest bid
-        _remove(bidList, 0);
+        for (uint256 i = 0; i < bidList.length - 1; i++) {
+            bidList[i] = bidList[i + 1];
+        }
+        bidList.pop();
     }
 
     function getHighestBid(uint256 level) public view returns (uint256) {
@@ -77,68 +93,5 @@ contract MarketPlace is ReentrancyGuard {
 
     function getLastTransactedPrice(uint256 level) public view returns (uint256) {
         return levelInfos[level].lastTransactedPrice;
-    }
-
-    // Helper functions for heap operations
-
-    function _heapifyUp(Bid[] storage bidList, uint256 index) private {
-        while (index > 0 && bidList[_parent(index)].price < bidList[index].price) {
-            _swap(bidList, _parent(index), index);
-            index = _parent(index);
-        }
-    }
-
-    function _heapifyDown(Bid[] storage bidList, uint256 index) private {
-        uint256 maxIndex = index;
-        uint256 leftChild = _leftChild(index);
-        uint256 rightChild = _rightChild(index);
-
-        if (leftChild < bidList.length && bidList[leftChild].price > bidList[maxIndex].price) {
-            maxIndex = leftChild;
-        }
-
-        if (rightChild < bidList.length && bidList[rightChild].price > bidList[maxIndex].price) {
-            maxIndex = rightChild;
-        }
-
-        if (maxIndex != index) {
-            _swap(bidList, index, maxIndex);
-            _heapifyDown(bidList, maxIndex);
-        }
-    }
-
-    function _remove(Bid[] storage bidList, uint256 index) private {
-        require(index < bidList.length, "Index out of bounds");
-
-        if (index == bidList.length - 1) {
-            bidList.pop();
-        } else {
-            bidList[index] = bidList[bidList.length - 1];
-            bidList.pop();
-            
-            if (index > 0 && bidList[index].price > bidList[_parent(index)].price) {
-                _heapifyUp(bidList, index);
-            } else {
-                _heapifyDown(bidList, index);
-            }
-        }
-    }
-
-    function _parent(uint256 index) private pure returns (uint256) {
-        return (index - 1) / 2;
-    }
-
-    function _leftChild(uint256 index) private pure returns (uint256) {
-        return 2 * index + 1;
-    }
-
-    function _rightChild(uint256 index) private pure returns (uint256) {
-        return 2 * index + 2;
-    }
-
-    function _swap(Bid[] storage bidList, uint256 i, uint256 j) private {
-        Bid memory temp = bidList[i];
-        bidList[i] = bidList[j];
-        bidList[j] = temp;
     }
 }
