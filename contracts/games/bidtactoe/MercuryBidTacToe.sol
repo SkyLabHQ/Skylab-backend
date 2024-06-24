@@ -45,7 +45,7 @@ contract MercuryBidTacToe is MercuryGameBase {
     event LoseGame(uint256 indexed tokenId, address indexed user);
     event StartGame(address player1, address player2, address gameAddress);
     event StartPvpGame(address player1, address player2, address gameAddress);
-    event StartBotGame(address player, address gameAdderss);
+    event StartBotGame(address player, address gameAddress);
 
     function initialize(address _protocol) public override {
         super.initialize(_protocol);
