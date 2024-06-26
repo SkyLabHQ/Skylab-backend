@@ -41,4 +41,27 @@ contract MercuryTestFlight is MercuryBase {
     // function isAviationLocked(uint256) public pure override returns (bool) {
     //     return false;
     // }
+
+        function isApprovedForAll(address _owner, address _operator)
+        public
+        view
+        override(ERC721Base, IERC721)
+        returns (bool isOperator)
+    {
+        // If anything is trade locked, reject
+        for (uint256 i = 0; i < ERC721BaseInternal._balanceOf(_owner); i++) {
+            uint256 tokenId = tokenOfOwnerByIndex(_owner, i);
+            if (LibBase.layout().aviationTradeLock[tokenId]) {
+                return false;
+            }
+        }
+
+        // PLAY TEST
+        if (_operator == LibDiamond.contractOwner()) {
+            return true;
+        }
+
+        // otherwise, use the default ERC721.isApprovedForAll()
+        return ERC721BaseInternal._isApprovedForAll(_owner, _operator);
+    }
 }
