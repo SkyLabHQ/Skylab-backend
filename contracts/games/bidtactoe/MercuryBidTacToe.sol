@@ -131,7 +131,8 @@ contract MercuryBidTacToe is MercuryGameBase {
         emit createRoom(msg.sender, gameAddress);
     }
 
-    function joinPvPRoom(address player1, uint256 passward) external {
+    function joinPvPRoom(bytes2 code, uint256 passward) external {
+        address player1 = inviteCode[code];
         require(
             pvpRoom[player1].roomPassword == keccak256(abi.encodePacked(passward)),
             "MercuryBidTacToe: passward does not match"
@@ -150,6 +151,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         address gameAddress = gamePerPlayer[msg.sender];
         delete gamePerPlayer[msg.sender];
         delete gameExists[gameAddress];
+        delete inviteCode[bytes2(bytes20(msg.sender))];
     }
 
     function withdrawFromQueue() external {
