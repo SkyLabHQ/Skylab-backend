@@ -40,12 +40,14 @@ contract MercuryBidTacToe is MercuryGameBase {
     mapping(address => bool) public validBidTacToeBots;
     mapping(address => mapping(address => uint256)) public joinDefaultQueueTime;
     mapping(address => RoomInfo) public pvpRoom;
+    mapping(bytes2 => address) public inviteCode; // invite code to room hoster
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
     event StartGame(address player1, address player2, address gameAddress);
     event StartPvpGame(address player1, address player2, address gameAddress);
     event StartBotGame(address player, address gameAddress);
+    event createRoom(address player, address gameAddress);
 
     function initialize(address _protocol) public override {
         super.initialize(_protocol);
@@ -124,10 +126,13 @@ contract MercuryBidTacToe is MercuryGameBase {
     function createPvPRoom(GameParams memory gameParams, bytes32 hash) external {
         address aviation = burnerAddressToAviation(msg.sender);
         pvpRoom[msg.sender] = RoomInfo(aviation, hash);
-        createGame(gameParams, msg.sender);
+        inviteCode[bytes2(bytes20(msg.sender))] = msg.sender;
+        address gameAddress = createGame(gameParams, msg.sender);
+        emit createRoom(msg.sender, gameAddress);
     }
 
-    function joinPvPRoom(address player1, uint256 passward) external {
+    function joinPvPRoom(bytes2 code, uint256 passward) external {
+        address player1 = inviteCode[code];
         require(
             pvpRoom[player1].roomPassword == keccak256(abi.encodePacked(passward)),
             "MercuryBidTacToe: passward does not match"
@@ -138,6 +143,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         joinGame(gameAddress, msg.sender);
         emit StartPvpGame(player1, msg.sender, gameAddress);
         delete pvpRoom[player1];
+        delete inviteCode[bytes2(bytes20(player1))];
     }
 
     function quitPvpRoom() external {
@@ -145,6 +151,7 @@ contract MercuryBidTacToe is MercuryGameBase {
         address gameAddress = gamePerPlayer[msg.sender];
         delete gamePerPlayer[msg.sender];
         delete gameExists[gameAddress];
+        delete inviteCode[bytes2(bytes20(msg.sender))];
     }
 
     function withdrawFromQueue() external {
