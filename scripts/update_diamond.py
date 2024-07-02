@@ -10,6 +10,7 @@ protocol_params = [
     'MercuryPilots',
     'MercuryResources',
     'Vault',
+    'MarketPlace',
 ]
 
 testflight_params = [
@@ -42,7 +43,7 @@ game_address = ''
 trailblazer_address = ''
 
 def update_diamond(address, params):
-    ## Remove selector
+    # Remove selector
     facet = project.Diamond.at(address).facets()
     print("Previous facet: ",facet)
     if type(facet) == list:
