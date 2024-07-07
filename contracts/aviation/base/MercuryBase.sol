@@ -32,6 +32,7 @@ abstract contract MercuryBase is SolidStateERC721 {
         LibBase.layout().lastTokenID++;
         LibBase.layout().aviationLevels[tokenId] = 1;
         LibBase.layout().aviationPoints[tokenId] = 1;
+        payable(LibBase.layout().protocol).transfer(msg.value);
         return tokenId;
     }
 
@@ -51,11 +52,8 @@ abstract contract MercuryBase is SolidStateERC721 {
         sbs.aviationPoints[loserTokenId] -= pointsToMove;
         emit LibBase.MovePoints(loserTokenId, winnerTokenId, pointsToMove);
 
-        LibBase.pilot().pilotWin(
-            _ownerOf(winnerTokenId), sbs.aviationLevels[winnerTokenId] * pointsToMove, pointsToMove
-        );
-        LibBase.pilot().pilotLose(_ownerOf(loserTokenId), sbs.aviationLevels[loserTokenId] * pointsToMove, pointsToMove);
-
+        LibBase.loyaltyPoint().playGame(_ownerOf(winnerTokenId), winnerTokenId);
+        LibBase.loyaltyPoint().playGame(_ownerOf(loserTokenId), loserTokenId);
         updateLevel(winnerTokenId);
         updateLevel(loserTokenId);
 

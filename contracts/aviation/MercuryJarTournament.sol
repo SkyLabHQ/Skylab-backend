@@ -4,8 +4,6 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibBase} from "./base/storage/LibBase.sol";
-import {LibPilots} from "../protocol/storage/LibPilots.sol";
-import {MercuryPilots} from "../protocol/MercuryPilots.sol";
 
 contract MercuryJarTournament is MercuryBase {
     mapping(uint256 => uint256) public levelToClaimTime;
@@ -27,8 +25,7 @@ contract MercuryJarTournament is MercuryBase {
             uint256 newComerId,
             string memory userName_,
             address owner,
-            uint256 point,
-            LibPilots.Pilot memory pilot
+            uint256 point
         )
     {
         claimTime = levelToClaimTime[level];
@@ -40,7 +37,6 @@ contract MercuryJarTournament is MercuryBase {
         }
         userName_ = userName[owner];
         point = aviationPoints(newComerId);
-        pilot = MercuryPilots(protocol()).getActivePilot(owner);
     }
 
     function initialize(string memory baseURI, address protocol) public {
@@ -107,18 +103,15 @@ contract MercuryJarTournament is MercuryBase {
 
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         uint256 pointsToMove = 1;
+
         if (playerWon) {
             sbs.aviationPoints[playerTokenId] += pointsToMove;
             emit LibBase.MovePoints(0, playerTokenId, pointsToMove);
-            LibBase.pilot().pilotWin(
-                _ownerOf(playerTokenId), sbs.aviationLevels[playerTokenId] * pointsToMove, pointsToMove
-            );
+            LibBase.loyaltyPoint().playGame( _ownerOf(playerTokenId), playerTokenId);
         } else {
             sbs.aviationPoints[playerTokenId] -= pointsToMove;
             emit LibBase.MovePoints(playerTokenId, 0, pointsToMove);
-            LibBase.pilot().pilotLose(
-                _ownerOf(playerTokenId), sbs.aviationLevels[playerTokenId] * pointsToMove, pointsToMove
-            );
+            LibBase.loyaltyPoint().playGame( _ownerOf(playerTokenId), playerTokenId);
         }
 
         updateLevel(playerTokenId);
