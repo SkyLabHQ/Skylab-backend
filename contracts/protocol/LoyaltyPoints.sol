@@ -27,7 +27,7 @@ contract LoyaltyPoints {
     }
 
     function playGame(address player, uint256 tokenId) external {
-        require(LibComponent.isValidAviation(msg.sender), "MercuryPilots: msg.sender is not a valid aviation. ");
+        require(LibComponent.isValidAviation(msg.sender), "LoyaltyPoints: msg.sender is not a valid aviation. ");
         uint256 today = getCurrentDay();
         if (lastPlayTime[player] != today) {
             if (lastPlayTime[player] == today - 1) {
