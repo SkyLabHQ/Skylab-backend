@@ -20,8 +20,7 @@ contract MarketPlace {
     mapping(uint256 => LevelInfo) public levelInfos; // level to LevelInfo
     mapping(address => mapping(uint256 => uint256)) public userBids; // user address => level => bid index (from 1 -> length)
 
-    function bid(MercuryBase aviation, uint256 tokenId) public payable {
-        uint256 level = aviation.aviationLevels(tokenId);
+    function bid(uint256 level) public payable {
         require(msg.value > 0, "Bid amount must be greater than 0");
         require(userBids[msg.sender][level] == 0, "You already have a bid for this level");
 
