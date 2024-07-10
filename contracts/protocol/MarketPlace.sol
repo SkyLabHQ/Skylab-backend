@@ -121,4 +121,14 @@ contract MarketPlace {
     function getLastTransactedPrice(uint256 level) public view returns (uint256) {
         return levelInfos[level].lastTransactedPrice;
     }
+
+    function getBidInfo(address user, uint256 level) public view returns (Bid memory) {
+        uint256 index;
+        if (userBids[user][level] > 0) {
+            index = userBids[user][level] - 1;
+        } else {
+            return Bid(address(0), 0, 0);
+        }
+        return levelInfos[level].bids[index];
+    }
 }
