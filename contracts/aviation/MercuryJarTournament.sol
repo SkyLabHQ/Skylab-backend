@@ -20,13 +20,7 @@ contract MercuryJarTournament is MercuryBase {
     function getNewCommerInfo(uint256 level)
         public
         view
-        returns (
-            uint256 claimTime,
-            uint256 newComerId,
-            string memory userName_,
-            address owner,
-            uint256 point
-        )
+        returns (uint256 claimTime, uint256 newComerId, string memory userName_, address owner, uint256 point)
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
@@ -80,7 +74,7 @@ contract MercuryJarTournament is MercuryBase {
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
-        if(winnerTokenId != 0 && loserTokenId != 0) {
+        if (winnerTokenId != 0 && loserTokenId != 0) {
             super.aviationMovePoints(winnerTokenId, loserTokenId);
         } else {
             aviationBotMovePoints(winnerTokenId, loserTokenId);
@@ -107,11 +101,11 @@ contract MercuryJarTournament is MercuryBase {
         if (playerWon) {
             sbs.aviationPoints[playerTokenId] += pointsToMove;
             emit LibBase.MovePoints(0, playerTokenId, pointsToMove);
-            LibBase.loyaltyPoint().playGame( _ownerOf(playerTokenId), playerTokenId);
+            LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), playerTokenId);
         } else {
             sbs.aviationPoints[playerTokenId] -= pointsToMove;
             emit LibBase.MovePoints(playerTokenId, 0, pointsToMove);
-            LibBase.loyaltyPoint().playGame( _ownerOf(playerTokenId), playerTokenId);
+            LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), playerTokenId);
         }
 
         updateLevel(playerTokenId);

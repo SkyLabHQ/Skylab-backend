@@ -32,7 +32,7 @@ library LibBase {
         }
     }
 
-    function loyaltyPoint() internal view returns(LoyaltyPoints) {
+    function loyaltyPoints() internal view returns(LoyaltyPoints) {
         return LoyaltyPoints(layout().protocol);
     }
 
