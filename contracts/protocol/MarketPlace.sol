@@ -66,9 +66,9 @@ contract MarketPlace {
         uint256 level = aviation.aviationLevels(tokenId);
         LevelInfo storage levelInfo = levelInfos[level];
         require(levelInfo.bids.length > 0, "No bids for this level");
-
+        address owner = aviation.ownerOf(tokenId);
         require(aviation.isApprovedOrOwner(msg.sender, tokenId), "You don't own this token");
-        require(aviation.getApproved(tokenId) == address(this), "Contract not approved for this token");
+        require(aviation.isApprovedForAll(owner, address(this)), "Contract not approved for this token");
 
         (uint256 highestBidIndex, Bid memory highestBid) = findHighestBid(level);
         address buyer = highestBid.bidder;
@@ -76,7 +76,6 @@ contract MarketPlace {
             return;
         }
         uint256 price = highestBid.price;
-        address owner = aviation.ownerOf(tokenId);
         // Transfer the token
         aviation.transferFrom(owner, buyer, tokenId);
 
