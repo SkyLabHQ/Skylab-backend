@@ -31,7 +31,7 @@ contract LoyaltyPoints {
         loyaltyPoints[_player] = _point;
     }
 
-    function playGame(address player, uint256 tokenId) external {
+    function playGame(address player, uint256 pointsTransferred) external {
         require(LibComponent.isValidAviation(msg.sender), "LoyaltyPoints: msg.sender is not a valid aviation. ");
         uint256 today = getCurrentDay();
         if (lastPlayTime[player] != today) {
@@ -42,13 +42,6 @@ contract LoyaltyPoints {
             }
             lastPlayTime[player] = today;
         }
-        uint256 level = MercuryBase(msg.sender).aviationLevels(tokenId);
-        uint256 point = levelToXP(level);
-        loyaltyPoints[player] += point * 12 ** (onlineStreak[player] - 1) / 10 ** (onlineStreak[player] - 1);
-    }
-
-    function levelToXP(uint256 level) public pure returns(uint256) {
-        //todo: need algorithm
-        return level;
+        loyaltyPoints[player] += pointsTransferred * 100 * 12 ** (onlineStreak[player] - 1) / 10 ** (onlineStreak[player] - 1);
     }
 } 

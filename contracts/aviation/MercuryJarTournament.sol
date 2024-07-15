@@ -101,13 +101,11 @@ contract MercuryJarTournament is MercuryBase {
         if (playerWon) {
             sbs.aviationPoints[playerTokenId] += pointsToMove;
             emit LibBase.MovePoints(0, playerTokenId, pointsToMove);
-            LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), playerTokenId);
         } else {
             sbs.aviationPoints[playerTokenId] -= pointsToMove;
             emit LibBase.MovePoints(playerTokenId, 0, pointsToMove);
-            LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), playerTokenId);
         }
-
+        LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), pointsToMove);
         updateLevel(playerTokenId);
 
         if (sbs.aviationPoints[playerTokenId] == 0) {
