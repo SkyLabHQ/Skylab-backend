@@ -57,18 +57,25 @@ contract MarketPlace {
         payable(msg.sender).transfer(bidAmount);
     }
 
+    function reBid(uint256 level) public payable {
+        cancelBid(level);
+        bid(level);
+    }
+
     function sell(MercuryBase aviation, uint256 tokenId) public {
         uint256 level = aviation.aviationLevels(tokenId);
         LevelInfo storage levelInfo = levelInfos[level];
         require(levelInfo.bids.length > 0, "No bids for this level");
-
+        address owner = aviation.ownerOf(tokenId);
         require(aviation.isApprovedOrOwner(msg.sender, tokenId), "You don't own this token");
-        require(aviation.getApproved(tokenId) == address(this), "Contract not approved for this token");
+        require(aviation.isApprovedForAll(owner, address(this)), "Contract not approved for this token");
 
         (uint256 highestBidIndex, Bid memory highestBid) = findHighestBid(level);
         address buyer = highestBid.bidder;
+        if(buyer == address(0)) {
+            return;
+        }
         uint256 price = highestBid.price;
-        address owner = aviation.ownerOf(tokenId);
         // Transfer the token
         aviation.transferFrom(owner, buyer, tokenId);
 
@@ -95,8 +102,9 @@ contract MarketPlace {
 
     function findHighestBid(uint256 level) internal view returns (uint256, Bid memory) {
         LevelInfo storage levelInfo = levelInfos[level];
-        require(levelInfo.bids.length > 0, "No bids for this level");
-
+        if(levelInfo.bids.length == 0) {
+            return (0, Bid(address(0), 0, 0));
+        }
         uint256 highestBidIndex = 0;
         Bid memory highestBid = levelInfo.bids[0];
 
@@ -120,5 +128,15 @@ contract MarketPlace {
 
     function getLastTransactedPrice(uint256 level) public view returns (uint256) {
         return levelInfos[level].lastTransactedPrice;
+    }
+
+    function getBidInfo(address user, uint256 level) public view returns (Bid memory) {
+        uint256 index;
+        if (userBids[user][level] > 0) {
+            index = userBids[user][level] - 1;
+        } else {
+            return Bid(address(0), 0, 0);
+        }
+        return levelInfos[level].bids[index];
     }
 }
