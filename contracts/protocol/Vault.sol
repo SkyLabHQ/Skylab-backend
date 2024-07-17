@@ -36,11 +36,8 @@ contract Vault is IERC721Receiver {
             msg.sender == LibVault.aviation().ownerOf(tokenId) && !mercs.nonBuyBack(mercsTokenId),
             "Vault: msg.sender is not owner of token"
         );
-        uint256 commissionPct = getCommmissionPct(LibVault.aviation().aviationLevels(tokenId));
-        uint256 commission = price(tokenId) * commissionPct / 1e4;
-        require(address(this).balance >= price(tokenId) - commission, "insufficient balance");
-        payable(msg.sender).transfer(price(tokenId) - commission);
-        payable(commissionReceiver).transfer(commission);
+        require(address(this).balance >= price(tokenId), "insufficient balance");
+        payable(msg.sender).transfer(price(tokenId));
         LibVault.aviation().transferFrom(msg.sender, address(this), tokenId);
     }
 
@@ -65,11 +62,6 @@ contract Vault is IERC721Receiver {
     function price(uint256 tokenId) public view returns (uint256) {
         uint256 point = LibVault.aviation().aviationPoints(tokenId);
         return point * 1e16;
-    }
-
-    function getCommmissionPct(uint256 level) public pure returns (uint256) {
-        require(level > 0, "Vault: level must be greater than 0");
-        return (level - 1) * 100 + 400 >= 1000 ? 1000 : (level - 1) * 100 + 400;
     }
 
     receive() external payable {}

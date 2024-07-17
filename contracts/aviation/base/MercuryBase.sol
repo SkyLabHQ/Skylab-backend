@@ -26,12 +26,13 @@ abstract contract MercuryBase is SolidStateERC721 {
         _setSupportsInterface(type(IERC721).interfaceId, true);
     }
 
-    function baseMint(address to) internal returns(uint256) {
+    function baseMint(address to) internal returns (uint256) {
         uint256 tokenId = LibBase.layout().lastTokenID + 1;
         _safeMint(to, tokenId);
         LibBase.layout().lastTokenID++;
         LibBase.layout().aviationLevels[tokenId] = 1;
         LibBase.layout().aviationPoints[tokenId] = 1;
+        payable(LibBase.layout().protocol).transfer(msg.value);
         return tokenId;
     }
 
@@ -51,11 +52,8 @@ abstract contract MercuryBase is SolidStateERC721 {
         sbs.aviationPoints[loserTokenId] -= pointsToMove;
         emit LibBase.MovePoints(loserTokenId, winnerTokenId, pointsToMove);
 
-        LibBase.pilot().pilotWin(
-            _ownerOf(winnerTokenId), sbs.aviationLevels[winnerTokenId] * pointsToMove, pointsToMove
-        );
-        LibBase.pilot().pilotLose(_ownerOf(loserTokenId), sbs.aviationLevels[loserTokenId] * pointsToMove, pointsToMove);
-
+        LibBase.loyaltyPoints().playGame(_ownerOf(winnerTokenId), pointsToMove);
+        LibBase.loyaltyPoints().playGame(_ownerOf(loserTokenId), pointsToMove);
         updateLevel(winnerTokenId);
         updateLevel(loserTokenId);
 

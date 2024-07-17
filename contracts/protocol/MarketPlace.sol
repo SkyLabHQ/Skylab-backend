@@ -19,6 +19,7 @@ contract MarketPlace {
 
     mapping(uint256 => LevelInfo) public levelInfos; // level to LevelInfo
     mapping(address => mapping(uint256 => uint256)) public userBids; // user address => level => bid index (from 1 -> length)
+    address public valut;
 
     function bid(uint256 level) public payable {
         require(msg.value > 0, "Bid amount must be greater than 0");
@@ -54,7 +55,8 @@ contract MarketPlace {
         userBids[msg.sender][level] = 0;
 
         // Return the bid amount to the user
-        payable(msg.sender).transfer(bidAmount);
+        payable(valut).transfer(bidAmount * getTaxRate() / 100);
+        payable(msg.sender).transfer(bidAmount * (100 - getTaxRate()) / 100);
     }
 
     function reBid(uint256 level) public payable {
@@ -130,6 +132,10 @@ contract MarketPlace {
         return levelInfos[level].lastTransactedPrice;
     }
 
+    function getTaxRate() public pure returns(uint256) {
+        return 2;
+    }
+    
     function getBidInfo(address user, uint256 level) public view returns (Bid memory) {
         uint256 index;
         if (userBids[user][level] > 0) {
