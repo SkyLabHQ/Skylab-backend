@@ -126,6 +126,6 @@ contract MarketPlace {
     }
 
     function getTaxRate() public pure returns(uint256) {
-        return 10;
+        return 2;
     }
 }

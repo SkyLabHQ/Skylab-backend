@@ -29,24 +29,25 @@ contract Mercs is SolidStateERC721 {
     //     lastClaimTime[tokenId] = block.timestamp;
     // }
 
-    function canClaim(uint256 tokenId) public view returns (bool) {
-        if (lastClaimTime[tokenId] == 0) {
-            return true;
-        }
-        uint256 passOneAMPSTSeconds = (block.timestamp - 9 hours) % 24 hours;
+    // function canClaim(uint256 tokenId) public view returns (bool) {
+    //     if (lastClaimTime[tokenId] == 0) {
+    //         return true;
+    //     }
+    //     uint256 passOneAMPSTSeconds = (block.timestamp - 9 hours) % 24 hours;
 
-        uint256 timestamp = block.timestamp - passOneAMPSTSeconds;
-        if (timestamp > lastClaimTime[tokenId]) {
-            return true;
-        }
-        return false;
-    }
+    //     uint256 timestamp = block.timestamp - passOneAMPSTSeconds;
+    //     if (timestamp > lastClaimTime[tokenId]) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
-    function mint(uint256 tokenId) public {
-        require(babyMercsUP[tokenId] >= 100, "Mercs: upgrade point does not meets requirement");
-        require(babyMercs.ownerOf(tokenId) == msg.sender, "not owner");
-        babyMercsUP[tokenId] -= 100;
-        babyMercs.burn(tokenId);
+    function mint() public {
+        LibDiamond.enforceIsContractOwner();
+        //require(babyMercsUP[tokenId] >= 100, "Mercs: upgrade point does not meets requirement");
+        //require(babyMercs.ownerOf(tokenId) == msg.sender, "not owner");
+        //babyMercsUP[tokenId] -= 100;
+        //babyMercs.burn(tokenId);
         _safeMint(msg.sender, nextTokenId + 1);
         nextTokenId++;
     }
