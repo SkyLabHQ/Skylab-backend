@@ -2,7 +2,7 @@ from ape import project,Contract
 from scripts import constant, utils, account
 
 FacetCutAction = {"Add": 0, "Replace": 1, "Remove": 2}
-protocol_names = ['Diamond','ComponentIndex','MercuryPilots','MercuryResources','Vault','MarketPlace']
+protocol_names = ['Diamond','ComponentIndex','MercuryResources','Vault','MarketPlace', 'LoyaltyPoints']
 aviation_names = ['Diamond','TrailblazerTournament']
 testflight_names = ['Diamond','MercuryTestFlight']
 bot_tournament_names = ['Diamond', 'MercuryBotTournament']
@@ -10,24 +10,13 @@ jar_tournament_names = ['Diamond', 'MercuryJarTournament']
 baby_names = ['Diamond','BabyMercs']
 game_names = ['Diamond','MercuryBidTacToe']
 bot_names = ['Diamond', 'MercuryBidTacToeBot']
-leaderboard_names = ['PilotMileage','PilotNetPoints','PilotSessions','PilotWinStreak']
 
 def upgrade(proxy_address, contract_name):
     ContractClass = getattr(project, contract_name)
     logic = ContractClass.deploy(sender=account.deployer)
     proxy = Contract(proxy_address,abi=constant.PROXY_ABI)
     proxy.upgradeTo(logic.address, sender=account.admin)
-      
-def deploy_leaderboard(contract_name, protocol_address):
-    leaderboard_addresses = {}
-    for contract_name in leaderboard_names:
-        ContractClass = getattr(project, contract_name)
-        contract = ContractClass.deploy(sender=account.deployer)
-        proxy = project.LeaderBoardProxy.deploy(contract.address, constant.ADMIN, "0x", sender=account.deployer)
-        leaderboard_addresses[contract_name] = proxy.address
-        delegate = ContractClass.at(proxy.address)
-        delegate.initialize(protocol_address,sender=account.deployer)
-    return leaderboard_addresses
+
 
 def deploy_diamond(names):
     cut = []
@@ -84,8 +73,6 @@ def main():
     game = project.MercuryBidTacToe.at(game_address)
     ## Init ganme
     game.initialize(protocol_address, sender=account.deployer)
-    ## Deploy leaderboard
-    leaderboard_addresses = deploy_leaderboard(leaderboard_names, protocol_address)
     ## Registry component index
     component_index = project.ComponentIndex.at(protocol_address)
     component_index.setValidPilotCollection(baby_address, True,sender=account.deployer)
@@ -93,10 +80,7 @@ def main():
     component_index.setValidAviation(bot_tournament_address, True, sender=account.deployer)
     component_index.setValidAviation(test_flight_address, True, sender=account.deployer)
     component_index.setValidGame(game_address, True,sender=account.deployer)
-    component_index.setPilotMileage(leaderboard_addresses['PilotMileage'],sender=account.deployer)
-    component_index.setNetPoints(leaderboard_addresses['PilotNetPoints'],sender=account.deployer)
-    component_index.setPilotSessions(leaderboard_addresses['PilotSessions'],sender=account.deployer)
-    component_index.setWinStreak(leaderboard_addresses['PilotWinStreak'],sender=account.deployer)
+
     for pilot in constant.Pilot_WhiteList:
         component_index.setValidPilotCollection(pilot, True,sender=account.deployer)
     # Deploy bot
@@ -113,7 +97,6 @@ def main():
         f.write("trailblazer_tournament_address:"+aviation_address+"\n")
         f.write("baby_address:"+baby_address+"\n")
         f.write("mercury_bidtactoe_address:"+game_address+"\n")
-        f.write("leaderboard_addresses:"+str(leaderboard_addresses)+"\n")
         f.write("bot_tournament_address:"+bot_tournament_address+"\n")
         f.write("bot_address:"+bot_address+"\n")
         f.write("bidtactoe_address:"+bidtactoe_player_versus_bot_address+"\n")

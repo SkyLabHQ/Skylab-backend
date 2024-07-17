@@ -26,9 +26,9 @@ contract LoyaltyPoints {
         return block.timestamp / 1 days;
     }
 
-    function updatePoint(address _player, uint256 _point) public {
+    function addPoint(address _player, uint256 _point) public {
         require(msg.sender == admin, "Not admin");
-        loyaltyPoints[_player] = _point;
+        loyaltyPoints[_player] += _point;
     }
 
     function playGame(address player, uint256 pointsTransferred) external {
