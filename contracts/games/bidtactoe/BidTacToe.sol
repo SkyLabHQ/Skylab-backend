@@ -183,6 +183,8 @@ contract BidTacToe is Initializable {
                 win(bidWinner, 4);
             } else if (occupiedGridCounts[bidWinner] * 2 > gridWidth * gridHeight) {
                 win(bidWinner, 10);
+            } else if (balances[bidLoser] == 0 && occupiedGridCounts[bidLoser] * 2 <= gridWidth * gridHeight){
+                win(bidWinner, 10);
             } else {
                 generateNextGrid();
                 gameStates[player1] = 1;
