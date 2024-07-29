@@ -30,10 +30,7 @@ contract LoyaltyPoints {
 
     function addPoint(address _player, uint256 _point) public {
         require(msg.sender == admin, "Not admin");
-        if(!userExists[_player]) {
-            userList.push(_player);
-            userExists[_player] = true;
-        }
+        addUserIfNotExists(_player);
         loyaltyPoints[_player] += _point;
     }
 
@@ -49,12 +46,15 @@ contract LoyaltyPoints {
             lastPlayTime[player] = today;
         }
         loyaltyPoints[player] += pointsTransferred * 100 * 12 ** (onlineStreak[player] - 1) / 10 ** (onlineStreak[player] - 1);
+        addUserIfNotExists(player);
+    }
+
+    function addUserIfNotExists(address player) private {
         if(!userExists[player]) {
             userList.push(player);
             userExists[player] = true;
         }
     }
-
     function pointList() public view returns (uint256[] memory) {
         uint256[] memory points = new uint256[](userList.length);
         for (uint i = 0; i < userList.length; i++) {
