@@ -1,10 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import {MercuryBidTacToe} from "./MercuryBidTacToe.sol";
-import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
+contract BidTacToe {
+    struct GameParams {
+        uint64 gridWidth;
+        uint64 gridHeight;
+        uint64 lengthToWin;
+        uint64 initialBalance;
+        uint128 gridMaxSelectionCount;
+        uint128 gridSelectionStrategy;
+        bool isBot;
+        uint256 universalTimeout;
+    }
 
-contract BidTacToe is Initializable {
     /*//////////////////////////////////////////////////////////////
                             Static Gameplay Data
     //////////////////////////////////////////////////////////////*/
@@ -75,10 +83,7 @@ contract BidTacToe is Initializable {
         _;
     }
 
-    function initialize(MercuryBidTacToe.GameParams memory gameParams, address player, address _mercuryBidTacToeAddress)
-        public
-        initializer
-    {
+    constructor(GameParams memory gameParams, address player) {
         if (gameParams.universalTimeout == 0) {
             universalTimeout = 90;
         } else {
@@ -96,7 +101,6 @@ contract BidTacToe is Initializable {
         revealedBids[player1] = new uint256[](gridWidth * gridHeight);
         gameStates[player1] = 1;
         balances[player1] = gameParams.initialBalance;
-        mercuryBidTacToeAddress = _mercuryBidTacToeAddress;
     }
 
     function getGrid() external view returns (address[] memory) {
@@ -330,8 +334,5 @@ contract BidTacToe is Initializable {
         address otherPlayer = getOtherPlayer(player);
         gameStates[otherPlayer] = state + 1;
         emit LoseGame(otherPlayer, state + 1);
-        (bool bttSuceed,) =
-            mercuryBidTacToeAddress.call(abi.encodeWithSignature("handleWinLoss(address,address)", player, otherPlayer));
-        require(bttSuceed, "BidTacToe: handleWinLoss failed");
     }
 }
