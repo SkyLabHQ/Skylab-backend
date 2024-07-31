@@ -55,11 +55,11 @@ contract LoyaltyPoints {
             userExists[player] = true;
         }
     }
-    function pointList() public view returns (uint256[] memory) {
+    function pointList() public view returns (address[] memory, uint256[] memory) {
         uint256[] memory points = new uint256[](userList.length);
         for (uint i = 0; i < userList.length; i++) {
             points[i] = loyaltyPoints[userList[i]];
         }
-        return points;
+        return (userList, points);
     }
 } 
