@@ -8,9 +8,11 @@ import {MercuryBase} from "../aviation/base/MercuryBase.sol";
 contract LoyaltyPoints {
 
     address public admin;
-    mapping(address player => uint256 point) public loyaltyPoints;
-    mapping(address player => uint256 onlineStreak) public onlineStreak;
-    mapping(address player => uint256 lastPlayTime) public lastPlayTime;
+    mapping(address => uint256) public loyaltyPoints;
+    mapping(address => uint256) public onlineStreak;
+    mapping(address => uint256) public lastPlayTime;
+    mapping(address => bool) public userExists;
+    address[] public userList;
 
     function initLoyaltyPoints(address _admin) public {
         LibDiamond.enforceIsContractOwner();
@@ -26,9 +28,10 @@ contract LoyaltyPoints {
         return block.timestamp / 1 days;
     }
 
-    function updatePoint(address _player, uint256 _point) public {
+    function addPoint(address _player, uint256 _point) public {
         require(msg.sender == admin, "Not admin");
-        loyaltyPoints[_player] = _point;
+        addUserIfNotExists(_player);
+        loyaltyPoints[_player] += _point;
     }
 
     function playGame(address player, uint256 pointsTransferred) external {
@@ -43,5 +46,20 @@ contract LoyaltyPoints {
             lastPlayTime[player] = today;
         }
         loyaltyPoints[player] += pointsTransferred * 100 * 12 ** (onlineStreak[player] - 1) / 10 ** (onlineStreak[player] - 1);
+        addUserIfNotExists(player);
+    }
+
+    function addUserIfNotExists(address player) private {
+        if(!userExists[player]) {
+            userList.push(player);
+            userExists[player] = true;
+        }
+    }
+    function pointList() public view returns (address[] memory, uint256[] memory) {
+        uint256[] memory points = new uint256[](userList.length);
+        for (uint i = 0; i < userList.length; i++) {
+            points[i] = loyaltyPoints[userList[i]];
+        }
+        return (userList, points);
     }
 } 

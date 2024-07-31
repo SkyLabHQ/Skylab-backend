@@ -123,9 +123,9 @@ contract MarketPlace {
         return (highestBidIndex, highestBid);
     }
 
-    function getHighestBid(uint256 level) public view returns (uint256) {
+    function getHighestBid(uint256 level) public view returns (address, uint256) {
         (, Bid memory highestBid) = findHighestBid(level);
-        return highestBid.price;
+        return (highestBid.bidder, highestBid.price);
     }
 
     function getLastTransactedPrice(uint256 level) public view returns (uint256) {

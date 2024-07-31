@@ -11,6 +11,7 @@ protocol_params = [
     'MercuryResources',
     'Vault',
     'MarketPlace',
+    'LoyaltyPoints',
 ]
 
 testflight_params = [
