@@ -194,6 +194,12 @@ contract BidTacToe {
                 win(bidWinner, 4);
             } else if (occupiedGridCounts[bidWinner] * 2 > gridWidth * gridHeight) {
                 win(bidWinner, 10);
+            } else if (balances[bidWinner] == 0 && balances[bidLoser] == 0) {
+                if (occupiedGridCounts[bidWinner] >= occupiedGridCounts[bidLoser]) {
+                    win(bidWinner, 10);
+                } else {
+                    win(bidLoser, 10);
+                }
             } else if (
                 (balances[player1] == 0 && occupiedGridCounts[player1] * 2 <= gridWidth * gridHeight)
                     || (balances[player2] == 0 && occupiedGridCounts[player2] * 2 <= gridWidth * gridHeight)
