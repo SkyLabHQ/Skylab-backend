@@ -191,10 +191,14 @@ contract BidTacToe is Initializable {
             } else if (occupiedGridCounts[bidWinner] * 2 > gridWidth * gridHeight) {
                 win(bidWinner, 10);
             } else if (balances[bidWinner] == 0 && balances[bidLoser] == 0) {
-                if (occupiedGridCounts[bidWinner] >= occupiedGridCounts[bidLoser]) {
+                if (occupiedGridCounts[bidWinner] > occupiedGridCounts[bidLoser]) {
                     win(bidWinner, 10);
-                } else {
+                } 
+                if (occupiedGridCounts[bidWinner] < occupiedGridCounts[bidLoser]) {
                     win(bidLoser, 10);
+                }
+                if (occupiedGridCounts[bidWinner] == occupiedGridCounts[bidLoser]) {
+                    win(nextDrawWinner, 10);
                 }
             } else if (
                 (balances[player1] == 0 && occupiedGridCounts[player1] * 2 <= gridWidth * gridHeight)
