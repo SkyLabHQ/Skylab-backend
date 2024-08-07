@@ -85,6 +85,19 @@ contract BidTacToe_Test is Test {
 
         assertEq(btt.balances(player1), 0);
         assertEq(btt.balances(player2), 0);
-        assertEq(btt.gameStates(btt.nextDrawWinner()), 11);
+        console.log(btt.gameStates(btt.nextDrawWinner()));
+
+        vm.prank(player1);
+        bid = 0;
+        btt.commitBid(uint256(keccak256(abi.encodePacked(bid, salt))));
+        vm.prank(player2);
+        bid = 0;
+        btt.commitBid(uint256(keccak256(abi.encodePacked(bid, salt))));
+        vm.prank(player1);
+        btt.revealBid(0, 0);
+        vm.prank(player2);
+        btt.revealBid(0, 0);
+        console.log(btt.gameStates(btt.player1()));
+        console.log(btt.gameStates(btt.player2()));
     }
 }

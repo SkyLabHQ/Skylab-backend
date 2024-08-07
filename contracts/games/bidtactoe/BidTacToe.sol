@@ -185,7 +185,6 @@ contract BidTacToe is Initializable {
             grid[currentSelectedGrid] = bidWinner;
             occupiedGridCounts[bidWinner] += 1;
             nextDrawWinner = bidLoser;
-
             if (existsOverallWinner()) {
                 win(bidWinner, 4);
             } else if (occupiedGridCounts[bidWinner] * 2 > gridWidth * gridHeight) {
@@ -197,9 +196,13 @@ contract BidTacToe is Initializable {
                 if (balances[bidWinner] == 0 && balances[bidLoser] == 0) {
                     if (occupiedGridCounts[bidWinner] > occupiedGridCounts[bidLoser]) {
                         win(bidWinner, 10);
-                    } 
-                    if (occupiedGridCounts[bidWinner] < occupiedGridCounts[bidLoser]) {
+                    } else if (occupiedGridCounts[bidWinner] < occupiedGridCounts[bidLoser]) {
                         win(bidLoser, 10);
+                    } else {
+                        generateNextGrid();
+                        gameStates[player1] = 1;
+                        gameStates[player2] = 1;
+                        setTimeoutForBothPlayers();
                     }
                 } else {
                     address gameWinner = balances[player1] == 0 ? player2 : player1;
