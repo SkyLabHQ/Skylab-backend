@@ -12,6 +12,8 @@ contract MercuryLeagueTournament is MercuryBase {
         bool leaderExist;
         uint256 leagueOwnerPercentage;
         uint256 newComerPercentage;
+        uint256 setPercentageTime;
+        uint256 totalPoint;
     }
 
     uint256 public pot;
@@ -21,8 +23,9 @@ contract MercuryLeagueTournament is MercuryBase {
     mapping(uint256 => uint256) public levelToClaimTime;
     mapping(uint256 => uint256) public levelToNewComerId;
     mapping(uint256 => uint256[]) public tokenIdPerLevel;
-    mapping(address leader => LeagueInfo) public league;
-    mapping(address member => address leader) memberToLeader;
+    mapping(address => LeagueInfo) public league; // leader to LeagueInfo
+    mapping(address => address) public memberToLeader;
+    uint256 public highestLevel;
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
@@ -96,12 +99,31 @@ contract MercuryLeagueTournament is MercuryBase {
         distributePot(leader, msg.sender);
     }
 
+    function vetoLeaderDecition(uint256 tokenId) public {
+        address leader = memberToLeader[msg.sender];
+        require(league[leader].leaderExist, "MercuryLeagueTournament: Permission deny");
+        require(block.timestamp <= league[leader].setPercentageTime + 1 hours, "MercuryLeagueTournament: veto windows expired");
+        uint256 points = aviationPoints(tokenId);
+        league[leader].totalPoint += points;
+        uint256 totalPoint;
+        for(uint256 i = 0; i < league[leader].tokenIds.length; i++) {
+            totalPoint += aviationPoints(league[leader].tokenIds[i]);
+        }
+        if (league[leader].totalPoint * 2 > totalPoint) {
+            league[leader].newComerPercentage = 10;
+            league[leader].leagueOwnerPercentage = 0;
+        }
+    }
+
     function setPercentage(uint256 _newComerPercentage, uint256 _leagueOwnerPercentage) public {
         require(league[msg.sender].leaderExist, "MercuryLeagueTournament: Permission deny");
         require(
             _newComerPercentage <= 20 && _newComerPercentage >= 10 && _leagueOwnerPercentage <= 20,
             "MercuryLeagueTournament: Argument Error"
         );
+        if(isTimeFrozen()) {
+            require(!isDominatingLeague(msg.sender), "MercuryLeagueTournament: dominating league can't change when any timer is less than 10min");
+        }
         for (uint256 i = 0; i < league[msg.sender].tokenIds.length; i++) {
             uint256 tokenId = league[msg.sender].tokenIds[i];
             uint256 level = aviationLevels(tokenId);
@@ -110,6 +132,7 @@ contract MercuryLeagueTournament is MercuryBase {
                 "MercuryLeagueTournament: pass setPercentage time lock"
             );
         }
+        league[msg.sender].setPercentageTime = block.timestamp;
         league[msg.sender].leagueOwnerPercentage = _leagueOwnerPercentage;
         league[msg.sender].newComerPercentage = _newComerPercentage;
     }
@@ -208,6 +231,9 @@ contract MercuryLeagueTournament is MercuryBase {
                 distributePot(leader, owner);
             }
         }
+        if (level > highestLevel) {
+            highestLevel = level;
+        }
         levelToClaimTime[level] = block.timestamp + 15 minutes * 2 ^ (level - 1);
         levelToNewComerId[level] = tokenId;
         tokenIdPerLevel[level].push(tokenId);
@@ -216,6 +242,7 @@ contract MercuryLeagueTournament is MercuryBase {
     function distributePot(address leader, address newCommer) private {
         address vault = LibBase.layout().protocol;
         LeagueInfo memory leagueInfo = league[leader];
+        require(block.timestamp >= leagueInfo.setPercentageTime + 1 hours, "MercuryLeagueTournament: veto windows didn't expire");
         uint256 denominator = 100;
         uint256 vaultValue = pot / denominator;
         uint256 newCommerValue = pot * leagueInfo.newComerPercentage / denominator;
@@ -237,4 +264,28 @@ contract MercuryLeagueTournament is MercuryBase {
         }
         pot = 0;
     }
+
+    function isTimeFrozen() private view returns(bool) {
+        for(uint256 level = 0; level <= highestLevel; level++) {
+            if(levelToClaimTime[level] <= block.timestamp + 10 minutes) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //dominating league definition: the league that's the newcomer of the shortest timer
+    function isDominatingLeague(address leader) private view returns(bool) {
+        uint256 shortestLevel = 0;
+        uint256 shortestTimer = levelToClaimTime[shortestLevel];
+        for(uint level = 1; level <= highestLevel; level++) {
+            if (levelToClaimTime[level] < shortestTimer) {
+                shortestTimer = levelToClaimTime[level];
+                shortestLevel = level;
+            }
+        }
+        uint256 newComerId = levelToNewComerId[shortestLevel];
+        address member = _ownerOf(newComerId);
+        return memberToLeader[member] == leader;
+    }
 }
+
