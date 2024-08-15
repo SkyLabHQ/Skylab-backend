@@ -41,7 +41,7 @@ abstract contract MercuryGameBase is ERC1155Holder {
         LibGameBase.layout().burnerAddressToAviation[burner] = address(aviation);
     }
 
-    function unapproveForGame(uint256 tokenId, MercuryBase aviation) internal virtual {
+    function unapproveForGame(uint256 tokenId, MercuryBase aviation) public virtual {
         require(componentIndex().isValidAviation(address(aviation)), "MercuryGameBase: aviation is not valid");
         aviation.aviationUnlock(tokenId);
         delete LibGameBase.layout().gameApprovals[tokenId];

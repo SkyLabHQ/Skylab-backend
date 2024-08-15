@@ -4,37 +4,48 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibBase} from "./base/storage/LibBase.sol";
+import {MercuryGameBase} from "../games/base/MercuryGameBase.sol";
 
 contract MercuryLeagueTournament is MercuryBase {
     struct LeagueInfo {
-        uint256[] tokenIds;
         bool isLeagueLocked;
         bool leaderExist;
+        uint256[] tokenIds;
+        uint256 preLeagueOwnerPercentage;
+        uint256 preNewComerPercentage;
         uint256 leagueOwnerPercentage;
         uint256 newComerPercentage;
         uint256 setPercentageTime;
-        uint256 totalPoint;
+        uint256 currentVetoPoint;
+        mapping(uint256 => uint256) tokenIdToVetoPoints;
     }
 
     uint256 public pot;
     address public admin;
+    address public bidTactoe;
     uint256 public paperTotalAmount;
+    uint256 public highestLevel;
+
     mapping(address => uint256) public paperBalance;
     mapping(uint256 => uint256) public levelToClaimTime;
     mapping(uint256 => uint256) public levelToNewComerId;
     mapping(uint256 => uint256[]) public tokenIdPerLevel;
-    mapping(address => LeagueInfo) public league; // leader to LeagueInfo
     mapping(address => address) public memberToLeader;
-    uint256 public highestLevel;
+    mapping(address => LeagueInfo) public league; // leader to LeagueInfo
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
         _;
     }
 
-    function initialize(string memory baseURI, address protocol) public {
+    function initialize(string memory baseURI, address protocol, address _bidTactoe) public {
         super.initialize(baseURI, "MercuryLeagueTournament", "MercuryLeagueTournament", protocol);
+        bidTactoe = _bidTactoe;
     }
+
+    //==============================================================================================================================
+    //=============================================USER FUNTION==================================================================
+    //==============================================================================================================================
 
     function mintPaper(uint256 amount) public payable {
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
@@ -60,6 +71,94 @@ contract MercuryLeagueTournament is MercuryBase {
         joinLeague(tokenId, leader);
     }
 
+    function claimPot(uint256 tokenId) public {
+        require(_ownerOf(tokenId) == msg.sender, "");
+        uint256 level = aviationLevels(tokenId);
+        require(levelToNewComerId[level] == tokenId, "");
+        require(block.timestamp >= levelToClaimTime[level], "");
+        // Reset the timer
+        addNewComer(tokenId, level);
+        address leader = memberToLeader[msg.sender];
+        distributePot(leader, msg.sender);
+    }
+
+    function setPercentage(uint256 _newComerPercentage, uint256 _leagueOwnerPercentage) public {
+        LeagueInfo storage leagueInfo = league[msg.sender];
+        require(leagueInfo.leaderExist, "MercuryLeagueTournament: Permission deny");
+        require(
+            _newComerPercentage <= 20 && _newComerPercentage >= 10 && _leagueOwnerPercentage <= 20,
+            "MercuryLeagueTournament: Argument Error"
+        );
+        if (isTimeFrozen()) {
+            require(
+                !isDominatingLeague(msg.sender),
+                "MercuryLeagueTournament: dominating league can't change when any timer is less than 10min"
+            );
+        }
+        for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
+            uint256 tokenId = leagueInfo.tokenIds[i];
+            uint256 level = aviationLevels(tokenId);
+            require(
+                levelToClaimTime[level] > block.timestamp && levelToClaimTime[level] - block.timestamp >= 5 minutes,
+                "MercuryLeagueTournament: pass setPercentage time lock"
+            );
+        }
+        leagueInfo.setPercentageTime = block.timestamp;
+        leagueInfo.preLeagueOwnerPercentage = leagueInfo.leagueOwnerPercentage;
+        leagueInfo.preNewComerPercentage = leagueInfo.newComerPercentage;
+        leagueInfo.leagueOwnerPercentage = _leagueOwnerPercentage;
+        leagueInfo.newComerPercentage = _newComerPercentage;
+        leagueInfo.currentVetoPoint = 0;
+        for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
+            uint256 tokenId = leagueInfo.tokenIds[i];
+            leagueInfo.tokenIdToVetoPoints[tokenId] = aviationPoints(tokenId);
+        }
+    }
+
+    function vetoLeaderDecision(uint256 tokenId) public {
+        address leader = memberToLeader[msg.sender];
+        require(
+            league[leader].leaderExist && _ownerOf(tokenId) == msg.sender, "MercuryLeagueTournament: Permission deny"
+        );
+        require(
+            block.timestamp <= league[leader].setPercentageTime + 1 hours,
+            "MercuryLeagueTournament: veto windows expired"
+        );
+        uint256 points = league[leader].tokenIdToVetoPoints[tokenId];
+        league[leader].currentVetoPoint += points;
+        uint256 totalPoint;
+        for (uint256 i = 0; i < league[leader].tokenIds.length; i++) {
+            totalPoint += league[leader].tokenIdToVetoPoints[league[leader].tokenIds[i]];
+        }
+        if (league[leader].currentVetoPoint * 2 > totalPoint) {
+            league[leader].newComerPercentage = league[msg.sender].preLeagueOwnerPercentage;
+            league[leader].leagueOwnerPercentage = league[msg.sender].preLeagueOwnerPercentage;
+        }
+    }
+
+    function setLeagueLockStatus(bool isLocked) public {
+        require(league[msg.sender].leaderExist, "Leader not exist");
+        league[msg.sender].isLeagueLocked = isLocked;
+    }
+
+    //==============================================================================================================================
+    //=============================================ADMIN FUNTION==================================================================
+    //==============================================================================================================================
+
+    function setAdmin(address _admin) public {
+        LibDiamond.enforceIsContractOwner();
+        admin = _admin;
+    }
+
+    function batchAviationMovePoints(uint256[] memory winnerTokenIds, uint256[] memory loserTokenIds) public {
+        require(winnerTokenIds.length == loserTokenIds.length, "MercuryLeagueTournament: invalid input");
+        for (uint256 i = 0; i < winnerTokenIds.length; i++) {
+            aviationMovePoints(winnerTokenIds[i], loserTokenIds[i]);
+            MercuryGameBase(bidTactoe).unapproveForGame(winnerTokenIds[i], MercuryBase(address(this)));
+            MercuryGameBase(bidTactoe).unapproveForGame(loserTokenIds[i], MercuryBase(address(this)));
+        }
+    }
+
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyAdmin {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
@@ -80,6 +179,15 @@ contract MercuryLeagueTournament is MercuryBase {
         }
     }
 
+    function setLeader(address _leader) public onlyAdmin {
+        league[_leader].leaderExist = true;
+        league[_leader].newComerPercentage = 10;
+    }
+
+    //==============================================================================================================================
+    //=============================================VIEW FUNTION==================================================================
+    //==============================================================================================================================
+
     function estimatePointsToMove(uint256 winnerTokenId, uint256 loserTokenId) public view override returns (uint256) {
         if (winnerTokenId == 0 || loserTokenId == 0) {
             return 1;
@@ -88,75 +196,7 @@ contract MercuryLeagueTournament is MercuryBase {
         }
     }
 
-    function claimPot(uint256 tokenId) public {
-        require(_ownerOf(tokenId) == msg.sender, "");
-        uint256 level = aviationLevels(tokenId);
-        require(levelToNewComerId[level] == tokenId, "");
-        require(block.timestamp >= levelToClaimTime[level], "");
-        // Reset the timer
-        addNewComer(tokenId, level);
-        address leader = memberToLeader[msg.sender];
-        distributePot(leader, msg.sender);
-    }
-
-    function vetoLeaderDecition(uint256 tokenId) public {
-        address leader = memberToLeader[msg.sender];
-        require(league[leader].leaderExist, "MercuryLeagueTournament: Permission deny");
-        require(block.timestamp <= league[leader].setPercentageTime + 1 hours, "MercuryLeagueTournament: veto windows expired");
-        uint256 points = aviationPoints(tokenId);
-        league[leader].totalPoint += points;
-        uint256 totalPoint;
-        for(uint256 i = 0; i < league[leader].tokenIds.length; i++) {
-            totalPoint += aviationPoints(league[leader].tokenIds[i]);
-        }
-        if (league[leader].totalPoint * 2 > totalPoint) {
-            league[leader].newComerPercentage = 10;
-            league[leader].leagueOwnerPercentage = 0;
-        }
-    }
-
-    function setPercentage(uint256 _newComerPercentage, uint256 _leagueOwnerPercentage) public {
-        require(league[msg.sender].leaderExist, "MercuryLeagueTournament: Permission deny");
-        require(
-            _newComerPercentage <= 20 && _newComerPercentage >= 10 && _leagueOwnerPercentage <= 20,
-            "MercuryLeagueTournament: Argument Error"
-        );
-        if(isTimeFrozen()) {
-            require(!isDominatingLeague(msg.sender), "MercuryLeagueTournament: dominating league can't change when any timer is less than 10min");
-        }
-        for (uint256 i = 0; i < league[msg.sender].tokenIds.length; i++) {
-            uint256 tokenId = league[msg.sender].tokenIds[i];
-            uint256 level = aviationLevels(tokenId);
-            require(
-                levelToClaimTime[level] > block.timestamp && levelToClaimTime[level] - block.timestamp >= 5 minutes,
-                "MercuryLeagueTournament: pass setPercentage time lock"
-            );
-        }
-        league[msg.sender].setPercentageTime = block.timestamp;
-        league[msg.sender].leagueOwnerPercentage = _leagueOwnerPercentage;
-        league[msg.sender].newComerPercentage = _newComerPercentage;
-    }
-
-    function getTokenIdPerLevel(uint256 level) public view returns (uint256[] memory) {
-        return tokenIdPerLevel[level];
-    }
-
-    function setAdmin(address _admin) public {
-        LibDiamond.enforceIsContractOwner();
-        admin = _admin;
-    }
-
-    function setLeagueLockStatus(bool isLocked) public {
-        require(league[msg.sender].leaderExist, "Leader not exist");
-        league[msg.sender].isLeagueLocked = isLocked;
-    }
-
-    function setLeader(address _leader) public onlyAdmin {
-        league[_leader].leaderExist = true;
-        league[_leader].newComerPercentage = 10;
-    }
-
-    function getNewCommerInfo(uint256 level)
+    function getnewComerInfo(uint256 level)
         public
         view
         returns (uint256 claimTime, uint256 newComerId, address owner, uint256 point)
@@ -171,8 +211,14 @@ contract MercuryLeagueTournament is MercuryBase {
         point = aviationPoints(newComerId);
     }
 
-    // Private Function
+    function getTokenIdPerLevel(uint256 level) public view returns (uint256[] memory) {
+        return tokenIdPerLevel[level];
+    }
 
+    //==============================================================================================================================
+    //=============================================PRIVATE FUNTION==================================================================
+    //==============================================================================================================================
+    
     function aviationBotMovePoints(uint256 winnerTokenId, uint256 loserTokenId) private {
         bool playerWon = loserTokenId == 0;
         uint256 playerTokenId = winnerTokenId + loserTokenId;
@@ -239,18 +285,21 @@ contract MercuryLeagueTournament is MercuryBase {
         tokenIdPerLevel[level].push(tokenId);
     }
 
-    function distributePot(address leader, address newCommer) private {
+    function distributePot(address leader, address newComer) private {
         address vault = LibBase.layout().protocol;
-        LeagueInfo memory leagueInfo = league[leader];
-        require(block.timestamp >= leagueInfo.setPercentageTime + 1 hours, "MercuryLeagueTournament: veto windows didn't expire");
+        LeagueInfo storage leagueInfo = league[leader];
+        require(
+            block.timestamp >= leagueInfo.setPercentageTime + 2 hours,
+            "MercuryLeagueTournament: veto windows didn't expire"
+        );
         uint256 denominator = 100;
         uint256 vaultValue = pot / denominator;
-        uint256 newCommerValue = pot * leagueInfo.newComerPercentage / denominator;
+        uint256 newComerValue = pot * leagueInfo.newComerPercentage / denominator;
         uint256 leaderValue = pot * leagueInfo.leagueOwnerPercentage / denominator;
         payable(vault).transfer(vaultValue);
-        payable(newCommer).transfer(newCommerValue);
+        payable(newComer).transfer(newComerValue);
         payable(leader).transfer(leaderValue);
-        uint256 valueAfter = pot - (vaultValue + newCommerValue + leaderValue);
+        uint256 valueAfter = pot - (vaultValue + newComerValue + leaderValue);
         uint256 totalPoints;
         for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
             uint256 tokenId_ = leagueInfo.tokenIds[i];
@@ -265,19 +314,20 @@ contract MercuryLeagueTournament is MercuryBase {
         pot = 0;
     }
 
-    function isTimeFrozen() private view returns(bool) {
-        for(uint256 level = 0; level <= highestLevel; level++) {
-            if(levelToClaimTime[level] <= block.timestamp + 10 minutes) {
+    function isTimeFrozen() private view returns (bool) {
+        for (uint256 level = 0; level <= highestLevel; level++) {
+            if (levelToClaimTime[level] <= block.timestamp + 10 minutes) {
                 return true;
             }
         }
         return false;
     }
     //dominating league definition: the league that's the newcomer of the shortest timer
-    function isDominatingLeague(address leader) private view returns(bool) {
+
+    function isDominatingLeague(address leader) private view returns (bool) {
         uint256 shortestLevel = 0;
         uint256 shortestTimer = levelToClaimTime[shortestLevel];
-        for(uint level = 1; level <= highestLevel; level++) {
+        for (uint256 level = 1; level <= highestLevel; level++) {
             if (levelToClaimTime[level] < shortestTimer) {
                 shortestTimer = levelToClaimTime[level];
                 shortestLevel = level;
@@ -288,4 +338,3 @@ contract MercuryLeagueTournament is MercuryBase {
         return memberToLeader[member] == leader;
     }
 }
-
