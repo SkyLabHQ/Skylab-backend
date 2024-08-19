@@ -17,6 +17,7 @@ contract MercuryLeagueTournament is MercuryBase {
         uint256 newComerPercentage;
         uint256 setPercentageTime;
         uint256 currentVetoPoint;
+        uint256 totalVetoPoint;
         mapping(uint256 => uint256) tokenIdToVetoPoints;
     }
 
@@ -103,15 +104,21 @@ contract MercuryLeagueTournament is MercuryBase {
                 "MercuryLeagueTournament: pass setPercentage time lock"
             );
         }
+        require(
+            block.timestamp >= leagueInfo.setPercentageTime + 2 hours,
+            "MercuryLeagueTournament: veto windows didn't expire"
+        );
         leagueInfo.setPercentageTime = block.timestamp;
         leagueInfo.preLeagueOwnerPercentage = leagueInfo.leagueOwnerPercentage;
         leagueInfo.preNewComerPercentage = leagueInfo.newComerPercentage;
         leagueInfo.leagueOwnerPercentage = _leagueOwnerPercentage;
         leagueInfo.newComerPercentage = _newComerPercentage;
         leagueInfo.currentVetoPoint = 0;
+        leagueInfo.totalVetoPoint = 0;
         for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
             uint256 tokenId = leagueInfo.tokenIds[i];
             leagueInfo.tokenIdToVetoPoints[tokenId] = aviationPoints(tokenId);
+            leagueInfo.totalVetoPoint += aviationPoints(tokenId);
         }
     }
 
@@ -126,11 +133,7 @@ contract MercuryLeagueTournament is MercuryBase {
         );
         uint256 points = league[leader].tokenIdToVetoPoints[tokenId];
         league[leader].currentVetoPoint += points;
-        uint256 totalPoint;
-        for (uint256 i = 0; i < league[leader].tokenIds.length; i++) {
-            totalPoint += league[leader].tokenIdToVetoPoints[league[leader].tokenIds[i]];
-        }
-        if (league[leader].currentVetoPoint * 2 > totalPoint) {
+        if (league[leader].currentVetoPoint * 2 > league[leader].totalVetoPoint) {
             league[leader].newComerPercentage = league[msg.sender].preLeagueOwnerPercentage;
             league[leader].leagueOwnerPercentage = league[msg.sender].preLeagueOwnerPercentage;
         }
