@@ -21,6 +21,7 @@ contract MercuryLeagueTournament is MercuryBase {
         mapping(uint256 => uint256) tokenIdToVetoPoints;
     }
 
+    bool public isPause;
     uint256 public pot;
     address public admin;
     address public bidTactoe;
@@ -39,6 +40,20 @@ contract MercuryLeagueTournament is MercuryBase {
         _;
     }
 
+    modifier potClaimable() {
+        for(uint256 level = 0; level < LibBase.MAXLEVEL; level ++) {
+            if (block.timestamp >= levelToClaimTime[level]) {
+            uint256 preTokenId = levelToNewComerId[level];
+            if (_exists(preTokenId)) {
+                address owner = _ownerOf(preTokenId);
+                address leader = memberToLeader[owner];
+                distributePot(leader, owner);
+            }
+            }
+        }
+        _;
+    }
+
     function initialize(string memory baseURI, address protocol, address _bidTactoe) public {
         super.initialize(baseURI, "MercuryLeagueTournament", "MercuryLeagueTournament", protocol);
         bidTactoe = _bidTactoe;
@@ -49,6 +64,7 @@ contract MercuryLeagueTournament is MercuryBase {
     //==============================================================================================================================
 
     function mintPaper(uint256 amount) public payable {
+        require(!isPause, "MercuryLeagueTournament: Tournament pause");
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
         paperBalance[msg.sender] += amount;
         pot += msg.value;
@@ -56,6 +72,7 @@ contract MercuryLeagueTournament is MercuryBase {
     }
 
     function mintWithPaper(address leader) public {
+        require(!isPause, "MercuryLeagueTournament: Tournament pause");
         require(paperBalance[msg.sender] >= 1, "MercuryLeagueTournament: no voucher to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
@@ -65,6 +82,7 @@ contract MercuryLeagueTournament is MercuryBase {
     }
 
     function mint(address leader) public payable {
+        require(!isPause, "MercuryLeagueTournament: Tournament pause");
         require(msg.value == 0.02 ether, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
@@ -153,6 +171,10 @@ contract MercuryLeagueTournament is MercuryBase {
         admin = _admin;
     }
 
+    function setPause(bool _isPause) public onlyAdmin potClaimable{
+        isPause = _isPause;
+    }
+
     function batchAviationMovePoints(uint256[] memory winnerTokenIds, uint256[] memory loserTokenIds) public {
         require(winnerTokenIds.length == loserTokenIds.length, "MercuryLeagueTournament: invalid input");
         for (uint256 i = 0; i < winnerTokenIds.length; i++) {
@@ -162,7 +184,8 @@ contract MercuryLeagueTournament is MercuryBase {
         }
     }
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyAdmin {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyAdmin potClaimable {
+        require(!isPause, "MercuryLeagueTournament: Tournament pause");
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
         if (winnerTokenId != 0 && loserTokenId != 0) {
@@ -271,18 +294,7 @@ contract MercuryLeagueTournament is MercuryBase {
         memberToLeader[msg.sender] = leader;
     }
 
-    function addNewComer(uint256 tokenId, uint256 level) private {
-        if (block.timestamp >= levelToClaimTime[level]) {
-            uint256 preTokenId = levelToNewComerId[level];
-            if (_exists(preTokenId)) {
-                address owner = _ownerOf(preTokenId);
-                address leader = memberToLeader[owner];
-                distributePot(leader, owner);
-            }
-        }
-        if (level > highestLevel) {
-            highestLevel = level;
-        }
+    function addNewComer(uint256 tokenId, uint256 level) private potClaimable {
         levelToClaimTime[level] = block.timestamp + 15 minutes * 2 ^ (level - 1);
         levelToNewComerId[level] = tokenId;
         tokenIdPerLevel[level].push(tokenId);
@@ -318,7 +330,7 @@ contract MercuryLeagueTournament is MercuryBase {
     }
 
     function isTimeFrozen() private view returns (bool) {
-        for (uint256 level = 0; level <= highestLevel; level++) {
+        for (uint256 level = 0; level <= LibBase.MAXLEVEL; level++) {
             if (levelToClaimTime[level] <= block.timestamp + 10 minutes) {
                 return true;
             }
@@ -330,7 +342,7 @@ contract MercuryLeagueTournament is MercuryBase {
     function isDominatingLeague(address leader) private view returns (bool) {
         uint256 shortestLevel = 0;
         uint256 shortestTimer = levelToClaimTime[shortestLevel];
-        for (uint256 level = 1; level <= highestLevel; level++) {
+        for (uint256 level = 1; level <= LibBase.MAXLEVEL; level++) {
             if (levelToClaimTime[level] < shortestTimer) {
                 shortestTimer = levelToClaimTime[level];
                 shortestLevel = level;
