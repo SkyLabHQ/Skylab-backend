@@ -26,7 +26,6 @@ contract MercuryLeagueTournament is MercuryBase {
     address public admin;
     address public bidTactoe;
     uint256 public paperTotalAmount;
-    uint256 public highestLevel;
 
     mapping(address => uint256) public paperBalance;
     mapping(uint256 => uint256) public levelToClaimTime;
