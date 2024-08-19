@@ -172,10 +172,6 @@ contract MercuryLeagueTournament is MercuryBase {
         admin = _admin;
     }
 
-    function setPause(bool _isPause) public onlyAdmin potClaimable{
-        isPause = _isPause;
-    }
-
     function batchAviationMovePoints(uint256[] memory winnerTokenIds, uint256[] memory loserTokenIds) public {
         require(winnerTokenIds.length == loserTokenIds.length, "MercuryLeagueTournament: invalid input");
         for (uint256 i = 0; i < winnerTokenIds.length; i++) {
@@ -327,6 +323,7 @@ contract MercuryLeagueTournament is MercuryBase {
             payable(receiver).transfer(valueAfter * points / totalPoints);
         }
         pot = 0;
+        isPause = true;
     }
 
     function isTimeFrozen() private view returns (bool) {
