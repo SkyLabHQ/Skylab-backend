@@ -8,7 +8,7 @@ import {MercuryGameBase} from "../games/base/MercuryGameBase.sol";
 
 contract MercuryLeagueTournament is MercuryBase {
     struct LeagueInfo {
-        bool isLeagueLocked;
+        bool isLocked;
         bool leaderExist;
         uint256[] tokenIds;
         uint256 preLeagueOwnerPercentage;
@@ -39,8 +39,13 @@ contract MercuryLeagueTournament is MercuryBase {
         _;
     }
 
+    modifier notPause() {
+        require(!isPause, "MercuryLeagueTournament: Tournament pause");
+        _;
+    }
+
     modifier potClaimable() {
-        for(uint256 level = 0; level < LibBase.MAXLEVEL; level ++) {
+        for(uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
             if (block.timestamp >= levelToClaimTime[level]) {
             uint256 preTokenId = levelToNewComerId[level];
             if (_exists(preTokenId)) {
@@ -62,16 +67,14 @@ contract MercuryLeagueTournament is MercuryBase {
     //=============================================USER FUNTION==================================================================
     //==============================================================================================================================
 
-    function mintPaper(uint256 amount) public payable {
-        require(!isPause, "MercuryLeagueTournament: Tournament pause");
+    function mintPaper(uint256 amount) public payable notPause{
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
         paperBalance[msg.sender] += amount;
         pot += msg.value;
         paperTotalAmount += amount;
     }
 
-    function mintWithPaper(address leader) public {
-        require(!isPause, "MercuryLeagueTournament: Tournament pause");
+    function mintWithPaper(address leader) public notPause {
         require(paperBalance[msg.sender] >= 1, "MercuryLeagueTournament: no voucher to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
@@ -80,8 +83,7 @@ contract MercuryLeagueTournament is MercuryBase {
         joinLeague(tokenId, leader);
     }
 
-    function mint(address leader) public payable {
-        require(!isPause, "MercuryLeagueTournament: Tournament pause");
+    function mint(address leader) public payable notPause {
         require(msg.value == 0.02 ether, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
@@ -158,7 +160,7 @@ contract MercuryLeagueTournament is MercuryBase {
 
     function setLeagueLockStatus(bool isLocked) public {
         require(league[msg.sender].leaderExist, "Leader not exist");
-        league[msg.sender].isLeagueLocked = isLocked;
+        league[msg.sender].isLocked = isLocked;
     }
 
     //==============================================================================================================================
@@ -183,8 +185,7 @@ contract MercuryLeagueTournament is MercuryBase {
         }
     }
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyAdmin potClaimable {
-        require(!isPause, "MercuryLeagueTournament: Tournament pause");
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyAdmin potClaimable notPause {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
         if (winnerTokenId != 0 && loserTokenId != 0) {
@@ -282,7 +283,7 @@ contract MercuryLeagueTournament is MercuryBase {
 
     function joinLeague(uint256 tokenId, address leader) private {
         require(league[leader].leaderExist, "MercuryLeagueTournament: leader not exist");
-        require(!league[leader].isLeagueLocked, "MercuryLeagueTournament: leagueLocked");
+        require(!league[leader].isLocked, "MercuryLeagueTournament: leagueLocked");
         uint256[] memory tokenIds = league[leader].tokenIds;
         for (uint256 i = 0; i < tokenIds.length; i++) {
             if (tokenId == tokenIds[i]) {
