@@ -50,8 +50,7 @@ contract MercuryLeagueTournament is MercuryBase {
             uint256 preTokenId = levelToNewComerId[level];
             if (_exists(preTokenId)) {
                 address owner = _ownerOf(preTokenId);
-                address leader = memberToLeader[owner];
-                distributePot(leader, owner);
+                distributePot(owner);
             }
             }
         }
@@ -98,8 +97,7 @@ contract MercuryLeagueTournament is MercuryBase {
         require(block.timestamp >= levelToClaimTime[level], "");
         // Reset the timer
         addNewComer(tokenId, level);
-        address leader = memberToLeader[msg.sender];
-        distributePot(leader, msg.sender);
+        distributePot(msg.sender);
     }
 
     function setPercentage(uint256 _newComerPercentage, uint256 _leagueOwnerPercentage) public {
@@ -119,7 +117,7 @@ contract MercuryLeagueTournament is MercuryBase {
             uint256 tokenId = leagueInfo.tokenIds[i];
             uint256 level = aviationLevels(tokenId);
             require(
-                levelToClaimTime[level] > block.timestamp && levelToClaimTime[level] - block.timestamp >= 5 minutes,
+                levelToClaimTime[level] - block.timestamp >= 5 minutes,
                 "MercuryLeagueTournament: pass setPercentage time lock"
             );
         }
@@ -296,8 +294,9 @@ contract MercuryLeagueTournament is MercuryBase {
         tokenIdPerLevel[level].push(tokenId);
     }
 
-    function distributePot(address leader, address newComer) private {
+    function distributePot(address newComer) private {
         address vault = LibBase.layout().protocol;
+        address leader = memberToLeader[newComer];
         LeagueInfo storage leagueInfo = league[leader];
         require(
             block.timestamp >= leagueInfo.setPercentageTime + 2 hours,
