@@ -10,6 +10,7 @@ contract MercuryLeagueTournament is MercuryBase {
     struct LeagueInfo {
         bool isLocked;
         bool leaderExist;
+        bool isWinner;
         uint256[] tokenIds;
         uint256 preLeagueOwnerPercentage;
         uint256 preNewComerPercentage;
@@ -33,6 +34,7 @@ contract MercuryLeagueTournament is MercuryBase {
     mapping(uint256 => uint256[]) public tokenIdPerLevel;
     mapping(address => address) public memberToLeader;
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
+    mapping(uint256 => bool) public isClaimed;
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
@@ -50,7 +52,7 @@ contract MercuryLeagueTournament is MercuryBase {
             uint256 preTokenId = levelToNewComerId[level];
             if (_exists(preTokenId)) {
                 address owner = _ownerOf(preTokenId);
-                distributePot(owner);
+                finalizeWinner(owner);
             }
             }
         }
@@ -91,13 +93,39 @@ contract MercuryLeagueTournament is MercuryBase {
     }
 
     function claimPot(uint256 tokenId) public {
-        require(_ownerOf(tokenId) == msg.sender, "");
-        uint256 level = aviationLevels(tokenId);
-        require(levelToNewComerId[level] == tokenId, "");
-        require(block.timestamp >= levelToClaimTime[level], "");
-        // Reset the timer
-        addNewComer(tokenId, level);
-        distributePot(msg.sender);
+        require(!isClaimed[tokenId], "");
+        address owner = _ownerOf(tokenId);
+        require(owner == msg.sender, "");
+        address leader = memberToLeader[owner];
+        LeagueInfo storage leagueInfo = league[leader];
+        require(leagueInfo.isWinner, "");
+        uint256 newComer = levelToNewComerId[aviationLevels(tokenId)];
+        for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
+            uint256 tokenId_ = leagueInfo.tokenIds[i];
+            if(tokenId == tokenId_) {
+                uint256 totalPoints;
+                for (uint256 j = 0; j < leagueInfo.tokenIds.length; j++) {
+                    uint256 _tokenId = leagueInfo.tokenIds[j];
+                    totalPoints += aviationPoints(_tokenId);
+                }
+                uint256 points = aviationPoints(tokenId_);
+                payable(owner).transfer(pot * points / totalPoints);
+                pot = pot - (pot * points / totalPoints);
+            }
+        }
+        if (tokenId == newComer) {
+            uint256 denominator = 100;
+            uint256 newComerValue = pot * leagueInfo.newComerPercentage / denominator;
+            payable(owner).transfer(newComerValue);
+            pot = pot - newComerValue;
+        }
+        if (msg.sender == leader) {
+            uint256 denominator = 100;
+            uint256 leaderValue = pot * leagueInfo.leagueOwnerPercentage / denominator;
+            payable(leader).transfer(leaderValue);
+            pot = pot - leaderValue;
+        }
+        isClaimed[tokenId] = true;
     }
 
     function setPercentage(uint256 _newComerPercentage, uint256 _leagueOwnerPercentage) public {
@@ -294,7 +322,7 @@ contract MercuryLeagueTournament is MercuryBase {
         tokenIdPerLevel[level].push(tokenId);
     }
 
-    function distributePot(address newComer) private {
+    function finalizeWinner(address newComer) private {
         address vault = LibBase.layout().protocol;
         address leader = memberToLeader[newComer];
         LeagueInfo storage leagueInfo = league[leader];
@@ -304,25 +332,10 @@ contract MercuryLeagueTournament is MercuryBase {
         );
         uint256 denominator = 100;
         uint256 vaultValue = pot / denominator;
-        uint256 newComerValue = pot * leagueInfo.newComerPercentage / denominator;
-        uint256 leaderValue = pot * leagueInfo.leagueOwnerPercentage / denominator;
         payable(vault).transfer(vaultValue);
-        payable(newComer).transfer(newComerValue);
-        payable(leader).transfer(leaderValue);
-        uint256 valueAfter = pot - (vaultValue + newComerValue + leaderValue);
-        uint256 totalPoints;
-        for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
-            uint256 tokenId_ = leagueInfo.tokenIds[i];
-            totalPoints += aviationPoints(tokenId_);
-        }
-        for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
-            uint256 tokenId_ = leagueInfo.tokenIds[i];
-            address receiver = _ownerOf(tokenId_);
-            uint256 points = aviationPoints(tokenId_);
-            payable(receiver).transfer(valueAfter * points / totalPoints);
-        }
-        pot = 0;
+        pot = pot - vaultValue;
         isPause = true;
+        leagueInfo.isWinner = true;
     }
 
     function isTimeFrozen() private view returns (bool) {
