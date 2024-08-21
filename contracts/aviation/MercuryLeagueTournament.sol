@@ -19,10 +19,12 @@ contract MercuryLeagueTournament is MercuryBase {
         uint256 setPercentageTime;
         uint256 currentVetoPoint;
         uint256 totalVetoPoint;
+        address newComer;
         mapping(uint256 => uint256) tokenIdToVetoPoints;
+        mapping(uint256 => bool) isClaimed;
     }
 
-    bool public isPause;
+    bool public isPaused;
     uint256 public pot;
     address public admin;
     address public bidTactoe;
@@ -34,19 +36,18 @@ contract MercuryLeagueTournament is MercuryBase {
     mapping(uint256 => uint256[]) public tokenIdPerLevel;
     mapping(address => address) public memberToLeader;
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
-    mapping(uint256 => bool) public isClaimed;
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
         _;
     }
 
-    modifier notPause() {
-        require(!isPause, "MercuryLeagueTournament: Tournament pause");
+    modifier notPaused() {
+        require(!isPaused, "MercuryLeagueTournament: Tournament pause");
         _;
     }
 
-    modifier potClaimable() {
+    modifier isPotClaimable() {
         for(uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
             if (block.timestamp >= levelToClaimTime[level]) {
             uint256 preTokenId = levelToNewComerId[level];
@@ -68,14 +69,14 @@ contract MercuryLeagueTournament is MercuryBase {
     //=============================================USER FUNTION==================================================================
     //==============================================================================================================================
 
-    function mintPaper(uint256 amount) public payable notPause{
+    function mintPaper(uint256 amount) public payable notPaused {
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
         paperBalance[msg.sender] += amount;
         pot += msg.value;
         paperTotalAmount += amount;
     }
 
-    function mintWithPaper(address leader) public notPause {
+    function mintWithPaper(address leader) public notPaused {
         require(paperBalance[msg.sender] >= 1, "MercuryLeagueTournament: no voucher to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
@@ -84,7 +85,7 @@ contract MercuryLeagueTournament is MercuryBase {
         joinLeague(tokenId, leader);
     }
 
-    function mint(address leader) public payable notPause {
+    function mint(address leader) public payable notPaused {
         require(msg.value == 0.02 ether, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
@@ -93,13 +94,13 @@ contract MercuryLeagueTournament is MercuryBase {
     }
 
     function claimPot(uint256 tokenId) public {
-        require(!isClaimed[tokenId], "");
         address owner = _ownerOf(tokenId);
-        require(owner == msg.sender, "");
+        require(owner == msg.sender, "MercuryLeagueTournament: not owner");
         address leader = memberToLeader[owner];
         LeagueInfo storage leagueInfo = league[leader];
-        require(leagueInfo.isWinner, "");
-        uint256 newComer = levelToNewComerId[aviationLevels(tokenId)];
+        require(!leagueInfo.isClaimed[tokenId], "MercuryLeagueTournament: has claimed");
+        require(leagueInfo.isWinner, "MercuryLeagueTournament: not winner");
+        address newComer = leagueInfo.newComer;
         for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
             uint256 tokenId_ = leagueInfo.tokenIds[i];
             if(tokenId == tokenId_) {
@@ -109,11 +110,11 @@ contract MercuryLeagueTournament is MercuryBase {
                     totalPoints += aviationPoints(_tokenId);
                 }
                 uint256 points = aviationPoints(tokenId_);
-                payable(owner).transfer(pot * points / totalPoints);
+                payable(owner).transfer(pot * (100 - leagueInfo.newComerPercentage - leagueInfo.leagueOwnerPercentage) * points / totalPoints / 100);
                 pot = pot - (pot * points / totalPoints);
             }
         }
-        if (tokenId == newComer) {
+        if (msg.sender == newComer) {
             uint256 denominator = 100;
             uint256 newComerValue = pot * leagueInfo.newComerPercentage / denominator;
             payable(owner).transfer(newComerValue);
@@ -125,7 +126,7 @@ contract MercuryLeagueTournament is MercuryBase {
             payable(leader).transfer(leaderValue);
             pot = pot - leaderValue;
         }
-        isClaimed[tokenId] = true;
+        leagueInfo.isClaimed[tokenId] = true;
     }
 
     function setPercentage(uint256 _newComerPercentage, uint256 _leagueOwnerPercentage) public {
@@ -207,7 +208,7 @@ contract MercuryLeagueTournament is MercuryBase {
         }
     }
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyAdmin potClaimable notPause {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyAdmin notPaused {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
         if (winnerTokenId != 0 && loserTokenId != 0) {
@@ -316,7 +317,7 @@ contract MercuryLeagueTournament is MercuryBase {
         memberToLeader[msg.sender] = leader;
     }
 
-    function addNewComer(uint256 tokenId, uint256 level) private potClaimable {
+    function addNewComer(uint256 tokenId, uint256 level) private isPotClaimable {
         levelToClaimTime[level] = block.timestamp + 15 minutes * 2 ^ (level - 1);
         levelToNewComerId[level] = tokenId;
         tokenIdPerLevel[level].push(tokenId);
@@ -334,8 +335,9 @@ contract MercuryLeagueTournament is MercuryBase {
         uint256 vaultValue = pot / denominator;
         payable(vault).transfer(vaultValue);
         pot = pot - vaultValue;
-        isPause = true;
+        isPaused = true;
         leagueInfo.isWinner = true;
+        leagueInfo.newComer = newComer;
     }
 
     function isTimeFrozen() private view returns (bool) {
