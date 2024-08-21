@@ -290,10 +290,6 @@ contract MercuryLeagueTournament is MercuryBase {
         address vault = LibBase.layout().protocol;
         address leader = memberToLeader[newComer];
         LeagueInfo storage leagueInfo = league[leader];
-        require(
-            block.timestamp >= leagueInfo.setPercentageTime + 2 hours,
-            "MercuryLeagueTournament: veto windows didn't expire"
-        );
         uint256 denominator = 100;
         uint256 vaultValue = pot / denominator;
         uint256 newComerValue = pot * leagueInfo.newComerPercentage / denominator;
