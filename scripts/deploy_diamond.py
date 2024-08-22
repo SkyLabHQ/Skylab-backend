@@ -7,6 +7,7 @@ aviation_names = ['Diamond','TrailblazerTournament']
 testflight_names = ['Diamond','MercuryTestFlight']
 bot_tournament_names = ['Diamond', 'MercuryBotTournament']
 jar_tournament_names = ['Diamond', 'MercuryJarTournament']
+league_tournament_names = ['Diamond', 'MercuryLeagueTournament']
 baby_names = ['Diamond','BabyMercs']
 game_names = ['Diamond','MercuryBidTacToe']
 bot_names = ['Diamond', 'MercuryBidTacToeBot']
@@ -50,6 +51,7 @@ def main():
     aviation_address = deploy_diamond(aviation_names)
     bot_tournament_address = deploy_diamond(bot_tournament_names)
     jar_tournament_address = deploy_diamond(jar_tournament_names)
+    league_tournament_address = deploy_diamond(league_tournament_names)
     test_flight_address = deploy_diamond(testflight_names)
     ## Init protocol vault
     protocol = project.Vault.at(protocol_address)
@@ -61,6 +63,8 @@ def main():
     bot_tournament.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
     jar_tournament = project.MercuryJarTournament.at(jar_tournament_address)
     jar_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, sender=account.deployer)
+    league_tournament = project.MercuryLeagueTournament.at(league_tournament_address)
+    league_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, constant.BACKEND_ADMIN)
     testflight = project.MercuryTestFlight.at(test_flight_address)
     testflight.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
     ## deploy babymercs
@@ -103,3 +107,4 @@ def main():
         f.write("bid_tac_toe:"+bid_tac_toe+"\n")
         f.write("test_flight_address:"+test_flight_address+"\n")
         f.write("delegate_erc721:"+delegate_erc721.address+"\n")
+        f.write("league_tournament:"+league_tournament_address+"\n")

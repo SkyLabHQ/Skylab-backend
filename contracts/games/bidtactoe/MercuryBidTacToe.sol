@@ -187,6 +187,23 @@ contract MercuryBidTacToe is MercuryGameBase {
         }
     }
 
+    function batchHandleWinLoss(address[] memory winnerBurners, address[] memory loserBurners) external {
+        require(winnerBurners.length == loserBurners.length, "MercuryBidTacToe: invalid input");
+        for (uint i = 0; i < winnerBurners.length; i++) {
+            address winnerBurner = winnerBurners[i];
+            address loserBurner = loserBurners[i];
+            if (burnerAddressToAviation(winnerBurner) != address(0)) {
+                MercuryBase aviation = MercuryBase(burnerAddressToAviation(winnerBurner));
+                uint256 winnerTokenId = cleanUp(winnerBurner, aviation);
+                uint256 loserTokenId = cleanUp(loserBurner, aviation);
+                emit WinGame(winnerTokenId, aviation.ownerOf(winnerTokenId));
+                emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
+                aviation.aviationMovePoints(winnerTokenId, loserTokenId);
+            }
+            
+        }
+    }
+
     function handleBotWinLoss(address playerBurner, bool playerWon) external {
         require(gameExists[msg.sender], "MercuryBidTacToe: msg.sender is not a game");
         require(

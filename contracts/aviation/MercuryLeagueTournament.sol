@@ -27,7 +27,6 @@ contract MercuryLeagueTournament is MercuryBase {
     bool public isPaused;
     uint256 public pot;
     address public admin;
-    address public bidTactoe;
     uint256 public paperTotalAmount;
 
     mapping(address => uint256) public paperBalance;
@@ -60,9 +59,9 @@ contract MercuryLeagueTournament is MercuryBase {
         _;
     }
 
-    function initialize(string memory baseURI, address protocol, address _bidTactoe) public {
+    function initialize(string memory baseURI, address protocol, address _admin) public {
         super.initialize(baseURI, "MercuryLeagueTournament", "MercuryLeagueTournament", protocol);
-        bidTactoe = _bidTactoe;
+        admin = _admin;
     }
 
     //==============================================================================================================================
@@ -200,14 +199,7 @@ contract MercuryLeagueTournament is MercuryBase {
         admin = _admin;
     }
 
-    function batchAviationMovePoints(uint256[] memory winnerTokenIds, uint256[] memory loserTokenIds) public {
-        require(winnerTokenIds.length == loserTokenIds.length, "MercuryLeagueTournament: invalid input");
-        for (uint256 i = 0; i < winnerTokenIds.length; i++) {
-            aviationMovePoints(winnerTokenIds[i], loserTokenIds[i]);
-        }
-    }
-
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyAdmin notPaused {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override notPaused {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
         if (winnerTokenId != 0 && loserTokenId != 0) {
