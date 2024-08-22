@@ -77,6 +77,7 @@ def main():
     game = project.MercuryBidTacToe.at(game_address)
     ## Init ganme
     game.initialize(protocol_address, sender=account.deployer)
+    game.setAdmin(constant.BACKEND_ADMIN, sender=account.deployer)
     ## Registry component index
     component_index = project.ComponentIndex.at(protocol_address)
     component_index.setValidPilotCollection(baby_address, True,sender=account.deployer)
