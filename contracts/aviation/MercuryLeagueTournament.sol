@@ -147,7 +147,7 @@ contract MercuryLeagueTournament is MercuryBase {
             uint256 tokenId = leagueInfo.tokenIds[i];
             uint256 level = aviationLevels(tokenId);
             require(
-                levelToClaimTime[level] - block.timestamp >= 5 minutes,
+                levelToClaimTime[level] > block.timestamp && levelToClaimTime[level] - block.timestamp >= 5 minutes,
                 "MercuryLeagueTournament: pass setPercentage time lock"
             );
         }
