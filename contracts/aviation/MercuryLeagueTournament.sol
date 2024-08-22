@@ -19,7 +19,7 @@ contract MercuryLeagueTournament is MercuryBase {
         uint256 setPercentageTime;
         uint256 currentVetoPoint;
         uint256 totalVetoPoint;
-        address newComer;
+        address winnerNewComer;
         mapping(uint256 => uint256) tokenIdToVetoPoints;
         mapping(uint256 => bool) isClaimed;
     }
@@ -100,7 +100,7 @@ contract MercuryLeagueTournament is MercuryBase {
         LeagueInfo storage leagueInfo = league[leader];
         require(!leagueInfo.isClaimed[tokenId], "MercuryLeagueTournament: has claimed");
         require(leagueInfo.isWinner, "MercuryLeagueTournament: not winner");
-        address newComer = leagueInfo.newComer;
+        address newComer = leagueInfo.winnerNewComer;
         for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
             uint256 tokenId_ = leagueInfo.tokenIds[i];
             if(tokenId == tokenId_) {
@@ -110,8 +110,9 @@ contract MercuryLeagueTournament is MercuryBase {
                     totalPoints += aviationPoints(_tokenId);
                 }
                 uint256 points = aviationPoints(tokenId_);
-                payable(owner).transfer(pot * (100 - leagueInfo.newComerPercentage - leagueInfo.leagueOwnerPercentage) * points / totalPoints / 100);
-                pot = pot - (pot * points / totalPoints);
+                uint256 ownerValue = pot * (100 - leagueInfo.newComerPercentage - leagueInfo.leagueOwnerPercentage) * points / totalPoints / 100;
+                payable(owner).transfer(ownerValue);
+                pot = pot - ownerValue;
             }
         }
         if (msg.sender == newComer) {
@@ -337,7 +338,7 @@ contract MercuryLeagueTournament is MercuryBase {
         pot = pot - vaultValue;
         isPaused = true;
         leagueInfo.isWinner = true;
-        leagueInfo.newComer = newComer;
+        leagueInfo.winnerNewComer = newComer;
     }
 
     function isTimeFrozen() private view returns (bool) {
