@@ -22,10 +22,6 @@ abstract contract MercuryGameBase is ERC1155Holder {
         _;
     }
 
-    modifier onlyAdmin() {
-        require(LibGameBase.admin() == msg.sender, "MercuryGameBase: caller is not the admin");
-        _;
-    }
     /*//////////////////////////////////////////////////////////////
                             Approval Function
     //////////////////////////////////////////////////////////////*/
@@ -53,12 +49,6 @@ abstract contract MercuryGameBase is ERC1155Holder {
         delete LibGameBase.layout().burnerAddressToAviation[msg.sender];
     }
 
-    function batchUnApproveForGame(uint256[] memory tokenIds, MercuryBase aviation) public onlyAdmin {
-        for (uint256 i = 0; i < tokenIds.length; i++) {
-            unapproveForGame(tokenIds[i], aviation);
-        }
-    }
-
     /*//////////////////////////////////////////////////////////////
                             Utils Function
     //////////////////////////////////////////////////////////////*/
@@ -66,11 +56,6 @@ abstract contract MercuryGameBase is ERC1155Holder {
     function setProtocol(address _protocol) public {
         LibDiamond.enforceIsContractOwner();
         LibGameBase.layout().protocol = _protocol;
-    }
-
-    function setAdmin(address _admin) public {
-        LibDiamond.enforceIsContractOwner();
-        LibGameBase.layout().admin = _admin;
     }
 
     function componentIndex() internal view returns (ComponentIndex) {

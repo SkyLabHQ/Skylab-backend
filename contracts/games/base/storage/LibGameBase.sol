@@ -6,7 +6,6 @@ library LibGameBase {
 
     struct MercuryGameBaseStorage {
         address protocol;
-        address admin;
         // token id => burner address
         mapping(uint256 => address) gameApprovals;
         mapping(address => uint256) burnerAddressToTokenId;
@@ -30,10 +29,6 @@ library LibGameBase {
 
     function protocol() internal view returns (address) {
         return layout().protocol;
-    }
-
-    function admin() internal view returns (address) {
-        return layout().admin;
     }
     
     function gameApprovals(uint256 tokenId) internal view returns (address) {
