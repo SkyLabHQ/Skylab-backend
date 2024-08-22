@@ -156,8 +156,6 @@ contract MercuryLeagueTournament is MercuryBase {
         require(winnerTokenIds.length == loserTokenIds.length, "MercuryLeagueTournament: invalid input");
         for (uint256 i = 0; i < winnerTokenIds.length; i++) {
             aviationMovePoints(winnerTokenIds[i], loserTokenIds[i]);
-            MercuryGameBase(bidTactoe).unapproveForGame(winnerTokenIds[i], MercuryBase(address(this)));
-            MercuryGameBase(bidTactoe).unapproveForGame(loserTokenIds[i], MercuryBase(address(this)));
         }
     }
 
