@@ -30,7 +30,7 @@ library LibGameBase {
     function protocol() internal view returns (address) {
         return layout().protocol;
     }
-    
+
     function gameApprovals(uint256 tokenId) internal view returns (address) {
         return layout().gameApprovals[tokenId];
     }
