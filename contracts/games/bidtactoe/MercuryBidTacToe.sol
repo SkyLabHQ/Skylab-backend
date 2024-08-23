@@ -188,20 +188,18 @@ contract MercuryBidTacToe is MercuryGameBase {
         }
     }
 
-    function batchHandleWinLoss(address[] memory winnerBurners, address[] memory loserBurners) external {
-        require(winnerBurners.length == loserBurners.length, "MercuryBidTacToe: invalid input");
+    function batchHandleWinLoss(uint256[] memory winnerIds, uint256[] memory loserIds, address aviationAddress) external {
+        require(winnerIds.length == loserIds.length, "MercuryBidTacToe: invalid input");
         require(msg.sender == admin, "MercuryBidTacToe: permission deny");
-        for (uint i = 0; i < winnerBurners.length; i++) {
-            address winnerBurner = winnerBurners[i];
-            address loserBurner = loserBurners[i];
-            if (burnerAddressToAviation(winnerBurner) != address(0)) {
-                MercuryBase aviation = MercuryBase(burnerAddressToAviation(winnerBurner));
-                uint256 winnerTokenId = cleanUp(winnerBurner, aviation);
-                uint256 loserTokenId = cleanUp(loserBurner, aviation);
-                emit WinGame(winnerTokenId, aviation.ownerOf(winnerTokenId));
-                emit LoseGame(loserTokenId, aviation.ownerOf(loserTokenId));
-                aviation.aviationMovePoints(winnerTokenId, loserTokenId);
-            }
+        for (uint i = 0; i < winnerIds.length; i++) {
+            uint256 winnerId = winnerIds[i];
+            uint256 loserId = loserIds[i];
+            MercuryBase aviation = MercuryBase(aviationAddress);
+            unapproveForGame(winnerId, aviation);
+            unapproveForGame(loserId, aviation);
+            emit WinGame(winnerId, aviation.ownerOf(winnerId));
+            emit LoseGame(loserId, aviation.ownerOf(loserId));
+            aviation.aviationMovePoints(winnerId, loserId);
         }
     }
 
