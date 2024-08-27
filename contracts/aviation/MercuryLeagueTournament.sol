@@ -199,7 +199,7 @@ contract MercuryLeagueTournament is MercuryBase {
         admin = _admin;
     }
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override notPaused {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses notPaused {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
         if (winnerTokenId != 0 && loserTokenId != 0) {
