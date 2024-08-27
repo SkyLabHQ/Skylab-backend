@@ -19,6 +19,7 @@ contract MercuryLeagueTournament is MercuryBase {
         uint256 setPercentageTime;
         uint256 currentVetoPoint;
         uint256 totalVetoPoint;
+        uint256 premium;
         address winnerNewComer;
         mapping(uint256 => uint256) tokenIdToVetoPoints;
         mapping(uint256 => bool) isClaimed;
@@ -85,11 +86,24 @@ contract MercuryLeagueTournament is MercuryBase {
     }
 
     function mint(address leader) public payable notPaused {
-        require(msg.value == 0.02 ether, "MercuryLeagueTournament:  not enough ether to mint");
+        require(msg.value == 0.02 ether + league[leader].premium, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
-        pot += msg.value;
+        pot += (msg.value - league[leader].premium);
         joinLeague(tokenId, leader);
+        //distribute premium
+        LeagueInfo storage leagueInfo = league[leader];
+        uint256 totalPoints;
+        for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
+            uint256 _tokenId = leagueInfo.tokenIds[i];
+            totalPoints += aviationPoints(_tokenId);
+        }
+        for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
+            uint256 _tokenId = leagueInfo.tokenIds[i];
+            uint256 points = aviationPoints(_tokenId);
+            address owner = _ownerOf(_tokenId);
+            payable(owner).transfer(league[leader].premium * points / totalPoints);
+        }
     }
 
     function claimPot(uint256 tokenId) public {
@@ -190,6 +204,12 @@ contract MercuryLeagueTournament is MercuryBase {
         league[msg.sender].isLocked = isLocked;
     }
 
+    function setPremium(uint256 premium) public {
+        require(league[msg.sender].leaderExist, "Leader not exist");
+        require(premium >= 5*10**15, "premium must greater than 0.005 ether");
+        require(premium > league[msg.sender].premium, "premium only be greater than previout premium");
+        league[msg.sender].premium = premium;
+    }
     //==============================================================================================================================
     //=============================================ADMIN FUNTION==================================================================
     //==============================================================================================================================
