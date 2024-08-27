@@ -64,7 +64,7 @@ def main():
     jar_tournament = project.MercuryJarTournament.at(jar_tournament_address)
     jar_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, sender=account.deployer)
     league_tournament = project.MercuryLeagueTournament.at(league_tournament_address)
-    league_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, constant.BACKEND_ADMIN)
+    league_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, constant.BACKEND_ADMIN, sender=account.deployer)
     testflight = project.MercuryTestFlight.at(test_flight_address)
     testflight.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
     ## deploy babymercs
