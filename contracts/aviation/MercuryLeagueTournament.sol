@@ -85,12 +85,16 @@ contract MercuryLeagueTournament is MercuryBase {
         joinLeague(tokenId, leader);
     }
 
-    function mint(address leader) public payable notPaused {
+    function mint(address leader, address referral) public payable notPaused {
         require(msg.value == 0.02 ether + league[leader].premium, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
         pot += (msg.value - league[leader].premium);
         joinLeague(tokenId, leader);
+        if (referral != address(0)) {
+            payable(referral).transfer(league[leader].premium);
+            return;
+        }
         //distribute premium
         LeagueInfo storage leagueInfo = league[leader];
         uint256 totalPoints;
