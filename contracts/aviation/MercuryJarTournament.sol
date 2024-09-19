@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibBase} from "./base/storage/LibBase.sol";
-import {Paper} from "../campaign/Paper.sol";
 
 contract MercuryJarTournament is MercuryBase {
     mapping(uint256 => uint256) public levelToClaimTime;
@@ -15,7 +14,6 @@ contract MercuryJarTournament is MercuryBase {
 
     uint256 public pot;
     bool public isTournamentBegin;
-    Paper public paper;
 
     function getNewCommerInfo(uint256 level)
         public
@@ -37,18 +35,6 @@ contract MercuryJarTournament is MercuryBase {
         super.initialize(baseURI, "MercuryJarTournament", "MercuryJarTournament", protocol);
     }
 
-    // function mintPaper(uint256 amount) public payable {
-    //     //require(!isTournamentBegin, "MercuryJarTournament: tournament already begin");
-    //     require(msg.value == 0.01 ether * amount, "MercuryJarTournament: not enough ether to mint");
-    //     paperBalance[msg.sender] += amount;
-    //     pot += msg.value;
-    //     paperTotalAmount += amount;
-    // }
-    function setPaper(Paper _paper) public {
-        LibDiamond.enforceIsContractOwner();
-        paper = _paper;
-    }
-
     function mint(uint256 amount) public payable {
         require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
         require(msg.value == 0.02 ether * amount, "MercuryJarTournament:  not enough ether to mint");
@@ -56,17 +42,6 @@ contract MercuryJarTournament is MercuryBase {
             uint256 tokenId = baseMint(msg.sender);
             addNewComer(tokenId, 1);
         }
-        pot += msg.value;
-    }
-
-    function mintWithPaper(uint256 amount) public payable{
-        require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
-        require(paper.balanceOf(msg.sender) >= amount, "MercuryJarTournament: no voucher to mint");
-        for (uint256 i = 0; i < amount; i++) {
-            uint256 tokenId = baseMint(msg.sender);
-            addNewComer(tokenId, 1);
-        }
-        paper.burn(amount);
         pot += msg.value;
     }
 

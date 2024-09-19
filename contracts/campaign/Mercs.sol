@@ -12,7 +12,6 @@ contract Mercs is SolidStateERC721 {
     mapping(uint256 => uint256) public lastClaimTime;
     uint256 public nextTokenId;
     mapping(uint256 => bool) public nonBuyBack;
-    address public paper;
 
     function initialize(address _babyMercs) public {
         LibDiamond.enforceIsContractOwner();
@@ -43,18 +42,6 @@ contract Mercs is SolidStateERC721 {
     //     return false;
     // }
 
-    function setPaper(address _paper) public {
-        LibDiamond.enforceIsContractOwner();
-        paper = _paper;
-    }
-
-    function mint(uint256 amount) public {
-        require(msg.sender == paper, "");
-        for (uint i = 0; i < amount; i++) {
-            _safeMint(msg.sender, nextTokenId + 1);
-            nextTokenId++;
-        }
-    }
     function mint() public {
         LibDiamond.enforceIsContractOwner();
         //require(babyMercsUP[tokenId] >= 100, "Mercs: upgrade point does not meets requirement");

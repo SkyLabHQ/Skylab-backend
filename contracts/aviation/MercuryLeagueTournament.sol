@@ -5,6 +5,7 @@ import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibBase} from "./base/storage/LibBase.sol";
 import {MercuryGameBase} from "../games/base/MercuryGameBase.sol";
+import {Paper} from "../campaign/Paper.sol";
 
 contract MercuryLeagueTournament is MercuryBase {
     struct LeagueInfo {
@@ -29,6 +30,7 @@ contract MercuryLeagueTournament is MercuryBase {
     uint256 public pot;
     address public admin;
     uint256 public paperTotalAmount;
+    Paper public paper;
 
     mapping(address => uint256) public paperBalance;
     mapping(uint256 => uint256) public levelToClaimTime;
@@ -71,17 +73,14 @@ contract MercuryLeagueTournament is MercuryBase {
 
     function mintPaper(uint256 amount) public payable notPaused {
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
-        paperBalance[msg.sender] += amount;
+        paper.mint(amount);
         pot += msg.value;
-        paperTotalAmount += amount;
     }
 
-    function mintWithPaper(address leader) public notPaused {
-        require(paperBalance[msg.sender] >= 1, "MercuryLeagueTournament: no voucher to mint");
+    function mintWithPaper(address leader) public payable{
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
-        paperBalance[msg.sender] -= 1;
-        paperTotalAmount -= 1;
+        paper.burn(tokenId);
         joinLeague(tokenId, leader);
     }
 
@@ -145,6 +144,11 @@ contract MercuryLeagueTournament is MercuryBase {
             pot = pot - leaderValue;
         }
         leagueInfo.isClaimed[tokenId] = true;
+    }
+
+    function setPaper(Paper _paper) public {
+        LibDiamond.enforceIsContractOwner();
+        paper = _paper;
     }
 
     function setPercentage(uint256 _newComerPercentage, uint256 _leagueOwnerPercentage) public {
