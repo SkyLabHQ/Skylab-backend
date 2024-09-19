@@ -196,6 +196,7 @@ contract MercuryBidTacToe is MercuryGameBase {
             uint256 loserId = loserIds[i];
             MercuryBase aviation = MercuryBase(aviationAddress);
             if(winnerId == loserId) {
+                //this case is using for exiting matching.
                 unapproveForGame(winnerId, aviation);
             } else {
                 unapproveForGame(winnerId, aviation);
