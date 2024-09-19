@@ -82,7 +82,7 @@ def main():
     if network != 'Polygon' and network != 'Mumbai' and network != 'Sepolia':
         print("Wrong network, must be one of these: 'Polygon', 'Mumbai'")
         return
-    diamond = input("please choose the diamond: 'Protocol', 'MercuryTestFlight', 'TrailblazerTournament', 'MercuryBidTacToe', 'MercuryBidTacToeBot', 'MercuryBotTournament', 'MercuryJarTournament", "MercuryLeagueTournament" + "\n")
+    diamond = input("please choose the diamond: 'Protocol', 'MercuryTestFlight', 'TrailblazerTournament', 'MercuryBidTacToe', 'MercuryBidTacToeBot', 'MercuryBotTournament', 'MercuryJarTournament', 'MercuryLeagueTournament'")
     if network == 'Polygon':
         protocol_address = constant.REAL_MAINNET_PROTOCOL
         trailblazer_address = constant.REAL_MAINNET_TOURNAMENT
