@@ -16,7 +16,7 @@ contract MarketPlace {
         Bid[] bids;
         uint256 lastTransactedPrice;
     }
-    //level 0 stands for paper
+
     mapping(uint256 => LevelInfo) public levelInfos; // level to LevelInfo
     mapping(address => mapping(uint256 => uint256)) public userBids; // user address => level => bid index (from 1 -> length)
     address public valut;

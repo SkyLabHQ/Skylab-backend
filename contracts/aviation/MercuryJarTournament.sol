@@ -11,9 +11,11 @@ contract MercuryJarTournament is MercuryBase {
     mapping(address => string) public userName;
     mapping(uint256 => uint256[]) public tokenIdPerLevel;
     mapping(string => bool) public userNameUsed;
+    mapping(address => uint256) public paperBalance;
 
     uint256 public pot;
     bool public isTournamentBegin;
+    uint256 public paperTotalAmount;
 
     function getNewCommerInfo(uint256 level)
         public
@@ -35,6 +37,14 @@ contract MercuryJarTournament is MercuryBase {
         super.initialize(baseURI, "MercuryJarTournament", "MercuryJarTournament", protocol);
     }
 
+    function mintPaper(uint256 amount) public payable {
+        //require(!isTournamentBegin, "MercuryJarTournament: tournament already begin");
+        require(msg.value == 0.01 ether * amount, "MercuryJarTournament: not enough ether to mint");
+        paperBalance[msg.sender] += amount;
+        pot += msg.value;
+        paperTotalAmount += amount;
+    }
+
     function mint(uint256 amount) public payable {
         require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
         require(msg.value == 0.02 ether * amount, "MercuryJarTournament:  not enough ether to mint");
@@ -43,6 +53,17 @@ contract MercuryJarTournament is MercuryBase {
             addNewComer(tokenId, 1);
         }
         pot += msg.value;
+    }
+
+    function mintWithPaper(uint256 amount) public {
+        require(isTournamentBegin, "MercuryJarTournament: tournament not begin");
+        require(paperBalance[msg.sender] >= amount, "MercuryJarTournament: no voucher to mint");
+        for (uint256 i = 0; i < amount; i++) {
+            uint256 tokenId = baseMint(msg.sender);
+            addNewComer(tokenId, 1);
+            paperBalance[msg.sender] -= 1;
+        }
+        paperTotalAmount -= amount;
     }
 
     function setTournamentBegin(bool _isTournamentBegin) public {
