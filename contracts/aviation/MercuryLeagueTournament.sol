@@ -87,7 +87,9 @@ contract MercuryLeagueTournament is MercuryBase {
     }
 
     function mint(address leader, address referral, uint256 expirationTime, bytes calldata signature) public payable notPaused {
-        verifySignature(referral, expirationTime, signature);
+        if(referral != address(0)) {
+            verifySignature(referral, expirationTime, signature);
+        }
         require(msg.value == 0.02 ether + league[leader].premium, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
