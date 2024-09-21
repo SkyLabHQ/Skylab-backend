@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@solidstate/token/ERC721/enumerable/ERC721Enumerable.sol";
+import "@solidstate/token/ERC721/metadata/ERC721MetadataStorage.sol";
 import "@solidstate/token/ERC721/SolidStateERC721.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 
@@ -11,7 +12,7 @@ contract Paper is ERC721Enumerable, SolidStateERC721 {
     uint256 nextTokenId;
     address public leagueTournament;
 
-    function initialize(string memory _name, string memory _symbol, string memory _baseTokenURI,uint256 _cap, uint256 _price, Mercs _mercs, address _leagueTournament) public {
+    function initialize(string memory _name, string memory _symbol, string memory _baseTokenURI,uint256 _cap, uint256 _price, address _leagueTournament) public {
         LibDiamond.enforceIsContractOwner();
         ERC721MetadataStorage.Layout storage layout = ERC721MetadataStorage.layout();
         layout.baseURI = _baseTokenURI;
