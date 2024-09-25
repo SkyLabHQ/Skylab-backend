@@ -5,7 +5,7 @@ import "../../../libraries/Base64.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import {ComponentIndex} from "../../../protocol/ComponentIndex.sol";
 import {MercuryResources} from "../../../protocol/MercuryResources.sol";
-import {MercuryPilots} from "../../../protocol/MercuryPilots.sol";
+import {LoyaltyPoints} from "../../../protocol/LoyaltyPoints.sol";
 
 library LibBase {
     using Strings for uint256;
@@ -32,16 +32,16 @@ library LibBase {
         }
     }
 
+    function loyaltyPoints() internal view returns(LoyaltyPoints) {
+        return LoyaltyPoints(layout().protocol);
+    }
+
     function mercuryResources() internal view returns (MercuryResources) {
         return MercuryResources(layout().protocol);
     }
 
     function componentIndex() internal view returns (ComponentIndex) {
         return ComponentIndex(layout().protocol);
-    }
-
-    function pilot() internal view returns (MercuryPilots) {
-        return MercuryPilots(layout().protocol);
     }
 
     function generateTokenMetadata(uint256 tokenId, string memory imageUrlSuffix)

@@ -4,8 +4,6 @@ pragma solidity ^0.8.0;
 import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibBase} from "./base/storage/LibBase.sol";
-import {LibPilots} from "../protocol/storage/LibPilots.sol";
-import {MercuryPilots} from "../protocol/MercuryPilots.sol";
 
 contract MercuryJarTournament is MercuryBase {
     mapping(uint256 => uint256) public levelToClaimTime;
@@ -22,14 +20,7 @@ contract MercuryJarTournament is MercuryBase {
     function getNewCommerInfo(uint256 level)
         public
         view
-        returns (
-            uint256 claimTime,
-            uint256 newComerId,
-            string memory userName_,
-            address owner,
-            uint256 point,
-            LibPilots.Pilot memory pilot
-        )
+        returns (uint256 claimTime, uint256 newComerId, string memory userName_, address owner, uint256 point)
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
@@ -40,7 +31,6 @@ contract MercuryJarTournament is MercuryBase {
         }
         userName_ = userName[owner];
         point = aviationPoints(newComerId);
-        pilot = MercuryPilots(protocol()).getActivePilot(owner);
     }
 
     function initialize(string memory baseURI, address protocol) public {
@@ -84,7 +74,7 @@ contract MercuryJarTournament is MercuryBase {
     function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
-        if(winnerTokenId != 0 && loserTokenId != 0) {
+        if (winnerTokenId != 0 && loserTokenId != 0) {
             super.aviationMovePoints(winnerTokenId, loserTokenId);
         } else {
             aviationBotMovePoints(winnerTokenId, loserTokenId);
@@ -107,20 +97,15 @@ contract MercuryJarTournament is MercuryBase {
 
         LibBase.MercuryBaseStorage storage sbs = LibBase.layout();
         uint256 pointsToMove = 1;
+
         if (playerWon) {
             sbs.aviationPoints[playerTokenId] += pointsToMove;
             emit LibBase.MovePoints(0, playerTokenId, pointsToMove);
-            LibBase.pilot().pilotWin(
-                _ownerOf(playerTokenId), sbs.aviationLevels[playerTokenId] * pointsToMove, pointsToMove
-            );
         } else {
             sbs.aviationPoints[playerTokenId] -= pointsToMove;
             emit LibBase.MovePoints(playerTokenId, 0, pointsToMove);
-            LibBase.pilot().pilotLose(
-                _ownerOf(playerTokenId), sbs.aviationLevels[playerTokenId] * pointsToMove, pointsToMove
-            );
         }
-
+        LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), pointsToMove);
         updateLevel(playerTokenId);
 
         if (sbs.aviationPoints[playerTokenId] == 0) {

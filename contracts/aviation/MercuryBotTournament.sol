@@ -52,21 +52,18 @@ contract MercuryBotTournament is TrailblazerTournament {
             if (_botPointsThisRound > pointsToMove) {
                 sbs.aviationPoints[playerTokenId] += pointsToMove;
                 _botPointsThisRound -= pointsToMove;
+                LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), pointsToMove);
             } else {
                 sbs.aviationPoints[playerTokenId] += _botPointsThisRound;
                 _botPointsThisRound = 0;
+                LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), _botPointsThisRound);
             }
             emit LibBase.MovePoints(0, playerTokenId, pointsToMove);
-            LibBase.pilot().pilotWin(
-                _ownerOf(playerTokenId), sbs.aviationLevels[playerTokenId] * pointsToMove, pointsToMove
-            );
         } else {
             sbs.aviationPoints[playerTokenId] -= pointsToMove;
             _botPointsThisRound += pointsToMove;
             emit LibBase.MovePoints(playerTokenId, 0, pointsToMove);
-            LibBase.pilot().pilotLose(
-                _ownerOf(playerTokenId), sbs.aviationLevels[playerTokenId] * pointsToMove, pointsToMove
-            );
+            LibBase.loyaltyPoints().playGame(_ownerOf(playerTokenId), pointsToMove);
         }
 
         updateLevel(playerTokenId);

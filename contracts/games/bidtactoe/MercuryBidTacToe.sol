@@ -41,6 +41,7 @@ contract MercuryBidTacToe is MercuryGameBase {
     mapping(address => mapping(address => uint256)) public joinDefaultQueueTime;
     mapping(address => RoomInfo) public pvpRoom;
     mapping(bytes2 => address) public inviteCode; // invite code to room hoster
+    address public admin;
 
     event WinGame(uint256 indexed tokenId, address indexed user);
     event LoseGame(uint256 indexed tokenId, address indexed user);
@@ -187,6 +188,21 @@ contract MercuryBidTacToe is MercuryGameBase {
         }
     }
 
+    function batchHandleWinLoss(uint256[] memory winnerIds, uint256[] memory loserIds, address aviationAddress) external {
+        require(winnerIds.length == loserIds.length, "MercuryBidTacToe: invalid input");
+        require(msg.sender == admin, "MercuryBidTacToe: permission deny");
+        for (uint i = 0; i < winnerIds.length; i++) {
+            uint256 winnerId = winnerIds[i];
+            uint256 loserId = loserIds[i];
+            MercuryBase aviation = MercuryBase(aviationAddress);
+            unapproveForGame(winnerId, aviation);
+            unapproveForGame(loserId, aviation);
+            emit WinGame(winnerId, aviation.ownerOf(winnerId));
+            emit LoseGame(loserId, aviation.ownerOf(loserId));
+            aviation.aviationMovePoints(winnerId, loserId);
+        }
+    }
+
     function handleBotWinLoss(address playerBurner, bool playerWon) external {
         require(gameExists[msg.sender], "MercuryBidTacToe: msg.sender is not a game");
         require(
@@ -233,6 +249,10 @@ contract MercuryBidTacToe is MercuryGameBase {
     
     function registerBot(address bot, bool register) external onlyOwner {
         validBidTacToeBots[bot] = register;
+    }
+
+    function setAdmin(address _admin) external onlyOwner {
+        admin = _admin;
     }
 
     function cleanupDefaultQueue(address aviation) external onlyOwner {
