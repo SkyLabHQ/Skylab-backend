@@ -75,14 +75,14 @@ contract MercuryLeagueTournament is MercuryBase {
 
     function mintPaper(uint256 amount) public payable notPaused {
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
-        paper.mint(amount);
+        paper.mint(msg.sender, amount);
         pot += msg.value;
     }
 
     function mintWithPaper(address leader) public payable {
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
-        paper.burn(tokenId);
+        paper.burn(msg.sender, 1);
         joinLeague(tokenId, leader);
     }
 
