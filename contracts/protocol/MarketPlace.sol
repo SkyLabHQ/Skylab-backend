@@ -9,6 +9,7 @@ contract MarketPlace {
     struct Bid {
         address bidder;
         uint256 price;
+        uint256 amount;
         uint256 timestamp;
     }
 
@@ -20,16 +21,43 @@ contract MarketPlace {
     mapping(uint256 => LevelInfo) public levelInfos; // level to LevelInfo
     mapping(address => mapping(uint256 => uint256)) public userBids; // user address => level => bid index (from 1 -> length)
     address public valut;
+    Bid[] public paperBids;
+    mapping(address => uint256) public paperIndex;
 
     function bid(uint256 level) public payable {
         require(msg.value > 0, "Bid amount must be greater than 0");
         require(userBids[msg.sender][level] == 0, "You already have a bid for this level");
 
         LevelInfo storage levelInfo = levelInfos[level];
-        Bid memory newBid = Bid(msg.sender, msg.value, block.timestamp);
+        Bid memory newBid = Bid(msg.sender, msg.value, 1, block.timestamp);
 
         levelInfo.bids.push(newBid);
         userBids[msg.sender][level] = levelInfo.bids.length;
+    }
+
+    function bidPaper(uint256 amount) public payable {
+        require(msg.value > 0, "Bid amount must be greater than 0");
+        require(paperIndex[msg.sender] == 0, "Already bid");
+        Bid memory newBid = Bid(msg.sender, msg.value, amount, block.timestamp);
+        paperIndex[msg.sender] = paperBids.length;
+        paperBids.push(newBid);
+    }
+
+    function cancelBidPaper() public {
+        require(paperIndex[msg.sender] != 0, "no bid");
+        uint256 actualIndex = paperIndex[msg.sender];
+        uint256 lastIndex = paperBids.length - 1;
+        uint256 bidPrice = paperBids[actualIndex].price;
+        if (actualIndex != lastIndex) {
+            paperBids[actualIndex] = paperBids[lastIndex];
+            address movedBidder = paperBids[lastIndex].bidder;
+            paperIndex[movedBidder] = actualIndex;
+        }
+        paperBids.pop();
+        paperIndex[msg.sender] = 0;
+        // Return the bid amount to the user
+        payable(valut).transfer(bidPrice * getTaxRate() / 100);
+        payable(msg.sender).transfer(bidPrice * (100 - getTaxRate()) / 100);
     }
 
     function cancelBid(uint256 level) public {
@@ -39,7 +67,7 @@ contract MarketPlace {
         LevelInfo storage levelInfo = levelInfos[level];
         uint256 actualIndex = bidIndex - 1; // Convert to 0-based index
         uint256 lastIndex = levelInfo.bids.length - 1;
-        uint256 bidAmount = levelInfo.bids[actualIndex].price;
+        uint256 bidPrice = levelInfo.bids[actualIndex].price;
 
         if (actualIndex != lastIndex) {
             // Move the last bid to the canceled bid's position
@@ -55,13 +83,33 @@ contract MarketPlace {
         userBids[msg.sender][level] = 0;
 
         // Return the bid amount to the user
-        payable(valut).transfer(bidAmount * getTaxRate() / 100);
-        payable(msg.sender).transfer(bidAmount * (100 - getTaxRate()) / 100);
+        payable(valut).transfer(bidPrice * getTaxRate() / 100);
+        payable(msg.sender).transfer(bidPrice * (100 - getTaxRate()) / 100);
+    }
+
+    function reBidPaper(uint256 amount) public payable {
+        cancelBidPaper();
+        bidPaper(amount);
     }
 
     function reBid(uint256 level) public payable {
         cancelBid(level);
         bid(level);
+    }
+
+    function sellPaper(address buyer) public {
+        uint256 actualIndex = paperIndex[buyer];
+        uint256 lastIndex = paperBids.length - 1;
+        uint256 bidPrice = paperBids[actualIndex].price;
+        if (actualIndex != lastIndex) {
+            paperBids[actualIndex] = paperBids[lastIndex];
+            address movedBidder = paperBids[lastIndex].bidder;
+            paperIndex[movedBidder] = actualIndex;
+        }
+        paperBids.pop();
+        paperIndex[buyer] = 0;
+
+        payable(msg.sender).transfer(bidPrice);
     }
 
     function sell(MercuryBase aviation, uint256 tokenId) public {
@@ -105,7 +153,7 @@ contract MarketPlace {
     function findHighestBid(uint256 level) internal view returns (uint256, Bid memory) {
         LevelInfo storage levelInfo = levelInfos[level];
         if(levelInfo.bids.length == 0) {
-            return (0, Bid(address(0), 0, 0));
+            return (0, Bid(address(0), 0, 0, 0));
         }
         uint256 highestBidIndex = 0;
         Bid memory highestBid = levelInfo.bids[0];
@@ -141,7 +189,7 @@ contract MarketPlace {
         if (userBids[user][level] > 0) {
             index = userBids[user][level] - 1;
         } else {
-            return Bid(address(0), 0, 0);
+            return Bid(address(0), 0, 0, 0);
         }
         return levelInfos[level].bids[index];
     }
