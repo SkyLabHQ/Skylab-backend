@@ -4,6 +4,8 @@ pragma solidity ^0.8.0;
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import "@openzeppelin/contracts/utils/Arrays.sol";
 import {MercuryBase} from "../aviation/base/MercuryBase.sol";
+import {IERC20} from "../interfaces/IERC20.sol";
+import {ComponentIndex} from "./ComponentIndex.sol";
 
 contract MarketPlace {
     struct Bid {
@@ -20,9 +22,15 @@ contract MarketPlace {
 
     mapping(uint256 => LevelInfo) public levelInfos; // level to LevelInfo
     mapping(address => mapping(uint256 => uint256)) public userBids; // user address => level => bid index (from 1 -> length)
-    address public valut;
+    address public valut = address(this);
+    address public paper;
     Bid[] public paperBids;
     mapping(address => uint256) public paperIndex;
+
+    function initMarketPlace(address _paper) public {
+        LibDiamond.enforceIsContractOwner();
+        paper = _paper;
+    }
 
     function bid(uint256 level) public payable {
         require(msg.value > 0, "Bid amount must be greater than 0");
@@ -101,6 +109,7 @@ contract MarketPlace {
         uint256 actualIndex = paperIndex[buyer];
         uint256 lastIndex = paperBids.length - 1;
         uint256 bidPrice = paperBids[actualIndex].price;
+        uint256 amount = paperBids[actualIndex].amount;
         if (actualIndex != lastIndex) {
             paperBids[actualIndex] = paperBids[lastIndex];
             address movedBidder = paperBids[lastIndex].bidder;
@@ -108,11 +117,13 @@ contract MarketPlace {
         }
         paperBids.pop();
         paperIndex[buyer] = 0;
-
-        payable(msg.sender).transfer(bidPrice);
+        IERC20(paper).transfer(buyer, amount);
+        payable(valut).transfer(bidPrice * getTaxRate() / 100);
+        payable(msg.sender).transfer(bidPrice * (100 - getTaxRate()) / 100);
     }
 
     function sell(MercuryBase aviation, uint256 tokenId) public {
+        require(ComponentIndex(address(this)).isValidAviation(address(aviation)), "Permission deny");
         uint256 level = aviation.aviationLevels(tokenId);
         LevelInfo storage levelInfo = levelInfos[level];
         require(levelInfo.bids.length > 0, "No bids for this level");
@@ -147,7 +158,8 @@ contract MarketPlace {
         levelInfo.lastTransactedPrice = price;
 
         // Transfer the funds to the seller
-        payable(msg.sender).transfer(price);
+        payable(valut).transfer(price * getTaxRate() / 100);
+        payable(msg.sender).transfer(price * (100 - getTaxRate()) / 100);
     }
 
     function findHighestBid(uint256 level) internal view returns (uint256, Bid memory) {
