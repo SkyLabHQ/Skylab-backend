@@ -14,7 +14,7 @@ contract PaperMarketPlace {
         uint256 amount;
     }
 
-    address public valut = address(this);
+    address public vault = address(this);
     address public paper;
     Bid[] public paperBids;
     mapping(address => uint256) public paperIndex;
@@ -45,7 +45,7 @@ contract PaperMarketPlace {
         paperBids.pop();
         paperIndex[msg.sender] = 0;
         // Return the bid amount to the user
-        payable(valut).transfer(bidPrice * getTaxRate() / 100);
+        payable(vault).transfer(bidPrice * getTaxRate() / 100);
         payable(msg.sender).transfer(bidPrice * (100 - getTaxRate()) / 100);
     }
 
@@ -67,7 +67,7 @@ contract PaperMarketPlace {
         paperBids.pop();
         paperIndex[buyer] = 0;
         IERC20(paper).transfer(buyer, amount);
-        payable(valut).transfer(bidPrice * getTaxRate() / 100);
+        payable(vault).transfer(bidPrice * getTaxRate() / 100);
         payable(msg.sender).transfer(bidPrice * (100 - getTaxRate()) / 100);
     }
 
