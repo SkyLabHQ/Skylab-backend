@@ -5,6 +5,8 @@ import {MercuryBase} from "./base/MercuryBase.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibBase} from "./base/storage/LibBase.sol";
 import {MercuryGameBase} from "../games/base/MercuryGameBase.sol";
+import {Paper} from "../campaign/Paper.sol";
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
 contract MercuryLeagueTournament is MercuryBase {
     struct LeagueInfo {
@@ -29,6 +31,7 @@ contract MercuryLeagueTournament is MercuryBase {
     uint256 public pot;
     address public admin;
     uint256 public paperTotalAmount;
+    Paper public paper;
 
     mapping(address => uint256) public paperBalance;
     mapping(uint256 => uint256) public levelToClaimTime;
@@ -36,6 +39,7 @@ contract MercuryLeagueTournament is MercuryBase {
     mapping(uint256 => uint256[]) public tokenIdPerLevel;
     mapping(address => address) public memberToLeader;
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
+    mapping(bytes => bool) public signatureUsed;
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
@@ -48,13 +52,13 @@ contract MercuryLeagueTournament is MercuryBase {
     }
 
     modifier isPotClaimable() {
-        for(uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
+        for (uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
             if (block.timestamp >= levelToClaimTime[level]) {
-            uint256 preTokenId = levelToNewComerId[level];
-            if (_exists(preTokenId)) {
-                address owner = _ownerOf(preTokenId);
-                finalizeWinner(owner);
-            }
+                uint256 preTokenId = levelToNewComerId[level];
+                if (_exists(preTokenId)) {
+                    address owner = _ownerOf(preTokenId);
+                    finalizeWinner(owner);
+                }
             }
         }
         _;
@@ -71,26 +75,30 @@ contract MercuryLeagueTournament is MercuryBase {
 
     function mintPaper(uint256 amount) public payable notPaused {
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
-        paperBalance[msg.sender] += amount;
+        paper.mint(msg.sender, amount);
         pot += msg.value;
-        paperTotalAmount += amount;
     }
 
-    function mintWithPaper(address leader) public notPaused {
-        require(paperBalance[msg.sender] >= 1, "MercuryLeagueTournament: no voucher to mint");
+    function mintWithPaper(address leader) public payable {
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
-        paperBalance[msg.sender] -= 1;
-        paperTotalAmount -= 1;
+        paper.burn(msg.sender, 1);
         joinLeague(tokenId, leader);
     }
 
-    function mint(address leader) public payable notPaused {
+    function mint(address leader, address referral, uint256 expirationTime, bytes calldata signature) public payable notPaused {
+        if(referral != address(0)) {
+            verifySignature(referral, expirationTime, signature);
+        }
         require(msg.value == 0.02 ether + league[leader].premium, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
         pot += (msg.value - league[leader].premium);
         joinLeague(tokenId, leader);
+        if (referral != address(0) && _balanceOf(referral) > 0) {
+            payable(referral).transfer(league[leader].premium);
+            return;
+        }
         //distribute premium
         LeagueInfo storage leagueInfo = league[leader];
         uint256 totalPoints;
@@ -116,14 +124,15 @@ contract MercuryLeagueTournament is MercuryBase {
         address newComer = leagueInfo.winnerNewComer;
         for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
             uint256 tokenId_ = leagueInfo.tokenIds[i];
-            if(tokenId == tokenId_) {
+            if (tokenId == tokenId_) {
                 uint256 totalPoints;
                 for (uint256 j = 0; j < leagueInfo.tokenIds.length; j++) {
                     uint256 _tokenId = leagueInfo.tokenIds[j];
                     totalPoints += aviationPoints(_tokenId);
                 }
                 uint256 points = aviationPoints(tokenId_);
-                uint256 ownerValue = pot * (100 - leagueInfo.newComerPercentage - leagueInfo.leagueOwnerPercentage) * points / totalPoints / 100;
+                uint256 ownerValue = pot * (100 - leagueInfo.newComerPercentage - leagueInfo.leagueOwnerPercentage)
+                    * points / totalPoints / 100;
                 payable(owner).transfer(ownerValue);
                 pot = pot - ownerValue;
             }
@@ -141,6 +150,11 @@ contract MercuryLeagueTournament is MercuryBase {
             pot = pot - leaderValue;
         }
         leagueInfo.isClaimed[tokenId] = true;
+    }
+
+    function setPaper(Paper _paper) public {
+        LibDiamond.enforceIsContractOwner();
+        paper = _paper;
     }
 
     function setPercentage(uint256 _newComerPercentage, uint256 _leagueOwnerPercentage) public {
@@ -206,7 +220,7 @@ contract MercuryLeagueTournament is MercuryBase {
 
     function setPremium(uint256 premium) public {
         require(league[msg.sender].leaderExist, "Leader not exist");
-        require(premium >= 5*10**15, "premium must greater than 0.005 ether");
+        require(premium >= 5 * 10 ** 15, "premium must greater than 0.005 ether");
         require(premium > league[msg.sender].premium, "premium only be greater than previout premium");
         league[msg.sender].premium = premium;
     }
@@ -219,7 +233,12 @@ contract MercuryLeagueTournament is MercuryBase {
         admin = _admin;
     }
 
-    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId) public override onlyGameAddresses notPaused {
+    function aviationMovePoints(uint256 winnerTokenId, uint256 loserTokenId)
+        public
+        override
+        onlyGameAddresses
+        notPaused
+    {
         uint256 winnerLevelBefore = aviationLevels(winnerTokenId);
         uint256 loserLevelBefore = aviationLevels(loserTokenId);
         if (winnerTokenId != 0 && loserTokenId != 0) {
@@ -278,7 +297,7 @@ contract MercuryLeagueTournament is MercuryBase {
     //==============================================================================================================================
     //=============================================PRIVATE FUNTION==================================================================
     //==============================================================================================================================
-    
+
     function aviationBotMovePoints(uint256 winnerTokenId, uint256 loserTokenId) private {
         bool playerWon = loserTokenId == 0;
         uint256 playerTokenId = winnerTokenId + loserTokenId;
@@ -369,5 +388,15 @@ contract MercuryLeagueTournament is MercuryBase {
         uint256 newComerId = levelToNewComerId[shortestLevel];
         address member = _ownerOf(newComerId);
         return memberToLeader[member] == leader;
+    }
+
+    function verifySignature(address refereal, uint256 expirationTime, bytes calldata signature) internal {
+        require(!signatureUsed[signature], "DAPPDistribution: signature used");
+        bytes32 digest = keccak256(abi.encode(refereal, expirationTime));
+        address recoveredSigner = ECDSA.recover(digest, signature);
+
+        require(admin == recoveredSigner, "DAPPDistribution: invalid signature");
+        require(block.timestamp <= expirationTime, "DAPPDistribution: signature expired");
+        signatureUsed[signature] = true;
     }
 }
