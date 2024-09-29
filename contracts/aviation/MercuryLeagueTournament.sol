@@ -296,7 +296,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     function getnewComerInfo(uint256 level)
         public
         view
-        returns (uint256 claimTime, uint256 newComerId, address owner, uint256 point)
+        returns (uint256 claimTime, uint256 newComerId, address owner, uint256 point, address leader)
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
@@ -305,6 +305,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         } else {
             owner = address(0);
         }
+        leader = memberToLeader[owner];
         point = aviationPoints(newComerId);
     }
 
