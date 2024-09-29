@@ -7,8 +7,9 @@ import {LibBase} from "./base/storage/LibBase.sol";
 import {MercuryGameBase} from "../games/base/MercuryGameBase.sol";
 import {Paper} from "../campaign/Paper.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-contract MercuryLeagueTournament is MercuryBase {
+contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     struct LeagueInfo {
         bool isLocked;
         bool leaderExist;
@@ -125,7 +126,7 @@ contract MercuryLeagueTournament is MercuryBase {
         return totalValue;
     }
 
-    function claimPot(uint256 tokenId) public returns (uint256){
+    function claimPot(uint256 tokenId) public nonReentrant returns (uint256) {
         address owner = _ownerOf(tokenId);
         require(owner == msg.sender, "MercuryLeagueTournament: not owner");
         address leader = memberToLeader[owner];
@@ -311,39 +312,39 @@ contract MercuryLeagueTournament is MercuryBase {
         return tokenIdPerLevel[level];
     }
 
-function getLeagueInfo(address leader) public view returns (
-    bool isLocked,
-    bool leaderExist,
-    bool isWinner,
-    uint256[] memory tokenIds,
-    uint256 preLeagueOwnerPercentage,
-    uint256 preNewComerPercentage,
-    uint256 leagueOwnerPercentage,
-    uint256 newComerPercentage,
-    uint256 setPercentageTime,
-    uint256 currentVetoPoint,
-    uint256 totalVetoPoint,
-    uint256 premium,
-    address winnerNewComer
-) {
-    LeagueInfo storage info = league[leader];
-    
-    return (
-        info.isLocked,
-        info.leaderExist,
-        info.isWinner,
-        info.tokenIds,
-        info.preLeagueOwnerPercentage,
-        info.preNewComerPercentage,
-        info.leagueOwnerPercentage,
-        info.newComerPercentage,
-        info.setPercentageTime,
-        info.currentVetoPoint,
-        info.totalVetoPoint,
-        info.premium,
-        info.winnerNewComer
-    );
-}
+    function getLeagueInfo(address leader) public view returns (
+        bool isLocked,
+        bool leaderExist,
+        bool isWinner,
+        uint256[] memory tokenIds,
+        uint256 preLeagueOwnerPercentage,
+        uint256 preNewComerPercentage,
+        uint256 leagueOwnerPercentage,
+        uint256 newComerPercentage,
+        uint256 setPercentageTime,
+        uint256 currentVetoPoint,
+        uint256 totalVetoPoint,
+        uint256 premium,
+        address winnerNewComer
+    ) {
+        LeagueInfo storage info = league[leader];
+        
+        return (
+            info.isLocked,
+            info.leaderExist,
+            info.isWinner,
+            info.tokenIds,
+            info.preLeagueOwnerPercentage,
+            info.preNewComerPercentage,
+            info.leagueOwnerPercentage,
+            info.newComerPercentage,
+            info.setPercentageTime,
+            info.currentVetoPoint,
+            info.totalVetoPoint,
+            info.premium,
+            info.winnerNewComer
+        );
+    }
 
     //==============================================================================================================================
     //=============================================PRIVATE FUNTION==================================================================
