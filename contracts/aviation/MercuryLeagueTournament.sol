@@ -42,6 +42,8 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
     mapping(bytes => bool) public signatureUsed;
 
+    address vaultV2;
+
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
         _;
@@ -53,21 +55,15 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     }
 
     modifier isPotClaimable() {
-        for (uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
-            if (block.timestamp >= levelToClaimTime[level]) {
-                uint256 preTokenId = levelToNewComerId[level];
-                if (_exists(preTokenId)) {
-                    address owner = _ownerOf(preTokenId);
-                    finalizeWinner(owner);
-                }
-            }
-        }
+        address finalNewComer = getGameOverNewComer();
+        if (finalNewComer != address(0)) finalizeWinner(finalNewComer);
         _;
     }
 
-    function initialize(string memory baseURI, address protocol, address _admin) public {
+    function initialize(string memory baseURI, address protocol, address _admin, address _vaultV2) public {
         super.initialize(baseURI, "MercuryLeagueTournament", "MercuryLeagueTournament", protocol);
         admin = _admin;
+        vaultV2 = _vaultV2;
     }
 
     //==============================================================================================================================
@@ -77,7 +73,9 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     function mintPaper(uint256 amount) public payable notPaused {
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
         paper.mint(msg.sender, amount);
-        pot += msg.value;
+        // 10% to vaultV2
+        payable(vaultV2).transfer(msg.value / 10);
+        pot += msg.value * 9 / 10;
     }
 
     function mintWithPaper(address leader) public payable {
@@ -94,7 +92,9 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         require(msg.value == 0.02 ether + league[leader].premium, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
-        pot += (msg.value - league[leader].premium);
+        //10% to vaultV2
+        payable(vaultV2).transfer(msg.value / 10);
+        pot += msg.value * 9 / 10 - league[leader].premium;
         joinLeague(tokenId, leader);
         if (referral != address(0) && _balanceOf(referral) > 0) {
             payable(referral).transfer(league[leader].premium);
@@ -115,11 +115,16 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         }
     }
 
-    function claimPot(address account) public returns(uint256) {
+    function claimPot(address account) public isPotClaimable returns(uint256) {
         uint256 balance = _balanceOf(account);
         uint256 totalValue;
+        address leader = memberToLeader[account];
+        LeagueInfo storage leagueInfo = league[leader];
         for(uint i = 0; i < balance; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
+            if(leagueInfo.isClaimed[tokenId]) {
+                continue;
+            }
             uint256 value = claimPot(tokenId);
             totalValue += value;
         }
@@ -293,6 +298,30 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         }
     }
 
+    function getGameOverNewComer() public view returns (address) {
+            for(uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
+                if (block.timestamp >= levelToClaimTime[level]) {
+                uint256 preTokenId = levelToNewComerId[level];
+                if (_exists(preTokenId)) {
+                    address owner = _ownerOf(preTokenId);
+                    return owner;
+                    }
+                }
+            }
+            return address(0);
+    }
+
+    function getTokenIds(address account) public view virtual returns(uint256[] memory) {
+        uint256 balance = _balanceOf(account);
+        uint256[] memory tokenIds = new uint256[](balance);
+        for(uint i = 0; i < balance; i++) {
+            uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
+            tokenIds[i] = tokenId;
+        }
+        return tokenIds;
+    }
+
+
     function getnewComerInfo(uint256 level)
         public
         view
@@ -407,13 +436,8 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     }
 
     function finalizeWinner(address newComer) private {
-        address vault = LibBase.layout().protocol;
         address leader = memberToLeader[newComer];
         LeagueInfo storage leagueInfo = league[leader];
-        uint256 denominator = 100;
-        uint256 vaultValue = pot / denominator;
-        payable(vault).transfer(vaultValue);
-        pot = pot - vaultValue;
         isPaused = true;
         leagueInfo.isWinner = true;
         leagueInfo.winnerNewComer = newComer;

@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/utils/Arrays.sol";
 import {MercuryBase} from "../aviation/base/MercuryBase.sol";
 import {IERC20} from "../interfaces/IERC20.sol";
 import {ComponentIndex} from "./ComponentIndex.sol";
+import {LibComponent} from "./storage/LibComponent.sol";
 
 contract PaperMarketPlace {
     struct Bid {
@@ -14,14 +15,14 @@ contract PaperMarketPlace {
         uint256 amount;
     }
 
-    address public vault = address(this);
     address public paper;
     Bid[] public paperBids;
     mapping(address => uint256) public paperIndex;
 
-    function initMarketPlace(address _paper) public {
+    function initMarketPlace(address _paper, address _vault) public {
         LibDiamond.enforceIsContractOwner();
         paper = _paper;
+        LibComponent.layout().vaultV2 = _vault;
     }
 
     function bidPaper(uint256 amount) public payable {
@@ -45,8 +46,7 @@ contract PaperMarketPlace {
         paperBids.pop();
         paperIndex[msg.sender] = 0;
         // Return the bid amount to the user
-        payable(vault).transfer(bidPrice * getTaxRate() / 100);
-        payable(msg.sender).transfer(bidPrice * (100 - getTaxRate()) / 100);
+        payable(msg.sender).transfer(bidPrice);
     }
 
     function reBidPaper(uint256 amount) public payable {
@@ -67,11 +67,16 @@ contract PaperMarketPlace {
         paperBids.pop();
         paperIndex[buyer] = 0;
         IERC20(paper).transfer(buyer, amount);
-        payable(vault).transfer(bidPrice * getTaxRate() / 100);
+        payable(LibComponent.vault()).transfer(bidPrice * getTaxRate() / 100);
         payable(msg.sender).transfer(bidPrice * (100 - getTaxRate()) / 100);
     }
 
     function getTaxRate() public pure returns(uint256) {
         return 2;
+    }
+
+    function setValidAviation(address _vault) public {
+        LibDiamond.enforceIsContractOwner();
+        LibComponent.layout().vaultV2 = _vault;
     }
 }
