@@ -7,8 +7,9 @@ import {LibBase} from "./base/storage/LibBase.sol";
 import {MercuryGameBase} from "../games/base/MercuryGameBase.sol";
 import {Paper} from "../campaign/Paper.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-contract MercuryLeagueTournament is MercuryBase {
+contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     struct LeagueInfo {
         bool isLocked;
         bool leaderExist;
@@ -114,7 +115,18 @@ contract MercuryLeagueTournament is MercuryBase {
         }
     }
 
-    function claimPot(uint256 tokenId) public {
+    function claimPot(address account) public returns(uint256) {
+        uint256 balance = _balanceOf(account);
+        uint256 totalValue;
+        for(uint i = 0; i < balance; i++) {
+            uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
+            uint256 value = claimPot(tokenId);
+            totalValue += value;
+        }
+        return totalValue;
+    }
+
+    function claimPot(uint256 tokenId) public nonReentrant returns (uint256) {
         address owner = _ownerOf(tokenId);
         require(owner == msg.sender, "MercuryLeagueTournament: not owner");
         address leader = memberToLeader[owner];
@@ -135,6 +147,8 @@ contract MercuryLeagueTournament is MercuryBase {
                     * points / totalPoints / 100;
                 payable(owner).transfer(ownerValue);
                 pot = pot - ownerValue;
+                leagueInfo.isClaimed[tokenId] = true;
+                return ownerValue;
             }
         }
         if (msg.sender == newComer) {
@@ -142,14 +156,18 @@ contract MercuryLeagueTournament is MercuryBase {
             uint256 newComerValue = pot * leagueInfo.newComerPercentage / denominator;
             payable(owner).transfer(newComerValue);
             pot = pot - newComerValue;
+            leagueInfo.isClaimed[tokenId] = true;
+            return newComerValue;
         }
         if (msg.sender == leader) {
             uint256 denominator = 100;
             uint256 leaderValue = pot * leagueInfo.leagueOwnerPercentage / denominator;
             payable(leader).transfer(leaderValue);
             pot = pot - leaderValue;
+            leagueInfo.isClaimed[tokenId] = true;
+            return leaderValue;
         }
-        leagueInfo.isClaimed[tokenId] = true;
+        return 0;
     }
 
     function setPaper(Paper _paper) public {
@@ -278,7 +296,7 @@ contract MercuryLeagueTournament is MercuryBase {
     function getnewComerInfo(uint256 level)
         public
         view
-        returns (uint256 claimTime, uint256 newComerId, address owner, uint256 point)
+        returns (uint256 claimTime, uint256 newComerId, address owner, uint256 point, address leader)
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
@@ -287,11 +305,46 @@ contract MercuryLeagueTournament is MercuryBase {
         } else {
             owner = address(0);
         }
+        leader = memberToLeader[owner];
         point = aviationPoints(newComerId);
     }
 
     function getTokenIdPerLevel(uint256 level) public view returns (uint256[] memory) {
         return tokenIdPerLevel[level];
+    }
+
+    function getLeagueInfo(address leader) public view returns (
+        bool isLocked,
+        bool leaderExist,
+        bool isWinner,
+        uint256[] memory tokenIds,
+        uint256 preLeagueOwnerPercentage,
+        uint256 preNewComerPercentage,
+        uint256 leagueOwnerPercentage,
+        uint256 newComerPercentage,
+        uint256 setPercentageTime,
+        uint256 currentVetoPoint,
+        uint256 totalVetoPoint,
+        uint256 premium,
+        address winnerNewComer
+    ) {
+        LeagueInfo storage info = league[leader];
+        
+        return (
+            info.isLocked,
+            info.leaderExist,
+            info.isWinner,
+            info.tokenIds,
+            info.preLeagueOwnerPercentage,
+            info.preNewComerPercentage,
+            info.leagueOwnerPercentage,
+            info.newComerPercentage,
+            info.setPercentageTime,
+            info.currentVetoPoint,
+            info.totalVetoPoint,
+            info.premium,
+            info.winnerNewComer
+        );
     }
 
     //==============================================================================================================================
