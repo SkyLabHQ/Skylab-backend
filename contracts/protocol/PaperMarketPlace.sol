@@ -75,7 +75,7 @@ contract PaperMarketPlace {
         return 2;
     }
 
-    function setValidAviation(address _vault) public {
+    function setVault(address _vault) public {
         LibDiamond.enforceIsContractOwner();
         LibComponent.layout().vaultV2 = _vault;
     }
