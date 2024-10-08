@@ -477,7 +477,8 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     function verifySignature(address refereal, uint256 expirationTime, bytes calldata signature) internal {
         require(!signatureUsed[signature], "signature used");
         bytes32 digest = keccak256(abi.encode(refereal, expirationTime));
-        address recoveredSigner = ECDSA.recover(digest, signature);
+        bytes32 preFixedHash = ECDSA.toEthSignedMessageHash(digest);
+        address recoveredSigner = ECDSA.recover(preFixedHash, signature);
 
         require(admin == recoveredSigner, "invalid signature");
         require(block.timestamp <= expirationTime, "signature expired");
