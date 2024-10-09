@@ -31,18 +31,15 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     bool public isPaused;
     uint256 public pot;
     address public admin;
-    uint256 public paperTotalAmount;
     Paper public paper;
-
-    mapping(address => uint256) public paperBalance;
+    address public vaultV2;
+    
     mapping(uint256 => uint256) public levelToClaimTime;
     mapping(uint256 => uint256) public levelToNewComerId;
     mapping(uint256 => uint256[]) public tokenIdPerLevel;
-    mapping(uint256 => address) public memberToLeader;
+    mapping(uint256 => address) public tokenIdToLeader;
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
     mapping(bytes => bool) public signatureUsed;
-
-    address vaultV2;
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
@@ -63,9 +60,19 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     function initialize(string memory baseURI, address protocol, address _admin, address _vaultV2) public {
         super.initialize(baseURI, "MercuryLeagueTournament", "MercuryLeagueTournament", protocol);
         admin = _admin;
-        vaultV2 = _vaultV2;
+        if (vaultV2 == address(0)) {
+            vaultV2 = _vaultV2;
+        }
     }
 
+    function baseMint(address to) internal override returns (uint256) {
+        uint256 tokenId = LibBase.layout().lastTokenID + 1;
+        _safeMint(to, tokenId);
+        LibBase.layout().lastTokenID++;
+        LibBase.layout().aviationLevels[tokenId] = 1;
+        LibBase.layout().aviationPoints[tokenId] = 1;
+        return tokenId;
+    }
     //==============================================================================================================================
     //=============================================USER FUNTION==================================================================
     //==============================================================================================================================
@@ -101,7 +108,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         pot += (msg.value - league[leader].premium) * 9 / 10;
         joinLeague(tokenId, leader);
         if (referral != address(0) && _balanceOf(referral) > 0) {
-            payable(referral).transfer(league[leader].premium);
+            payable(referral).transfer(league[leader].premium * 9 / 10);
             return;
         }
         //distribute premium
@@ -124,7 +131,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         uint256 totalValue;
         for (uint256 i = 0; i < balance; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
-            address leader = memberToLeader[tokenId];
+            address leader = tokenIdToLeader[tokenId];
             LeagueInfo storage leagueInfo = league[leader];
             if (leagueInfo.isClaimed[tokenId]) {
                 continue;
@@ -138,7 +145,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     function claimPot(uint256 tokenId) public nonReentrant returns (uint256) {
         address owner = _ownerOf(tokenId);
         require(owner == msg.sender, "MercuryLeagueTournament: not owner");
-        address leader = memberToLeader[tokenId];
+        address leader = tokenIdToLeader[tokenId];
         LeagueInfo storage leagueInfo = league[leader];
         require(!leagueInfo.isClaimed[tokenId], "MercuryLeagueTournament: has claimed");
         require(leagueInfo.isWinner, "MercuryLeagueTournament: not winner");
@@ -224,7 +231,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     }
 
     function vetoLeaderDecision(uint256 tokenId) public {
-        address leader = memberToLeader[tokenId];
+        address leader = tokenIdToLeader[tokenId];
         require(
             league[leader].leaderExist && _ownerOf(tokenId) == msg.sender, "MercuryLeagueTournament: Permission deny"
         );
@@ -322,23 +329,18 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         for (uint256 i = 0; i < balance; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
             tokenIds[i] = tokenId;
-            leaders[i] = memberToLeader[tokenId];
+            leaders[i] = tokenIdToLeader[tokenId];
         }
     }
 
     function getNewComerInfo(uint256 level)
         public
         view
-        returns (uint256 claimTime, uint256 newComerId, address owner, uint256 point, address leader)
+        returns (uint256 claimTime, uint256 newComerId, uint256 point, address leader)
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
-        if (_exists(newComerId)) {
-            owner = _ownerOf(newComerId);
-        } else {
-            owner = address(0);
-        }
-        leader = memberToLeader[newComerId];
+        leader = tokenIdToLeader[newComerId];
         point = aviationPoints(newComerId);
     }
 
@@ -434,7 +436,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             }
         }
         league[leader].tokenIds.push(tokenId);
-        memberToLeader[tokenId] = leader;
+        tokenIdToLeader[tokenId] = leader;
     }
 
     function addNewComer(uint256 tokenId, uint256 level) private isPotClaimable {
@@ -444,7 +446,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     }
 
     function finalizeWinner(address newComer, uint256 tokenId) private {
-        address leader = memberToLeader[tokenId];
+        address leader = tokenIdToLeader[tokenId];
         LeagueInfo storage leagueInfo = league[leader];
         isPaused = true;
         leagueInfo.isWinner = true;
@@ -471,7 +473,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             }
         }
         uint256 newComerId = levelToNewComerId[shortestLevel];
-        return memberToLeader[newComerId] == leader;
+        return tokenIdToLeader[newComerId] == leader;
     }
 
     function verifySignature(address refereal, uint256 expirationTime, bytes calldata signature) internal {
