@@ -19,10 +19,9 @@ contract PaperMarketPlace {
     Bid[] public paperBids;
     mapping(address => uint256) public paperIndex;
 
-    function initMarketPlace(address _paper, address _vault) public {
+    function initMarketPlace(address _paper) public {
         LibDiamond.enforceIsContractOwner();
         paper = _paper;
-        LibComponent.layout().vaultV2 = _vault;
     }
 
     function bidPaper(uint256 amount) public payable {
@@ -77,6 +76,8 @@ contract PaperMarketPlace {
 
     function setVault(address _vault) public {
         LibDiamond.enforceIsContractOwner();
+        if(LibComponent.layout().vaultV2 == address(0)){
         LibComponent.layout().vaultV2 = _vault;
+        }
     }
 }

@@ -339,10 +339,15 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     function getNewComerInfo(uint256 level)
         public
         view
-        returns (uint256 claimTime, uint256 newComerId, uint256 point, address leader)
+        returns (uint256 claimTime, uint256 newComerId, uint256 point, address owner, address leader)
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
+        if(_exists(newComerId)){
+            owner = _ownerOf(newComerId);
+        } else {
+            owner = address(0);
+        }
         leader = tokenIdToLeader[newComerId];
         point = aviationPoints(newComerId);
     }
