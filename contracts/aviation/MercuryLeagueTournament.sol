@@ -28,6 +28,9 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         mapping(uint256 => bool) isClaimed;
     }
 
+    uint256 constant VETO_WINDOWS = 2 hours;
+    uint256 constant SET_PERCENTAGE_TIME_LOCK = 5 minutes;
+
     bool public isPaused;
     uint256 public pot;
     address public admin;
@@ -208,12 +211,12 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 tokenId = leagueInfo.tokenIds[i];
             uint256 level = aviationLevels(tokenId);
             require(
-                levelToClaimTime[level] > block.timestamp && levelToClaimTime[level] - block.timestamp >= 5 minutes,
+                levelToClaimTime[level] > block.timestamp && levelToClaimTime[level] - block.timestamp >= SET_PERCENTAGE_TIME_LOCK,
                 "MercuryLeagueTournament: pass setPercentage time lock"
             );
         }
         require(
-            block.timestamp >= leagueInfo.setPercentageTime + 2 hours,
+            block.timestamp >= leagueInfo.setPercentageTime + VETO_WINDOWS,
             "MercuryLeagueTournament: veto windows didn't expire"
         );
         leagueInfo.setPercentageTime = block.timestamp;
