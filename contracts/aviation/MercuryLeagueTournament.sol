@@ -330,7 +330,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         tokenIds = new uint256[](balance);
         leaders = new address[](balance);
         for (uint256 i = 0; i < balance; i++) {
-            uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
+            uint256 tokenId = tokenOfOwnerByIndex(account, i);
             tokenIds[i] = tokenId;
             leaders[i] = tokenIdToLeader[tokenId];
         }
