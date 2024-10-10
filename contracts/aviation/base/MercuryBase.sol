@@ -26,7 +26,7 @@ abstract contract MercuryBase is SolidStateERC721 {
         _setSupportsInterface(type(IERC721).interfaceId, true);
     }
 
-    function baseMint(address to) internal returns (uint256) {
+    function baseMint(address to) internal virtual returns (uint256) {
         uint256 tokenId = LibBase.layout().lastTokenID + 1;
         _safeMint(to, tokenId);
         LibBase.layout().lastTokenID++;

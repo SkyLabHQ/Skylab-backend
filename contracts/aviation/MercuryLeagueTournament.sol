@@ -28,17 +28,19 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         mapping(uint256 => bool) isClaimed;
     }
 
+    uint256 constant VETO_WINDOWS = 2 hours;
+    uint256 constant SET_PERCENTAGE_TIME_LOCK = 5 minutes;
+
     bool public isPaused;
     uint256 public pot;
     address public admin;
-    uint256 public paperTotalAmount;
     Paper public paper;
-
-    mapping(address => uint256) public paperBalance;
+    address public vaultV2;
+    
     mapping(uint256 => uint256) public levelToClaimTime;
     mapping(uint256 => uint256) public levelToNewComerId;
     mapping(uint256 => uint256[]) public tokenIdPerLevel;
-    mapping(address => address) public memberToLeader;
+    mapping(uint256 => address) public tokenIdToLeader;
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
     mapping(bytes => bool) public signatureUsed;
 
@@ -53,23 +55,27 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     }
 
     modifier isPotClaimable() {
-        for (uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
-            if (block.timestamp >= levelToClaimTime[level]) {
-                uint256 preTokenId = levelToNewComerId[level];
-                if (_exists(preTokenId)) {
-                    address owner = _ownerOf(preTokenId);
-                    finalizeWinner(owner);
-                }
-            }
-        }
+        (address finalNewComer, uint256 tokenId) = getGameOverNewComer();
+        if (finalNewComer != address(0)) finalizeWinner(finalNewComer, tokenId);
         _;
     }
 
-    function initialize(string memory baseURI, address protocol, address _admin) public {
+    function initialize(string memory baseURI, address protocol, address _admin, address _vaultV2) public {
         super.initialize(baseURI, "MercuryLeagueTournament", "MercuryLeagueTournament", protocol);
         admin = _admin;
+        if (vaultV2 == address(0)) {
+            vaultV2 = _vaultV2;
+        }
     }
 
+    function baseMint(address to) internal override returns (uint256) {
+        uint256 tokenId = LibBase.layout().lastTokenID + 1;
+        _safeMint(to, tokenId);
+        LibBase.layout().lastTokenID++;
+        LibBase.layout().aviationLevels[tokenId] = 1;
+        LibBase.layout().aviationPoints[tokenId] = 1;
+        return tokenId;
+    }
     //==============================================================================================================================
     //=============================================USER FUNTION==================================================================
     //==============================================================================================================================
@@ -77,7 +83,9 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     function mintPaper(uint256 amount) public payable notPaused {
         require(msg.value == 0.01 ether * amount, "MercuryLeagueTournament: not enough ether to mint");
         paper.mint(msg.sender, amount);
-        pot += msg.value;
+        // 10% to vaultV2
+        payable(vaultV2).transfer(msg.value / 10);
+        pot += msg.value * 9 / 10;
     }
 
     function mintWithPaper(address leader) public payable {
@@ -87,17 +95,23 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         joinLeague(tokenId, leader);
     }
 
-    function mint(address leader, address referral, uint256 expirationTime, bytes calldata signature) public payable notPaused {
-        if(referral != address(0)) {
+    function mint(address leader, address referral, uint256 expirationTime, bytes calldata signature)
+        public
+        payable
+        notPaused
+    {
+        if (referral != address(0)) {
             verifySignature(referral, expirationTime, signature);
         }
         require(msg.value == 0.02 ether + league[leader].premium, "MercuryLeagueTournament:  not enough ether to mint");
         uint256 tokenId = baseMint(msg.sender);
         addNewComer(tokenId, 1);
-        pot += (msg.value - league[leader].premium);
+        //10% to vaultV2
+        payable(vaultV2).transfer(msg.value / 10);
+        pot += (msg.value - league[leader].premium) * 9 / 10;
         joinLeague(tokenId, leader);
         if (referral != address(0) && _balanceOf(referral) > 0) {
-            payable(referral).transfer(league[leader].premium);
+            payable(referral).transfer(league[leader].premium * 9 / 10);
             return;
         }
         //distribute premium
@@ -111,15 +125,20 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 _tokenId = leagueInfo.tokenIds[i];
             uint256 points = aviationPoints(_tokenId);
             address owner = _ownerOf(_tokenId);
-            payable(owner).transfer(league[leader].premium * points / totalPoints);
+            payable(owner).transfer(league[leader].premium * 9 * points / totalPoints / 10);
         }
     }
 
-    function claimPot(address account) public returns(uint256) {
+    function claimPot(address account) public isPotClaimable returns (uint256) {
         uint256 balance = _balanceOf(account);
         uint256 totalValue;
-        for(uint i = 0; i < balance; i++) {
+        for (uint256 i = 0; i < balance; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
+            address leader = tokenIdToLeader[tokenId];
+            LeagueInfo storage leagueInfo = league[leader];
+            if (leagueInfo.isClaimed[tokenId]) {
+                continue;
+            }
             uint256 value = claimPot(tokenId);
             totalValue += value;
         }
@@ -129,7 +148,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     function claimPot(uint256 tokenId) public nonReentrant returns (uint256) {
         address owner = _ownerOf(tokenId);
         require(owner == msg.sender, "MercuryLeagueTournament: not owner");
-        address leader = memberToLeader[owner];
+        address leader = tokenIdToLeader[tokenId];
         LeagueInfo storage leagueInfo = league[leader];
         require(!leagueInfo.isClaimed[tokenId], "MercuryLeagueTournament: has claimed");
         require(leagueInfo.isWinner, "MercuryLeagueTournament: not winner");
@@ -192,12 +211,12 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 tokenId = leagueInfo.tokenIds[i];
             uint256 level = aviationLevels(tokenId);
             require(
-                levelToClaimTime[level] > block.timestamp && levelToClaimTime[level] - block.timestamp >= 5 minutes,
+                levelToClaimTime[level] > block.timestamp && levelToClaimTime[level] - block.timestamp >= SET_PERCENTAGE_TIME_LOCK,
                 "MercuryLeagueTournament: pass setPercentage time lock"
             );
         }
         require(
-            block.timestamp >= leagueInfo.setPercentageTime + 2 hours,
+            block.timestamp >= leagueInfo.setPercentageTime + VETO_WINDOWS,
             "MercuryLeagueTournament: veto windows didn't expire"
         );
         leagueInfo.setPercentageTime = block.timestamp;
@@ -215,7 +234,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     }
 
     function vetoLeaderDecision(uint256 tokenId) public {
-        address leader = memberToLeader[msg.sender];
+        address leader = tokenIdToLeader[tokenId];
         require(
             league[leader].leaderExist && _ownerOf(tokenId) == msg.sender, "MercuryLeagueTournament: Permission deny"
         );
@@ -293,19 +312,43 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         }
     }
 
-    function getnewComerInfo(uint256 level)
+    function getGameOverNewComer() public view returns (address, uint256) {
+        for (uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
+            if (block.timestamp >= levelToClaimTime[level]) {
+                uint256 preTokenId = levelToNewComerId[level];
+                if (_exists(preTokenId)) {
+                    address owner = _ownerOf(preTokenId);
+                    return (owner, preTokenId);
+                }
+            }
+        }
+        return (address(0), 0);
+    }
+
+    function getAccountInfo(address account) public view virtual returns (uint256[] memory tokenIds, address[] memory leaders) {
+        uint256 balance = _balanceOf(account);
+        tokenIds = new uint256[](balance);
+        leaders = new address[](balance);
+        for (uint256 i = 0; i < balance; i++) {
+            uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
+            tokenIds[i] = tokenId;
+            leaders[i] = tokenIdToLeader[tokenId];
+        }
+    }
+
+    function getNewComerInfo(uint256 level)
         public
         view
-        returns (uint256 claimTime, uint256 newComerId, address owner, uint256 point, address leader)
+        returns (uint256 claimTime, uint256 newComerId, uint256 point, address owner, address leader)
     {
         claimTime = levelToClaimTime[level];
         newComerId = levelToNewComerId[level];
-        if (_exists(newComerId)) {
+        if(_exists(newComerId)){
             owner = _ownerOf(newComerId);
         } else {
             owner = address(0);
         }
-        leader = memberToLeader[owner];
+        leader = tokenIdToLeader[newComerId];
         point = aviationPoints(newComerId);
     }
 
@@ -313,23 +356,27 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         return tokenIdPerLevel[level];
     }
 
-    function getLeagueInfo(address leader) public view returns (
-        bool isLocked,
-        bool leaderExist,
-        bool isWinner,
-        uint256[] memory tokenIds,
-        uint256 preLeagueOwnerPercentage,
-        uint256 preNewComerPercentage,
-        uint256 leagueOwnerPercentage,
-        uint256 newComerPercentage,
-        uint256 setPercentageTime,
-        uint256 currentVetoPoint,
-        uint256 totalVetoPoint,
-        uint256 premium,
-        address winnerNewComer
-    ) {
+    function getLeagueInfo(address leader)
+        public
+        view
+        returns (
+            bool isLocked,
+            bool leaderExist,
+            bool isWinner,
+            uint256[] memory tokenIds,
+            uint256 preLeagueOwnerPercentage,
+            uint256 preNewComerPercentage,
+            uint256 leagueOwnerPercentage,
+            uint256 newComerPercentage,
+            uint256 setPercentageTime,
+            uint256 currentVetoPoint,
+            uint256 totalVetoPoint,
+            uint256 premium,
+            address winnerNewComer
+        )
+    {
         LeagueInfo storage info = league[leader];
-        
+
         return (
             info.isLocked,
             info.leaderExist,
@@ -397,7 +444,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             }
         }
         league[leader].tokenIds.push(tokenId);
-        memberToLeader[msg.sender] = leader;
+        tokenIdToLeader[tokenId] = leader;
     }
 
     function addNewComer(uint256 tokenId, uint256 level) private isPotClaimable {
@@ -406,14 +453,9 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         tokenIdPerLevel[level].push(tokenId);
     }
 
-    function finalizeWinner(address newComer) private {
-        address vault = LibBase.layout().protocol;
-        address leader = memberToLeader[newComer];
+    function finalizeWinner(address newComer, uint256 tokenId) private {
+        address leader = tokenIdToLeader[tokenId];
         LeagueInfo storage leagueInfo = league[leader];
-        uint256 denominator = 100;
-        uint256 vaultValue = pot / denominator;
-        payable(vault).transfer(vaultValue);
-        pot = pot - vaultValue;
         isPaused = true;
         leagueInfo.isWinner = true;
         leagueInfo.winnerNewComer = newComer;
@@ -439,17 +481,17 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             }
         }
         uint256 newComerId = levelToNewComerId[shortestLevel];
-        address member = _ownerOf(newComerId);
-        return memberToLeader[member] == leader;
+        return tokenIdToLeader[newComerId] == leader;
     }
 
     function verifySignature(address refereal, uint256 expirationTime, bytes calldata signature) internal {
-        require(!signatureUsed[signature], "DAPPDistribution: signature used");
+        require(!signatureUsed[signature], "signature used");
         bytes32 digest = keccak256(abi.encode(refereal, expirationTime));
-        address recoveredSigner = ECDSA.recover(digest, signature);
+        bytes32 preFixedHash = ECDSA.toEthSignedMessageHash(digest);
+        address recoveredSigner = ECDSA.recover(preFixedHash, signature);
 
-        require(admin == recoveredSigner, "DAPPDistribution: invalid signature");
-        require(block.timestamp <= expirationTime, "DAPPDistribution: signature expired");
+        require(admin == recoveredSigner, "invalid signature");
+        require(block.timestamp <= expirationTime, "signature expired");
         signatureUsed[signature] = true;
     }
 }

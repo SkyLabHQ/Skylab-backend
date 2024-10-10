@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/utils/Arrays.sol";
 import {MercuryBase} from "../aviation/base/MercuryBase.sol";
 import {IERC20} from "../interfaces/IERC20.sol";
 import {ComponentIndex} from "./ComponentIndex.sol";
+import {LibComponent} from "./storage/LibComponent.sol";
 
 contract PlaneMarketPlace {
     struct Bid {
@@ -21,7 +22,6 @@ contract PlaneMarketPlace {
 
     mapping(uint256 => LevelInfo) public levelInfos; // level to LevelInfo
     mapping(address => mapping(uint256 => uint256)) public userBids; // user address => level => bid index (from 1 -> length)
-    address public valut = address(this);
 
     function bid(uint256 level) public payable {
         require(msg.value > 0, "Bid amount must be greater than 0");
@@ -57,8 +57,7 @@ contract PlaneMarketPlace {
         userBids[msg.sender][level] = 0;
 
         // Return the bid amount to the user
-        payable(valut).transfer(bidPrice * getTaxRate() / 100);
-        payable(msg.sender).transfer(bidPrice * (100 - getTaxRate()) / 100);
+        payable(msg.sender).transfer(bidPrice);
     }
 
     function reBid(uint256 level) public payable {
@@ -102,7 +101,7 @@ contract PlaneMarketPlace {
         levelInfo.lastTransactedPrice = price;
 
         // Transfer the funds to the seller
-        payable(valut).transfer(price * getTaxRate() / 100);
+        payable(LibComponent.vault()).transfer(price * getTaxRate() / 100);
         payable(msg.sender).transfer(price * (100 - getTaxRate()) / 100);
     }
 

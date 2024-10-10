@@ -7,6 +7,7 @@ library LibComponent {
     struct ComponentIndexStorage {
         mapping(address => bool) isValidAviation;
         mapping(address => bool) isValidGame;
+        address vaultV2;
     }
 
     event ValidAviation(address, bool);
@@ -25,5 +26,9 @@ library LibComponent {
 
     function isValidGame(address _game) internal view returns (bool) {
         return layout().isValidGame[_game];
+    }
+
+    function vault() internal view returns(address) {
+        return layout().vaultV2;
     }
 }

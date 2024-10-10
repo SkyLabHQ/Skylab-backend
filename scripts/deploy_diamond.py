@@ -37,6 +37,11 @@ def deploy_bidtactoe():
     bidtactoe = project.BidTacToe.deploy(sender=account.deployer)
     return bidtactoe.address
 
+def deploy_vaultv2():
+    vaultv2 = project.VaultV2.deploy(constant.BACKEND_ADMIN, sender=account.deployer)
+    return vaultv2.address
+
+
 def deploy_bot():
     bot = project.MercuryBidTacToeBot.deploy(sender=account.deployer)
     return bot.address
@@ -64,7 +69,7 @@ def main():
     jar_tournament = project.MercuryJarTournament.at(jar_tournament_address)
     jar_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, sender=account.deployer)
     league_tournament = project.MercuryLeagueTournament.at(league_tournament_address)
-    league_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, constant.BACKEND_ADMIN, sender=account.deployer)
+    league_tournament.initialize(constant.MAINNET_URI, constant.Sepolia_Protocol, constant.BACKEND_ADMIN, constant.Sepolia_VaultV2, sender=account.deployer)
     testflight = project.MercuryTestFlight.at(test_flight_address)
     testflight.initialize(constant.MAINNET_URI,protocol_address, sender=account.deployer)
     ## deploy babymercs
@@ -96,6 +101,7 @@ def main():
     game.registerBot(bot_address, True, sender=account.deployer)
     bidtactoe_player_versus_bot_address = deploy_bidtactoe_player_versus_bot()
     bid_tac_toe = deploy_bidtactoe()
+    vaultv2_address = deploy_vaultv2()
     # Write address to file
     with open('./address.temp','w') as f:
         f.write("protocol_address:"+protocol_address+"\n")
@@ -109,3 +115,4 @@ def main():
         f.write("test_flight_address:"+test_flight_address+"\n")
         f.write("delegate_erc721:"+delegate_erc721.address+"\n")
         f.write("league_tournament:"+league_tournament_address+"\n")
+        f.write("vaultv2:"+vaultv2_address+"\n")
