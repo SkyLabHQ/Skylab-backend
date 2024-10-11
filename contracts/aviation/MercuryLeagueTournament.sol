@@ -25,7 +25,6 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         uint256 premium;
         address winnerNewComer;
         mapping(uint256 => uint256) tokenIdToVetoPoints;
-        mapping(uint256 => bool) isClaimed;
     }
 
     uint256 constant VETO_WINDOWS = 2 hours;
@@ -43,7 +42,8 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     mapping(uint256 => address) public tokenIdToLeader;
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
     mapping(bytes => bool) public signatureUsed;
-
+    mapping(address => uint256) public referralReward;
+    mapping(uint256 => bool) public isClaimed;
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
         _;
@@ -55,7 +55,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     }
 
     modifier isPotClaimable() {
-        (address finalNewComer, uint256 tokenId) = getGameOverNewComer();
+        (address finalNewComer, uint256 tokenId,) = getGameOverNewComer();
         if (finalNewComer != address(0)) finalizeWinner(finalNewComer, tokenId);
         _;
     }
@@ -112,6 +112,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         joinLeague(tokenId, leader);
         if (referral != address(0) && _balanceOf(referral) > 0) {
             payable(referral).transfer(league[leader].premium * 9 / 10);
+            referralReward[referral] += league[leader].premium * 9 / 10;
             return;
         }
         //distribute premium
@@ -134,9 +135,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         uint256 totalValue;
         for (uint256 i = 0; i < balance; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
-            address leader = tokenIdToLeader[tokenId];
-            LeagueInfo storage leagueInfo = league[leader];
-            if (leagueInfo.isClaimed[tokenId]) {
+            if (isClaimed[tokenId]) {
                 continue;
             }
             uint256 value = claimPot(tokenId);
@@ -150,7 +149,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         require(owner == msg.sender, "MercuryLeagueTournament: not owner");
         address leader = tokenIdToLeader[tokenId];
         LeagueInfo storage leagueInfo = league[leader];
-        require(!leagueInfo.isClaimed[tokenId], "MercuryLeagueTournament: has claimed");
+        require(!isClaimed[tokenId], "MercuryLeagueTournament: has claimed");
         require(leagueInfo.isWinner, "MercuryLeagueTournament: not winner");
         address newComer = leagueInfo.winnerNewComer;
         for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
@@ -166,7 +165,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
                     * points / totalPoints / 100;
                 payable(owner).transfer(ownerValue);
                 pot = pot - ownerValue;
-                leagueInfo.isClaimed[tokenId] = true;
+                isClaimed[tokenId] = true;
                 return ownerValue;
             }
         }
@@ -175,7 +174,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 newComerValue = pot * leagueInfo.newComerPercentage / denominator;
             payable(owner).transfer(newComerValue);
             pot = pot - newComerValue;
-            leagueInfo.isClaimed[tokenId] = true;
+            isClaimed[tokenId] = true;
             return newComerValue;
         }
         if (msg.sender == leader) {
@@ -183,7 +182,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 leaderValue = pot * leagueInfo.leagueOwnerPercentage / denominator;
             payable(leader).transfer(leaderValue);
             pot = pot - leaderValue;
-            leagueInfo.isClaimed[tokenId] = true;
+            isClaimed[tokenId] = true;
             return leaderValue;
         }
         return 0;
@@ -312,27 +311,31 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         }
     }
 
-    function getGameOverNewComer() public view returns (address, uint256) {
+    function getGameOverNewComer() public view returns (address, uint256, address) {
         for (uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
             if (block.timestamp >= levelToClaimTime[level]) {
                 uint256 preTokenId = levelToNewComerId[level];
                 if (_exists(preTokenId)) {
                     address owner = _ownerOf(preTokenId);
-                    return (owner, preTokenId);
+                    return (owner, preTokenId, tokenIdToLeader[preTokenId]);
                 }
             }
         }
-        return (address(0), 0);
+        return (address(0), 0, address(0));
     }
 
-    function getAccountInfo(address account) public view virtual returns (uint256[] memory tokenIds, address[] memory leaders) {
+    function getAccountInfo(address account) public view virtual returns (uint256[] memory tokenIds, address[] memory leaders, uint256[] memory points, bool[] memory isLocked) {
         uint256 balance = _balanceOf(account);
         tokenIds = new uint256[](balance);
         leaders = new address[](balance);
+        points = new uint256[](balance);
+        isLocked = new bool[](balance);
         for (uint256 i = 0; i < balance; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(account, i);
             tokenIds[i] = tokenId;
             leaders[i] = tokenIdToLeader[tokenId];
+            points[i] = aviationPoints(tokenId);
+            isLocked[i] = isAviationLocked(tokenId);
         }
     }
 
@@ -372,11 +375,15 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 currentVetoPoint,
             uint256 totalVetoPoint,
             uint256 premium,
-            address winnerNewComer
+            address winnerNewComer,
+            uint256[] memory points
         )
     {
         LeagueInfo storage info = league[leader];
-
+        points = new uint256[](info.tokenIds.length);
+        for (uint256 i = 0; i < info.tokenIds.length; i++) {
+            points[i] = aviationPoints(info.tokenIds[i]);
+        }
         return (
             info.isLocked,
             info.leaderExist,
@@ -390,7 +397,8 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             info.currentVetoPoint,
             info.totalVetoPoint,
             info.premium,
-            info.winnerNewComer
+            info.winnerNewComer,
+            points
         );
     }
 
