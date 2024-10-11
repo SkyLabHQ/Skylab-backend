@@ -43,6 +43,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     mapping(uint256 => address) public tokenIdToLeader;
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
     mapping(bytes => bool) public signatureUsed;
+    mapping(address => uint256) public referralReward;
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
@@ -112,6 +113,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         joinLeague(tokenId, leader);
         if (referral != address(0) && _balanceOf(referral) > 0) {
             payable(referral).transfer(league[leader].premium * 9 / 10);
+            referralReward[referral] += league[leader].premium * 9 / 10;
             return;
         }
         //distribute premium
@@ -325,14 +327,18 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         return (address(0), 0);
     }
 
-    function getAccountInfo(address account) public view virtual returns (uint256[] memory tokenIds, address[] memory leaders) {
+    function getAccountInfo(address account) public view virtual returns (uint256[] memory tokenIds, address[] memory leaders, uint256[] memory points, bool[] memory isLocked) {
         uint256 balance = _balanceOf(account);
         tokenIds = new uint256[](balance);
         leaders = new address[](balance);
+        points = new uint256[](balance);
+        isLocked = new bool[](balance);
         for (uint256 i = 0; i < balance; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(account, i);
             tokenIds[i] = tokenId;
             leaders[i] = tokenIdToLeader[tokenId];
+            points[i] = aviationPoints(tokenId);
+            isLocked[i] = isAviationLocked(tokenId);
         }
     }
 
@@ -372,11 +378,15 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 currentVetoPoint,
             uint256 totalVetoPoint,
             uint256 premium,
-            address winnerNewComer
+            address winnerNewComer,
+            uint256[] memory points
         )
     {
         LeagueInfo storage info = league[leader];
-
+        points = new uint256[](info.tokenIds.length);
+        for (uint256 i = 0; i < info.tokenIds.length; i++) {
+            points[i] = aviationPoints(info.tokenIds[i]);
+        }
         return (
             info.isLocked,
             info.leaderExist,
@@ -390,7 +400,8 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             info.currentVetoPoint,
             info.totalVetoPoint,
             info.premium,
-            info.winnerNewComer
+            info.winnerNewComer,
+            points
         );
     }
 
