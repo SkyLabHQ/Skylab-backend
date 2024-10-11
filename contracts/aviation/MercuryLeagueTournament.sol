@@ -55,7 +55,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     }
 
     modifier isPotClaimable() {
-        (address finalNewComer, uint256 tokenId) = getGameOverNewComer();
+        (address finalNewComer, uint256 tokenId,) = getGameOverNewComer();
         if (finalNewComer != address(0)) finalizeWinner(finalNewComer, tokenId);
         _;
     }
@@ -311,17 +311,17 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         }
     }
 
-    function getGameOverNewComer() public view returns (address, uint256) {
+    function getGameOverNewComer() public view returns (address, uint256, address) {
         for (uint256 level = 0; level < LibBase.MAXLEVEL; level++) {
             if (block.timestamp >= levelToClaimTime[level]) {
                 uint256 preTokenId = levelToNewComerId[level];
                 if (_exists(preTokenId)) {
                     address owner = _ownerOf(preTokenId);
-                    return (owner, preTokenId);
+                    return (owner, preTokenId, tokenIdToLeader[preTokenId]);
                 }
             }
         }
-        return (address(0), 0);
+        return (address(0), 0, address(0));
     }
 
     function getAccountInfo(address account) public view virtual returns (uint256[] memory tokenIds, address[] memory leaders, uint256[] memory points, bool[] memory isLocked) {
