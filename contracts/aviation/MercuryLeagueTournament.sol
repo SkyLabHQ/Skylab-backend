@@ -25,7 +25,6 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         uint256 premium;
         address winnerNewComer;
         mapping(uint256 => uint256) tokenIdToVetoPoints;
-        mapping(uint256 => bool) isClaimed;
     }
 
     uint256 constant VETO_WINDOWS = 2 hours;
@@ -44,7 +43,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
     mapping(address => LeagueInfo) public league; // leader to LeagueInfo
     mapping(bytes => bool) public signatureUsed;
     mapping(address => uint256) public referralReward;
-
+    mapping(uint256 => bool) public isClaimed;
     modifier onlyAdmin() {
         require(msg.sender == admin, "MercuryLeagueTournament: Permission deny");
         _;
@@ -136,9 +135,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         uint256 totalValue;
         for (uint256 i = 0; i < balance; i++) {
             uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
-            address leader = tokenIdToLeader[tokenId];
-            LeagueInfo storage leagueInfo = league[leader];
-            if (leagueInfo.isClaimed[tokenId]) {
+            if (isClaimed[tokenId]) {
                 continue;
             }
             uint256 value = claimPot(tokenId);
@@ -152,7 +149,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
         require(owner == msg.sender, "MercuryLeagueTournament: not owner");
         address leader = tokenIdToLeader[tokenId];
         LeagueInfo storage leagueInfo = league[leader];
-        require(!leagueInfo.isClaimed[tokenId], "MercuryLeagueTournament: has claimed");
+        require(!isClaimed[tokenId], "MercuryLeagueTournament: has claimed");
         require(leagueInfo.isWinner, "MercuryLeagueTournament: not winner");
         address newComer = leagueInfo.winnerNewComer;
         for (uint256 i = 0; i < leagueInfo.tokenIds.length; i++) {
@@ -168,7 +165,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
                     * points / totalPoints / 100;
                 payable(owner).transfer(ownerValue);
                 pot = pot - ownerValue;
-                leagueInfo.isClaimed[tokenId] = true;
+                isClaimed[tokenId] = true;
                 return ownerValue;
             }
         }
@@ -177,7 +174,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 newComerValue = pot * leagueInfo.newComerPercentage / denominator;
             payable(owner).transfer(newComerValue);
             pot = pot - newComerValue;
-            leagueInfo.isClaimed[tokenId] = true;
+            isClaimed[tokenId] = true;
             return newComerValue;
         }
         if (msg.sender == leader) {
@@ -185,7 +182,7 @@ contract MercuryLeagueTournament is MercuryBase, ReentrancyGuard {
             uint256 leaderValue = pot * leagueInfo.leagueOwnerPercentage / denominator;
             payable(leader).transfer(leaderValue);
             pot = pot - leaderValue;
-            leagueInfo.isClaimed[tokenId] = true;
+            isClaimed[tokenId] = true;
             return leaderValue;
         }
         return 0;
