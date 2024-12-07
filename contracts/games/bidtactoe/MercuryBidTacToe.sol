@@ -155,6 +155,15 @@ contract MercuryBidTacToe is MercuryGameBase {
         delete inviteCode[bytes2(bytes20(msg.sender))];
     }
 
+    function streamerMatch(address player1, address player2) external returns(address) {
+        address aviation1 = burnerAddressToAviation(player1);
+        address aviation2 = burnerAddressToAviation(player2);
+        require(aviation1 == aviation2 && aviation1 != address(0) && msg.sender == aviation1, "MercuryBidTacToe: permission deny");
+        address gameAddress = createGame(LibBidTacToe.defaultParams(), player1);
+        joinGame(gameAddress, player2);
+        return gameAddress;
+    }
+
     function withdrawFromQueue() external {
         address aviation = burnerAddressToAviation(msg.sender);
         require(msg.sender == defaultGameQueue[aviation], "MercuryBidTacToe: msg.sender is not in default queue");
